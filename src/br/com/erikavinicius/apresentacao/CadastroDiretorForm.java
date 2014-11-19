@@ -126,7 +126,11 @@ public class CadastroDiretorForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+
       System.out.println("Mensagem erika2"); 
+
+      System.out.println("Mensagem vinicius"); 
+
       String nome = this.txtNome.getText().trim();
       String senha = this.txtSenha.getText().trim();
       String cpf = this.txtCpf.getText().trim();
