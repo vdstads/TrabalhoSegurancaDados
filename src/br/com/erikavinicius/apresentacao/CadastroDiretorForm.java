@@ -8,6 +8,8 @@ package br.com.erikavinicius.apresentacao;
 
 import br.com.erikavinicius.TrabalhoSeguranca;
 import br.com.erikavinicius.entidade.Diretor;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 /**
@@ -35,9 +37,9 @@ public class CadastroDiretorForm extends javax.swing.JFrame {
         txtEmail = new javax.swing.JTextField();
         lblCpf = new javax.swing.JLabel();
         lblSenha = new javax.swing.JLabel();
-        txtCpf = new javax.swing.JTextField();
         btnCadastrar = new javax.swing.JButton();
         txtSenha = new javax.swing.JPasswordField();
+        txtCpf = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Diretor");
@@ -61,6 +63,12 @@ public class CadastroDiretorForm extends javax.swing.JFrame {
             }
         });
 
+        try {
+            txtCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout plDiretorLayout = new javax.swing.GroupLayout(plDiretor);
         plDiretor.setLayout(plDiretorLayout);
         plDiretorLayout.setHorizontalGroup(
@@ -71,7 +79,7 @@ public class CadastroDiretorForm extends javax.swing.JFrame {
                     .addComponent(btnCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
                     .addComponent(txtNome)
                     .addComponent(txtEmail)
-                    .addComponent(txtCpf)
+                    .addComponent(txtSenha)
                     .addGroup(plDiretorLayout.createSequentialGroup()
                         .addGroup(plDiretorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblNome)
@@ -79,7 +87,7 @@ public class CadastroDiretorForm extends javax.swing.JFrame {
                             .addComponent(lblCpf)
                             .addComponent(lblSenha))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(txtSenha))
+                    .addComponent(txtCpf))
                 .addContainerGap())
         );
         plDiretorLayout.setVerticalGroup(
@@ -127,10 +135,6 @@ public class CadastroDiretorForm extends javax.swing.JFrame {
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
 
-      System.out.println("Mensagem erika2"); 
-
-      System.out.println("Mensagem vinicius"); 
-
       String nome = this.txtNome.getText().trim();
       String senha = this.txtSenha.getText().trim();
       String cpf = this.txtCpf.getText().trim();
@@ -138,14 +142,16 @@ public class CadastroDiretorForm extends javax.swing.JFrame {
       
         if(nome.isEmpty() || senha.isEmpty() || email.isEmpty() || cpf.isEmpty()){
             JOptionPane.showMessageDialog(this, "Preencha todos os campos!", "Erro", JOptionPane.WARNING_MESSAGE);
-        }else{
+        } else if(validarEmail(email) == false){
+                JOptionPane.showMessageDialog(this, "E-mail invalido!", "Erro", JOptionPane.WARNING_MESSAGE);
+            } else{
             Diretor diretor = new Diretor();
             
             diretor.setNome(nome);
             diretor.setEmail(email);
             diretor.setCpf(cpf);
             diretor.setSenha(senha);
-                       
+            
             this.trabalhoSeguranca.inserirDiretor(diretor);
             this.limpar();
             JOptionPane.showMessageDialog(this, "Diretor cadastrado com sucesso!", "Cadastro de Diretor", JOptionPane.INFORMATION_MESSAGE);
@@ -189,8 +195,18 @@ public class CadastroDiretorForm extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
-        
+        /* Create and display the form */  
+    }
+    
+    public boolean validarEmail(String email) {
+        boolean retorno = false;
+// Expressão Regular para validar E-mail
+        Pattern p = Pattern.compile("^[\\w-]+(\\.[\\w-]+)*@([\\w-]+\\.)+[a-zA-Z]{2,7}$");
+        Matcher m = p.matcher(email);
+        if (m.find()) {
+            retorno = true;
+        }
+        return retorno;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -200,7 +216,7 @@ public class CadastroDiretorForm extends javax.swing.JFrame {
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblSenha;
     private javax.swing.JPanel plDiretor;
-    private javax.swing.JTextField txtCpf;
+    private javax.swing.JFormattedTextField txtCpf;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtNome;
     private javax.swing.JPasswordField txtSenha;

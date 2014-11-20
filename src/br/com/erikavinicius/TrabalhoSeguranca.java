@@ -35,12 +35,12 @@ public class TrabalhoSeguranca {
             if (diretor.getEmail().equals(email)) {
                if (diretor.getSenha().equals(senha)) {
                     loginAtivo = true;
-                    System.out.print("Email e senha confere");
+                    //System.out.print("Email e senha confere");
                }
                break;
             }
         }
-        System.out.print("Email e senha NAO confere");
+        //System.out.print("Email e senha NAO confere");
     return loginAtivo;
     }
     private void exibirMenu() {

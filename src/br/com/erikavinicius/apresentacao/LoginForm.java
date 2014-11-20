@@ -39,7 +39,7 @@ public class LoginForm extends javax.swing.JFrame {
         btnLogin = new javax.swing.JButton();
         txtSenha = new javax.swing.JPasswordField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Login");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
@@ -124,13 +124,14 @@ public class LoginForm extends javax.swing.JFrame {
      String senha = this.txtSenha.getText().trim();
      String email = this.txtEmail.getText().trim();
      
-     if (this.trabalhoSeguranca.loginDiretor(email, senha) == true){
-         MenuDiretorForm menuDiretorForm = new MenuDiretorForm(this.trabalhoSeguranca);
+        if (this.trabalhoSeguranca.loginDiretor(email, senha) == true){
+            MenuDiretorForm menuDiretorForm = new MenuDiretorForm(this.trabalhoSeguranca);
             menuDiretorForm.setVisible(true);
-     }else{
+            
+            this.limpar();
+        }else{
          JOptionPane.showMessageDialog(this, "E-mail e Senha Incorretos!", "Erro", JOptionPane.WARNING_MESSAGE);
-     }
-         
+        }    
     }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
@@ -162,6 +163,11 @@ public class LoginForm extends javax.swing.JFrame {
 
         /* Create and display the form */
         
+    }
+    
+    public void limpar(){
+         this.txtEmail.setText(null);
+         this.txtSenha.setText(null);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
