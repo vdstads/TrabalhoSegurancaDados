@@ -125,6 +125,7 @@ public class LoginForm extends javax.swing.JFrame {
      String email = this.txtEmail.getText().trim();
      
         if (this.trabalhoSeguranca.loginDiretor(email, senha) == true){
+            this.dispose();
             MenuDiretorForm menuDiretorForm = new MenuDiretorForm(this.trabalhoSeguranca);
             menuDiretorForm.setVisible(true);
             

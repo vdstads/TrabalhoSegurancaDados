@@ -7,7 +7,11 @@
 package br.com.erikavinicius.apresentacao;
 
 import br.com.erikavinicius.TrabalhoSeguranca;
+import br.com.erikavinicius.dados.BancoDados;
 import br.com.erikavinicius.entidade.Diretor;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
@@ -19,13 +23,16 @@ import javax.swing.JOptionPane;
 public class CadastroDiretorForm extends javax.swing.JFrame {
 
     private TrabalhoSeguranca trabalhoSeguranca;
+    private BancoDados bancoDados;
     
     public CadastroDiretorForm(TrabalhoSeguranca trabalhoSeguranca) {
         initComponents();
         this.trabalhoSeguranca = trabalhoSeguranca;
+        this.bancoDados = bancoDados;
     }
 
-    
+
+        
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -110,7 +117,7 @@ public class CadastroDiretorForm extends javax.swing.JFrame {
                 .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnCadastrar)
-                .addGap(0, 19, Short.MAX_VALUE))
+                .addGap(0, 9, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -126,7 +133,7 @@ public class CadastroDiretorForm extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(plDiretor, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
+                .addComponent(plDiretor, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -145,17 +152,22 @@ public class CadastroDiretorForm extends javax.swing.JFrame {
         } else if(validarEmail(email) == false){
                 JOptionPane.showMessageDialog(this, "E-mail invalido!", "Erro", JOptionPane.WARNING_MESSAGE);
             } else{
-            Diretor diretor = new Diretor();
-            
-            diretor.setNome(nome);
-            diretor.setEmail(email);
-            diretor.setCpf(cpf);
-            diretor.setSenha(senha);
-            
-            this.trabalhoSeguranca.inserirDiretor(diretor);
+          try {
+              /*Diretor diretor = new Diretor();
+              
+              diretor.setNome(nome);
+              diretor.setEmail(email);
+              diretor.setCpf(cpf);
+              diretor.setSenha(senha);
+              
+              this.trabalhoSeguranca.inserirDiretor(diretor);*/
+              this.bancoDados.CriarFuncionario(cpf, nome, email, senha, "DIRETOR");
+          } catch (SQLException ex) {
+              Logger.getLogger(CadastroDiretorForm.class.getName()).log(Level.SEVERE, null, ex);
+          }
             this.limpar();
             JOptionPane.showMessageDialog(this, "Diretor cadastrado com sucesso!", "Cadastro de Diretor", JOptionPane.INFORMATION_MESSAGE);
-            
+            this.dispose();
             LoginForm loginForm = new LoginForm(this.trabalhoSeguranca);
             loginForm.setVisible(true);
         }       
@@ -168,35 +180,7 @@ public class CadastroDiretorForm extends javax.swing.JFrame {
          this.txtEmail.setText(null);
          this.txtSenha.setText(null);
     }
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroDiretorForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroDiretorForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroDiretorForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroDiretorForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */  
-    }
+    
     
     public boolean validarEmail(String email) {
         boolean retorno = false;
