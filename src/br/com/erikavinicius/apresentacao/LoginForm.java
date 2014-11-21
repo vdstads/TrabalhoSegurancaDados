@@ -136,16 +136,7 @@ public class LoginForm extends javax.swing.JFrame {
             }else{
                 JOptionPane.showMessageDialog(this, "E-mail e Senha Incorretos!", "Erro", JOptionPane.WARNING_MESSAGE);    
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InvalidKeyException ex) {
-            Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalBlockSizeException ex) {
-            Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (BadPaddingException ex) {
-            Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e) {
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 

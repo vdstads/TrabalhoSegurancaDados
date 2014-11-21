@@ -10,19 +10,20 @@ package br.com.erikavinicius;
 import br.com.erikavinicius.apresentacao.CadastroDiretorForm;
 import br.com.erikavinicius.apresentacao.LoginForm;
 import br.com.erikavinicius.dados.BancoDados;
-import br.com.erikavinicius.dados.BancoDadosUtil;
-import br.com.erikavinicius.entidade.Diretor;
 import br.com.erikavinicius.entidade.Usuario;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 
 
 
@@ -34,11 +35,17 @@ public class TrabalhoSeguranca {
 
     public List<Usuario> listaUsuarios;
     private BancoDados bancoDados;
-    private CryptographyTripleDES criptografia;
+    CryptographyTripleDES cryptography;
+    
+                  
     
     
     
     public TrabalhoSeguranca() {
+        try {
+            this.cryptography = new CryptographyTripleDES();
+        } catch (Exception e) {
+        }
         listaUsuarios = new ArrayList<Usuario>();
     }
     
@@ -47,7 +54,7 @@ public class TrabalhoSeguranca {
         boolean loginAtivo = false;
         for (Usuario usuario : listaUsuarios) {
             if (usuario.getEmail().equals(email)) {
-               if (this.criptografia.decrypt(usuario.getSenha()).equals(senha)) {
+               if (cryptography.decrypt(usuario.getSenha()).equals(senha)) {
                     loginAtivo = true;
                }
                break;
