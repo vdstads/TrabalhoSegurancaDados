@@ -8,7 +8,15 @@ package br.com.erikavinicius;
 
 
 import br.com.erikavinicius.apresentacao.CadastroDiretorForm;
+import br.com.erikavinicius.apresentacao.LoginForm;
+import br.com.erikavinicius.dados.BancoDados;
+import br.com.erikavinicius.dados.BancoDadosUtil;
 import br.com.erikavinicius.entidade.Diretor;
+import br.com.erikavinicius.entidade.Usuario;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,22 +26,20 @@ import java.util.List;
  */
 public class TrabalhoSeguranca {
 
-    public List<Diretor> listaDiretor;
+    public List<Usuario> listaUsuarios;
+    private BancoDados bancoDados;
+    
     
     public TrabalhoSeguranca() {
-        listaDiretor = new ArrayList<Diretor>();
+        listaUsuarios = new ArrayList<Usuario>();
     }
     
-    public void inserirDiretor(Diretor diretor) {
-        listaDiretor.add(diretor);
-    }
-    
-    public boolean loginDiretor(String email, String senha) {
+    public boolean login(String email, String senha) throws SQLException {
+        listaUsuarios = this.bancoDados.ConsultaTodos();
         boolean loginAtivo = false;
-        
-        for (Diretor diretor : listaDiretor) {
-            if (diretor.getEmail().equals(email)) {
-               if (diretor.getSenha().equals(senha)) {
+        for (Usuario usuario : listaUsuarios) {
+            if (usuario.getEmail().equals(email)) {
+               if (usuario.getSenha().equals(senha)) {
                     loginAtivo = true;
                     //System.out.print("Email e senha confere");
                }
@@ -43,12 +49,17 @@ public class TrabalhoSeguranca {
         //System.out.print("Email e senha NAO confere");
     return loginAtivo;
     }
-    private void exibirMenu() {
-       CadastroDiretorForm cadastroDiretorForm = new CadastroDiretorForm(this);
-       cadastroDiretorForm.setVisible(true);
+    private void exibirMenu() throws SQLException {
+        if(this.bancoDados.ConsultaDiretor()==false){
+            CadastroDiretorForm cadastroDiretorForm = new CadastroDiretorForm(this);
+            cadastroDiretorForm.setVisible(true);
+        }else{
+            LoginForm loginForm = new LoginForm(this);
+            loginForm.setVisible(true);
+        }
     }
     
-    public static void main(String[] args){
+    public static void main(String[] args) throws SQLException{
         TrabalhoSeguranca trabalhoSeguranca = new TrabalhoSeguranca();
         
         trabalhoSeguranca.exibirMenu();

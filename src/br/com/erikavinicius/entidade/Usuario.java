@@ -15,7 +15,16 @@ public class Usuario {
     private String email;
     private String senha;
     private String cpf;
+    private String cargo;
 
+    public String getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
+    }
+    
     public String getCpf() {
         return cpf;
     }

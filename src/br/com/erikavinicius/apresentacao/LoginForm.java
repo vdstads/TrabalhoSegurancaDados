@@ -7,6 +7,9 @@
 package br.com.erikavinicius.apresentacao;
 
 import br.com.erikavinicius.TrabalhoSeguranca;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -124,15 +127,19 @@ public class LoginForm extends javax.swing.JFrame {
      String senha = this.txtSenha.getText().trim();
      String email = this.txtEmail.getText().trim();
      
-        if (this.trabalhoSeguranca.loginDiretor(email, senha) == true){
-            this.dispose();
-            MenuDiretorForm menuDiretorForm = new MenuDiretorForm(this.trabalhoSeguranca);
-            menuDiretorForm.setVisible(true);
-            
-            this.limpar();
-        }else{
-         JOptionPane.showMessageDialog(this, "E-mail e Senha Incorretos!", "Erro", JOptionPane.WARNING_MESSAGE);
-        }    
+        try {
+            if (this.trabalhoSeguranca.login(email, senha) == true){
+                this.dispose();
+                MenuDiretorForm menuDiretorForm = new MenuDiretorForm(this.trabalhoSeguranca);
+                menuDiretorForm.setVisible(true);
+                
+                this.limpar();
+            }else{
+                JOptionPane.showMessageDialog(this, "E-mail e Senha Incorretos!", "Erro", JOptionPane.WARNING_MESSAGE);    
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
