@@ -41,12 +41,10 @@ public class TrabalhoSeguranca {
             if (usuario.getEmail().equals(email)) {
                if (usuario.getSenha().equals(senha)) {
                     loginAtivo = true;
-                    //System.out.print("Email e senha confere");
                }
                break;
             }
         }
-        //System.out.print("Email e senha NAO confere");
     return loginAtivo;
     }
     private void exibirMenu() throws SQLException {
