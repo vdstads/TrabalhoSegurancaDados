@@ -34,7 +34,9 @@ public class TrabalhoSeguranca {
 
     public List<Usuario> listaUsuarios;
     private BancoDados bancoDados;
-    private CryptographyTripleDES criptografia;  
+    private CryptographyTripleDES criptografia;
+    
+    
     
     public TrabalhoSeguranca() {
         listaUsuarios = new ArrayList<Usuario>();
@@ -68,5 +70,6 @@ public class TrabalhoSeguranca {
         
         trabalhoSeguranca.exibirMenu();
     }
-    
+
+        
 }

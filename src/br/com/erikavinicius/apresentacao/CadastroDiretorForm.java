@@ -165,8 +165,8 @@ public class CadastroDiretorForm extends javax.swing.JFrame {
           try {
               //CRIPTOGRAFANDO A SENHA---------------------------
               try {
-                  CryptographyTripleDES cryptography = CryptographyTripleDES.newInstance();
-                  senha = this.criptografia.encrypt(senha);
+                   CryptographyTripleDES cryptography = CryptographyTripleDES.newInstance();
+                   senha = cryptography.encrypt(senha);
               } catch (InvalidKeyException ex) {
                   Logger.getLogger(CadastroDiretorForm.class.getName()).log(Level.SEVERE, null, ex);
               } catch (IllegalBlockSizeException ex) {

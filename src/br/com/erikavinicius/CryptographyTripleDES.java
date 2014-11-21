@@ -28,7 +28,7 @@ import java.io.IOException;
       return new CryptographyTripleDES();
     }
  
-    private CryptographyTripleDES() throws UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, InvalidKeySpecException {
+    public CryptographyTripleDES() throws UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, InvalidKeySpecException {
       String key = "ViniciusDiasSouzaErikaMariaSant";
       encryptKey = key.getBytes( "UTF-8" );
       cipher = Cipher.getInstance( "DESede" );
@@ -39,10 +39,12 @@ import java.io.IOException;
  
    
     public String encrypt( String value ) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, UnsupportedEncodingException {
+      String senhaCriptografada= null;
       cipher.init( Cipher.ENCRYPT_MODE, secretKey );
       byte[] cipherText = cipher.doFinal( value.getBytes( "UTF-8" ) );
       BASE64Encoder encoder = new BASE64Encoder();
-      return encoder.encode( cipherText );
+      senhaCriptografada = encoder.encode( cipherText );
+      return senhaCriptografada;
     }
  
    
