@@ -6,14 +6,23 @@
 
 package br.com.erikavinicius.apresentacao;
 
+
+import br.com.erikavinicius.CryptographyTripleDES;
 import br.com.erikavinicius.TrabalhoSeguranca;
 import br.com.erikavinicius.dados.BancoDados;
 import br.com.erikavinicius.entidade.Diretor;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.swing.JOptionPane;
 
 /**
@@ -24,6 +33,7 @@ public class CadastroDiretorForm extends javax.swing.JFrame {
 
     private TrabalhoSeguranca trabalhoSeguranca;
     private BancoDados bancoDados;
+    private CryptographyTripleDES criptografia;
     
     public CadastroDiretorForm(TrabalhoSeguranca trabalhoSeguranca) {
         initComponents();
@@ -153,14 +163,26 @@ public class CadastroDiretorForm extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "E-mail invalido!", "Erro", JOptionPane.WARNING_MESSAGE);
             } else{
           try {
-              /*Diretor diretor = new Diretor();
-              
-              diretor.setNome(nome);
-              diretor.setEmail(email);
-              diretor.setCpf(cpf);
-              diretor.setSenha(senha);
-              
-              this.trabalhoSeguranca.inserirDiretor(diretor);*/
+              //CRIPTOGRAFANDO A SENHA---------------------------
+              try {
+                  CryptographyTripleDES cryptography = CryptographyTripleDES.newInstance();
+                  senha = this.criptografia.encrypt(senha);
+              } catch (InvalidKeyException ex) {
+                  Logger.getLogger(CadastroDiretorForm.class.getName()).log(Level.SEVERE, null, ex);
+              } catch (IllegalBlockSizeException ex) {
+                  Logger.getLogger(CadastroDiretorForm.class.getName()).log(Level.SEVERE, null, ex);
+              } catch (BadPaddingException ex) {
+                  Logger.getLogger(CadastroDiretorForm.class.getName()).log(Level.SEVERE, null, ex);
+              } catch (UnsupportedEncodingException ex) {
+                  Logger.getLogger(CadastroDiretorForm.class.getName()).log(Level.SEVERE, null, ex);
+              } catch (NoSuchAlgorithmException ex) {
+                  Logger.getLogger(CadastroDiretorForm.class.getName()).log(Level.SEVERE, null, ex);
+              } catch (NoSuchPaddingException ex) {
+                  Logger.getLogger(CadastroDiretorForm.class.getName()).log(Level.SEVERE, null, ex);
+              } catch (InvalidKeySpecException ex) {
+                  Logger.getLogger(CadastroDiretorForm.class.getName()).log(Level.SEVERE, null, ex);
+              }
+              //---------------------------------------------------
               this.bancoDados.CriarFuncionario(cpf, nome, email, senha, "DIRETOR");
           } catch (SQLException ex) {
               Logger.getLogger(CadastroDiretorForm.class.getName()).log(Level.SEVERE, null, ex);

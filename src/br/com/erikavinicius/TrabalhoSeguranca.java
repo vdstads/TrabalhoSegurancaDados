@@ -13,12 +13,18 @@ import br.com.erikavinicius.dados.BancoDados;
 import br.com.erikavinicius.dados.BancoDadosUtil;
 import br.com.erikavinicius.entidade.Diretor;
 import br.com.erikavinicius.entidade.Usuario;
+import java.io.IOException;
+import java.security.InvalidKeyException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+
+
 
 /**
  *
@@ -28,18 +34,18 @@ public class TrabalhoSeguranca {
 
     public List<Usuario> listaUsuarios;
     private BancoDados bancoDados;
-    
+    private CryptographyTripleDES criptografia;  
     
     public TrabalhoSeguranca() {
         listaUsuarios = new ArrayList<Usuario>();
     }
     
-    public boolean login(String email, String senha) throws SQLException {
+    public boolean login(String email, String senha) throws SQLException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, IOException {
         listaUsuarios = this.bancoDados.ConsultaTodos();
         boolean loginAtivo = false;
         for (Usuario usuario : listaUsuarios) {
             if (usuario.getEmail().equals(email)) {
-               if (usuario.getSenha().equals(senha)) {
+               if (this.criptografia.decrypt(usuario.getSenha()).equals(senha)) {
                     loginAtivo = true;
                }
                break;
