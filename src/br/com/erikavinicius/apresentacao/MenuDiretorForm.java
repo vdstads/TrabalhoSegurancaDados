@@ -43,6 +43,7 @@ public class MenuDiretorForm extends javax.swing.JFrame {
 
         jMenu1.setText("Departamentos");
 
+        itmCadastroDepartamentos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
         itmCadastroDepartamentos.setText("Cadastrar Departamentos");
         itmCadastroDepartamentos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -51,7 +52,7 @@ public class MenuDiretorForm extends javax.swing.JFrame {
         });
         jMenu1.add(itmCadastroDepartamentos);
 
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
         jMenuItem1.setText("Lista de Departamentos");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -64,6 +65,7 @@ public class MenuDiretorForm extends javax.swing.JFrame {
 
         itmMenuCadastrarFuncionario.setText("Funcionários");
 
+        itmCadastroFuncionarios.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, 0));
         itmCadastroFuncionarios.setText("Cadastrar Funcionarios");
         itmCadastroFuncionarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,7 +74,7 @@ public class MenuDiretorForm extends javax.swing.JFrame {
         });
         itmMenuCadastrarFuncionario.add(itmCadastroFuncionarios);
 
-        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, 0));
         jMenuItem2.setText("Lista de Funcionários");
         itmMenuCadastrarFuncionario.add(jMenuItem2);
 

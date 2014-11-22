@@ -206,7 +206,7 @@ public class CadastroFuncionarioForm extends javax.swing.JFrame {
     
     public boolean validarEmail(String email) {
         boolean retorno = false;
-// Expressão Regular para validar E-mail
+        // Expressão Regular para validar E-mail
         Pattern p = Pattern.compile("^[\\w-]+(\\.[\\w-]+)*@([\\w-]+\\.)+[a-zA-Z]{2,7}$");
         Matcher m = p.matcher(email);
         if (m.find()) {
