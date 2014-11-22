@@ -32,35 +32,49 @@ public class MenuDiretorForm extends javax.swing.JFrame {
 
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        itmCadastroDepartamentos = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         itmMenuCadastrarFuncionario = new javax.swing.JMenu();
+        itmCadastroFuncionarios = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setExtendedState(6);
 
         jMenu1.setText("Departamentos");
 
+        itmCadastroDepartamentos.setText("Cadastrar Departamentos");
+        itmCadastroDepartamentos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmCadastroDepartamentosActionPerformed(evt);
+            }
+        });
+        jMenu1.add(itmCadastroDepartamentos);
+
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
         jMenuItem1.setText("Lista de Departamentos");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
         jMenuBar1.add(jMenu1);
 
         itmMenuCadastrarFuncionario.setText("Funcionários");
 
+        itmCadastroFuncionarios.setText("Cadastrar Funcionarios");
+        itmCadastroFuncionarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmCadastroFuncionariosActionPerformed(evt);
+            }
+        });
+        itmMenuCadastrarFuncionario.add(itmCadastroFuncionarios);
+
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
         jMenuItem2.setText("Lista de Funcionários");
         itmMenuCadastrarFuncionario.add(jMenuItem2);
-
-        jMenuItem3.setText("Cadastrar Funcionarios");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
-        itmMenuCadastrarFuncionario.add(jMenuItem3);
 
         jMenuBar1.add(itmMenuCadastrarFuncionario);
 
@@ -80,10 +94,18 @@ public class MenuDiretorForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        CadastroFuncionarioForm cadastroFuncionarioForm = new CadastroFuncionarioForm();
+    private void itmCadastroFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmCadastroFuncionariosActionPerformed
+        CadastroFuncionarioForm cadastroFuncionarioForm = new CadastroFuncionarioForm(this.trabalhoSeguranca);
         cadastroFuncionarioForm.setVisible(true);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_itmCadastroFuncionariosActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void itmCadastroDepartamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmCadastroDepartamentosActionPerformed
+        
+    }//GEN-LAST:event_itmCadastroDepartamentosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -117,11 +139,12 @@ public class MenuDiretorForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem itmCadastroDepartamentos;
+    private javax.swing.JMenuItem itmCadastroFuncionarios;
     private javax.swing.JMenu itmMenuCadastrarFuncionario;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     // End of variables declaration//GEN-END:variables
 }

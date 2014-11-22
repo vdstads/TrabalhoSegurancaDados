@@ -62,7 +62,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="btnCadastrar" alignment="0" pref="340" max="32767" attributes="0"/>
@@ -79,11 +79,11 @@
                               <Component id="lblCargo" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="rdoGerente" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="rdoEncarregado" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="174" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -115,9 +115,9 @@
                       <Component id="rdoGerente" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="rdoEncarregado" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Component id="btnCadastrar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="65" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -176,9 +176,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Gerente"/>
           </Properties>
-          <BindingProperties>
-            <BindingProperty name="selected" source="grpCargo" target="rdoGerente" targetPath="selected" updateStrategy="0" immediately="false"/>
-          </BindingProperties>
         </Component>
         <Component class="javax.swing.JRadioButton" name="rdoEncarregado">
           <Properties>
@@ -187,9 +184,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Encarregado"/>
           </Properties>
-          <BindingProperties>
-            <BindingProperty name="selected" source="grpCargo" target="rdoEncarregado" targetPath="selected" updateStrategy="0" immediately="false"/>
-          </BindingProperties>
         </Component>
       </SubComponents>
     </Container>

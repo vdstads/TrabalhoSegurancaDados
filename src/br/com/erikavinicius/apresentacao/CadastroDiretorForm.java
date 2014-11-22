@@ -40,8 +40,6 @@ public class CadastroDiretorForm extends javax.swing.JFrame {
         this.trabalhoSeguranca = trabalhoSeguranca;
         this.bancoDados = bancoDados;
     }
-
-
         
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

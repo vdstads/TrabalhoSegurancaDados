@@ -39,12 +39,10 @@ import java.io.IOException;
  
    
     public String encrypt( String value ) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, UnsupportedEncodingException {
-      String senhaCriptografada= null;
       cipher.init( Cipher.ENCRYPT_MODE, secretKey );
       byte[] cipherText = cipher.doFinal( value.getBytes( "UTF-8" ) );
       BASE64Encoder encoder = new BASE64Encoder();
-      senhaCriptografada = encoder.encode( cipherText );
-      return senhaCriptografada;
+      return encoder.encode( cipherText );
     }
  
    
