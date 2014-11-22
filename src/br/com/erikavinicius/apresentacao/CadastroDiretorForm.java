@@ -160,18 +160,18 @@ public class CadastroDiretorForm extends javax.swing.JFrame {
         } else if(validarEmail(email) == false){
                 JOptionPane.showMessageDialog(this, "E-mail invalido!", "Erro", JOptionPane.WARNING_MESSAGE);
             } else{
-          try {
-              //CRIPTOGRAFANDO A SENHA---------------------------
-              try {
-                   CryptographyTripleDES cryptography = CryptographyTripleDES.newInstance();
-                   senha = cryptography.encrypt(senha);
-              } catch (Exception e) {
-              }
-              //---------------------------------------------------
-              this.bancoDados.CriarFuncionario(cpf, nome, email, senha, "DIRETOR");
-          } catch (SQLException ex) {
-              Logger.getLogger(CadastroDiretorForm.class.getName()).log(Level.SEVERE, null, ex);
-          }
+            try {
+                //CRIPTOGRAFANDO A SENHA---------------------------
+                try {
+                     CryptographyTripleDES cryptography = CryptographyTripleDES.newInstance();
+                     senha = cryptography.encrypt(senha);
+                } catch (Exception e) {
+                }
+                //---------------------------------------------------
+                this.bancoDados.CriarFuncionario(cpf, nome, email, senha, "DIRETOR");
+            } catch (SQLException ex) {
+                Logger.getLogger(CadastroDiretorForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
             this.limpar();
             JOptionPane.showMessageDialog(this, "Diretor cadastrado com sucesso!", "Cadastro de Diretor", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();

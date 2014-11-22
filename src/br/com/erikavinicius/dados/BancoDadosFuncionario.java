@@ -121,5 +121,10 @@ public class BancoDadosFuncionario {
         }
         return existeDiretor;
     }
+   
+    public static  List<Usuario> removeFuncionario(String nome) throws SQLException {
+        return null;
+        
+    }
 
 }

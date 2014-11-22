@@ -25,8 +25,6 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
-
-
 /**
  *
  * @author ALUNO 2014 2
@@ -35,11 +33,7 @@ public class TrabalhoSeguranca {
 
     public List<Usuario> listaUsuarios;
     private BancoDados bancoDados;
-    CryptographyTripleDES cryptography;
-    
-                  
-    
-    
+    CryptographyTripleDES cryptography;   
     
     public TrabalhoSeguranca() {
         try {
@@ -62,6 +56,7 @@ public class TrabalhoSeguranca {
         }
     return loginAtivo;
     }
+    
     private void exibirMenu() throws SQLException {
         if(this.bancoDados.ConsultaDiretor()==false){
             CadastroDiretorForm cadastroDiretorForm = new CadastroDiretorForm(this);

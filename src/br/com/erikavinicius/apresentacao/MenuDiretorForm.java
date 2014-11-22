@@ -36,7 +36,7 @@ public class MenuDiretorForm extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         itmMenuCadastrarFuncionario = new javax.swing.JMenu();
         itmCadastroFuncionarios = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        itmListaFuncionarios = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setExtendedState(6);
@@ -74,9 +74,14 @@ public class MenuDiretorForm extends javax.swing.JFrame {
         });
         itmMenuCadastrarFuncionario.add(itmCadastroFuncionarios);
 
-        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, 0));
-        jMenuItem2.setText("Lista de Funcionários");
-        itmMenuCadastrarFuncionario.add(jMenuItem2);
+        itmListaFuncionarios.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, 0));
+        itmListaFuncionarios.setText("Lista de Funcionários");
+        itmListaFuncionarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmListaFuncionariosActionPerformed(evt);
+            }
+        });
+        itmMenuCadastrarFuncionario.add(itmListaFuncionarios);
 
         jMenuBar1.add(itmMenuCadastrarFuncionario);
 
@@ -108,6 +113,11 @@ public class MenuDiretorForm extends javax.swing.JFrame {
     private void itmCadastroDepartamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmCadastroDepartamentosActionPerformed
         
     }//GEN-LAST:event_itmCadastroDepartamentosActionPerformed
+
+    private void itmListaFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmListaFuncionariosActionPerformed
+        ListaFuncionarioForm listaFuncionarioForm = new ListaFuncionarioForm(this.trabalhoSeguranca);
+        listaFuncionarioForm.setVisible(true);
+    }//GEN-LAST:event_itmListaFuncionariosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -143,10 +153,10 @@ public class MenuDiretorForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem itmCadastroDepartamentos;
     private javax.swing.JMenuItem itmCadastroFuncionarios;
+    private javax.swing.JMenuItem itmListaFuncionarios;
     private javax.swing.JMenu itmMenuCadastrarFuncionario;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     // End of variables declaration//GEN-END:variables
 }
