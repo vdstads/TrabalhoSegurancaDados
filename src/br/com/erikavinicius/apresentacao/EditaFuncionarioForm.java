@@ -74,7 +74,7 @@ public class EditaFuncionarioForm extends javax.swing.JFrame {
 
         lblSenha.setText("Senha:");
 
-        btnCadastrar.setText("Cadastrar");
+        btnCadastrar.setText("Editar");
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadastrarActionPerformed(evt);
@@ -147,7 +147,7 @@ public class EditaFuncionarioForm extends javax.swing.JFrame {
                     .addComponent(rdoEncarregado))
                 .addGap(18, 18, 18)
                 .addComponent(btnCadastrar)
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -171,32 +171,7 @@ public class EditaFuncionarioForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        JOptionPane.showMessageDialog(this, CPF+" cadastrado com sucesso!", "Cadastro de Funcionario", JOptionPane.INFORMATION_MESSAGE);
-        Usuario usrTemp = new Usuario();
-        List<Usuario> listaUsuario = null;
-        try {
-            listaUsuario  = this.bancoDados.ConsultaTodos();
-        } catch (SQLException ex) {
-            Logger.getLogger(EditaFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        for (Usuario usuario : listaUsuario) {
-            if (usuario.getCpf().equals(CPF)) {
-               usrTemp = usuario;
-               break;
-            }
-        }
-        //txtNomeForn.setText(FornTemp.getNome());
-        txtNome.setText(usrTemp.getNome());
-        usrTemp.setNome(this.txtNome.getText().trim());
-        usrTemp.setEmail(this.txtEmail.getText().trim());
-        usrTemp.setSenha(this.txtSenha.getText().trim());
-        //usrTemp.setCargo(this.grpCargo);
-        usrTemp.setCpf(this.txtCpf.getText().trim());
         
-
-     
-        /*
         String nome = this.txtNome.getText().trim();
         String senha = this.txtSenha.getText().trim();
         String cpf = this.txtCpf.getText().trim();
@@ -229,13 +204,14 @@ public class EditaFuncionarioForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, cargo+" cadastrado com sucesso!", "Cadastro de Funcionario", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
         }
-        */
+        
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void preencher() {
 
         Usuario usrTemp = new Usuario();
         List<Usuario> listaUsuario = null;
+        String senha = null;
         try {
             listaUsuario  = this.bancoDados.ConsultaTodos();
         } catch (SQLException ex) {
@@ -248,11 +224,22 @@ public class EditaFuncionarioForm extends javax.swing.JFrame {
                break;
             }
         }
+        try {
+                    CryptographyTripleDES cryptography = CryptographyTripleDES.newInstance();
+                    senha = cryptography.encrypt(usrTemp.getSenha());
+                } catch (Exception e) {
+               }
+        //grpCargo.setSelected(, true);
+        if(usrTemp.getCargo().equals("ENCARREGADO")){
+            rdoEncarregado.setSelected(true);
+        }else{
+            rdoGerente.setSelected(true);
+        }
 
         txtNome.setText(usrTemp.getNome());
         txtCpf.setText(usrTemp.getCpf());
         txtEmail.setText(usrTemp.getEmail());
-        txtSenha.setText(usrTemp.getSenha());
+        txtSenha.setText(senha);
 
     }
     
