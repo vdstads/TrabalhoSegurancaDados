@@ -6,6 +6,16 @@
 
 package br.com.erikavinicius.apresentacao;
 
+import br.com.erikavinicius.TrabalhoSeguranca;
+import br.com.erikavinicius.dados.BancoDados;
+import br.com.erikavinicius.dados.BancoDadosDepartamento;
+import br.com.erikavinicius.dados.BancoDadosFuncionario;
+import br.com.erikavinicius.entidade.Usuario;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,11 +24,16 @@ import javax.swing.JOptionPane;
  */
 public class CadastroDepartamentoForm extends javax.swing.JFrame {
 
-    /**
-     * Creates new form CadastroDepartamentoForm
-     */
-    public CadastroDepartamentoForm() {
+    private TrabalhoSeguranca trabalhoSeguranca;
+    private BancoDados bancoDados;
+    private BancoDadosDepartamento bancoDadosDepartamento;
+    public CadastroDepartamentoForm(TrabalhoSeguranca trabalhoSeguranca) {
         initComponents();
+    this.trabalhoSeguranca = trabalhoSeguranca;
+    this.bancoDados = bancoDados;
+    this.bancoDadosDepartamento = bancoDadosDepartamento;
+    this.configurarCmbGerente();
+    
     }
 
     /**
@@ -132,24 +147,47 @@ public class CadastroDepartamentoForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmbFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbFuncionarioActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_cmbFuncionarioActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        /*String nome = this.txtNome.getText().trim();
+        Usuario usrTemp = new Usuario();
+        usrTemp = (Usuario) this.cmbFuncionario.getSelectedItem();
+                
+        String nome = this.txtNome.getText().trim();
         String codigo = this.txtCodigo.getText().trim();
-        String funcionario = "";
-        
+        String cpfGerente = usrTemp.getCpf();
          
         if(nome.isEmpty() || codigo.isEmpty()){
             JOptionPane.showMessageDialog(this, "Preencha todos os campos!", "Erro", JOptionPane.WARNING_MESSAGE);    
         }else{
-           //funcionario =  this.cmbFuncionario.getSelectedItem());
+            try {
+                this.bancoDadosDepartamento.CriarDepartamento(codigo, nome, cpfGerente);
+            } catch (SQLException ex) {
+                Logger.getLogger(CadastroDepartamentoForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
            JOptionPane.showMessageDialog(this, "Departamento adicionado com sucesso!", "Cadastro de Departamento", JOptionPane.INFORMATION_MESSAGE);
            limpar();
-        }*/
+        }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
+    private void configurarCmbGerente() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) this.cmbFuncionario.getModel();
+        model.removeAllElements();
+        
+        List<Usuario> listaTodos = null;
+       // List<Usuario> listaGerenteTemp;
+        try {
+            listaTodos = this.bancoDados.ConsultaTodos();
+        } catch (Exception e) {
+        }
+        
+        for (Usuario gerente : listaTodos) {
+            if (gerente.getCargo().equals("GERENTE")) {
+               model.addElement(gerente);
+            }
+        }    
+    }
     /**
      * @param args the command line arguments
      */

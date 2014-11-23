@@ -114,7 +114,8 @@ public class MenuDiretorForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void itmCadastroDepartamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmCadastroDepartamentosActionPerformed
-        
+        CadastroDepartamentoForm cadastroDepartamentoForm = new CadastroDepartamentoForm(this.trabalhoSeguranca);
+        cadastroDepartamentoForm.setVisible(true);        
     }//GEN-LAST:event_itmCadastroDepartamentosActionPerformed
 
     private void itmListaFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmListaFuncionariosActionPerformed
