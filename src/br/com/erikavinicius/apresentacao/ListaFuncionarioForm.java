@@ -152,6 +152,7 @@ public class ListaFuncionarioForm extends javax.swing.JFrame {
                }
                 
                 //JOptionPane.showMessageDialog(null,"Editado com sucesso!");
+               this.dispose();
             }
         }else{
             JOptionPane.showMessageDialog(null, "Por favor, selecione um item!");
@@ -190,7 +191,7 @@ public class ListaFuncionarioForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
     
-    private void configurarTblFuncionarios() throws SQLException {
+    void configurarTblFuncionarios() throws SQLException {
         
         TabelaFuncionariosModel model = new TabelaFuncionariosModel(this.bancoDadosFuncionario.ConsultaTodos());
 

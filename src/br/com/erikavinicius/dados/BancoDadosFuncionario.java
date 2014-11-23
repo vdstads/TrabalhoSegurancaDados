@@ -147,21 +147,21 @@ public class BancoDadosFuncionario {
         }
     }
     
-    public static void EditaFuncionario(String cpf) throws SQLException {
+    public static void EditaFuncionario(String cpf, String nome, String email, String senha, String cargo, String cpfAtual) throws SQLException {
         Connection conexao = null;
         PreparedStatement comando = null;
         try {
             conexao = BancoDadosUtil.getConnection();
 
             //Código de criar...
-            String sql = "INSERT INTO FUNCIONARIO(CPF, NOME, EMAIL, SENHA, CARGO) VALUES (?,?,?,?,?)";
+            String sql = "UPDATE FUNCIONARIO SET CPF = ?, NOME = ?, EMAIL = ?, SENHA = ?, CARGO = ? WHERE CPF ='"+cpfAtual+"'";
             comando = conexao.prepareStatement(sql);
 
             comando.setString(1, cpf);
-            /*comando.setString(2, nome);
+            comando.setString(2, nome);
             comando.setString(3, email);
             comando.setString(4, senha);
-            comando.setString(5, cargo);*/
+            comando.setString(5, cargo);
 
             comando.execute();
 
