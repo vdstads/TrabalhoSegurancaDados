@@ -122,9 +122,61 @@ public class BancoDadosFuncionario {
         return existeDiretor;
     }
    
-    public static  List<Usuario> removeFuncionario(String nome) throws SQLException {
-        return null;
-        
+    public static void removeFuncionario(String CPF) throws SQLException {
+        Connection conexao = null;
+        PreparedStatement comando = null;
+        try {
+            conexao = BancoDadosUtil.getConnection();
+
+            //Código de criar...
+            String sql = "DELETE FROM FUNCIONARIO WHERE CPF ='"+CPF+"'";
+            comando = conexao.prepareStatement(sql);
+            
+            comando.execute();
+
+            conexao.commit();
+        } catch (Exception e) {
+            if (conexao != null && !conexao.isClosed()) {
+                conexao.rollback();
+            }
+            throw new RuntimeException(e);
+        } finally {
+            if (conexao != null && !conexao.isClosed()) {
+                conexao.close();
+            }
+        }
     }
+    
+    public static void EditaFuncionario(String cpf) throws SQLException {
+        Connection conexao = null;
+        PreparedStatement comando = null;
+        try {
+            conexao = BancoDadosUtil.getConnection();
+
+            //Código de criar...
+            String sql = "INSERT INTO FUNCIONARIO(CPF, NOME, EMAIL, SENHA, CARGO) VALUES (?,?,?,?,?)";
+            comando = conexao.prepareStatement(sql);
+
+            comando.setString(1, cpf);
+            /*comando.setString(2, nome);
+            comando.setString(3, email);
+            comando.setString(4, senha);
+            comando.setString(5, cargo);*/
+
+            comando.execute();
+
+            conexao.commit();
+        } catch (Exception e) {
+            if (conexao != null && !conexao.isClosed()) {
+                conexao.rollback();
+            }
+            throw new RuntimeException(e);
+        } finally {
+            if (conexao != null && !conexao.isClosed()) {
+                conexao.close();
+            }
+        }
+    }
+    
 
 }

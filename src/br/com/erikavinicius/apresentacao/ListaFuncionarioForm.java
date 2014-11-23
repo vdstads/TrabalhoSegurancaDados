@@ -25,7 +25,8 @@ public class ListaFuncionarioForm extends javax.swing.JFrame {
 
     private TrabalhoSeguranca trabalhoSeguranca;
     private BancoDadosFuncionario bancoDadosFuncionario;
-    private CryptographyTripleDES criptografia;
+ 
+    
     
     public ListaFuncionarioForm(TrabalhoSeguranca trabalhoSeguranca) throws SQLException {
         initComponents();
@@ -127,7 +128,31 @@ public class ListaFuncionarioForm extends javax.swing.JFrame {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         if (tblFuncionarios.getSelectedRow() != - 1) {
-           
+           int result = JOptionPane.showConfirmDialog(null, "Deseja Editar ? ", "Editar", JOptionPane.YES_NO_CANCEL_OPTION);
+            if (result == JOptionPane.YES_OPTION) {
+                TabelaFuncionariosModel model = null;
+                try {
+                    model = new TabelaFuncionariosModel(this.bancoDadosFuncionario.ConsultaTodos());
+                } catch (SQLException ex) {
+                    Logger.getLogger(ListaFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                int colunaCPF = 1;
+                String CPF = (String) model.getValueAt(tblFuncionarios.getSelectedRow(), colunaCPF);
+                
+               
+               EditaFuncionarioForm editaFuncionarioForm = new EditaFuncionarioForm(this.trabalhoSeguranca, CPF);
+               editaFuncionarioForm.setVisible(true);
+                
+
+                
+               try {
+                   this.configurarTblFuncionarios();
+               } catch (SQLException ex) {
+                   Logger.getLogger(ListaFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);
+               }
+                
+                //JOptionPane.showMessageDialog(null,"Editado com sucesso!");
+            }
         }else{
             JOptionPane.showMessageDialog(null, "Por favor, selecione um item!");
         }
@@ -143,11 +168,11 @@ public class ListaFuncionarioForm extends javax.swing.JFrame {
                 } catch (SQLException ex) {
                     Logger.getLogger(ListaFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                int colunaNome = 0;
-                String nome = (String) model.getValueAt(tblFuncionarios.getSelectedRow(),colunaNome);
+                int colunaCPF = 1;
+                String CPF = (String) model.getValueAt(tblFuncionarios.getSelectedRow(), colunaCPF);
                 
                 try {
-                    this.bancoDadosFuncionario.removeFuncionario(nome);
+                    this.bancoDadosFuncionario.removeFuncionario(CPF);
                 } catch (SQLException ex) {
                     Logger.getLogger(ListaFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -157,7 +182,7 @@ public class ListaFuncionarioForm extends javax.swing.JFrame {
                 } catch (SQLException ex) {
                     Logger.getLogger(ListaFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                JOptionPane.showMessageDialog(null, "Excluído com sucesso!");
+                JOptionPane.showMessageDialog(null,"Excluído com sucesso!");
                 
             }
         }else{
