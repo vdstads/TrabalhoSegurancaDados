@@ -36,6 +36,7 @@ public class EditaFuncionarioForm extends javax.swing.JFrame {
         this.bancoDadosFuncionario = bancoDadosFuncionario;
         this.bancoDados = bancoDados;
         CPF = cpf;
+        preencher();
         
     }
 
@@ -231,6 +232,30 @@ public class EditaFuncionarioForm extends javax.swing.JFrame {
         */
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
+    private void preencher() {
+
+        Usuario usrTemp = new Usuario();
+        List<Usuario> listaUsuario = null;
+        try {
+            listaUsuario  = this.bancoDados.ConsultaTodos();
+        } catch (SQLException ex) {
+            Logger.getLogger(EditaFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        for (Usuario usuario : listaUsuario) {
+            if (usuario.getCpf().equals(CPF)) {
+               usrTemp = usuario;
+               break;
+            }
+        }
+
+        txtNome.setText(usrTemp.getNome());
+        txtCpf.setText(usrTemp.getCpf());
+        txtEmail.setText(usrTemp.getEmail());
+        txtSenha.setText(usrTemp.getSenha());
+
+    }
+    
     public void limpar(){
          this.txtNome.setText(null);   
          this.txtCpf.setText(null);

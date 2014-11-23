@@ -7,6 +7,9 @@
 package br.com.erikavinicius.apresentacao;
 
 import br.com.erikavinicius.TrabalhoSeguranca;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -115,7 +118,12 @@ public class MenuDiretorForm extends javax.swing.JFrame {
     }//GEN-LAST:event_itmCadastroDepartamentosActionPerformed
 
     private void itmListaFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmListaFuncionariosActionPerformed
-        ListaFuncionarioForm listaFuncionarioForm = new ListaFuncionarioForm(this.trabalhoSeguranca);
+        ListaFuncionarioForm listaFuncionarioForm = null;
+        try {
+            listaFuncionarioForm = new ListaFuncionarioForm(this.trabalhoSeguranca);
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuDiretorForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
         listaFuncionarioForm.setVisible(true);
     }//GEN-LAST:event_itmListaFuncionariosActionPerformed
 
