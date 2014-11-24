@@ -7,9 +7,13 @@
 package br.com.erikavinicius.apresentacao;
 
 import br.com.erikavinicius.TrabalhoSeguranca;
+import br.com.erikavinicius.dados.BancoDadosFuncionario;
+import br.com.erikavinicius.entidade.Usuario;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,10 +22,12 @@ import java.util.logging.Logger;
 public class MenuDiretorForm extends javax.swing.JFrame {
 
     private TrabalhoSeguranca trabalhoSeguranca;
+    private BancoDadosFuncionario bancoDadosFuncionario;
     
     public MenuDiretorForm(TrabalhoSeguranca trabalhoSeguranca) {
         initComponents();
         this.trabalhoSeguranca = trabalhoSeguranca;
+        this.bancoDadosFuncionario = bancoDadosFuncionario;
     }
 
     /**
@@ -114,8 +120,18 @@ public class MenuDiretorForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void itmCadastroDepartamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmCadastroDepartamentosActionPerformed
-        CadastroDepartamentoForm cadastroDepartamentoForm = new CadastroDepartamentoForm(this.trabalhoSeguranca);
-        cadastroDepartamentoForm.setVisible(true);        
+        List<Usuario> listaUsuario = null;
+        try {
+            listaUsuario = this.bancoDadosFuncionario.ConsultaGerenteDisponivel();
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuDiretorForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(!listaUsuario.isEmpty()){
+            CadastroDepartamentoForm cadastroDepartamentoForm = new CadastroDepartamentoForm(this.trabalhoSeguranca);
+            cadastroDepartamentoForm.setVisible(true); 
+        }else{
+            JOptionPane.showMessageDialog(this, "Não possui Gerentes Disponiveis! Cadastre um Novo!", "Erro", JOptionPane.WARNING_MESSAGE);
+        }       
     }//GEN-LAST:event_itmCadastroDepartamentosActionPerformed
 
     private void itmListaFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmListaFuncionariosActionPerformed

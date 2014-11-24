@@ -25,12 +25,12 @@ import javax.swing.JOptionPane;
 public class CadastroDepartamentoForm extends javax.swing.JFrame {
 
     private TrabalhoSeguranca trabalhoSeguranca;
-    private BancoDados bancoDados;
+    private BancoDadosFuncionario bancoDadosFuncionario;
     private BancoDadosDepartamento bancoDadosDepartamento;
     public CadastroDepartamentoForm(TrabalhoSeguranca trabalhoSeguranca) {
         initComponents();
     this.trabalhoSeguranca = trabalhoSeguranca;
-    this.bancoDados = bancoDados;
+    this.bancoDadosFuncionario = bancoDadosFuncionario;
     this.bancoDadosDepartamento = bancoDadosDepartamento;
     this.configurarCmbGerente();
     
@@ -54,7 +54,7 @@ public class CadastroDepartamentoForm extends javax.swing.JFrame {
         cmbFuncionario = new javax.swing.JComboBox();
         lblGerente = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastro de Departamento", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 18))); // NOI18N
 
@@ -178,14 +178,14 @@ public class CadastroDepartamentoForm extends javax.swing.JFrame {
         List<Usuario> listaTodos = null;
        // List<Usuario> listaGerenteTemp;
         try {
-            listaTodos = this.bancoDados.ConsultaTodos();
+            listaTodos = this.bancoDadosFuncionario.ConsultaGerenteDisponivel();
         } catch (Exception e) {
         }
         
         for (Usuario gerente : listaTodos) {
-            if (gerente.getCargo().equals("GERENTE")) {
+            //if (gerente.getCargo().equals("GERENTE")) {
                model.addElement(gerente);
-            }
+            //}
         }    
     }
     /**
