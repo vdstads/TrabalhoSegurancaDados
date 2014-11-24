@@ -116,13 +116,13 @@ public class MenuDiretorForm extends javax.swing.JFrame {
     }//GEN-LAST:event_itmCadastroFuncionariosActionPerformed
 
     private void itmListaDepartamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmListaDepartamentosActionPerformed
-        ListaDepartamentosForm listaDepartamentosForm = null;
+        ListaDepartamentoForm listaDepartamentoForm = null;
         try {
-            listaDepartamentosForm = new ListaDepartamentosForm(this.trabalhoSeguranca);
+            listaDepartamentoForm = new ListaDepartamentoForm(this.trabalhoSeguranca);
         } catch (SQLException ex) {
             Logger.getLogger(MenuDiretorForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        listaDepartamentosForm.setVisible(true);
+        listaDepartamentoForm.setVisible(true);
     }//GEN-LAST:event_itmListaDepartamentosActionPerformed
 
     private void itmCadastroDepartamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmCadastroDepartamentosActionPerformed

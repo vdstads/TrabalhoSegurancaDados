@@ -5,6 +5,7 @@
  */
 package br.com.erikavinicius.dados;
 
+import br.com.erikavinicius.entidade.Gerente;
 import br.com.erikavinicius.entidade.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -214,5 +215,83 @@ public class BancoDadosFuncionario {
         }
         return listaFuncionarios;
     }    
+    
+     public static Gerente ConsultaGerentePorCPF(String CPFBuscado) throws SQLException {
+        Connection conexao = null;
+        PreparedStatement comando = null;
+        ResultSet resultado = null;
+        Gerente gerente = new Gerente();
+        try {
+            conexao = BancoDadosUtil.getConnection();
+
+            //Código de criar...
+            String sql = "SELECT CPF, NOME, EMAIL, SENHA, CARGO FROM FUNCIONARIO WHERE CPF ='"+CPFBuscado+"'";
+            comando = conexao.prepareStatement(sql);
+
+            resultado = comando.executeQuery();
+
+            while (resultado.next()) {
+            //Instancia um novo objeto e atribui os valores vindo do BD
+                //(Note que no BD o index inicia por 1)
+                
+                gerente.setCpf(resultado.getString(1));
+                gerente.setNome(resultado.getString(2));
+                gerente.setEmail(resultado.getString(3));
+                gerente.setSenha(resultado.getString(4));
+                gerente.setCargo(resultado.getString(5));
+//Adiciona um item à lista que será retornada
+                
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (resultado != null && !resultado.isClosed()) {
+                resultado.close();
+            }
+            if (conexao != null && !conexao.isClosed()) {
+                conexao.close();
+            }
+        }
+        return gerente;
+    }
+    
+    public static Usuario ConsultaFuncionarioPorCPF(String CPFBuscado) throws SQLException {
+        Connection conexao = null;
+        PreparedStatement comando = null;
+        ResultSet resultado = null;
+        Usuario usuario = new Usuario();
+        try {
+            conexao = BancoDadosUtil.getConnection();
+
+            //Código de criar...
+            String sql = "SELECT CPF, NOME FROM FUNCIONARIO WHERE CPF ='"+CPFBuscado+"'";
+            comando = conexao.prepareStatement(sql);
+
+            resultado = comando.executeQuery();
+
+            while (resultado.next()) {
+            //Instancia um novo objeto e atribui os valores vindo do BD
+                //(Note que no BD o index inicia por 1)
+                
+                usuario.setCpf(resultado.getString(1));
+                usuario.setNome(resultado.getString(2));
+                //Adiciona um item à lista que será retornada
+                //----------------------------------
+                
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (resultado != null && !resultado.isClosed()) {
+                resultado.close();
+            }
+            if (conexao != null && !conexao.isClosed()) {
+                conexao.close();
+            }
+        }
+        return usuario;
+    }
 
 }
