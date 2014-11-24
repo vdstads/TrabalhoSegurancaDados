@@ -39,5 +39,8 @@ public class Departamento {
         this.codigo = codigo;
     }
     
-    
+    public String toString(){
+        return nome;
+    }
+   
 }

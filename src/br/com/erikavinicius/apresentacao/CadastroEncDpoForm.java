@@ -55,9 +55,9 @@ public class CadastroEncDpoForm extends javax.swing.JFrame {
         cmbEncarregado = new javax.swing.JComboBox();
         lblEncarregado = new javax.swing.JLabel();
         lblDepartamento = new javax.swing.JLabel();
-        cmbDepertamento = new javax.swing.JComboBox();
+        cmbDepartamento = new javax.swing.JComboBox();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastro de Empregado no Departamento", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 18))); // NOI18N
 
@@ -79,10 +79,10 @@ public class CadastroEncDpoForm extends javax.swing.JFrame {
 
         lblDepartamento.setText("Departamento:");
 
-        cmbDepertamento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cmbDepertamento.addActionListener(new java.awt.event.ActionListener() {
+        cmbDepartamento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbDepartamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbDepertamentoActionPerformed(evt);
+                cmbDepartamentoActionPerformed(evt);
             }
         });
 
@@ -95,7 +95,7 @@ public class CadastroEncDpoForm extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cmbEncarregado, 0, 409, Short.MAX_VALUE)
-                    .addComponent(cmbDepertamento, 0, 409, Short.MAX_VALUE)
+                    .addComponent(cmbDepartamento, 0, 409, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblEncarregado)
@@ -113,7 +113,7 @@ public class CadastroEncDpoForm extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(lblDepartamento)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmbDepertamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmbDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addComponent(btnCadastrar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -159,15 +159,35 @@ public class CadastroEncDpoForm extends javax.swing.JFrame {
             limpar();
             this.dispose();
         }*/
+        
+        /*Usuario usrTemp = new Usuario();
+        usrTemp = (Usuario) this.cmbDepartamento.getSelectedItem();
+        usrTemp = (Usuario) this.cmbEncarregado.getSelectedItem();
+                
+        
+        String cpfGerente = usrTemp.getCpf();
+         
+        if(nome.isEmpty() || codigo.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Preencha todos os campos!", "Erro", JOptionPane.WARNING_MESSAGE);    
+        }else{
+            try {
+                this.bancoDadosDepartamento.CriarDepartamento(codigo, nome, cpfGerente);
+            } catch (SQLException ex) {
+                Logger.getLogger(CadastroDepartamentoForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           JOptionPane.showMessageDialog(this, "Departamento adicionado com sucesso!", "Cadastro de Departamento", JOptionPane.INFORMATION_MESSAGE);
+           limpar();
+           this.dispose();
+        }*/
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void cmbEncarregadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEncarregadoActionPerformed
 
     }//GEN-LAST:event_cmbEncarregadoActionPerformed
 
-    private void cmbDepertamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDepertamentoActionPerformed
+    private void cmbDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDepartamentoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cmbDepertamentoActionPerformed
+    }//GEN-LAST:event_cmbDepartamentoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -197,7 +217,7 @@ public class CadastroEncDpoForm extends javax.swing.JFrame {
         //</editor-fold>
     }
     
-     private void configurarCmbEncarregado() {
+    private void configurarCmbEncarregado() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) this.cmbEncarregado.getModel();
         model.removeAllElements();
         
@@ -214,7 +234,7 @@ public class CadastroEncDpoForm extends javax.swing.JFrame {
     }
      
     private void configurarCmbDepartamento() {
-        DefaultComboBoxModel model = (DefaultComboBoxModel) this.cmbEncarregado.getModel();
+        DefaultComboBoxModel model = (DefaultComboBoxModel) this.cmbDepartamento.getModel();
         model.removeAllElements();
         
         List<Departamento> listaDepartamentos = null;
@@ -230,7 +250,7 @@ public class CadastroEncDpoForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
-    private javax.swing.JComboBox cmbDepertamento;
+    private javax.swing.JComboBox cmbDepartamento;
     private javax.swing.JComboBox cmbEncarregado;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblDepartamento;
