@@ -293,5 +293,43 @@ public class BancoDadosFuncionario {
         }
         return usuario;
     }
+    
+    public static List<Usuario> ConsultaEncarregadoDisponivel() throws SQLException {
+        Connection conexao = null;
+        PreparedStatement comando = null;
+        ResultSet resultado = null;
+        List<Usuario> listaFuncionarios = new ArrayList<Usuario>();
+        try {
+            conexao = BancoDadosUtil.getConnection();
+            
+            //Código SQL...
+            String sql = "SELECT CPF, NOME FROM FUNCIONARIO WHERE (CARGO = 'ENCARREGADO')";
+            comando = conexao.prepareStatement(sql);
+
+            resultado = comando.executeQuery();
+
+            while (resultado.next()) {
+            //Instancia um novo objeto e atribui os valores vindo do BD
+                //(Note que no BD o index inicia por 1)
+                Usuario usuario = new Usuario();
+                usuario.setCpf(resultado.getString(1));
+                usuario.setNome(resultado.getString(2));
+                
+                //Adiciona um item à lista que será retornada
+                listaFuncionarios.add(usuario);
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (resultado != null && !resultado.isClosed()) {
+                resultado.close();
+            }
+            if (conexao != null && !conexao.isClosed()) {
+                conexao.close();
+            }
+        }
+        return listaFuncionarios;
+    }
 
 }

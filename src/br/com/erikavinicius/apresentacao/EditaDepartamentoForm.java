@@ -31,9 +31,9 @@ public class EditaDepartamentoForm extends javax.swing.JFrame {
     private BancoDadosFuncionario bancoDadosFuncionario;
     private BancoDadosDepartamento bancoDadosDepartamento;
     private String codigoDep;
-    private String CPF_Atual;
+    private Gerente CPF_Atual;
     
-    public EditaDepartamentoForm(TrabalhoSeguranca trabalhoSeguranca, String codigoDep, String CPFAtual) {
+    public EditaDepartamentoForm(TrabalhoSeguranca trabalhoSeguranca, String codigoDep, Gerente CPFAtual) {
         initComponents();
     this.trabalhoSeguranca = trabalhoSeguranca;
     this.bancoDadosFuncionario = bancoDadosFuncionario;
@@ -179,7 +179,7 @@ public class EditaDepartamentoForm extends javax.swing.JFrame {
         List<Usuario> listaTodos = null;
         Usuario user = null;
         try {
-            user = this.bancoDadosFuncionario.ConsultaFuncionarioPorCPF(CPF_Atual);
+            user = this.bancoDadosFuncionario.ConsultaFuncionarioPorCPF(CPF_Atual.getCpf());
         } catch (SQLException ex) {
             Logger.getLogger(EditaDepartamentoForm.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -190,10 +190,9 @@ public class EditaDepartamentoForm extends javax.swing.JFrame {
         }
         
         for (Usuario gerente : listaTodos) {
-            //if (gerente.getCargo().equals("GERENTE")) {
                model.addElement(gerente);
-            //}
-        }    
+        }
+        model.setSelectedItem(CPF_Atual);
     }
     /**
      * @param args the command line arguments
@@ -244,7 +243,7 @@ public class EditaDepartamentoForm extends javax.swing.JFrame {
                break;
             }
         }
-        cmbFuncionario.setSelectedItem(depTemp.getGerente().getNome());
+        
         txtCodigo.setText(depTemp.getCodigo());        
         txtNome.setText(depTemp.getNome());
         

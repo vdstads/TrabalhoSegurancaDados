@@ -11,6 +11,7 @@ import br.com.erikavinicius.TrabalhoSeguranca;
 import br.com.erikavinicius.dados.BancoDadosDepartamento;
 import br.com.erikavinicius.dados.BancoDadosFuncionario;
 import br.com.erikavinicius.entidade.Departamento;
+import br.com.erikavinicius.entidade.Gerente;
 import br.com.erikavinicius.entidade.Usuario;
 import java.sql.SQLException;
 import java.util.List;
@@ -28,6 +29,7 @@ public class ListaDepartamentoForm extends javax.swing.JFrame {
     private TrabalhoSeguranca trabalhoSeguranca;
     private BancoDadosFuncionario bancoDadosFuncionario;
     private BancoDadosDepartamento bancoDadosDepartamento;
+    Gerente CPFAtual = null;
  
     
     
@@ -37,6 +39,7 @@ public class ListaDepartamentoForm extends javax.swing.JFrame {
         this.bancoDadosFuncionario = bancoDadosFuncionario;
         this.bancoDadosDepartamento = bancoDadosDepartamento;
         this.configurarTblDepartamentos();
+        
         
     }
 
@@ -141,7 +144,7 @@ public class ListaDepartamentoForm extends javax.swing.JFrame {
                 }
                 int colunaCodigo = 0;
                 String codigoDep = (String) model.getValueAt(tblDepartamentos.getSelectedRow(), colunaCodigo);
-                String CPFAtual = (String) model.getValueAt(tblDepartamentos.getSelectedRow(), 2);
+                CPFAtual = (Gerente) model.getValueAt(tblDepartamentos.getSelectedRow(), 2);
                 
                 EditaDepartamentoForm editaDepartamentoForm = new EditaDepartamentoForm(this.trabalhoSeguranca, codigoDep, CPFAtual);
                 editaDepartamentoForm.setVisible(true);
@@ -225,7 +228,7 @@ public class ListaDepartamentoForm extends javax.swing.JFrame {
             } else if(columnIndex==1) {
                 return departamento.getNome();
             } else {
-                return departamento.getGerente().getNome();
+                return departamento.getGerente();
             }   
         }
 

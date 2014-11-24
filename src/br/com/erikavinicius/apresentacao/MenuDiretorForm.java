@@ -7,7 +7,9 @@
 package br.com.erikavinicius.apresentacao;
 
 import br.com.erikavinicius.TrabalhoSeguranca;
+import br.com.erikavinicius.dados.BancoDadosDepartamento;
 import br.com.erikavinicius.dados.BancoDadosFuncionario;
+import br.com.erikavinicius.entidade.Departamento;
 import br.com.erikavinicius.entidade.Usuario;
 import java.sql.SQLException;
 import java.util.List;
@@ -23,11 +25,13 @@ public class MenuDiretorForm extends javax.swing.JFrame {
 
     private TrabalhoSeguranca trabalhoSeguranca;
     private BancoDadosFuncionario bancoDadosFuncionario;
+    private BancoDadosDepartamento bancoDadosDepartamento;
     
     public MenuDiretorForm(TrabalhoSeguranca trabalhoSeguranca) {
         initComponents();
         this.trabalhoSeguranca = trabalhoSeguranca;
         this.bancoDadosFuncionario = bancoDadosFuncionario;
+        this.bancoDadosDepartamento = bancoDadosDepartamento;
     }
 
     /**
@@ -46,6 +50,7 @@ public class MenuDiretorForm extends javax.swing.JFrame {
         itmMenuCadastrarFuncionario = new javax.swing.JMenu();
         itmCadastroFuncionarios = new javax.swing.JMenuItem();
         itmListaFuncionarios = new javax.swing.JMenuItem();
+        itmCadastroCargo = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setExtendedState(6);
@@ -91,6 +96,14 @@ public class MenuDiretorForm extends javax.swing.JFrame {
             }
         });
         itmMenuCadastrarFuncionario.add(itmListaFuncionarios);
+
+        itmCadastroCargo.setText("Cadastro de Cargo");
+        itmCadastroCargo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmCadastroCargoActionPerformed(evt);
+            }
+        });
+        itmMenuCadastrarFuncionario.add(itmCadastroCargo);
 
         jMenuBar1.add(itmMenuCadastrarFuncionario);
 
@@ -150,6 +163,26 @@ public class MenuDiretorForm extends javax.swing.JFrame {
         listaFuncionarioForm.setVisible(true);
     }//GEN-LAST:event_itmListaFuncionariosActionPerformed
 
+    private void itmCadastroCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmCadastroCargoActionPerformed
+       List<Usuario> listaUsuario = null;
+       List<Departamento> listaDepartamentos = null;
+        try {
+            listaUsuario = this.bancoDadosFuncionario.ConsultaEncarregadoDisponivel();
+            listaDepartamentos = this.bancoDadosDepartamento.ConsultaTodos();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuDiretorForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(listaUsuario.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Não possui Encarregados Disponiveis! Cadastre um Novo!", "Erro", JOptionPane.WARNING_MESSAGE);
+        }else if(listaDepartamentos.isEmpty()){
+                JOptionPane.showMessageDialog(this, "Não possui Departamento! Cadastre um Novo!", "Erro", JOptionPane.WARNING_MESSAGE); 
+            }else{
+                CadastroEncDpoForm cadastroEncDpoForm = new CadastroEncDpoForm(this.trabalhoSeguranca);
+                cadastroEncDpoForm.setVisible(true);
+            }
+    }//GEN-LAST:event_itmCadastroCargoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -182,6 +215,7 @@ public class MenuDiretorForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem itmCadastroCargo;
     private javax.swing.JMenuItem itmCadastroDepartamentos;
     private javax.swing.JMenuItem itmCadastroFuncionarios;
     private javax.swing.JMenuItem itmListaDepartamentos;

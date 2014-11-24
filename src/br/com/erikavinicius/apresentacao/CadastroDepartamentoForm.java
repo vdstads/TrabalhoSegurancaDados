@@ -168,6 +168,7 @@ public class CadastroDepartamentoForm extends javax.swing.JFrame {
             }
            JOptionPane.showMessageDialog(this, "Departamento adicionado com sucesso!", "Cadastro de Departamento", JOptionPane.INFORMATION_MESSAGE);
            limpar();
+           this.dispose();
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
