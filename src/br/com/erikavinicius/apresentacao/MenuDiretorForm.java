@@ -42,7 +42,7 @@ public class MenuDiretorForm extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         itmCadastroDepartamentos = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        itmListaDepartamentos = new javax.swing.JMenuItem();
         itmMenuCadastrarFuncionario = new javax.swing.JMenu();
         itmCadastroFuncionarios = new javax.swing.JMenuItem();
         itmListaFuncionarios = new javax.swing.JMenuItem();
@@ -61,14 +61,14 @@ public class MenuDiretorForm extends javax.swing.JFrame {
         });
         jMenu1.add(itmCadastroDepartamentos);
 
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
-        jMenuItem1.setText("Lista de Departamentos");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        itmListaDepartamentos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
+        itmListaDepartamentos.setText("Lista de Departamentos");
+        itmListaDepartamentos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                itmListaDepartamentosActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenu1.add(itmListaDepartamentos);
 
         jMenuBar1.add(jMenu1);
 
@@ -115,9 +115,15 @@ public class MenuDiretorForm extends javax.swing.JFrame {
         cadastroFuncionarioForm.setVisible(true);
     }//GEN-LAST:event_itmCadastroFuncionariosActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    private void itmListaDepartamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmListaDepartamentosActionPerformed
+        ListaDepartamentosForm listaDepartamentosForm = null;
+        try {
+            listaDepartamentosForm = new ListaDepartamentosForm(this.trabalhoSeguranca);
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuDiretorForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        listaDepartamentosForm.setVisible(true);
+    }//GEN-LAST:event_itmListaDepartamentosActionPerformed
 
     private void itmCadastroDepartamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmCadastroDepartamentosActionPerformed
         List<Usuario> listaUsuario = null;
@@ -178,10 +184,10 @@ public class MenuDiretorForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem itmCadastroDepartamentos;
     private javax.swing.JMenuItem itmCadastroFuncionarios;
+    private javax.swing.JMenuItem itmListaDepartamentos;
     private javax.swing.JMenuItem itmListaFuncionarios;
     private javax.swing.JMenu itmMenuCadastrarFuncionario;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     // End of variables declaration//GEN-END:variables
 }
