@@ -31,7 +31,7 @@ public class EditaFuncionarioGerenteForm extends javax.swing.JFrame {
         this.usuarioAtivo = usuarioAtivo;
         this.trabalhoSeguranca = trabalhoSeguranca;
         this.bancoDadosFuncionario = bancoDadosFuncionario;
-        this.bancoDadosFuncionario = bancoDadosFuncionario;
+        this.bancoDados = bancoDados;
         this.CPF = cpf;
         
         this.preencher();
