@@ -37,6 +37,7 @@ public class MenuGerenteForm extends javax.swing.JFrame {
         itmListaFuncionarios = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setExtendedState(6);
 
         jMenu1.setText("Departamentos");
 

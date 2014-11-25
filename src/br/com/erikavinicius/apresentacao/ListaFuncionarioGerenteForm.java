@@ -148,7 +148,7 @@ public class ListaFuncionarioGerenteForm extends javax.swing.JFrame {
     
     void configurarTblFuncionarios() throws SQLException {
         /* NESSA LINHA QUE ACUSA UM ERRO NA HR DE CHAMAR A TELA DE FUNCIONARIOS*/
-        TabelaFuncionariosModel model = new TabelaFuncionariosModel((List<Usuario>) this.bancoDadosFuncionario.ConsultaFuncionarioDepartamento(usuarioAtivo.getSenha()));
+        TabelaFuncionariosModel model = new TabelaFuncionariosModel(this.bancoDadosFuncionario.ConsultaFuncionariosDepartamento(usuarioAtivo.getSenha()));
 
         tblFuncionarios.setModel(model);
     }

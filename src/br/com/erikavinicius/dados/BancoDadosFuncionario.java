@@ -411,11 +411,12 @@ public class BancoDadosFuncionario {
         return usuario;
     }
     
-    public static Usuario ConsultaFuncionarioDepartamento(String codDep) throws SQLException {
+    public static List<Usuario> ConsultaFuncionariosDepartamento(String codDep) throws SQLException {
         Connection conexao = null;
         PreparedStatement comando = null;
         ResultSet resultado = null;
-        Usuario usuario = new Usuario();
+        List<Usuario> listaFuncionarios = new ArrayList<Usuario>();
+     
         try {
             conexao = BancoDadosUtil.getConnection();
 
@@ -428,10 +429,11 @@ public class BancoDadosFuncionario {
             while (resultado.next()) {
             //Instancia um novo objeto e atribui os valores vindo do BD
                 //(Note que no BD o index inicia por 1)
-                
+                Usuario usuario = new Usuario();
                 usuario.setCpf(resultado.getString(1));
                 usuario.setNome(resultado.getString(2));
                 //Adiciona um item à lista que será retornada
+                listaFuncionarios.add(usuario);
                 //----------------------------------
                 
             }
@@ -446,7 +448,7 @@ public class BancoDadosFuncionario {
                 conexao.close();
             }
         }
-        return usuario;
+        return listaFuncionarios;
     }
     
     public static void SetaaFuncionarioDepartamento(String cpf, String codDep) throws SQLException {
