@@ -19,14 +19,14 @@ import java.util.List;
  * @author vinicius
  */
 public class BancoDadosFuncionario {
-    public static void CriarFuncionario(String cpf, String nome, String email, String senha, String cargo) throws SQLException {
+    public static void CriarFuncionario(String cpf, String nome, String email, String senha, String cargo, String departamento) throws SQLException {
         Connection conexao = null;
         PreparedStatement comando = null;
         try {
             conexao = BancoDadosUtil.getConnection();
 
             //Código de criar...
-            String sql = "INSERT INTO FUNCIONARIO(CPF, NOME, EMAIL, SENHA, CARGO) VALUES (?,?,?,?,?)";
+            String sql = "INSERT INTO FUNCIONARIO(CPF, NOME, EMAIL, SENHA, CARGO, DEPARTAMENTO) VALUES (?,?,?,?,?,?)";
             comando = conexao.prepareStatement(sql);
 
             comando.setString(1, cpf);
@@ -34,6 +34,7 @@ public class BancoDadosFuncionario {
             comando.setString(3, email);
             comando.setString(4, senha);
             comando.setString(5, cargo);
+            comando.setString(6, departamento);
 
             comando.execute();
 
@@ -330,6 +331,149 @@ public class BancoDadosFuncionario {
             }
         }
         return listaFuncionarios;
+    }
+    
+    public static String ConsultaCargo(String email) throws SQLException {
+        Connection conexao = null;
+        PreparedStatement comando = null;
+        ResultSet resultado = null;
+        Usuario usuario = new Usuario();
+        try {
+            conexao = BancoDadosUtil.getConnection();
+
+            //Código de criar...
+            String sql = "SELECT CARGO FROM FUNCIONARIO WHERE EMAIL ='"+email+"'";
+            comando = conexao.prepareStatement(sql);
+
+            resultado = comando.executeQuery();
+
+            while (resultado.next()) {
+            //Instancia um novo objeto e atribui os valores vindo do BD
+                //(Note que no BD o index inicia por 1)
+                
+                usuario.setCargo(resultado.getString(1));
+             
+//Adiciona um item à lista que será retornada
+                
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (resultado != null && !resultado.isClosed()) {
+                resultado.close();
+            }
+            if (conexao != null && !conexao.isClosed()) {
+                conexao.close();
+            }
+        }
+        return usuario.getCargo();
+    }
+    
+    public static Usuario ConsultaFuncionarioPorEmail(String email) throws SQLException {
+        Connection conexao = null;
+        PreparedStatement comando = null;
+        ResultSet resultado = null;
+        Usuario usuario = new Usuario();
+        try {
+            conexao = BancoDadosUtil.getConnection();
+
+            //Código de criar...
+            String sql = "SELECT CPF, NOME, EMAIL, DEPARTAMENTO, CARGO FROM FUNCIONARIO WHERE EMAIL ='"+email+"'";
+            comando = conexao.prepareStatement(sql);
+
+            resultado = comando.executeQuery();
+
+            while (resultado.next()) {
+            //Instancia um novo objeto e atribui os valores vindo do BD
+                //(Note que no BD o index inicia por 1)
+                
+                usuario.setCpf(resultado.getString(1));
+                usuario.setNome(resultado.getString(2));
+                usuario.setEmail(resultado.getString(3));
+                usuario.setSenha(resultado.getString(4));
+                usuario.setCargo(resultado.getString(5));
+                //Adiciona um item à lista que será retornada
+                //----------------------------------
+                
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (resultado != null && !resultado.isClosed()) {
+                resultado.close();
+            }
+            if (conexao != null && !conexao.isClosed()) {
+                conexao.close();
+            }
+        }
+        return usuario;
+    }
+    
+    public static Usuario ConsultaFuncionarioDepartamento(String codDep) throws SQLException {
+        Connection conexao = null;
+        PreparedStatement comando = null;
+        ResultSet resultado = null;
+        Usuario usuario = new Usuario();
+        try {
+            conexao = BancoDadosUtil.getConnection();
+
+            //Código de criar...
+            String sql = "SELECT CPF, NOME FROM FUNCIONARIO WHERE DEPARTAMENTO ='"+codDep+"'";
+            comando = conexao.prepareStatement(sql);
+
+            resultado = comando.executeQuery();
+
+            while (resultado.next()) {
+            //Instancia um novo objeto e atribui os valores vindo do BD
+                //(Note que no BD o index inicia por 1)
+                
+                usuario.setCpf(resultado.getString(1));
+                usuario.setNome(resultado.getString(2));
+                //Adiciona um item à lista que será retornada
+                //----------------------------------
+                
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (resultado != null && !resultado.isClosed()) {
+                resultado.close();
+            }
+            if (conexao != null && !conexao.isClosed()) {
+                conexao.close();
+            }
+        }
+        return usuario;
+    }
+    
+    public static void SetaaFuncionarioDepartamento(String cpf, String codDep) throws SQLException {
+        Connection conexao = null;
+        PreparedStatement comando = null;
+        try {
+            conexao = BancoDadosUtil.getConnection();
+
+            //Código de criar...
+            String sql = "UPDATE FUNCIONARIO SET DEPARTAMENTO = ? WHERE CPF ='"+cpf+"'";
+            comando = conexao.prepareStatement(sql);
+
+            comando.setString(1, codDep);
+            
+            comando.execute();
+
+            conexao.commit();
+        } catch (Exception e) {
+            if (conexao != null && !conexao.isClosed()) {
+                conexao.rollback();
+            }
+            throw new RuntimeException(e);
+        } finally {
+            if (conexao != null && !conexao.isClosed()) {
+                conexao.close();
+            }
+        }
     }
 
 }

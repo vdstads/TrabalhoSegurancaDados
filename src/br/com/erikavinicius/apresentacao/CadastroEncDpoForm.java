@@ -9,6 +9,7 @@ import br.com.erikavinicius.TrabalhoSeguranca;
 import br.com.erikavinicius.dados.BancoDadosDepartamento;
 import br.com.erikavinicius.dados.BancoDadosFuncionario;
 import br.com.erikavinicius.entidade.Departamento;
+import br.com.erikavinicius.entidade.Encarregado;
 import br.com.erikavinicius.entidade.Gerente;
 import br.com.erikavinicius.entidade.Usuario;
 import java.sql.SQLException;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -140,45 +142,21 @@ public class CadastroEncDpoForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-       /* Departamento depTemp = new Departamento();
-        depTemp = (Departamento) this.cmbEncarregado.getSelectedItem();
-
-        String nome = this.txtNome.getText().trim();
-        String codigo = this.txtCodigo.getText().trim();
-        String cpfGerente = depTemp.getGerente().getCpf();
-
-        if(nome.isEmpty() || codigo.isEmpty()){
-            JOptionPane.showMessageDialog(this, "Preencha todos os campos!", "Erro", JOptionPane.WARNING_MESSAGE);
-        }else{
-            try {
-                this.bancoDadosDepartamento.EditaDepartamento(codigo, nome, cpfGerente, codigoDep);
-            } catch (SQLException ex) {
-                Logger.getLogger(EditaDepartamentoForm.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            JOptionPane.showMessageDialog(this, "Departamento Editado com sucesso!", "Edição de Departamento", JOptionPane.INFORMATION_MESSAGE);
-            limpar();
-            this.dispose();
-        }*/
+        Departamento depTemp = new Departamento();
+        depTemp = (Departamento) this.cmbDepartamento.getSelectedItem();
         
-        /*Usuario usrTemp = new Usuario();
-        usrTemp = (Usuario) this.cmbDepartamento.getSelectedItem();
-        usrTemp = (Usuario) this.cmbEncarregado.getSelectedItem();
-                
+        Usuario encTemp = new Usuario();
+        encTemp = (Usuario) this.cmbEncarregado.getSelectedItem();
+
         
-        String cpfGerente = usrTemp.getCpf();
-         
-        if(nome.isEmpty() || codigo.isEmpty()){
-            JOptionPane.showMessageDialog(this, "Preencha todos os campos!", "Erro", JOptionPane.WARNING_MESSAGE);    
-        }else{
-            try {
-                this.bancoDadosDepartamento.CriarDepartamento(codigo, nome, cpfGerente);
-            } catch (SQLException ex) {
-                Logger.getLogger(CadastroDepartamentoForm.class.getName()).log(Level.SEVERE, null, ex);
-            }
-           JOptionPane.showMessageDialog(this, "Departamento adicionado com sucesso!", "Cadastro de Departamento", JOptionPane.INFORMATION_MESSAGE);
-           limpar();
-           this.dispose();
-        }*/
+         try {
+             this.bancoDadosDepartamento.CadastraEncDep(encTemp.getCpf(), depTemp.getCodigo());
+         } catch (SQLException ex) {
+             Logger.getLogger(CadastroEncDpoForm.class.getName()).log(Level.SEVERE, null, ex);
+         }
+           
+        JOptionPane.showMessageDialog(this, "Encarregado: "+encTemp.getNome()+" Cadastrado no Departamento "+depTemp.getNome()+" com sucesso!", "Edição de Departamento", JOptionPane.INFORMATION_MESSAGE);
+        this.dispose();    
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void cmbEncarregadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEncarregadoActionPerformed

@@ -163,6 +163,7 @@ public class CadastroDepartamentoForm extends javax.swing.JFrame {
         }else{
             try {
                 this.bancoDadosDepartamento.CriarDepartamento(codigo, nome, cpfGerente);
+                this.bancoDadosFuncionario.SetaaFuncionarioDepartamento(cpfGerente, codigo);
             } catch (SQLException ex) {
                 Logger.getLogger(CadastroDepartamentoForm.class.getName()).log(Level.SEVERE, null, ex);
             }

@@ -97,6 +97,7 @@ public class MenuDiretorForm extends javax.swing.JFrame {
         });
         itmMenuCadastrarFuncionario.add(itmListaFuncionarios);
 
+        itmCadastroCargo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
         itmCadastroCargo.setText("Cadastro de Cargo");
         itmCadastroCargo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

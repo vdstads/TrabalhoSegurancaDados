@@ -7,9 +7,12 @@
 package br.com.erikavinicius.apresentacao;
 
 import br.com.erikavinicius.TrabalhoSeguranca;
+import br.com.erikavinicius.dados.BancoDadosFuncionario;
+import br.com.erikavinicius.entidade.Usuario;
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.crypto.BadPaddingException;
@@ -23,10 +26,14 @@ import javax.swing.JOptionPane;
 public class LoginForm extends javax.swing.JFrame {
     
     private TrabalhoSeguranca trabalhoSeguranca;
+    private BancoDadosFuncionario bancoDadosFuncionario;
+    
+    Usuario usuario = new Usuario();
     
     public LoginForm(TrabalhoSeguranca trabalhoSeguranca) {
         initComponents();
         this.trabalhoSeguranca = trabalhoSeguranca;
+        this.bancoDadosFuncionario = bancoDadosFuncionario;
         
     }
 
@@ -128,9 +135,19 @@ public class LoginForm extends javax.swing.JFrame {
      
         try {
             if (this.trabalhoSeguranca.login(email, senha) == true){
+                usuario = this.bancoDadosFuncionario.ConsultaFuncionarioPorEmail(email);
+                if(usuario.getCargo().equals("DIRETOR")){
+                    MenuDiretorForm menuDiretorForm = new MenuDiretorForm(this.trabalhoSeguranca);
+                    menuDiretorForm.setVisible(true);       
+                }else if(usuario.getCargo().equals("GERENTE")){
+                    MenuGerenteForm menuGerenteForm = new MenuGerenteForm(this.trabalhoSeguranca, usuario);
+                    menuGerenteForm.setVisible(true);       
+                }else if(usuario.getCargo().equals("ENCARREGADO")){
+                    MenuDiretorForm menuDiretorForm = new MenuDiretorForm(this.trabalhoSeguranca);
+                    menuDiretorForm.setVisible(true);       
+                }
                 this.dispose();
-                MenuDiretorForm menuDiretorForm = new MenuDiretorForm(this.trabalhoSeguranca);
-                menuDiretorForm.setVisible(true);
+                
                 
                 this.limpar();
             }else{

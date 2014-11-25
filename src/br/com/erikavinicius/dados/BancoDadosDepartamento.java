@@ -153,4 +153,55 @@ public class BancoDadosDepartamento {
         }
 
     }
+     
+    public static void CadastraEncDep(String cpfEnc, String codigo) throws SQLException {
+        Connection conexao = null;
+        PreparedStatement comando = null;
+        try {
+            conexao = BancoDadosUtil.getConnection();
+
+            //Código de criar...
+            String sql = "UPDATE FUNCIONARIO SET DEPARTAMENTO = '"+codigo+"' WHERE CPF ='"+cpfEnc+"'";
+            comando = conexao.prepareStatement(sql);
+            
+            comando.execute();
+
+            conexao.commit();
+        } catch (Exception e) {
+            if (conexao != null && !conexao.isClosed()) {
+                conexao.rollback();
+            }
+            throw new RuntimeException(e);
+        } finally {
+            if (conexao != null && !conexao.isClosed()) {
+                conexao.close();
+            }
+        }
+
+    }
+    
+    public static void removeDepartamento(String Codigo) throws SQLException {
+        Connection conexao = null;
+        PreparedStatement comando = null;
+        try {
+            conexao = BancoDadosUtil.getConnection();
+
+            //Código de criar...
+            String sql = "DELETE FROM DEPARTAMENTO WHERE CODIGO ='"+Codigo+"'";
+            comando = conexao.prepareStatement(sql);
+            
+            comando.execute();
+
+            conexao.commit();
+        } catch (Exception e) {
+            if (conexao != null && !conexao.isClosed()) {
+                conexao.rollback();
+            }
+            throw new RuntimeException(e);
+        } finally {
+            if (conexao != null && !conexao.isClosed()) {
+                conexao.close();
+            }
+        }
+    }
 }

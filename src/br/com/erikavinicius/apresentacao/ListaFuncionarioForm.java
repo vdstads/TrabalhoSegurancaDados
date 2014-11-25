@@ -36,6 +36,8 @@ public class ListaFuncionarioForm extends javax.swing.JFrame {
         this.configurarTblFuncionarios();
     }
 
+    
+
    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -71,7 +73,7 @@ public class ListaFuncionarioForm extends javax.swing.JFrame {
             }
         });
 
-        btnExcluir.setText("Excluir");
+        btnExcluir.setText("Demitir");
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExcluirActionPerformed(evt);
