@@ -49,7 +49,7 @@ public class EditaFuncionarioGerenteForm extends javax.swing.JFrame {
         txtEmail = new javax.swing.JTextField();
         lblCpf = new javax.swing.JLabel();
         lblSenha = new javax.swing.JLabel();
-        btnCadastrar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
         txtSenha = new javax.swing.JPasswordField();
         txtCpf = new javax.swing.JFormattedTextField();
         lblCargo = new javax.swing.JLabel();
@@ -69,10 +69,10 @@ public class EditaFuncionarioGerenteForm extends javax.swing.JFrame {
 
         lblSenha.setText("Senha:");
 
-        btnCadastrar.setText("Cadastrar");
-        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadastrarActionPerformed(evt);
+                btnEditarActionPerformed(evt);
             }
         });
 
@@ -95,7 +95,7 @@ public class EditaFuncionarioGerenteForm extends javax.swing.JFrame {
             .addGroup(plDiretorLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(plDiretorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
+                    .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
                     .addComponent(txtNome)
                     .addComponent(txtEmail)
                     .addComponent(txtSenha)
@@ -139,7 +139,7 @@ public class EditaFuncionarioGerenteForm extends javax.swing.JFrame {
                     .addComponent(rdoGerente)
                     .addComponent(rdoEncarregado))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnCadastrar)
+                .addComponent(btnEditar)
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
@@ -163,7 +163,7 @@ public class EditaFuncionarioGerenteForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
 
         String nome = this.txtNome.getText().trim();
         String senha = this.txtSenha.getText().trim();
@@ -200,7 +200,7 @@ public class EditaFuncionarioGerenteForm extends javax.swing.JFrame {
             } catch (Exception e) {
             } 
         }   
-    }//GEN-LAST:event_btnCadastrarActionPerformed
+    }//GEN-LAST:event_btnEditarActionPerformed
     
     private void preencher() {
 
@@ -286,7 +286,7 @@ public class EditaFuncionarioGerenteForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCadastrar;
+    private javax.swing.JButton btnEditar;
     private javax.swing.JLabel lblCargo;
     private javax.swing.JLabel lblCpf;
     private javax.swing.JLabel lblEmail;

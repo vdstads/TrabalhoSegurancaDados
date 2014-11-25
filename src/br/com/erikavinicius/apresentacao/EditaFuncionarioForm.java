@@ -213,10 +213,8 @@ public class EditaFuncionarioForm extends javax.swing.JFrame {
                 listaFuncionarioForm = new ListaFuncionarioForm(this.trabalhoSeguranca);
                 listaFuncionarioForm.setVisible(true);
             } catch (Exception e) {
-                }
-            
-        }
-        
+            }   
+        }  
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void preencher() {
