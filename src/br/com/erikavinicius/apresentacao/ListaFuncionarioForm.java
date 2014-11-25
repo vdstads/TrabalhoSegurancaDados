@@ -62,7 +62,7 @@ public class ListaFuncionarioForm extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblFuncionarios);
 
-        btnEditar.setIcon(new javax.swing.ImageIcon("D:\\Diversos\\NetBeansProjects\\TrabalhoSegurancaDados\\Icones\\application_edit.png")); // NOI18N
+        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/application_edit.png"))); // NOI18N
         btnEditar.setText("Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -70,7 +70,7 @@ public class ListaFuncionarioForm extends javax.swing.JFrame {
             }
         });
 
-        btnDemitir.setIcon(new javax.swing.ImageIcon("D:\\Diversos\\NetBeansProjects\\TrabalhoSegurancaDados\\Icones\\user_delete.png")); // NOI18N
+        btnDemitir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/user_delete.png"))); // NOI18N
         btnDemitir.setText("Demitir");
         btnDemitir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

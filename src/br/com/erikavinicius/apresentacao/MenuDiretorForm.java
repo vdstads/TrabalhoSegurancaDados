@@ -57,11 +57,11 @@ public class MenuDiretorForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setExtendedState(6);
 
-        jMenu1.setIcon(new javax.swing.ImageIcon("D:\\Diversos\\NetBeansProjects\\TrabalhoSegurancaDados\\Icones\\dossier-orange-icone-9020-32.png")); // NOI18N
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/dossier-orange-icone-9020-32.png"))); // NOI18N
         jMenu1.setText("Departamentos");
 
         itmCadastroDepartamentos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
-        itmCadastroDepartamentos.setIcon(new javax.swing.ImageIcon("D:\\Diversos\\NetBeansProjects\\TrabalhoSegurancaDados\\Icones\\departamento.png")); // NOI18N
+        itmCadastroDepartamentos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/departamento.png"))); // NOI18N
         itmCadastroDepartamentos.setText("Cadastrar Departamentos");
         itmCadastroDepartamentos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -71,7 +71,7 @@ public class MenuDiretorForm extends javax.swing.JFrame {
         jMenu1.add(itmCadastroDepartamentos);
 
         itmListaDepartamentos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
-        itmListaDepartamentos.setIcon(new javax.swing.ImageIcon("D:\\Diversos\\NetBeansProjects\\TrabalhoSegurancaDados\\Icones\\liste-texte-vue-icone-4177-32.png")); // NOI18N
+        itmListaDepartamentos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/liste-texte-vue-icone-4177-32.png"))); // NOI18N
         itmListaDepartamentos.setText("Lista de Departamentos");
         itmListaDepartamentos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,11 +82,11 @@ public class MenuDiretorForm extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        itmMenuCadastrarFuncionario.setIcon(new javax.swing.ImageIcon("D:\\Diversos\\NetBeansProjects\\TrabalhoSegurancaDados\\Icones\\homme-costume-cravate-utilisateur-icone-7362-32.png")); // NOI18N
+        itmMenuCadastrarFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/homme-costume-cravate-utilisateur-icone-7362-32.png"))); // NOI18N
         itmMenuCadastrarFuncionario.setText("Funcionários");
 
         itmCadastroFuncionarios.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, 0));
-        itmCadastroFuncionarios.setIcon(new javax.swing.ImageIcon("D:\\Diversos\\NetBeansProjects\\TrabalhoSegurancaDados\\Icones\\1416951045_user_add.png")); // NOI18N
+        itmCadastroFuncionarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/1416951045_user_add.png"))); // NOI18N
         itmCadastroFuncionarios.setText("Cadastrar Funcionarios");
         itmCadastroFuncionarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,7 +96,7 @@ public class MenuDiretorForm extends javax.swing.JFrame {
         itmMenuCadastrarFuncionario.add(itmCadastroFuncionarios);
 
         itmListaFuncionarios.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, 0));
-        itmListaFuncionarios.setIcon(new javax.swing.ImageIcon("D:\\Diversos\\NetBeansProjects\\TrabalhoSegurancaDados\\Icones\\liste-texte-vue-icone-4177-32.png")); // NOI18N
+        itmListaFuncionarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/liste-texte-vue-icone-4177-32.png"))); // NOI18N
         itmListaFuncionarios.setText("Lista de Funcionários");
         itmListaFuncionarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,7 +106,7 @@ public class MenuDiretorForm extends javax.swing.JFrame {
         itmMenuCadastrarFuncionario.add(itmListaFuncionarios);
 
         itmCadastroCargo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
-        itmCadastroCargo.setIcon(new javax.swing.ImageIcon("D:\\Diversos\\NetBeansProjects\\TrabalhoSegurancaDados\\Icones\\cargo.png")); // NOI18N
+        itmCadastroCargo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/cargo.png"))); // NOI18N
         itmCadastroCargo.setText("Cadastro de Cargo");
         itmCadastroCargo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,7 +117,7 @@ public class MenuDiretorForm extends javax.swing.JFrame {
 
         jMenuBar1.add(itmMenuCadastrarFuncionario);
 
-        MenuSair.setIcon(new javax.swing.ImageIcon("D:\\Diversos\\NetBeansProjects\\TrabalhoSegurancaDados\\Icones\\halte-session-icone-4911-32.png")); // NOI18N
+        MenuSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/halte-session-icone-4911-32.png"))); // NOI18N
         MenuSair.setText("Sair");
         MenuSair.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

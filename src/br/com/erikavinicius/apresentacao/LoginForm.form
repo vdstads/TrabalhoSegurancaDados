@@ -114,7 +114,7 @@
         <Component class="javax.swing.JButton" name="btnLogin">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\Diversos\NetBeansProjects\TrabalhoSegurancaDados\Icones\1416952736_cursor.png"/>
+              <Image iconType="3" name="/br/com/erikavinicius/entidade/icones/door_in.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Login"/>
           </Properties>

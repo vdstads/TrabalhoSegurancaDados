@@ -71,7 +71,7 @@ public class ListaDepartamentoForm extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblDepartamentos);
 
-        btnEditar.setIcon(new javax.swing.ImageIcon("D:\\Diversos\\NetBeansProjects\\TrabalhoSegurancaDados\\Icones\\application_edit.png")); // NOI18N
+        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/application_edit.png"))); // NOI18N
         btnEditar.setText("Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,7 +79,7 @@ public class ListaDepartamentoForm extends javax.swing.JFrame {
             }
         });
 
-        btnExcluir.setIcon(new javax.swing.ImageIcon("D:\\Diversos\\NetBeansProjects\\TrabalhoSegurancaDados\\Icones\\application_form_delete.png")); // NOI18N
+        btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/application_delete.png"))); // NOI18N
         btnExcluir.setText("Excluir");
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

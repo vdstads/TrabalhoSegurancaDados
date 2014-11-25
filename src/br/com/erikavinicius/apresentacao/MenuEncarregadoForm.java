@@ -34,11 +34,11 @@ public class MenuEncarregadoForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setExtendedState(6);
 
-        jMenu1.setIcon(new javax.swing.ImageIcon("D:\\Diversos\\NetBeansProjects\\TrabalhoSegurancaDados\\Icones\\kwrite-icone-4245-32.png")); // NOI18N
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/kwrite-icone-4245-32.png"))); // NOI18N
         jMenu1.setText("Alterar Dados");
         jMenuBar1.add(jMenu1);
 
-        MenuSair.setIcon(new javax.swing.ImageIcon("D:\\Diversos\\NetBeansProjects\\TrabalhoSegurancaDados\\Icones\\halte-session-icone-4911-32.png")); // NOI18N
+        MenuSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/halte-session-icone-4911-32.png"))); // NOI18N
         MenuSair.setText("Sair");
         MenuSair.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

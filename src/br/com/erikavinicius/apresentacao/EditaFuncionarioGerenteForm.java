@@ -69,7 +69,7 @@ public class EditaFuncionarioGerenteForm extends javax.swing.JFrame {
 
         lblSenha.setText("Senha:");
 
-        btnEditar.setIcon(new javax.swing.ImageIcon("D:\\Diversos\\NetBeansProjects\\TrabalhoSegurancaDados\\Icones\\application_form_edit.png")); // NOI18N
+        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/application_edit.png"))); // NOI18N
         btnEditar.setText("Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

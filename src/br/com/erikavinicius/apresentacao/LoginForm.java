@@ -66,7 +66,7 @@ public class LoginForm extends javax.swing.JFrame {
 
         lblSenha.setText("Senha:");
 
-        btnLogin.setIcon(new javax.swing.ImageIcon("D:\\Diversos\\NetBeansProjects\\TrabalhoSegurancaDados\\Icones\\1416952736_cursor.png")); // NOI18N
+        btnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/door_in.png"))); // NOI18N
         btnLogin.setText("Login");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

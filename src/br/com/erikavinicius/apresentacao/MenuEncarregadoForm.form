@@ -7,7 +7,7 @@
         <Menu class="javax.swing.JMenu" name="jMenu1">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\Diversos\NetBeansProjects\TrabalhoSegurancaDados\Icones\kwrite-icone-4245-32.png"/>
+              <Image iconType="3" name="/br/com/erikavinicius/entidade/icones/kwrite-icone-4245-32.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Alterar Dados"/>
           </Properties>
@@ -15,7 +15,7 @@
         <Menu class="javax.swing.JMenu" name="MenuSair">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\Diversos\NetBeansProjects\TrabalhoSegurancaDados\Icones\halte-session-icone-4911-32.png"/>
+              <Image iconType="3" name="/br/com/erikavinicius/entidade/icones/halte-session-icone-4911-32.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Sair"/>
           </Properties>

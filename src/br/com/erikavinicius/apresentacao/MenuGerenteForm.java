@@ -66,7 +66,7 @@ public class MenuGerenteForm extends javax.swing.JFrame {
         itmMenuCadastrarFuncionario.setText("Funcionários");
 
         itmCadastroFuncionarios.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
-        itmCadastroFuncionarios.setIcon(new javax.swing.ImageIcon("D:\\Diversos\\NetBeansProjects\\TrabalhoSegurancaDados\\Icones\\1416951045_user_add.png")); // NOI18N
+        itmCadastroFuncionarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/1416951045_user_add.png"))); // NOI18N
         itmCadastroFuncionarios.setText("Cadastrar Funcionarios");
         itmCadastroFuncionarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,7 +76,7 @@ public class MenuGerenteForm extends javax.swing.JFrame {
         itmMenuCadastrarFuncionario.add(itmCadastroFuncionarios);
 
         itmListaFuncionarios.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, 0));
-        itmListaFuncionarios.setIcon(new javax.swing.ImageIcon("D:\\Diversos\\NetBeansProjects\\TrabalhoSegurancaDados\\Icones\\liste-texte-vue-icone-4177-32.png")); // NOI18N
+        itmListaFuncionarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/liste-texte-vue-icone-4177-32.png"))); // NOI18N
         itmListaFuncionarios.setText("Lista de Funcionários");
         itmListaFuncionarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
