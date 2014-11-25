@@ -7,6 +7,7 @@
 package br.com.erikavinicius.apresentacao;
 
 import br.com.erikavinicius.TrabalhoSeguranca;
+import br.com.erikavinicius.entidade.Usuario;
 
 /**
  *
@@ -15,27 +16,40 @@ import br.com.erikavinicius.TrabalhoSeguranca;
 public class MenuEncarregadoForm extends javax.swing.JFrame {
 
     private TrabalhoSeguranca trabalhoSeguranca;
+    private Usuario usuarioAtivo;
     
-    
-    MenuEncarregadoForm(TrabalhoSeguranca trabalhoSeguranca) {
+    MenuEncarregadoForm(TrabalhoSeguranca trabalhoSeguranca, Usuario usuario) {
         initComponents();
         this.trabalhoSeguranca = trabalhoSeguranca;
+        this.usuarioAtivo = usuario;
     }
 
-   
+     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        itmAlterarDados = new javax.swing.JMenuItem();
         MenuSair = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setExtendedState(6);
 
-        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/kwrite-icone-4245-32.png"))); // NOI18N
-        jMenu1.setText("Alterar Dados");
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/flashkard-icone-4018-32.png"))); // NOI18N
+        jMenu1.setText("Dados");
+
+        itmAlterarDados.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
+        itmAlterarDados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/kwrite-icone-4245-32.png"))); // NOI18N
+        itmAlterarDados.setText("Alterar");
+        itmAlterarDados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmAlterarDadosActionPerformed(evt);
+            }
+        });
+        jMenu1.add(itmAlterarDados);
+
         jMenuBar1.add(jMenu1);
 
         MenuSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/halte-session-icone-4911-32.png"))); // NOI18N
@@ -78,6 +92,11 @@ public class MenuEncarregadoForm extends javax.swing.JFrame {
         } 
     }//GEN-LAST:event_MenuSairMouseClicked
 
+    private void itmAlterarDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmAlterarDadosActionPerformed
+        AlteraDadosEncarregado alteraDadosEncarregado = new AlteraDadosEncarregado(this.trabalhoSeguranca, usuarioAtivo);
+        alteraDadosEncarregado.setVisible(true);
+    }//GEN-LAST:event_itmAlterarDadosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -111,6 +130,7 @@ public class MenuEncarregadoForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu MenuSair;
+    private javax.swing.JMenuItem itmAlterarDados;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables

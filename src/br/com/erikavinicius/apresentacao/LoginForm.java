@@ -144,7 +144,7 @@ public class LoginForm extends javax.swing.JFrame {
                     MenuGerenteForm menuGerenteForm = new MenuGerenteForm(this.trabalhoSeguranca, usuario);
                     menuGerenteForm.setVisible(true);       
                 }else if(usuario.getCargo().equals("ENCARREGADO")){
-                    MenuEncarregadoForm menuEncarregadoForm = new MenuEncarregadoForm(this.trabalhoSeguranca);
+                    MenuEncarregadoForm menuEncarregadoForm = new MenuEncarregadoForm(this.trabalhoSeguranca, usuario);
                     menuEncarregadoForm.setVisible(true);       
                 }
                
