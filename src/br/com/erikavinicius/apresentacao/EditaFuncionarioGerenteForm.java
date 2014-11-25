@@ -192,11 +192,11 @@ public class EditaFuncionarioGerenteForm extends javax.swing.JFrame {
             this.limpar();
             JOptionPane.showMessageDialog(this, cargo+" editado com sucesso!", "Edição de Funcionario", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
-            ListaFuncionarioForm listaFuncionarioForm;
+            ListaFuncionarioGerenteForm listaFuncionarioGerenteForm;
             
             try {
-                listaFuncionarioForm = new ListaFuncionarioForm(this.trabalhoSeguranca);
-                listaFuncionarioForm.setVisible(true);
+                listaFuncionarioGerenteForm = new ListaFuncionarioGerenteForm(this.trabalhoSeguranca, usuarioAtivo);
+                listaFuncionarioGerenteForm.setVisible(true);
             } catch (Exception e) {
             } 
         }   

@@ -138,7 +138,6 @@ public class ListaFuncionarioGerenteForm extends javax.swing.JFrame {
                    Logger.getLogger(ListaFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);
                }
                 
-                //JOptionPane.showMessageDialog(null,"Editado com sucesso!");
                this.dispose();
             }
         }else{
