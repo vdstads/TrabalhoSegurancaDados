@@ -26,12 +26,15 @@ public class EditaFuncionarioGerenteForm extends javax.swing.JFrame {
     private Usuario usuarioAtivo;
     private String CPF;
     
-    public EditaFuncionarioGerenteForm(TrabalhoSeguranca trabalhoSeguranca,Usuario usuarioAtivo) {
+    public EditaFuncionarioGerenteForm(TrabalhoSeguranca trabalhoSeguranca,String cpf) {
         initComponents();
         this.usuarioAtivo = usuarioAtivo;
         this.trabalhoSeguranca = trabalhoSeguranca;
         this.bancoDadosFuncionario = bancoDadosFuncionario;
         this.bancoDadosFuncionario = bancoDadosFuncionario;
+        this.CPF = cpf;
+        
+        this.preencher();
     }
 
     
@@ -161,11 +164,7 @@ public class EditaFuncionarioGerenteForm extends javax.swing.JFrame {
         String cargo = null;
         if(this.rdoEncarregado.isSelected()){
             cargo = "ENCARREGADO";
-        }/*else if(this.rdoGerente.isSelected()){
-            cargo = "GERENTE";
-        }else{
-            cargo = "DIRETOR";
-        }*/
+        }
 
         if(nome.isEmpty() || senha.isEmpty() || email.isEmpty() || cpf.isEmpty() || cargo.isEmpty()){
             JOptionPane.showMessageDialog(this, "Preencha todos os campos!", "Erro", JOptionPane.WARNING_MESSAGE);

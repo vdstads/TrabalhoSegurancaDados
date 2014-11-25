@@ -118,7 +118,7 @@ public class ListaFuncionarioGerenteForm extends javax.swing.JFrame {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         if (tblFuncionarios.getSelectedRow() != - 1) {
-            int result = JOptionPane.showConfirmDialog(null, "Deseja Editar ? ", "Editar", JOptionPane.YES_NO_CANCEL_OPTION);
+           int result = JOptionPane.showConfirmDialog(null, "Deseja Editar ? ", "Editar", JOptionPane.YES_NO_CANCEL_OPTION);
             if (result == JOptionPane.YES_OPTION) {
                 TabelaFuncionariosModel model = null;
                 try {
@@ -128,9 +128,10 @@ public class ListaFuncionarioGerenteForm extends javax.swing.JFrame {
                 }
                 int colunaCPF = 1;
                 String CPF = (String) model.getValueAt(tblFuncionarios.getSelectedRow(), colunaCPF);
+                JOptionPane.showMessageDialog(null, "Resposta"+CPF);
 
-                EditaFuncionarioForm editaFuncionarioForm = new EditaFuncionarioForm(this.trabalhoSeguranca, CPF);
-                editaFuncionarioForm.setVisible(true);
+                EditaFuncionarioGerenteForm editaFuncionarioGerenteForm = new EditaFuncionarioGerenteForm(this.trabalhoSeguranca, CPF);
+                editaFuncionarioGerenteForm.setVisible(true);
 
                 try {
                     this.configurarTblFuncionarios();
