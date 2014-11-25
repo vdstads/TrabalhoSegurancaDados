@@ -25,11 +25,13 @@ public class ListaFuncionarioGerenteForm extends javax.swing.JFrame {
     private BancoDadosFuncionario bancoDadosFuncionario;
     private Usuario usuarioAtivo;
             
-    public ListaFuncionarioGerenteForm(TrabalhoSeguranca trabalhoSeguranca, Usuario usuarioAtivo) {
+    public ListaFuncionarioGerenteForm(TrabalhoSeguranca trabalhoSeguranca, Usuario usuarioAtivo) throws SQLException {
         initComponents();
         this.trabalhoSeguranca = trabalhoSeguranca;
         this.bancoDadosFuncionario = bancoDadosFuncionario;
         this.usuarioAtivo = usuarioAtivo;
+        
+        this.configurarTblFuncionarios();
     }
 
     /**
@@ -41,15 +43,14 @@ public class ListaFuncionarioGerenteForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        plFuncionarios = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblFuncionarios = new javax.swing.JTable();
         btnEditar = new javax.swing.JButton();
-        btnExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista de Funcionários", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 18))); // NOI18N
+        plFuncionarios.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista de Funcionários", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 18))); // NOI18N
 
         tblFuncionarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -71,38 +72,28 @@ public class ListaFuncionarioGerenteForm extends javax.swing.JFrame {
             }
         });
 
-        btnExcluir.setText("Demitir");
-        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExcluirActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
-                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(107, 107, 107)
-                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        javax.swing.GroupLayout plFuncionariosLayout = new javax.swing.GroupLayout(plFuncionarios);
+        plFuncionarios.setLayout(plFuncionariosLayout);
+        plFuncionariosLayout.setHorizontalGroup(
+            plFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(plFuncionariosLayout.createSequentialGroup()
+                .addGroup(plFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(plFuncionariosLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(plFuncionariosLayout.createSequentialGroup()
+                        .addGap(151, 151, 151)
+                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        plFuncionariosLayout.setVerticalGroup(
+            plFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(plFuncionariosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEditar)
-                    .addComponent(btnExcluir))
-                .addContainerGap(118, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addComponent(btnEditar)
+                .addContainerGap(128, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -111,14 +102,14 @@ public class ListaFuncionarioGerenteForm extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(plFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(plFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -154,41 +145,9 @@ public class ListaFuncionarioGerenteForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Por favor, selecione um item!");
         }
     }//GEN-LAST:event_btnEditarActionPerformed
-
-    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        if (tblFuncionarios.getSelectedRow() != - 1) {
-            int result = JOptionPane.showConfirmDialog(null, "Deseja Excluir ? ", "Excluir", JOptionPane.YES_NO_CANCEL_OPTION);
-            if (result == JOptionPane.YES_OPTION) {
-                TabelaFuncionariosModel model = null;
-                try {
-                    model = new TabelaFuncionariosModel(this.bancoDadosFuncionario.ConsultaTodos());
-                } catch (SQLException ex) {
-                    Logger.getLogger(ListaFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                int colunaCPF = 1;
-                String CPF = (String) model.getValueAt(tblFuncionarios.getSelectedRow(), colunaCPF);
-
-                try {
-                    this.bancoDadosFuncionario.removeFuncionario(CPF);
-                } catch (SQLException ex) {
-                    Logger.getLogger(ListaFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-                try {
-                    this.configurarTblFuncionarios();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ListaFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                JOptionPane.showMessageDialog(null,"Excluído com sucesso!");
-
-            }
-        }else{
-            JOptionPane.showMessageDialog(null, "Por favor, selecione um item!");
-        }
-    }//GEN-LAST:event_btnExcluirActionPerformed
     
     void configurarTblFuncionarios() throws SQLException {
-        
+        /* NESSA LINHA QUE ACUSA UM ERRO NA HR DE CHAMAR A TELA DE FUNCIONARIOS*/
         TabelaFuncionariosModel model = new TabelaFuncionariosModel((List<Usuario>) this.bancoDadosFuncionario.ConsultaFuncionarioDepartamento(usuarioAtivo.getSenha()));
 
         tblFuncionarios.setModel(model);
@@ -265,9 +224,8 @@ public class ListaFuncionarioGerenteForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditar;
-    private javax.swing.JButton btnExcluir;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel plFuncionarios;
     private javax.swing.JTable tblFuncionarios;
     // End of variables declaration//GEN-END:variables
 }

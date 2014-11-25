@@ -12,7 +12,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="itmListaDepartamentos">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="F2"/>
+                  <KeyStroke key="F1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Lista de Departamentos"/>
               </Properties>
@@ -30,7 +30,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="itmCadastroFuncionarios">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="F3"/>
+                  <KeyStroke key="F2"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Cadastrar Funcionarios"/>
               </Properties>
@@ -41,7 +41,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="itmListaFuncionarios">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="F4"/>
+                  <KeyStroke key="F3"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Lista de Funcion&#xe1;rios"/>
               </Properties>

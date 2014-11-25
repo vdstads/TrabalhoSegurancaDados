@@ -40,7 +40,7 @@ public class MenuGerenteForm extends javax.swing.JFrame {
 
         jMenu1.setText("Departamentos");
 
-        itmListaDepartamentos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
+        itmListaDepartamentos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
         itmListaDepartamentos.setText("Lista de Departamentos");
         itmListaDepartamentos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -53,7 +53,7 @@ public class MenuGerenteForm extends javax.swing.JFrame {
 
         itmMenuCadastrarFuncionario.setText("Funcionários");
 
-        itmCadastroFuncionarios.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, 0));
+        itmCadastroFuncionarios.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
         itmCadastroFuncionarios.setText("Cadastrar Funcionarios");
         itmCadastroFuncionarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -62,7 +62,7 @@ public class MenuGerenteForm extends javax.swing.JFrame {
         });
         itmMenuCadastrarFuncionario.add(itmCadastroFuncionarios);
 
-        itmListaFuncionarios.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, 0));
+        itmListaFuncionarios.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, 0));
         itmListaFuncionarios.setText("Lista de Funcionários");
         itmListaFuncionarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,7 +105,11 @@ public class MenuGerenteForm extends javax.swing.JFrame {
 
     private void itmListaFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmListaFuncionariosActionPerformed
         ListaFuncionarioGerenteForm listaFuncionarioGerenteForm = null;
-        listaFuncionarioGerenteForm = new ListaFuncionarioGerenteForm(this.trabalhoSeguranca, usuarioAtivo);
+        try {
+            listaFuncionarioGerenteForm = new ListaFuncionarioGerenteForm(this.trabalhoSeguranca, usuarioAtivo);
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuGerenteForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
         listaFuncionarioGerenteForm.setVisible(true);
     }//GEN-LAST:event_itmListaFuncionariosActionPerformed
 

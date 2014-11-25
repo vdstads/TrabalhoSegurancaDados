@@ -56,7 +56,7 @@ public class CadastroFuncionarioGerenteForm extends javax.swing.JFrame {
         lblCargo = new javax.swing.JLabel();
         rdoEncarregado = new javax.swing.JRadioButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         plDiretor.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastro de Funcionarios", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 0, 18))); // NOI18N
         plDiretor.setPreferredSize(new java.awt.Dimension(405, 245));
