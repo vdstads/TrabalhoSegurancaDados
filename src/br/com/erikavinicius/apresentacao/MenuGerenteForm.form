@@ -12,7 +12,7 @@
         <Menu class="javax.swing.JMenu" name="jMenu1">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\Diversos\NetBeansProjects\TrabalhoSegurancaDados\Icones\dossier-orange-icone-9020-32.png"/>
+              <Image iconType="3" name="/br/com/erikavinicius/entidade/icones/dossier-orange-icone-9020-32.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Departamentos"/>
           </Properties>
@@ -23,7 +23,7 @@
                   <KeyStroke key="F1"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="D:\Diversos\NetBeansProjects\TrabalhoSegurancaDados\Icones\liste-texte-vue-icone-4177-32.png"/>
+                  <Image iconType="3" name="/br/com/erikavinicius/entidade/icones/liste-texte-vue-icone-4177-32.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Lista de Departamentos"/>
               </Properties>
@@ -36,7 +36,7 @@
         <Menu class="javax.swing.JMenu" name="itmMenuCadastrarFuncionario">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\Diversos\NetBeansProjects\TrabalhoSegurancaDados\Icones\homme-costume-cravate-utilisateur-icone-7362-32.png"/>
+              <Image iconType="3" name="/br/com/erikavinicius/entidade/icones/homme-costume-cravate-utilisateur-icone-7362-32.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Funcion&#xe1;rios"/>
           </Properties>
@@ -74,7 +74,7 @@
         <Menu class="javax.swing.JMenu" name="MenuSair">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\Diversos\NetBeansProjects\TrabalhoSegurancaDados\Icones\halte-session-icone-4911-32.png"/>
+              <Image iconType="3" name="/br/com/erikavinicius/entidade/icones/halte-session-icone-4911-32.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Sair"/>
           </Properties>
