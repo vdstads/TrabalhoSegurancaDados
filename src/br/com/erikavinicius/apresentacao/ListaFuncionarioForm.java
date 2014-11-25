@@ -25,8 +25,7 @@ public class ListaFuncionarioForm extends javax.swing.JFrame {
 
     private TrabalhoSeguranca trabalhoSeguranca;
     private BancoDadosFuncionario bancoDadosFuncionario;
- 
-    
+
     
     public ListaFuncionarioForm(TrabalhoSeguranca trabalhoSeguranca) throws SQLException {
         initComponents();
@@ -36,9 +35,6 @@ public class ListaFuncionarioForm extends javax.swing.JFrame {
         this.configurarTblFuncionarios();
     }
 
-    
-
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -47,7 +43,7 @@ public class ListaFuncionarioForm extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblFuncionarios = new javax.swing.JTable();
         btnEditar = new javax.swing.JButton();
-        btnExcluir = new javax.swing.JButton();
+        btnDemitir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -73,10 +69,10 @@ public class ListaFuncionarioForm extends javax.swing.JFrame {
             }
         });
 
-        btnExcluir.setText("Demitir");
-        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+        btnDemitir.setText("Demitir");
+        btnDemitir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExcluirActionPerformed(evt);
+                btnDemitirActionPerformed(evt);
             }
         });
 
@@ -93,7 +89,7 @@ public class ListaFuncionarioForm extends javax.swing.JFrame {
                         .addGap(73, 73, 73)
                         .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(108, 108, 108)
-                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnDemitir, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -103,7 +99,7 @@ public class ListaFuncionarioForm extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnExcluir)
+                    .addComponent(btnDemitir)
                     .addComponent(btnEditar))
                 .addContainerGap(58, Short.MAX_VALUE))
         );
@@ -160,9 +156,9 @@ public class ListaFuncionarioForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
-    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+    private void btnDemitirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDemitirActionPerformed
         if (tblFuncionarios.getSelectedRow() != - 1) {
-            int result = JOptionPane.showConfirmDialog(null, "Deseja Excluir ? ", "Excluir", JOptionPane.YES_NO_CANCEL_OPTION);
+            int result = JOptionPane.showConfirmDialog(null, "Deseja Demitir ? ", "Demissão", JOptionPane.YES_NO_CANCEL_OPTION);
             if (result == JOptionPane.YES_OPTION) {
                 TabelaFuncionariosModel model = null;
                 try {
@@ -171,26 +167,31 @@ public class ListaFuncionarioForm extends javax.swing.JFrame {
                     Logger.getLogger(ListaFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 int colunaCPF = 1;
+                int colunaCargo = 2;
                 String CPF = (String) model.getValueAt(tblFuncionarios.getSelectedRow(), colunaCPF);
+                String CARGO = (String) model.getValueAt(tblFuncionarios.getSelectedRow(), colunaCargo);
                 
-                try {
-                    this.bancoDadosFuncionario.removeFuncionario(CPF);
-                } catch (SQLException ex) {
-                    Logger.getLogger(ListaFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                if (CARGO.equals("DIRETOR")) {
+                    JOptionPane.showMessageDialog(null, "Não é permitido demitir Diretor!");
+                } else {
+                    try {
+                        this.bancoDadosFuncionario.removeFuncionario(CPF);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ListaFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);
+                    }
 
-                try {
-                    this.configurarTblFuncionarios();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ListaFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);
+                    try {
+                        this.configurarTblFuncionarios();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ListaFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    JOptionPane.showMessageDialog(null,"Demitido com sucesso!");
                 }
-                JOptionPane.showMessageDialog(null,"Excluído com sucesso!");
-                
             }
         }else{
             JOptionPane.showMessageDialog(null, "Por favor, selecione um item!");
         }
-    }//GEN-LAST:event_btnExcluirActionPerformed
+    }//GEN-LAST:event_btnDemitirActionPerformed
     
     void configurarTblFuncionarios() throws SQLException {
         
@@ -272,8 +273,8 @@ public class ListaFuncionarioForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDemitir;
     private javax.swing.JButton btnEditar;
-    private javax.swing.JButton btnExcluir;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblFuncionarios;

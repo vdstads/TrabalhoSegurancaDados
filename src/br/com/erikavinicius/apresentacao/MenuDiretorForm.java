@@ -27,6 +27,7 @@ public class MenuDiretorForm extends javax.swing.JFrame {
     private BancoDadosFuncionario bancoDadosFuncionario;
     private BancoDadosDepartamento bancoDadosDepartamento;
     
+    
     public MenuDiretorForm(TrabalhoSeguranca trabalhoSeguranca) {
         initComponents();
         this.trabalhoSeguranca = trabalhoSeguranca;
@@ -151,6 +152,7 @@ public class MenuDiretorForm extends javax.swing.JFrame {
             Logger.getLogger(MenuDiretorForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         listaDepartamentoForm.setVisible(true);
+        
     }//GEN-LAST:event_itmListaDepartamentosActionPerformed
 
     private void itmCadastroDepartamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmCadastroDepartamentosActionPerformed

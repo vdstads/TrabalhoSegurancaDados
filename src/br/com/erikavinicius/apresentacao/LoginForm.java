@@ -146,12 +146,11 @@ public class LoginForm extends javax.swing.JFrame {
                     MenuDiretorForm menuDiretorForm = new MenuDiretorForm(this.trabalhoSeguranca);
                     menuDiretorForm.setVisible(true);       
                 }
-                this.dispose();
-                
-                
+               
+                this.dispose(); 
                 this.limpar();
             }else{
-                JOptionPane.showMessageDialog(this, "E-mail e Senha Incorretos!", "Erro", JOptionPane.WARNING_MESSAGE);    
+                JOptionPane.showMessageDialog(this, "E-mail e Senha Incorretos!", "Erro", JOptionPane.WARNING_MESSAGE);   
             }
         } catch (Exception e) {
         }

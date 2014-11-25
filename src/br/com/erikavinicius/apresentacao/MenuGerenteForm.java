@@ -6,10 +6,13 @@
 package br.com.erikavinicius.apresentacao;
 
 import br.com.erikavinicius.TrabalhoSeguranca;
+import br.com.erikavinicius.entidade.Departamento;
 import br.com.erikavinicius.entidade.Usuario;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,6 +21,7 @@ import java.util.logging.Logger;
 public class MenuGerenteForm extends javax.swing.JFrame {
     private TrabalhoSeguranca trabalhoSeguranca;
     private Usuario usuarioAtivo;
+    
     
     public MenuGerenteForm(TrabalhoSeguranca trabalhoSeguranca, Usuario usuario) {
         initComponents();
@@ -114,6 +118,7 @@ public class MenuGerenteForm extends javax.swing.JFrame {
         } catch (Exception e) {
         }
         departamentoGerenteForm.setVisible(true);
+        
     }//GEN-LAST:event_itmListaDepartamentosActionPerformed
 
     private void itmCadastroFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmCadastroFuncionariosActionPerformed

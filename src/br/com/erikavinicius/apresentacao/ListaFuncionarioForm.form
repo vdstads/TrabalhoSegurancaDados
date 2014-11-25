@@ -68,7 +68,7 @@
                           <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
                           <Component id="btnEditar" min="-2" pref="92" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
-                          <Component id="btnExcluir" min="-2" pref="91" max="-2" attributes="0"/>
+                          <Component id="btnDemitir" min="-2" pref="91" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="18" max="32767" attributes="0"/>
@@ -82,7 +82,7 @@
                   <Component id="jScrollPane1" min="-2" pref="173" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="btnExcluir" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnDemitir" min="-2" max="-2" attributes="0"/>
                       <Component id="btnEditar" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="58" max="32767" attributes="0"/>
@@ -147,12 +147,12 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditarActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnExcluir">
+        <Component class="javax.swing.JButton" name="btnDemitir">
           <Properties>
             <Property name="text" type="java.lang.String" value="Demitir"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExcluirActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDemitirActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
