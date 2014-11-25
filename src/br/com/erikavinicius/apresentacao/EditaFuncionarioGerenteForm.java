@@ -17,30 +17,27 @@ import javax.swing.JOptionPane;
  *
  * @author vinicius
  */
-public class EditaFuncionarioForm extends javax.swing.JFrame {
+public class EditaFuncionarioGerenteForm extends javax.swing.JFrame {
 
     private TrabalhoSeguranca trabalhoSeguranca;
-    private BancoDadosFuncionario bancoDadosFuncionario;
     private BancoDados bancoDados;
+    private BancoDadosFuncionario bancoDadosFuncionario;
     private CryptographyTripleDES criptografia;
-    String CPF;
-    private ListaFuncionarioForm listaFuncionario;
+    private Usuario usuarioAtivo;
     
-    public EditaFuncionarioForm(TrabalhoSeguranca trabalhoSeguranca, String cpf) {
+    public EditaFuncionarioGerenteForm(TrabalhoSeguranca trabalhoSeguranca,Usuario usuarioAtivo) {
         initComponents();
+        this.usuarioAtivo = usuarioAtivo;
         this.trabalhoSeguranca = trabalhoSeguranca;
         this.bancoDadosFuncionario = bancoDadosFuncionario;
-        this.bancoDados = bancoDados;
-        CPF = cpf;
-        preencher();
-        
+        this.bancoDadosFuncionario = bancoDadosFuncionario;
     }
- 
+
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        grpCargo = new javax.swing.ButtonGroup();
         plDiretor = new javax.swing.JPanel();
         lblNome = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
@@ -48,17 +45,15 @@ public class EditaFuncionarioForm extends javax.swing.JFrame {
         txtEmail = new javax.swing.JTextField();
         lblCpf = new javax.swing.JLabel();
         lblSenha = new javax.swing.JLabel();
-        btnEditar = new javax.swing.JButton();
+        btnCadastrar = new javax.swing.JButton();
         txtSenha = new javax.swing.JPasswordField();
         txtCpf = new javax.swing.JFormattedTextField();
         lblCargo = new javax.swing.JLabel();
-        rdoGerente = new javax.swing.JRadioButton();
         rdoEncarregado = new javax.swing.JRadioButton();
-        rdoDiretor = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        plDiretor.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Edição de Funcionarios", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 0, 18))); // NOI18N
+        plDiretor.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastro de Funcionarios", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 0, 18))); // NOI18N
         plDiretor.setPreferredSize(new java.awt.Dimension(405, 245));
 
         lblNome.setText("Nome:");
@@ -69,10 +64,10 @@ public class EditaFuncionarioForm extends javax.swing.JFrame {
 
         lblSenha.setText("Senha:");
 
-        btnEditar.setText("Editar");
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+        btnCadastrar.setText("Cadastrar");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
+                btnCadastrarActionPerformed(evt);
             }
         });
 
@@ -84,15 +79,7 @@ public class EditaFuncionarioForm extends javax.swing.JFrame {
 
         lblCargo.setText("Cargo:");
 
-        grpCargo.add(rdoGerente);
-        rdoGerente.setText("Gerente");
-
-        grpCargo.add(rdoEncarregado);
         rdoEncarregado.setText("Encarregado");
-
-        grpCargo.add(rdoDiretor);
-        rdoDiretor.setText("Diretor");
-        rdoDiretor.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         javax.swing.GroupLayout plDiretorLayout = new javax.swing.GroupLayout(plDiretor);
         plDiretor.setLayout(plDiretorLayout);
@@ -101,7 +88,7 @@ public class EditaFuncionarioForm extends javax.swing.JFrame {
             .addGroup(plDiretorLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(plDiretorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
                     .addComponent(txtNome)
                     .addComponent(txtEmail)
                     .addComponent(txtSenha)
@@ -113,13 +100,8 @@ public class EditaFuncionarioForm extends javax.swing.JFrame {
                             .addComponent(lblCpf)
                             .addComponent(lblSenha)
                             .addComponent(lblCargo)
-                            .addGroup(plDiretorLayout.createSequentialGroup()
-                                .addComponent(rdoGerente)
-                                .addGap(18, 18, 18)
-                                .addComponent(rdoEncarregado)
-                                .addGap(18, 18, 18)
-                                .addComponent(rdoDiretor)))
-                        .addGap(0, 35, Short.MAX_VALUE)))
+                            .addComponent(rdoEncarregado))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         plDiretorLayout.setVerticalGroup(
@@ -143,12 +125,9 @@ public class EditaFuncionarioForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblCargo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(plDiretorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rdoGerente)
-                    .addComponent(rdoEncarregado)
-                    .addComponent(rdoDiretor))
+                .addComponent(rdoEncarregado)
                 .addGap(18, 18, 18)
-                .addComponent(btnEditar)
+                .addComponent(btnCadastrar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -158,7 +137,7 @@ public class EditaFuncionarioForm extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(plDiretor, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)
+                .addComponent(plDiretor, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -172,8 +151,8 @@ public class EditaFuncionarioForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+
         String nome = this.txtNome.getText().trim();
         String senha = this.txtSenha.getText().trim();
         String cpf = this.txtCpf.getText().trim();
@@ -217,8 +196,8 @@ public class EditaFuncionarioForm extends javax.swing.JFrame {
             
         }
         
-    }//GEN-LAST:event_btnEditarActionPerformed
-
+    }//GEN-LAST:event_btnCadastrarActionPerformed
+    
     private void preencher() {
 
         Usuario usrTemp = new Usuario();
@@ -241,15 +220,9 @@ public class EditaFuncionarioForm extends javax.swing.JFrame {
                     senha = cryptography.decrypt(usrTemp.getSenha());
                 } catch (Exception e) {
                }
-        //grpCargo.setSelected(, true);
-        if(usrTemp.getCargo().equals("ENCARREGADO")){
-            rdoEncarregado.setSelected(true);
-        }else if(usrTemp.getCargo().equals("GERENTE")){
-            rdoGerente.setSelected(true);
-        }else{
-            rdoDiretor.setSelected(true);
-            rdoEncarregado.setEnabled(false);
-            rdoGerente.setEnabled(false);
+        
+        this.rdoEncarregado.setSelected(true);
+        
         }
 
         txtNome.setText(usrTemp.getNome());
@@ -258,13 +231,6 @@ public class EditaFuncionarioForm extends javax.swing.JFrame {
         txtSenha.setText(senha);
         rdoDiretor.setEnabled(false);
 
-    }
-    
-    public void limpar(){
-         this.txtNome.setText(null);   
-         this.txtCpf.setText(null);
-         this.txtEmail.setText(null);
-         this.txtSenha.setText(null);
     }
     
     public boolean validarEmail(String email) {
@@ -276,6 +242,13 @@ public class EditaFuncionarioForm extends javax.swing.JFrame {
             retorno = true;
         }
         return retorno;
+    }
+    
+     public void limpar(){
+         this.txtNome.setText(null);   
+         this.txtCpf.setText(null);
+         this.txtEmail.setText(null);
+         this.txtSenha.setText(null);
     }
     
     public static void main(String args[]) {
@@ -292,33 +265,28 @@ public class EditaFuncionarioForm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EditaFuncionarioForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditaFuncionarioGerenteForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EditaFuncionarioForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditaFuncionarioGerenteForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EditaFuncionarioForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditaFuncionarioGerenteForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EditaFuncionarioForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditaFuncionarioGerenteForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
 
-        /* Create and display the form */
-        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEditar;
-    private javax.swing.ButtonGroup grpCargo;
+    private javax.swing.JButton btnCadastrar;
     private javax.swing.JLabel lblCargo;
     private javax.swing.JLabel lblCpf;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblSenha;
     private javax.swing.JPanel plDiretor;
-    private javax.swing.JRadioButton rdoDiretor;
     private javax.swing.JRadioButton rdoEncarregado;
-    private javax.swing.JRadioButton rdoGerente;
     private javax.swing.JFormattedTextField txtCpf;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtNome;
