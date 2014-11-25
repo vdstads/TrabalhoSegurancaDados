@@ -117,30 +117,29 @@ public class ListaFuncionarioGerenteForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        if (tblFuncionarios.getSelectedRow() != - 1) {
+       if (tblFuncionarios.getSelectedRow() != - 1) {
            int result = JOptionPane.showConfirmDialog(null, "Deseja Editar ? ", "Editar", JOptionPane.YES_NO_CANCEL_OPTION);
             if (result == JOptionPane.YES_OPTION) {
                 TabelaFuncionariosModel model = null;
                 try {
-                    model = new TabelaFuncionariosModel(this.bancoDadosFuncionario.ConsultaTodos());
+                    model = new TabelaFuncionariosModel(this.bancoDadosFuncionario.ConsultaFuncionariosDepartamento(usuarioAtivo.getSenha()));
                 } catch (SQLException ex) {
                     Logger.getLogger(ListaFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 int colunaCPF = 1;
                 String CPF = (String) model.getValueAt(tblFuncionarios.getSelectedRow(), colunaCPF);
-                JOptionPane.showMessageDialog(null, "Resposta"+CPF);
-
+ 
                 EditaFuncionarioGerenteForm editaFuncionarioGerenteForm = new EditaFuncionarioGerenteForm(this.trabalhoSeguranca, CPF);
                 editaFuncionarioGerenteForm.setVisible(true);
-
-                try {
-                    this.configurarTblFuncionarios();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ListaFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
+   
+               try {
+                   this.configurarTblFuncionarios();
+               } catch (SQLException ex) {
+                   Logger.getLogger(ListaFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);
+               }
+                
                 //JOptionPane.showMessageDialog(null,"Editado com sucesso!");
-                this.dispose();
+               this.dispose();
             }
         }else{
             JOptionPane.showMessageDialog(null, "Por favor, selecione um item!");

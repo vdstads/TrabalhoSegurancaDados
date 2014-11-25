@@ -142,13 +142,10 @@ public class ListaFuncionarioForm extends javax.swing.JFrame {
                 }
                 int colunaCPF = 1;
                 String CPF = (String) model.getValueAt(tblFuncionarios.getSelectedRow(), colunaCPF);
-                
-               
-               EditaFuncionarioForm editaFuncionarioForm = new EditaFuncionarioForm(this.trabalhoSeguranca, CPF);
-               editaFuncionarioForm.setVisible(true);
-                
-
-                
+ 
+                EditaFuncionarioForm editaFuncionarioForm = new EditaFuncionarioForm(this.trabalhoSeguranca, CPF);
+                editaFuncionarioForm.setVisible(true);
+   
                try {
                    this.configurarTblFuncionarios();
                } catch (SQLException ex) {

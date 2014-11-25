@@ -73,7 +73,11 @@
                               <Component id="lblCpf" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="lblSenha" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="lblCargo" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="rdoEncarregado" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="rdoGerente" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="rdoEncarregado" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
@@ -103,10 +107,13 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="lblCargo" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="rdoEncarregado" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="rdoGerente" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="rdoEncarregado" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btnCadastrar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="18" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -161,6 +168,11 @@
         <Component class="javax.swing.JRadioButton" name="rdoEncarregado">
           <Properties>
             <Property name="text" type="java.lang.String" value="Encarregado"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="rdoGerente">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Gerente"/>
           </Properties>
         </Component>
       </SubComponents>

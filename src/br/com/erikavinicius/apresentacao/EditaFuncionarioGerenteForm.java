@@ -26,7 +26,7 @@ public class EditaFuncionarioGerenteForm extends javax.swing.JFrame {
     private Usuario usuarioAtivo;
     private String CPF;
     
-    public EditaFuncionarioGerenteForm(TrabalhoSeguranca trabalhoSeguranca,String cpf) {
+    public EditaFuncionarioGerenteForm(TrabalhoSeguranca trabalhoSeguranca, String cpf) {
         initComponents();
         this.usuarioAtivo = usuarioAtivo;
         this.trabalhoSeguranca = trabalhoSeguranca;
@@ -54,6 +54,7 @@ public class EditaFuncionarioGerenteForm extends javax.swing.JFrame {
         txtCpf = new javax.swing.JFormattedTextField();
         lblCargo = new javax.swing.JLabel();
         rdoEncarregado = new javax.swing.JRadioButton();
+        rdoGerente = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -85,6 +86,8 @@ public class EditaFuncionarioGerenteForm extends javax.swing.JFrame {
 
         rdoEncarregado.setText("Encarregado");
 
+        rdoGerente.setText("Gerente");
+
         javax.swing.GroupLayout plDiretorLayout = new javax.swing.GroupLayout(plDiretor);
         plDiretor.setLayout(plDiretorLayout);
         plDiretorLayout.setHorizontalGroup(
@@ -104,7 +107,10 @@ public class EditaFuncionarioGerenteForm extends javax.swing.JFrame {
                             .addComponent(lblCpf)
                             .addComponent(lblSenha)
                             .addComponent(lblCargo)
-                            .addComponent(rdoEncarregado))
+                            .addGroup(plDiretorLayout.createSequentialGroup()
+                                .addComponent(rdoGerente)
+                                .addGap(18, 18, 18)
+                                .addComponent(rdoEncarregado)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -129,10 +135,12 @@ public class EditaFuncionarioGerenteForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblCargo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rdoEncarregado)
-                .addGap(18, 18, 18)
+                .addGroup(plDiretorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rdoGerente)
+                    .addComponent(rdoEncarregado))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCadastrar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -217,14 +225,20 @@ public class EditaFuncionarioGerenteForm extends javax.swing.JFrame {
         } catch (Exception e) {
         }
         
-        this.rdoEncarregado.setSelected(true);
+        if(usrTemp.getCargo().equals("ENCARREGADO")){
+            this.rdoEncarregado.setSelected(true);
+        }else{
+            this.rdoGerente.setSelected(true);
+        }
+        
                 
 
         txtNome.setText(usrTemp.getNome());
         txtCpf.setText(usrTemp.getCpf());
         txtEmail.setText(usrTemp.getEmail());
         txtSenha.setText(senha);
-        //rdoDiretor.setEnabled(false);
+        rdoEncarregado.setEnabled(false);
+        rdoGerente.setEnabled(false);
     }
     
     public boolean validarEmail(String email) {
@@ -280,6 +294,7 @@ public class EditaFuncionarioGerenteForm extends javax.swing.JFrame {
     private javax.swing.JLabel lblSenha;
     private javax.swing.JPanel plDiretor;
     private javax.swing.JRadioButton rdoEncarregado;
+    private javax.swing.JRadioButton rdoGerente;
     private javax.swing.JFormattedTextField txtCpf;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtNome;
