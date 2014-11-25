@@ -66,6 +66,7 @@ public class LoginForm extends javax.swing.JFrame {
 
         lblSenha.setText("Senha:");
 
+        btnLogin.setIcon(new javax.swing.ImageIcon("D:\\Diversos\\NetBeansProjects\\TrabalhoSegurancaDados\\Icones\\1416952736_cursor.png")); // NOI18N
         btnLogin.setText("Login");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,7 +103,7 @@ public class LoginForm extends javax.swing.JFrame {
                 .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addComponent(btnLogin)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -143,8 +144,8 @@ public class LoginForm extends javax.swing.JFrame {
                     MenuGerenteForm menuGerenteForm = new MenuGerenteForm(this.trabalhoSeguranca, usuario);
                     menuGerenteForm.setVisible(true);       
                 }else if(usuario.getCargo().equals("ENCARREGADO")){
-                    MenuDiretorForm menuDiretorForm = new MenuDiretorForm(this.trabalhoSeguranca);
-                    menuDiretorForm.setVisible(true);       
+                    MenuEncarregadoForm menuEncarregadoForm = new MenuEncarregadoForm(this.trabalhoSeguranca);
+                    menuEncarregadoForm.setVisible(true);       
                 }
                
                 this.dispose(); 

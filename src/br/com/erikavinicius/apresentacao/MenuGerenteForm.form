@@ -11,6 +11,9 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jMenu1">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="D:\Diversos\NetBeansProjects\TrabalhoSegurancaDados\Icones\dossier-orange-icone-9020-32.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Departamentos"/>
           </Properties>
           <SubComponents>
@@ -18,6 +21,9 @@
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="F1"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="2" name="D:\Diversos\NetBeansProjects\TrabalhoSegurancaDados\Icones\liste-texte-vue-icone-4177-32.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Lista de Departamentos"/>
               </Properties>
@@ -29,6 +35,9 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="itmMenuCadastrarFuncionario">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="D:\Diversos\NetBeansProjects\TrabalhoSegurancaDados\Icones\homme-costume-cravate-utilisateur-icone-7362-32.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Funcion&#xe1;rios"/>
           </Properties>
           <SubComponents>
@@ -36,6 +45,9 @@
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="F2"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="2" name="D:\Diversos\NetBeansProjects\TrabalhoSegurancaDados\Icones\1416951045_user_add.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Cadastrar Funcionarios"/>
               </Properties>
@@ -48,6 +60,9 @@
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="F3"/>
                 </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="2" name="D:\Diversos\NetBeansProjects\TrabalhoSegurancaDados\Icones\liste-texte-vue-icone-4177-32.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Lista de Funcion&#xe1;rios"/>
               </Properties>
               <Events>
@@ -58,6 +73,9 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="MenuSair">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="D:\Diversos\NetBeansProjects\TrabalhoSegurancaDados\Icones\halte-session-icone-4911-32.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Sair"/>
           </Properties>
           <Events>
@@ -97,7 +115,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="279" max="32767" attributes="0"/>
+          <EmptySpace min="0" pref="266" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>

@@ -69,6 +69,7 @@ public class EditaFuncionarioGerenteForm extends javax.swing.JFrame {
 
         lblSenha.setText("Senha:");
 
+        btnEditar.setIcon(new javax.swing.ImageIcon("D:\\Diversos\\NetBeansProjects\\TrabalhoSegurancaDados\\Icones\\application_form_edit.png")); // NOI18N
         btnEditar.setText("Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,7 +141,7 @@ public class EditaFuncionarioGerenteForm extends javax.swing.JFrame {
                     .addComponent(rdoEncarregado))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnEditar)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

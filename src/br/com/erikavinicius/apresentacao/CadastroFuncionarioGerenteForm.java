@@ -69,6 +69,7 @@ public class CadastroFuncionarioGerenteForm extends javax.swing.JFrame {
 
         lblSenha.setText("Senha:");
 
+        btnCadastrar.setIcon(new javax.swing.ImageIcon("D:\\Diversos\\NetBeansProjects\\TrabalhoSegurancaDados\\Icones\\application_add.png")); // NOI18N
         btnCadastrar.setText("Cadastrar");
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
