@@ -91,9 +91,9 @@ public class ListaFuncionarioGerenteForm extends javax.swing.JFrame {
             .addGroup(plFuncionariosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(71, 71, 71)
                 .addComponent(btnEditar)
-                .addContainerGap(128, Short.MAX_VALUE))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

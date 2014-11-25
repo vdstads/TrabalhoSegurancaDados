@@ -24,6 +24,7 @@ public class EditaFuncionarioGerenteForm extends javax.swing.JFrame {
     private BancoDadosFuncionario bancoDadosFuncionario;
     private CryptographyTripleDES criptografia;
     private Usuario usuarioAtivo;
+    private String CPF;
     
     public EditaFuncionarioGerenteForm(TrabalhoSeguranca trabalhoSeguranca,Usuario usuarioAtivo) {
         initComponents();
@@ -53,7 +54,7 @@ public class EditaFuncionarioGerenteForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        plDiretor.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastro de Funcionarios", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 0, 18))); // NOI18N
+        plDiretor.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Edição de Funcionarios", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 0, 18))); // NOI18N
         plDiretor.setPreferredSize(new java.awt.Dimension(405, 245));
 
         lblNome.setText("Nome:");
@@ -160,11 +161,11 @@ public class EditaFuncionarioGerenteForm extends javax.swing.JFrame {
         String cargo = null;
         if(this.rdoEncarregado.isSelected()){
             cargo = "ENCARREGADO";
-        }else if(this.rdoGerente.isSelected()){
+        }/*else if(this.rdoGerente.isSelected()){
             cargo = "GERENTE";
         }else{
             cargo = "DIRETOR";
-        }
+        }*/
 
         if(nome.isEmpty() || senha.isEmpty() || email.isEmpty() || cpf.isEmpty() || cargo.isEmpty()){
             JOptionPane.showMessageDialog(this, "Preencha todos os campos!", "Erro", JOptionPane.WARNING_MESSAGE);
@@ -172,16 +173,14 @@ public class EditaFuncionarioGerenteForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "E-mail invalido!", "Erro", JOptionPane.WARNING_MESSAGE);
         } else{
             try {
-                //------------------CRIPTOGRAFANDO A SENHA----------------------
-                try {
-                    CryptographyTripleDES cryptography = CryptographyTripleDES.newInstance();
-                    senha = cryptography.encrypt(senha);
-                } catch (Exception e) {
-               }
-                //--------------------------------------------------------------
+                CryptographyTripleDES cryptography = CryptographyTripleDES.newInstance();
+                senha = cryptography.encrypt(senha);
+            } catch (Exception e) {
+            }
+            try {
                 this.bancoDadosFuncionario.EditaFuncionario(cpf, nome, email, senha, cargo, CPF);
             } catch (SQLException ex) {
-                Logger.getLogger(CadastroDiretorForm.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(EditaFuncionarioGerenteForm.class.getName()).log(Level.SEVERE, null, ex);
             }
             this.limpar();
             JOptionPane.showMessageDialog(this, cargo+" editado com sucesso!", "Edição de Funcionario", JOptionPane.INFORMATION_MESSAGE);
@@ -192,10 +191,8 @@ public class EditaFuncionarioGerenteForm extends javax.swing.JFrame {
                 listaFuncionarioForm = new ListaFuncionarioForm(this.trabalhoSeguranca);
                 listaFuncionarioForm.setVisible(true);
             } catch (Exception e) {
-                }
-            
-        }
-        
+            } 
+        }   
     }//GEN-LAST:event_btnCadastrarActionPerformed
     
     private void preencher() {
@@ -216,21 +213,19 @@ public class EditaFuncionarioGerenteForm extends javax.swing.JFrame {
             }
         }
         try {
-                    CryptographyTripleDES cryptography = CryptographyTripleDES.newInstance();
-                    senha = cryptography.decrypt(usrTemp.getSenha());
-                } catch (Exception e) {
-               }
+            CryptographyTripleDES cryptography = CryptographyTripleDES.newInstance();
+            senha = cryptography.decrypt(usrTemp.getSenha());
+        } catch (Exception e) {
+        }
         
         this.rdoEncarregado.setSelected(true);
-        
-        }
+                
 
         txtNome.setText(usrTemp.getNome());
         txtCpf.setText(usrTemp.getCpf());
         txtEmail.setText(usrTemp.getEmail());
         txtSenha.setText(senha);
-        rdoDiretor.setEnabled(false);
-
+        //rdoDiretor.setEnabled(false);
     }
     
     public boolean validarEmail(String email) {
@@ -244,11 +239,11 @@ public class EditaFuncionarioGerenteForm extends javax.swing.JFrame {
         return retorno;
     }
     
-     public void limpar(){
-         this.txtNome.setText(null);   
-         this.txtCpf.setText(null);
-         this.txtEmail.setText(null);
-         this.txtSenha.setText(null);
+    public void limpar(){
+        this.txtNome.setText(null);   
+        this.txtCpf.setText(null);
+        this.txtEmail.setText(null);
+        this.txtSenha.setText(null);
     }
     
     public static void main(String args[]) {
@@ -275,7 +270,6 @@ public class EditaFuncionarioGerenteForm extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
