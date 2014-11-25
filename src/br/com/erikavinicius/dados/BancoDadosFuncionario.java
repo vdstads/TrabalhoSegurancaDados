@@ -421,7 +421,7 @@ public class BancoDadosFuncionario {
             conexao = BancoDadosUtil.getConnection();
 
             //Código de criar...
-            String sql = "SELECT CPF, NOME FROM FUNCIONARIO WHERE DEPARTAMENTO ='"+codDep+"'";
+            String sql = "SELECT CPF, NOME, CARGO FROM FUNCIONARIO WHERE DEPARTAMENTO ='"+codDep+"'";
             comando = conexao.prepareStatement(sql);
 
             resultado = comando.executeQuery();
@@ -432,6 +432,7 @@ public class BancoDadosFuncionario {
                 Usuario usuario = new Usuario();
                 usuario.setCpf(resultado.getString(1));
                 usuario.setNome(resultado.getString(2));
+                usuario.setCargo(resultado.getString(3));
                 //Adiciona um item à lista que será retornada
                 listaFuncionarios.add(usuario);
                 //----------------------------------
