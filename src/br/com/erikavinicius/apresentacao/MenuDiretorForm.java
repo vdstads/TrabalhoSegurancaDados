@@ -51,6 +51,7 @@ public class MenuDiretorForm extends javax.swing.JFrame {
         itmCadastroFuncionarios = new javax.swing.JMenuItem();
         itmListaFuncionarios = new javax.swing.JMenuItem();
         itmCadastroCargo = new javax.swing.JMenuItem();
+        MenuSair = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setExtendedState(6);
@@ -107,6 +108,19 @@ public class MenuDiretorForm extends javax.swing.JFrame {
         itmMenuCadastrarFuncionario.add(itmCadastroCargo);
 
         jMenuBar1.add(itmMenuCadastrarFuncionario);
+
+        MenuSair.setText("Sair");
+        MenuSair.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                MenuSairMouseClicked(evt);
+            }
+        });
+        MenuSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuSairActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(MenuSair);
 
         setJMenuBar(jMenuBar1);
 
@@ -184,6 +198,16 @@ public class MenuDiretorForm extends javax.swing.JFrame {
             }
     }//GEN-LAST:event_itmCadastroCargoActionPerformed
 
+    private void MenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuSairActionPerformed
+       
+    }//GEN-LAST:event_MenuSairActionPerformed
+
+    private void MenuSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuSairMouseClicked
+        if(javax.swing.JOptionPane.showConfirmDialog(null,"Deseja Sair do Sistema?","ATENÇÂO ",javax.swing.JOptionPane.YES_NO_OPTION )==0){
+            System.exit(0);
+        }
+    }//GEN-LAST:event_MenuSairMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -216,6 +240,7 @@ public class MenuDiretorForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu MenuSair;
     private javax.swing.JMenuItem itmCadastroCargo;
     private javax.swing.JMenuItem itmCadastroDepartamentos;
     private javax.swing.JMenuItem itmCadastroFuncionarios;

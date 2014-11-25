@@ -29,12 +29,16 @@ public class MenuGerenteForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         itmListaDepartamentos = new javax.swing.JMenuItem();
         itmMenuCadastrarFuncionario = new javax.swing.JMenu();
         itmCadastroFuncionarios = new javax.swing.JMenuItem();
         itmListaFuncionarios = new javax.swing.JMenuItem();
+        MenuSair = new javax.swing.JMenu();
+
+        jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setExtendedState(6);
@@ -73,6 +77,19 @@ public class MenuGerenteForm extends javax.swing.JFrame {
         itmMenuCadastrarFuncionario.add(itmListaFuncionarios);
 
         jMenuBar1.add(itmMenuCadastrarFuncionario);
+
+        MenuSair.setText("Sair");
+        MenuSair.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                MenuSairMouseClicked(evt);
+            }
+        });
+        MenuSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuSairActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(MenuSair);
 
         setJMenuBar(jMenuBar1);
 
@@ -114,6 +131,16 @@ public class MenuGerenteForm extends javax.swing.JFrame {
         listaFuncionarioGerenteForm.setVisible(true);
     }//GEN-LAST:event_itmListaFuncionariosActionPerformed
 
+    private void MenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuSairActionPerformed
+      
+    }//GEN-LAST:event_MenuSairActionPerformed
+
+    private void MenuSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuSairMouseClicked
+       if(javax.swing.JOptionPane.showConfirmDialog(null,"Deseja Sair do Sistema?","ATENÇÂO ",javax.swing.JOptionPane.YES_NO_OPTION )==0){  
+            System.exit(0);  
+        }  
+    }//GEN-LAST:event_MenuSairMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -145,11 +172,13 @@ public class MenuGerenteForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu MenuSair;
     private javax.swing.JMenuItem itmCadastroFuncionarios;
     private javax.swing.JMenuItem itmListaDepartamentos;
     private javax.swing.JMenuItem itmListaFuncionarios;
     private javax.swing.JMenu itmMenuCadastrarFuncionario;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     // End of variables declaration//GEN-END:variables
 }
