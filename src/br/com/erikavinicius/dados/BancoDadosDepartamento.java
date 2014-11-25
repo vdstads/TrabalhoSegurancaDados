@@ -204,4 +204,34 @@ public class BancoDadosDepartamento {
             }
         }
     }
+    public static boolean ConsultaDepartamentoExiste() throws SQLException {
+        Connection conexao = null;
+        PreparedStatement comando = null;
+        ResultSet resultado = null;
+        boolean existeDepartamento = false;
+        try {
+            conexao = BancoDadosUtil.getConnection();
+
+            //Código de criar...
+            String sql = "SELECT * FROM DEPARTAMENTO";
+            comando = conexao.prepareStatement(sql);
+
+            resultado = comando.executeQuery();
+
+            if (resultado.next()) {
+                existeDepartamento = true;
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (resultado != null && !resultado.isClosed()) {
+                resultado.close();
+            }
+            if (conexao != null && !conexao.isClosed()) {
+                conexao.close();
+            }
+        }
+        return existeDepartamento;
+    }
 }

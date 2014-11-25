@@ -153,14 +153,16 @@ public class MenuDiretorForm extends javax.swing.JFrame {
     }//GEN-LAST:event_itmCadastroFuncionariosActionPerformed
 
     private void itmListaDepartamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmListaDepartamentosActionPerformed
-        ListaDepartamentoForm listaDepartamentoForm = null;
         try {
-            listaDepartamentoForm = new ListaDepartamentoForm(this.trabalhoSeguranca);
+            if(this.bancoDadosDepartamento.ConsultaDepartamentoExiste()){
+                ListaDepartamentoForm listaDepartamentoForm = new ListaDepartamentoForm(this.trabalhoSeguranca);
+             listaDepartamentoForm.setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(this, "Não possui Departamentos Cadastrados! Cadastre um Novo!", "Erro", JOptionPane.WARNING_MESSAGE);
+            }
         } catch (SQLException ex) {
-            Logger.getLogger(MenuDiretorForm.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        listaDepartamentoForm.setVisible(true);
-        
+            Logger.getLogger(MenuGerenteForm.class.getName()).log(Level.SEVERE, null, ex);
+        }        
     }//GEN-LAST:event_itmListaDepartamentosActionPerformed
 
     private void itmCadastroDepartamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmCadastroDepartamentosActionPerformed

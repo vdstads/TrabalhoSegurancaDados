@@ -6,6 +6,7 @@
 package br.com.erikavinicius.apresentacao;
 
 import br.com.erikavinicius.TrabalhoSeguranca;
+import br.com.erikavinicius.dados.BancoDadosDepartamento;
 import br.com.erikavinicius.entidade.Departamento;
 import br.com.erikavinicius.entidade.Usuario;
 import java.sql.SQLException;
@@ -21,11 +22,12 @@ import javax.swing.JOptionPane;
 public class MenuGerenteForm extends javax.swing.JFrame {
     private TrabalhoSeguranca trabalhoSeguranca;
     private Usuario usuarioAtivo;
-    
+    private BancoDadosDepartamento bancoDadosDepartamento;
     
     public MenuGerenteForm(TrabalhoSeguranca trabalhoSeguranca, Usuario usuario) {
         initComponents();
         this.usuarioAtivo = usuario;
+        this.bancoDadosDepartamento = bancoDadosDepartamento;
     }
 
    
@@ -118,12 +120,17 @@ public class MenuGerenteForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void itmListaDepartamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmListaDepartamentosActionPerformed
-        ListaDepartamentoGerenteForm departamentoGerenteForm = null;
         try {
-            departamentoGerenteForm = new ListaDepartamentoGerenteForm(this.trabalhoSeguranca);
-        } catch (Exception e) {
+            if(this.bancoDadosDepartamento.ConsultaDepartamentoExiste()){
+                ListaDepartamentoGerenteForm departamentoGerenteForm = null;
+                departamentoGerenteForm = new ListaDepartamentoGerenteForm(this.trabalhoSeguranca);
+                departamentoGerenteForm.setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(this, "Não possui Departamentos Cadastrados! Cadastre um Novo!", "Erro", JOptionPane.WARNING_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuGerenteForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        departamentoGerenteForm.setVisible(true);
         
     }//GEN-LAST:event_itmListaDepartamentosActionPerformed
 
