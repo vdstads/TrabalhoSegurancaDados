@@ -45,6 +45,9 @@ public class MenuGerenteForm extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         itmCadastrarProjeto = new javax.swing.JMenuItem();
         itmListarProjetos = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        itmCadastarAtividades = new javax.swing.JMenuItem();
+        itmListarAtividades = new javax.swing.JMenuItem();
         MenuSair = new javax.swing.JMenu();
 
         jMenuItem1.setText("jMenuItem1");
@@ -117,6 +120,26 @@ public class MenuGerenteForm extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/List.png"))); // NOI18N
+        jMenu1.setText("Atividades");
+
+        itmCadastarAtividades.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F6, 0));
+        itmCadastarAtividades.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/List_add.jpg"))); // NOI18N
+        itmCadastarAtividades.setText("Cadastrar Atividades");
+        itmCadastarAtividades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmCadastarAtividadesActionPerformed(evt);
+            }
+        });
+        jMenu1.add(itmCadastarAtividades);
+
+        itmListarAtividades.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F7, 0));
+        itmListarAtividades.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/liste-texte-vue-icone-4177-32.png"))); // NOI18N
+        itmListarAtividades.setText("Listar Atividades");
+        jMenu1.add(itmListarAtividades);
+
+        jMenuBar1.add(jMenu1);
+
         MenuSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/halte-session-icone-4911-32.png"))); // NOI18N
         MenuSair.setText("Sair");
         MenuSair.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -137,7 +160,7 @@ public class MenuGerenteForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 571, Short.MAX_VALUE)
+            .addGap(0, 649, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,6 +224,11 @@ public class MenuGerenteForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_itmListarProjetosActionPerformed
 
+    private void itmCadastarAtividadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmCadastarAtividadesActionPerformed
+      CadastroAtividadesForm cadastroAtividadesForm = new CadastroAtividadesForm(this.trabalhoSeguranca, usuarioAtivo);
+      cadastroAtividadesForm.setVisible(true);
+    }//GEN-LAST:event_itmCadastarAtividadesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -233,13 +261,16 @@ public class MenuGerenteForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu MenuSair;
+    private javax.swing.JMenuItem itmCadastarAtividades;
     private javax.swing.JMenuItem itmCadastrarProjeto;
     private javax.swing.JMenuItem itmCadastroFuncionarios;
     private javax.swing.JMenu itmListaDepartamento;
     private javax.swing.JMenuItem itmListaDepartamentos;
     private javax.swing.JMenuItem itmListaFuncionarios;
+    private javax.swing.JMenuItem itmListarAtividades;
     private javax.swing.JMenuItem itmListarProjetos;
     private javax.swing.JMenu itmMenuCadastrarFuncionario;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;

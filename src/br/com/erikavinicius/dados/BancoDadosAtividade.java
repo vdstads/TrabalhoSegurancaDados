@@ -18,23 +18,21 @@ import java.util.List;
  *
  * @author vinicius
  */
-public class BancoDadosProjeto {
-    public static void CriarProjeto(int codigo, String nome, String descricao, String dataInicio, String dataTermino, String atividade) throws SQLException {
+public class BancoDadosAtividade {
+    public static void CriarAtividade(int codigo, String nome, int duracao, String cpfEnc) throws SQLException {
         Connection conexao = null;
         PreparedStatement comando = null;
         try {
             conexao = BancoDadosUtil.getConnection();
 
             //Código de criar...
-            String sql = "INSERT INTO PROJETO(COD_PROJETO, NOME, DESCRICAO, DATA_INICIO, DATA_TERMINO, FK_ATIVIDADE) VALUES (?,?,?,?,?,?)";
+            String sql = "INSERT INTO ATIVIDADE(COD_ATIVIDADE, NOME, DURACAO_PREV, FK_ENCARREGADO_CPF) VALUES (?,?,?,?)";
             comando = conexao.prepareStatement(sql);
 
             comando.setInt(1, codigo);
             comando.setString(2, nome);
-            comando.setString(3, descricao);
-            comando.setString(4, dataInicio);
-            comando.setString(5, dataTermino);
-            comando.setString(6, atividade);
+            comando.setInt(3, duracao);
+            comando.setString(4, cpfEnc);
 
             comando.execute();
 
@@ -83,7 +81,7 @@ public class BancoDadosProjeto {
         }
         return ultimoCodigo;
     }
-    public static List<Projeto> ConsultaTodosProjetos() throws SQLException {
+    public static List<Projeto> ConsultaTodasAtividades() throws SQLException {
         Connection conexao = null;
         PreparedStatement comando = null;
         ResultSet resultado = null;
@@ -125,7 +123,7 @@ public class BancoDadosProjeto {
         return listaProjetos;
     }
     
-    public static void removeProjeto(int Codigo) throws SQLException {
+    public static void removeAtividade(int Codigo) throws SQLException {
         Connection conexao = null;
         PreparedStatement comando = null;
         try {
@@ -149,7 +147,7 @@ public class BancoDadosProjeto {
             }
         }
     }
-    public static void EditaProjeto(int codigo, String nome, String descricao, String dataInicio, String dataTermino) throws SQLException {
+    public static void EditaAtividade(int codigo, String nome, String descricao, String dataInicio, String dataTermino) throws SQLException {
         Connection conexao = null;
         PreparedStatement comando = null;
         try {
@@ -164,34 +162,6 @@ public class BancoDadosProjeto {
             comando.setString(3, descricao);
             comando.setString(4, dataInicio);
             comando.setString(5, dataTermino);
-            
-            comando.execute();
-
-            conexao.commit();
-        } catch (Exception e) {
-            if (conexao != null && !conexao.isClosed()) {
-                conexao.rollback();
-            }
-            throw new RuntimeException(e);
-        } finally {
-            if (conexao != null && !conexao.isClosed()) {
-                conexao.close();
-            }
-        }
-
-    }
-    
-    public static void SetaProjeto(int codigoProj, int codigoAtv) throws SQLException {
-        Connection conexao = null;
-        PreparedStatement comando = null;
-        try {
-            conexao = BancoDadosUtil.getConnection();
-
-            //Código de criar...
-            String sql = "UPDATE PROJETO SET FK_ATIVIDADE = ? WHERE COD_PROJETO ='"+codigoProj+"'";
-            comando = conexao.prepareStatement(sql);
-
-            comando.setInt(1, codigoAtv);
             
             comando.execute();
 

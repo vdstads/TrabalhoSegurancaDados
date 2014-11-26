@@ -5,11 +5,13 @@
  */
 package br.com.erikavinicius.apresentacao;
 
+import br.com.erikavinicius.CryptographyTripleDES;
 import br.com.erikavinicius.TrabalhoSeguranca;
-import br.com.erikavinicius.dados.BancoDadosDepartamento;
 import br.com.erikavinicius.dados.BancoDadosProjeto;
 import br.com.erikavinicius.entidade.Projeto;
+import br.com.erikavinicius.entidade.Usuario;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -18,18 +20,19 @@ import javax.swing.JOptionPane;
  *
  * @author vinicius
  */
-public class CadastroProjetoForm extends javax.swing.JFrame {
+public class EditaProjetoForm extends javax.swing.JFrame {
 
     private TrabalhoSeguranca trabalhoSeguranca;
     private BancoDadosProjeto bancoDadosProjeto;
-    private BancoDadosDepartamento bancoDadosDepartamento;
-
-    public CadastroProjetoForm(TrabalhoSeguranca trabalhoSeguranca) {
+    private int codigoProj;
+    public EditaProjetoForm(TrabalhoSeguranca trabalhoSeguranca, int codigo) {
         initComponents();
         this.bancoDadosProjeto = bancoDadosProjeto;
         this.trabalhoSeguranca = trabalhoSeguranca;
-        this.bancoDadosDepartamento = bancoDadosDepartamento;
+        this.codigoProj = codigo;
+        this.preencher();
     }
+
 
 
     @SuppressWarnings("unchecked")
@@ -47,19 +50,17 @@ public class CadastroProjetoForm extends javax.swing.JFrame {
         txtDataInicio = new javax.swing.JFormattedTextField();
         lblDataTermino = new javax.swing.JLabel();
         txtDataTermino = new javax.swing.JFormattedTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastro de Projeto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 18))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Edição de Projeto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 18))); // NOI18N
 
         lblNome.setText("Nome:");
 
         lblDescricao.setText("Descrição:");
 
-        btnCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/application_add.png"))); // NOI18N
-        btnCadastrar.setText("Cadastrar");
+        btnCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/tick.png"))); // NOI18N
+        btnCadastrar.setText("Salvar");
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadastrarActionPerformed(evt);
@@ -76,12 +77,6 @@ public class CadastroProjetoForm extends javax.swing.JFrame {
 
         txtDataTermino.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.MEDIUM))));
 
-        jLabel1.setForeground(new java.awt.Color(236, 23, 23));
-        jLabel1.setText("Formato: dd/mm/aaaa");
-
-        jLabel3.setForeground(new java.awt.Color(236, 23, 23));
-        jLabel3.setText("Formato: dd/mm/aaaa");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -89,35 +84,32 @@ public class CadastroProjetoForm extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(128, 128, 128)
-                                .addComponent(btnCadastrar))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblDataTermino)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(txtDataTermino, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel3)))))
-                        .addGap(0, 18, Short.MAX_VALUE))
+                        .addGap(128, 128, 128)
+                        .addComponent(btnCadastrar)
+                        .addGap(0, 151, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtNome)
+                            .addComponent(txtDataInicio)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblNome)
-                                    .addComponent(lblDataInicio)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(txtDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel1)))
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(lblDataInicio))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(lblDescricao)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtDataTermino)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblDataTermino)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
@@ -135,15 +127,11 @@ public class CadastroProjetoForm extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(lblDataInicio)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                .addComponent(txtDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lblDataTermino)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtDataTermino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                .addComponent(txtDataTermino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(btnCadastrar)
                 .addContainerGap())
@@ -171,27 +159,50 @@ public class CadastroProjetoForm extends javax.swing.JFrame {
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         try {
-            int codigo;
-            codigo = 1+(this.bancoDadosProjeto.ConsultaUltimoCodigo());
+            int codigo = codigoProj;
             String nome = this.txtNome.getText().trim();
             String descricao = this.txtDescricao.getText().trim();
             String dataInicio = this.txtDataInicio.getText().trim();
             String dataTermino = this.txtDataTermino.getText().trim();
-            String atividade = null;
 
             if (nome.isEmpty() || descricao.isEmpty() || dataInicio.isEmpty() || dataTermino.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Preencha todos os campos!", "Erro", JOptionPane.WARNING_MESSAGE);
             } else {
-                this.bancoDadosProjeto.CriarProjeto(codigo, nome, descricao, dataInicio, dataTermino, atividade);
-                //this.bancoDadosDepartamento.SetaDepartamento(, codigo);
-                JOptionPane.showMessageDialog(this, "Projeto adicionado com sucesso!", "Cadastro de Projeto", JOptionPane.INFORMATION_MESSAGE);
+                this.bancoDadosProjeto.EditaProjeto(codigo, nome, descricao, dataInicio, dataTermino);
+                JOptionPane.showMessageDialog(this, "Projeto Editado com sucesso!", "Edição de Projeto", JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
             }
         } catch (SQLException ex) {
-            Logger.getLogger(CadastroProjetoForm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EditaProjetoForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
+    private void preencher() {
+
+        Projeto projetoTemp = new Projeto();
+        List<Projeto> listaProjeto = null;
+        String senha = null;
+        try {
+            listaProjeto  = this.bancoDadosProjeto.ConsultaTodosProjetos();
+        } catch (SQLException ex) {
+            Logger.getLogger(EditaFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        for (Projeto projeto : listaProjeto) {
+            if (projeto.getCodigo() == codigoProj) {
+               projetoTemp = projeto;
+               break;
+            }
+        }
+
+
+        txtNome.setText(projetoTemp.getNome());
+        txtDataInicio.setText(projetoTemp.getDataInicio());
+        txtDataTermino.setText(projetoTemp.getDataTermino());
+        txtDescricao.setText(projetoTemp.getDescricao());
+
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -206,21 +217,20 @@ public class CadastroProjetoForm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroProjetoForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditaProjetoForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroProjetoForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditaProjetoForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroProjetoForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditaProjetoForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroProjetoForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditaProjetoForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblDataInicio;

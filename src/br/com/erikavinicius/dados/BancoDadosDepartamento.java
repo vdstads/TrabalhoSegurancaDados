@@ -151,6 +151,7 @@ public class BancoDadosDepartamento {
                 conexao.close();
             }
         }
+        
 
     }
      
@@ -234,4 +235,34 @@ public class BancoDadosDepartamento {
         }
         return existeDepartamento;
     }
+    
+    public static void SetaDepartamento(int codigoDep, int codigoProjeto) throws SQLException {
+        Connection conexao = null;
+        PreparedStatement comando = null;
+        try {
+            conexao = BancoDadosUtil.getConnection();
+
+            //Código de criar...
+            String sql = "UPDATE DEPARTAMENTO SET FK_PROJETO = ? WHERE CODIGO ='"+codigoDep+"'";
+            comando = conexao.prepareStatement(sql);
+
+            comando.setInt(1, codigoProjeto);
+            
+            comando.execute();
+
+            conexao.commit();
+        } catch (Exception e) {
+            if (conexao != null && !conexao.isClosed()) {
+                conexao.rollback();
+            }
+            throw new RuntimeException(e);
+        } finally {
+            if (conexao != null && !conexao.isClosed()) {
+                conexao.close();
+            }
+        }
+        
+
+    }
+    
 }

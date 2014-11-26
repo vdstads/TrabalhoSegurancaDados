@@ -30,7 +30,6 @@ public class ListaProjetoForm extends javax.swing.JFrame {
 
     private TrabalhoSeguranca trabalhoSeguranca;
     private BancoDadosProjeto bancoDadosProjeto;
-    Gerente CPFAtual = null;
  
     
     
@@ -132,24 +131,23 @@ public class ListaProjetoForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-       /* if (tblProjeto.getSelectedRow() != - 1) {
+        if (tblProjeto.getSelectedRow() != - 1) {
            int result = JOptionPane.showConfirmDialog(null, "Deseja Editar ? ", "Editar", JOptionPane.YES_NO_CANCEL_OPTION);
             if (result == JOptionPane.YES_OPTION) {
-                TabelaDepartamentoModel model = null;
+                TabelaProjetoModel model = null;
                 try {
-                    model = new TabelaDepartamentoModel(this.bancoDadosDepartamento.ConsultaTodosDepartamentos());
+                    model = new TabelaProjetoModel(this.bancoDadosProjeto.ConsultaTodosProjetos());
                 } catch (SQLException ex) {
                     Logger.getLogger(ListaProjetoForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 int colunaCodigo = 0;
-                String codigoDep = (String) model.getValueAt(tblProjeto.getSelectedRow(), colunaCodigo);
-                CPFAtual = (Gerente) model.getValueAt(tblProjeto.getSelectedRow(), 2);
+                int codigo =  (int) model.getValueAt(tblProjeto.getSelectedRow(), colunaCodigo);
                 
-                EditaDepartamentoForm editaDepartamentoForm = new EditaDepartamentoForm(this.trabalhoSeguranca, codigoDep, CPFAtual);
-                editaDepartamentoForm.setVisible(true);
+                EditaProjetoForm editaProjetoForm = new EditaProjetoForm(this.trabalhoSeguranca, codigo);
+                editaProjetoForm.setVisible(true);
                 
                try {
-                   this.configurarTblDepartamentos();
+                   this.configurarTblProjeto();
                } catch (SQLException ex) {
                    Logger.getLogger(ListaProjetoForm.class.getName()).log(Level.SEVERE, null, ex);
                }
@@ -159,11 +157,11 @@ public class ListaProjetoForm extends javax.swing.JFrame {
             }
         }else{
             JOptionPane.showMessageDialog(null, "Por favor, selecione um item!");
-        }*/
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        /*if (tblProjeto.getSelectedRow() != - 1) {
+        if (tblProjeto.getSelectedRow() != - 1) {
             int result = JOptionPane.showConfirmDialog(null, "Deseja Excluir ? ", "Excluir", JOptionPane.YES_NO_CANCEL_OPTION);
             if (result == JOptionPane.YES_OPTION) {
                 TabelaProjetoModel model = null;
@@ -173,16 +171,16 @@ public class ListaProjetoForm extends javax.swing.JFrame {
                     Logger.getLogger(ListaFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 int colunaCodigo = 0;
-                String Codigo = (String) model.getValueAt(tblProjeto.getSelectedRow(), colunaCodigo);
+                int Codigo =  (int) model.getValueAt(tblProjeto.getSelectedRow(), colunaCodigo);
                 
                 try {
-                    this.bancoDadosProjeto.removeDepartamento(Codigo);
+                    this.bancoDadosProjeto.removeProjeto(Codigo);
                 } catch (SQLException ex) {
                     Logger.getLogger(ListaFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
                 try {
-                    this.configurarTblDepartamentos();
+                    this.configurarTblProjeto();
                 } catch (SQLException ex) {
                     Logger.getLogger(ListaFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -191,7 +189,7 @@ public class ListaProjetoForm extends javax.swing.JFrame {
             }
         }else{
             JOptionPane.showMessageDialog(null, "Por favor, selecione um item!");
-        }*/
+        }
     }//GEN-LAST:event_btnExcluirActionPerformed
     
     void configurarTblProjeto() throws SQLException {
