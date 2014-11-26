@@ -25,7 +25,7 @@ public class BancoDadosDepartamento {
             conexao = BancoDadosUtil.getConnection();
 
             //Código de criar...
-            String sql = "INSERT INTO DEPARTAMENTO(CODIGO, NOME, CPF_GERENTE) VALUES (?,?,?)";
+            String sql = "INSERT INTO DEPARTAMENTO(CODIGO, NOME, FK_GERENTE_CPF) VALUES (?,?,?)";
             comando = conexao.prepareStatement(sql);
 
             comando.setString(1, codigo);
@@ -94,7 +94,7 @@ public class BancoDadosDepartamento {
             conexao = BancoDadosUtil.getConnection();
 
             //Código de criar...
-            String sql = "SELECT CODIGO, NOME, CPF_GERENTE FROM DEPARTAMENTO";
+            String sql = "SELECT CODIGO, NOME, FK_GERENTE_CPF FROM DEPARTAMENTO";
             comando = conexao.prepareStatement(sql);
 
             resultado = comando.executeQuery();
@@ -131,7 +131,7 @@ public class BancoDadosDepartamento {
             conexao = BancoDadosUtil.getConnection();
 
             //Código de criar...
-            String sql = "UPDATE DEPARTAMENTO SET CODIGO = ?, NOME = ?, CPF_GERENTE = ? WHERE CODIGO ='"+codigoAtual+"'";
+            String sql = "UPDATE DEPARTAMENTO SET CODIGO = ?, NOME = ?, FK_GERENTE_CPF = ? WHERE CODIGO ='"+codigoAtual+"'";
             comando = conexao.prepareStatement(sql);
 
             comando.setString(1, codigo);
