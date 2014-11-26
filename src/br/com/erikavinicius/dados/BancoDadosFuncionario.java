@@ -188,7 +188,7 @@ public class BancoDadosFuncionario {
             conexao = BancoDadosUtil.getConnection();
             
             //Código SQL...
-            String sql = "SELECT F.CPF, F.NOME FROM FUNCIONARIO F  WHERE F.CPF NOT IN (SELECT CPF_GERENTE FROM DEPARTAMENTO) AND (F.CARGO = 'GERENTE')";
+            String sql = "SELECT F.CPF, F.NOME FROM FUNCIONARIO F  WHERE F.CPF NOT IN (SELECT FK_GERENTE_CPF FROM DEPARTAMENTO) AND (F.CARGO = 'GERENTE')";
             comando = conexao.prepareStatement(sql);
 
             resultado = comando.executeQuery();
