@@ -95,6 +95,7 @@ public class MenuGerenteForm extends javax.swing.JFrame {
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/Edit_page.png"))); // NOI18N
         jMenu2.setText("Projetos");
 
+        itmCadastrarProjeto.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, 0));
         itmCadastrarProjeto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/Create.png"))); // NOI18N
         itmCadastrarProjeto.setText("Cadastrar Projetos");
         itmCadastrarProjeto.addActionListener(new java.awt.event.ActionListener() {
@@ -104,6 +105,7 @@ public class MenuGerenteForm extends javax.swing.JFrame {
         });
         jMenu2.add(itmCadastrarProjeto);
 
+        itmListarProjetos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
         itmListarProjetos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/liste-texte-vue-icone-4177-32.png"))); // NOI18N
         itmListarProjetos.setText("Listar Projetos");
         itmListarProjetos.addActionListener(new java.awt.event.ActionListener() {
