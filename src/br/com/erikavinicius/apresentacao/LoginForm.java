@@ -47,15 +47,21 @@ public class LoginForm extends javax.swing.JFrame {
         lblSenha = new javax.swing.JLabel();
         btnLogin = new javax.swing.JButton();
         txtSenha = new javax.swing.JPasswordField();
+        btnLogin1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Login");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setExtendedState(6);
 
-        plLogin.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Login", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 0, 18))); // NOI18N
+        plLogin.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Login", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 0, 24))); // NOI18N
         plLogin.setToolTipText("");
+        plLogin.setAlignmentX(CENTER_ALIGNMENT);
+        plLogin.setAlignmentY(CENTER_ALIGNMENT);
         plLogin.setName(""); // NOI18N
+        plLogin.setPreferredSize(new java.awt.Dimension(410, 270));
 
+        lblEmail.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         lblEmail.setText("E-Mail:");
 
         txtEmail.addActionListener(new java.awt.event.ActionListener() {
@@ -64,13 +70,25 @@ public class LoginForm extends javax.swing.JFrame {
             }
         });
 
+        lblSenha.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         lblSenha.setText("Senha:");
 
+        btnLogin.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         btnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/door_in.png"))); // NOI18N
-        btnLogin.setText("Login");
+        btnLogin.setText("Fazer Login");
+        btnLogin.setSelected(true);
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
+            }
+        });
+
+        btnLogin1.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
+        btnLogin1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/cancel.png"))); // NOI18N
+        btnLogin1.setText("Sair");
+        btnLogin1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogin1ActionPerformed(evt);
             }
         });
 
@@ -83,11 +101,14 @@ public class LoginForm extends javax.swing.JFrame {
                 .addGroup(plLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtEmail)
-                    .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
+                    .addGroup(plLoginLayout.createSequentialGroup()
+                        .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLogin1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtSenha)
                     .addGroup(plLoginLayout.createSequentialGroup()
                         .addComponent(lblSenha)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(txtSenha))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         plLoginLayout.setVerticalGroup(
@@ -96,31 +117,33 @@ public class LoginForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lblEmail)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblSenha)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addComponent(btnLogin)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(plLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLogin1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(plLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(207, 207, 207)
+                .addComponent(plLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(208, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(plLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(91, 91, 91)
+                .addComponent(plLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(105, Short.MAX_VALUE))
         );
 
         pack();
@@ -156,6 +179,10 @@ public class LoginForm extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void btnLogin1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogin1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLogin1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,6 +222,7 @@ public class LoginForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
+    private javax.swing.JButton btnLogin1;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblSenha;
     private javax.swing.JPanel plLogin;

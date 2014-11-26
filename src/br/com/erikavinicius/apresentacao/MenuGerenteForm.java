@@ -37,11 +37,14 @@ public class MenuGerenteForm extends javax.swing.JFrame {
 
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        itmListaDepartamento = new javax.swing.JMenu();
         itmListaDepartamentos = new javax.swing.JMenuItem();
         itmMenuCadastrarFuncionario = new javax.swing.JMenu();
         itmCadastroFuncionarios = new javax.swing.JMenuItem();
         itmListaFuncionarios = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        itmCadastrarProjeto = new javax.swing.JMenuItem();
+        itmListarProjetos = new javax.swing.JMenuItem();
         MenuSair = new javax.swing.JMenu();
 
         jMenuItem1.setText("jMenuItem1");
@@ -49,8 +52,8 @@ public class MenuGerenteForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setExtendedState(6);
 
-        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/dossier-orange-icone-9020-32.png"))); // NOI18N
-        jMenu1.setText("Departamentos");
+        itmListaDepartamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/dossier-orange-icone-9020-32.png"))); // NOI18N
+        itmListaDepartamento.setText("Departamentos");
 
         itmListaDepartamentos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
         itmListaDepartamentos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/liste-texte-vue-icone-4177-32.png"))); // NOI18N
@@ -60,9 +63,9 @@ public class MenuGerenteForm extends javax.swing.JFrame {
                 itmListaDepartamentosActionPerformed(evt);
             }
         });
-        jMenu1.add(itmListaDepartamentos);
+        itmListaDepartamento.add(itmListaDepartamentos);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(itmListaDepartamento);
 
         itmMenuCadastrarFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/homme-costume-cravate-utilisateur-icone-7362-32.png"))); // NOI18N
         itmMenuCadastrarFuncionario.setText("Funcionários");
@@ -89,6 +92,29 @@ public class MenuGerenteForm extends javax.swing.JFrame {
 
         jMenuBar1.add(itmMenuCadastrarFuncionario);
 
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/Edit_page.png"))); // NOI18N
+        jMenu2.setText("Projetos");
+
+        itmCadastrarProjeto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/Create.png"))); // NOI18N
+        itmCadastrarProjeto.setText("Cadastrar Projetos");
+        itmCadastrarProjeto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmCadastrarProjetoActionPerformed(evt);
+            }
+        });
+        jMenu2.add(itmCadastrarProjeto);
+
+        itmListarProjetos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/liste-texte-vue-icone-4177-32.png"))); // NOI18N
+        itmListarProjetos.setText("Listar Projetos");
+        itmListarProjetos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmListarProjetosActionPerformed(evt);
+            }
+        });
+        jMenu2.add(itmListarProjetos);
+
+        jMenuBar1.add(jMenu2);
+
         MenuSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/halte-session-icone-4911-32.png"))); // NOI18N
         MenuSair.setText("Sair");
         MenuSair.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -109,7 +135,7 @@ public class MenuGerenteForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 571, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,6 +185,20 @@ public class MenuGerenteForm extends javax.swing.JFrame {
         }  
     }//GEN-LAST:event_MenuSairMouseClicked
 
+    private void itmCadastrarProjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmCadastrarProjetoActionPerformed
+        CadastroProjetoForm cadastroProjetoForm = new CadastroProjetoForm(this.trabalhoSeguranca);
+        cadastroProjetoForm.setVisible(true);
+    }//GEN-LAST:event_itmCadastrarProjetoActionPerformed
+
+    private void itmListarProjetosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmListarProjetosActionPerformed
+        try {
+            ListaProjetoForm listaProjetoForm = new ListaProjetoForm(this.trabalhoSeguranca);  
+            listaProjetoForm.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuGerenteForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_itmListarProjetosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -191,11 +231,14 @@ public class MenuGerenteForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu MenuSair;
+    private javax.swing.JMenuItem itmCadastrarProjeto;
     private javax.swing.JMenuItem itmCadastroFuncionarios;
+    private javax.swing.JMenu itmListaDepartamento;
     private javax.swing.JMenuItem itmListaDepartamentos;
     private javax.swing.JMenuItem itmListaFuncionarios;
+    private javax.swing.JMenuItem itmListarProjetos;
     private javax.swing.JMenu itmMenuCadastrarFuncionario;
-    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     // End of variables declaration//GEN-END:variables
