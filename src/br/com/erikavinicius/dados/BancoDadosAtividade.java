@@ -5,6 +5,7 @@
  */
 package br.com.erikavinicius.dados;
 
+import br.com.erikavinicius.entidade.Atividade;
 import br.com.erikavinicius.entidade.Departamento;
 import br.com.erikavinicius.entidade.Projeto;
 import java.sql.Connection;
@@ -81,47 +82,6 @@ public class BancoDadosAtividade {
         }
         return ultimoCodigo;
     }
-    public static List<Projeto> ConsultaTodasAtividades() throws SQLException {
-        Connection conexao = null;
-        PreparedStatement comando = null;
-        ResultSet resultado = null;
-        List<Projeto> listaProjetos = new ArrayList<Projeto>();
-                
-        try {
-            conexao = BancoDadosUtil.getConnection();
-
-            //Código de criar...
-            String sql = "SELECT COD_PROJETO, NOME, DESCRICAO, DATA_INICIO, DATA_TERMINO, FK_ATIVIDADE FROM PROJETO";
-            comando = conexao.prepareStatement(sql);
-
-            resultado = comando.executeQuery();
-
-            while (resultado.next()) {
-            //Instancia um novo objeto e atribui os valores vindo do BD
-                //(Note que no BD o index inicia por 1)
-                                
-                Projeto projeto = new Projeto();
-                projeto.setCodigo(resultado.getInt(1));
-                projeto.setNome(resultado.getString(2));
-                projeto.setDescricao(resultado.getString(3));
-                projeto.setDataInicio(resultado.getString(4));
-                projeto.setDataTermino(resultado.getString(5));
-                //Adiciona um item à lista que será retornada
-                listaProjetos.add(projeto);
-            }
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        } finally {
-            if (resultado != null && !resultado.isClosed()) {
-                resultado.close();
-            }
-            if (conexao != null && !conexao.isClosed()) {
-                conexao.close();
-            }
-        }
-        return listaProjetos;
-    }
     
     public static void removeAtividade(int Codigo) throws SQLException {
         Connection conexao = null;
@@ -177,6 +137,83 @@ public class BancoDadosAtividade {
             }
         }
 
+    }
+    
+    public static boolean ConsultaAtividadeExiste(String codDep) throws SQLException {
+        Connection conexao = null;
+        PreparedStatement comando = null;
+        ResultSet resultado = null;
+        boolean existeDepartamento = false;
+        try {
+            conexao = BancoDadosUtil.getConnection();
+
+            //Código de criar...
+            String sql = "SELECT * FROM PROJETO INNER JOIN DEPARTAMENTO D ON (D.FK_PROJETO = COD_PROJETO) WHERE D.CODIGO = '"+codDep+"'";
+            comando = conexao.prepareStatement(sql);
+
+            resultado = comando.executeQuery();
+
+            if (resultado.next()) {
+                existeDepartamento = true;
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (resultado != null && !resultado.isClosed()) {
+                resultado.close();
+            }
+            if (conexao != null && !conexao.isClosed()) {
+                conexao.close();
+            }
+        }
+        return existeDepartamento;
+    }
+    
+    public static List<Atividade> ConsultaAtividadePorProj(String codDep) throws SQLException {
+        Connection conexao = null;
+        PreparedStatement comando = null;
+        ResultSet resultado = null;
+        List<Atividade> listaAtividade = new ArrayList<Atividade>();
+                
+        try {
+            conexao = BancoDadosUtil.getConnection();
+
+            //Código de criar...
+            String sql = "SELECT COD_ATIVIDADE, NOME, DURACAO_PREV, HORAS_TRABALHADAS, PERCENTUAL_CONCLUSAO FROM ATIVIDADE "
+                    + "INNER JOIN PROJETO P ON (P.FK_ATIVIDADE = COD_ATIVIDADE) "
+                    + "INNER JOIN DEPARTAMENTO D ON (D.FK_PROJETO = P.COD_PROJETO) "
+                    + "WHERE D.CODIGO ='"+codDep+"'";
+            
+            comando = conexao.prepareStatement(sql);
+
+            resultado = comando.executeQuery();
+
+            while (resultado.next()) {
+            //Instancia um novo objeto e atribui os valores vindo do BD
+                //(Note que no BD o index inicia por 1)
+                                
+                Atividade atividade = new Atividade();
+                atividade.setCodigo(resultado.getInt(1));
+                atividade.setNome(resultado.getString(2));
+                atividade.setDuracao(resultado.getInt(3));
+                atividade.setHorasTrabalhadas(resultado.getInt(4));
+                atividade.setPercentualConclusao(resultado.getInt(5));
+                //Adiciona um item à lista que será retornada
+                listaAtividade.add(atividade);
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (resultado != null && !resultado.isClosed()) {
+                resultado.close();
+            }
+            if (conexao != null && !conexao.isClosed()) {
+                conexao.close();
+            }
+        }
+        return listaAtividade;
     }
 
 }

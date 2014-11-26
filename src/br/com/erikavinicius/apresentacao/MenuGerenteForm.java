@@ -6,7 +6,9 @@
 package br.com.erikavinicius.apresentacao;
 
 import br.com.erikavinicius.TrabalhoSeguranca;
+import br.com.erikavinicius.dados.BancoDadosAtividade;
 import br.com.erikavinicius.dados.BancoDadosDepartamento;
+import br.com.erikavinicius.dados.BancoDadosFuncionario;
 import br.com.erikavinicius.entidade.Departamento;
 import br.com.erikavinicius.entidade.Usuario;
 import java.sql.SQLException;
@@ -23,11 +25,13 @@ public class MenuGerenteForm extends javax.swing.JFrame {
     private TrabalhoSeguranca trabalhoSeguranca;
     private Usuario usuarioAtivo;
     private BancoDadosDepartamento bancoDadosDepartamento;
+    private BancoDadosAtividade bancoDadosAtividade;
     
     public MenuGerenteForm(TrabalhoSeguranca trabalhoSeguranca, Usuario usuario) {
         initComponents();
         this.usuarioAtivo = usuario;
         this.bancoDadosDepartamento = bancoDadosDepartamento;
+        this.bancoDadosAtividade = bancoDadosAtividade;
     }
 
    
@@ -136,6 +140,11 @@ public class MenuGerenteForm extends javax.swing.JFrame {
         itmListarAtividades.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F7, 0));
         itmListarAtividades.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/liste-texte-vue-icone-4177-32.png"))); // NOI18N
         itmListarAtividades.setText("Listar Atividades");
+        itmListarAtividades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmListarAtividadesActionPerformed(evt);
+            }
+        });
         jMenu1.add(itmListarAtividades);
 
         jMenuBar1.add(jMenu1);
@@ -211,13 +220,13 @@ public class MenuGerenteForm extends javax.swing.JFrame {
     }//GEN-LAST:event_MenuSairMouseClicked
 
     private void itmCadastrarProjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmCadastrarProjetoActionPerformed
-        CadastroProjetoForm cadastroProjetoForm = new CadastroProjetoForm(this.trabalhoSeguranca);
+        CadastroProjetoForm cadastroProjetoForm = new CadastroProjetoForm(this.trabalhoSeguranca, usuarioAtivo);
         cadastroProjetoForm.setVisible(true);
     }//GEN-LAST:event_itmCadastrarProjetoActionPerformed
 
     private void itmListarProjetosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmListarProjetosActionPerformed
         try {
-            ListaProjetoForm listaProjetoForm = new ListaProjetoForm(this.trabalhoSeguranca);  
+            ListaProjetoForm listaProjetoForm = new ListaProjetoForm(this.trabalhoSeguranca, usuarioAtivo);  
             listaProjetoForm.setVisible(true);
         } catch (SQLException ex) {
             Logger.getLogger(MenuGerenteForm.class.getName()).log(Level.SEVERE, null, ex);
@@ -225,9 +234,24 @@ public class MenuGerenteForm extends javax.swing.JFrame {
     }//GEN-LAST:event_itmListarProjetosActionPerformed
 
     private void itmCadastarAtividadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmCadastarAtividadesActionPerformed
-      CadastroAtividadesForm cadastroAtividadesForm = new CadastroAtividadesForm(this.trabalhoSeguranca, usuarioAtivo);
+      CadastroAtividadeForm cadastroAtividadesForm = new CadastroAtividadeForm(this.trabalhoSeguranca, usuarioAtivo);
       cadastroAtividadesForm.setVisible(true);
     }//GEN-LAST:event_itmCadastarAtividadesActionPerformed
+
+    private void itmListarAtividadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmListarAtividadesActionPerformed
+        try {
+            Usuario usuario = new Usuario();
+            usuario = BancoDadosFuncionario.ConsultaFuncionarioPorEmail(usuarioAtivo.getEmail());
+            if(this.bancoDadosAtividade.ConsultaAtividadeExiste(usuario.getSenha())){
+                ListaAtividadeForm listaAtividadeForm = new ListaAtividadeForm(this.trabalhoSeguranca, usuarioAtivo);
+                listaAtividadeForm.setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(this, "Não possui Departamentos Cadastrados! Cadastre um Novo!", "Erro", JOptionPane.WARNING_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuGerenteForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_itmListarAtividadesActionPerformed
 
     /**
      * @param args the command line arguments

@@ -64,7 +64,10 @@ public class Projeto {
     public void setAtividade(Atividade atividade) {
         this.atividade = atividade;
     }
-    
+    @Override
+    public String toString(){
+        return nome;
+    }
     
     
 }

@@ -7,6 +7,8 @@ package br.com.erikavinicius.apresentacao;
 
 import br.com.erikavinicius.CryptographyTripleDES;
 import br.com.erikavinicius.TrabalhoSeguranca;
+import br.com.erikavinicius.dados.BancoDadosDepartamento;
+import br.com.erikavinicius.dados.BancoDadosFuncionario;
 import br.com.erikavinicius.dados.BancoDadosProjeto;
 import br.com.erikavinicius.entidade.Projeto;
 import br.com.erikavinicius.entidade.Usuario;
@@ -24,12 +26,17 @@ public class EditaProjetoForm extends javax.swing.JFrame {
 
     private TrabalhoSeguranca trabalhoSeguranca;
     private BancoDadosProjeto bancoDadosProjeto;
+    private BancoDadosDepartamento bancoDadosDepartamento;
     private int codigoProj;
-    public EditaProjetoForm(TrabalhoSeguranca trabalhoSeguranca, int codigo) {
+    private Usuario usuarioAtivo;
+    
+    public EditaProjetoForm(TrabalhoSeguranca trabalhoSeguranca, int codigo, Usuario usuario) {
         initComponents();
         this.bancoDadosProjeto = bancoDadosProjeto;
         this.trabalhoSeguranca = trabalhoSeguranca;
         this.codigoProj = codigo;
+        this.usuarioAtivo = usuario;
+        this.bancoDadosDepartamento = bancoDadosDepartamento;
         this.preencher();
     }
 
@@ -169,6 +176,9 @@ public class EditaProjetoForm extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Preencha todos os campos!", "Erro", JOptionPane.WARNING_MESSAGE);
             } else {
                 this.bancoDadosProjeto.EditaProjeto(codigo, nome, descricao, dataInicio, dataTermino);
+                Usuario usuario = new Usuario();
+                usuario = BancoDadosFuncionario.ConsultaFuncionarioPorEmail(usuarioAtivo.getEmail());
+                this.bancoDadosDepartamento.SetaDepartamento(usuario.getSenha(), codigo);
                 JOptionPane.showMessageDialog(this, "Projeto Editado com sucesso!", "Edição de Projeto", JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
             }
@@ -225,7 +235,6 @@ public class EditaProjetoForm extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(EditaProjetoForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
     }
 

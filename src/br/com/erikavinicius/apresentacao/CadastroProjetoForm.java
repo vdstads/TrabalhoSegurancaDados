@@ -7,8 +7,10 @@ package br.com.erikavinicius.apresentacao;
 
 import br.com.erikavinicius.TrabalhoSeguranca;
 import br.com.erikavinicius.dados.BancoDadosDepartamento;
+import br.com.erikavinicius.dados.BancoDadosFuncionario;
 import br.com.erikavinicius.dados.BancoDadosProjeto;
 import br.com.erikavinicius.entidade.Projeto;
+import br.com.erikavinicius.entidade.Usuario;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,12 +25,16 @@ public class CadastroProjetoForm extends javax.swing.JFrame {
     private TrabalhoSeguranca trabalhoSeguranca;
     private BancoDadosProjeto bancoDadosProjeto;
     private BancoDadosDepartamento bancoDadosDepartamento;
+    private BancoDadosFuncionario bancoDadosFuncionario;
+    private Usuario usuarioAtivo;
 
-    public CadastroProjetoForm(TrabalhoSeguranca trabalhoSeguranca) {
+    public CadastroProjetoForm(TrabalhoSeguranca trabalhoSeguranca, Usuario usuario) {
         initComponents();
         this.bancoDadosProjeto = bancoDadosProjeto;
         this.trabalhoSeguranca = trabalhoSeguranca;
         this.bancoDadosDepartamento = bancoDadosDepartamento;
+        this.bancoDadosFuncionario = bancoDadosFuncionario;
+        this.usuarioAtivo = usuario;
     }
 
 
@@ -183,7 +189,9 @@ public class CadastroProjetoForm extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Preencha todos os campos!", "Erro", JOptionPane.WARNING_MESSAGE);
             } else {
                 this.bancoDadosProjeto.CriarProjeto(codigo, nome, descricao, dataInicio, dataTermino, atividade);
-                //this.bancoDadosDepartamento.SetaDepartamento(, codigo);
+                Usuario usuario = new Usuario();
+                usuario = BancoDadosFuncionario.ConsultaFuncionarioPorEmail(usuarioAtivo.getEmail());
+                this.bancoDadosDepartamento.SetaDepartamento(usuario.getSenha(), codigo);
                 JOptionPane.showMessageDialog(this, "Projeto adicionado com sucesso!", "Cadastro de Projeto", JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
             }

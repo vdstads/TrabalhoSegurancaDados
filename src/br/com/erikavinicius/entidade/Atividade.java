@@ -12,8 +12,26 @@ package br.com.erikavinicius.entidade;
 public class Atividade {
     private int codigo;
     private String nome;
-    private String duracao;
+    private int duracao;
+    private int horasTrabalhadas;
+    private float percentualConclusao;
     private Encarregado encarregado;
+
+    public int getHorasTrabalhadas() {
+        return horasTrabalhadas;
+    }
+
+    public void setHorasTrabalhadas(int horasTrabalhadas) {
+        this.horasTrabalhadas = horasTrabalhadas;
+    }
+
+    public float getPercentualConclusao() {
+        return percentualConclusao;
+    }
+
+    public void setPercentualConclusao(float percentualConclusao) {
+        this.percentualConclusao = percentualConclusao;
+    }
 
     public int getCodigo() {
         return codigo;
@@ -31,11 +49,11 @@ public class Atividade {
         this.nome = nome;
     }
 
-    public String getDuracao() {
+    public int getDuracao() {
         return duracao;
     }
 
-    public void setDuracao(String duracao) {
+    public void setDuracao(int duracao) {
         this.duracao = duracao;
     }
 
@@ -46,6 +64,9 @@ public class Atividade {
     public void setEncarregado(Encarregado encarregado) {
         this.encarregado = encarregado;
     }
-    
+    @Override
+    public String toString(){
+        return nome;
+    }
     
 }

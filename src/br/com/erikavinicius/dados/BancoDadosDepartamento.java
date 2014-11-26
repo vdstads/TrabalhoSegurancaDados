@@ -236,7 +236,7 @@ public class BancoDadosDepartamento {
         return existeDepartamento;
     }
     
-    public static void SetaDepartamento(int codigoDep, int codigoProjeto) throws SQLException {
+    public static void SetaDepartamento(String codigoDep, int codigoProjeto) throws SQLException {
         Connection conexao = null;
         PreparedStatement comando = null;
         try {
