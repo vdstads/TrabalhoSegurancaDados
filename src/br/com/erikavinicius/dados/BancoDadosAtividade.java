@@ -58,7 +58,7 @@ public class BancoDadosAtividade {
             conexao = BancoDadosUtil.getConnection();
 
             //Código de criar...
-            String sql = "SELECT MAX(COD_PROJETO) FROM PROJETO";
+            String sql = "SELECT MAX(COD_ATIVIDADE) FROM ATIVIDADE";
             comando = conexao.prepareStatement(sql);
 
             resultado = comando.executeQuery();
