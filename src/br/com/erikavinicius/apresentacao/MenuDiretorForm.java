@@ -203,7 +203,7 @@ public class MenuDiretorForm extends javax.swing.JFrame {
         if(listaUsuario.isEmpty()){
             JOptionPane.showMessageDialog(this, "Não possui Encarregados Disponiveis! Cadastre um Novo!", "Erro", JOptionPane.WARNING_MESSAGE);
         }else if(listaDepartamentos.isEmpty()){
-                JOptionPane.showMessageDialog(this, "Não possui Departamento! Cadastre um Novo!", "Erro", JOptionPane.WARNING_MESSAGE); 
+                JOptionPane.showMessageDialog(this, "Não possui Departamento cadastrado! Cadastre um Novo!", "Erro", JOptionPane.WARNING_MESSAGE); 
             }else{
                 CadastroEncDpoForm cadastroEncDpoForm = new CadastroEncDpoForm(this.trabalhoSeguranca);
                 cadastroEncDpoForm.setVisible(true);
