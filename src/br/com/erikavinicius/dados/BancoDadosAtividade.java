@@ -215,5 +215,156 @@ public class BancoDadosAtividade {
         }
         return listaAtividade;
     }
+    
+    public static void removeAtv(int codigo) throws SQLException {
+        Connection conexao = null;
+        PreparedStatement comando = null;
+        try {
+            conexao = BancoDadosUtil.getConnection();
+
+            //Código de criar...
+            String sql = "DELETE FROM PROJETO WHERE COD_PROJETO ='"+codigo+"'";
+            comando = conexao.prepareStatement(sql);
+            
+            comando.execute();
+
+            conexao.commit();
+        } catch (Exception e) {
+            if (conexao != null && !conexao.isClosed()) {
+                conexao.rollback();
+            }
+            throw new RuntimeException(e);
+        } finally {
+            if (conexao != null && !conexao.isClosed()) {
+                conexao.close();
+            }
+        }
+    }
+    
+    public static List<Atividade> ConsultaAtividadePorEncarregado(String codEnc) throws SQLException {
+        Connection conexao = null;
+        PreparedStatement comando = null;
+        ResultSet resultado = null;
+        List<Atividade> listaAtividade = new ArrayList<Atividade>();
+                
+        try {
+            conexao = BancoDadosUtil.getConnection();
+
+            //Código de criar...
+            String sql = "SELECT COD_ATIVIDADE, NOME, DURACAO_PREV, HORAS_TRABALHADAS, PERCENTUAL_CONCLUSAO FROM ATIVIDADE A "
+                    + "INNER JOIN FUNCIONARIO F ON (F.CPF = A.FK_ENCARREGADO_CPF) "
+                    + "WHERE A.FK_ENCARREGADO_CPF ='"+codEnc+"'";
+            
+            comando = conexao.prepareStatement(sql);
+
+            resultado = comando.executeQuery();
+
+            while (resultado.next()) {
+            //Instancia um novo objeto e atribui os valores vindo do BD
+                //(Note que no BD o index inicia por 1)
+                                
+                Atividade atividade = new Atividade();
+                atividade.setCodigo(resultado.getInt(1));
+                atividade.setNome(resultado.getString(2));
+                atividade.setDuracao(resultado.getInt(3));
+                atividade.setHorasTrabalhadas(resultado.getInt(4));
+                atividade.setPercentualConclusao(resultado.getInt(5));
+                //Adiciona um item à lista que será retornada
+                listaAtividade.add(atividade);
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (resultado != null && !resultado.isClosed()) {
+                resultado.close();
+            }
+            if (conexao != null && !conexao.isClosed()) {
+                conexao.close();
+            }
+        }
+        return listaAtividade;
+    }
+    
+    public static void SetaHorasAtividade(int horas, int percentual, int codAtv) throws SQLException {
+        Connection conexao = null;
+        PreparedStatement comando = null;
+        try {
+            conexao = BancoDadosUtil.getConnection();
+
+            //Código de criar...
+            String sql = "UPDATE ATIVIDADE SET HORAS_TRABALHADAS = ?, PERCENTUAL_CONCLUSAO = ? WHERE COD_ATIVIDADE ='"+codAtv+"'";
+            comando = conexao.prepareStatement(sql);
+
+            comando.setInt(1, horas);
+            comando.setInt(2, percentual);
+                        
+            comando.execute();
+
+            conexao.commit();
+        } catch (Exception e) {
+            if (conexao != null && !conexao.isClosed()) {
+                conexao.rollback();
+            }
+            throw new RuntimeException(e);
+        } finally {
+            if (conexao != null && !conexao.isClosed()) {
+                conexao.close();
+            }
+        }
+
+    }
+    
+    public static List<Atividade> ConsultaAtividadesAtrasadas(String codGer) throws SQLException {
+        Connection conexao = null;
+        PreparedStatement comando = null;
+        ResultSet resultado = null;
+        List<Atividade> listaAtividade = new ArrayList<Atividade>();
+        List<Atividade> listaAtividadeTemp = new ArrayList<Atividade>();
+                
+        try {
+            conexao = BancoDadosUtil.getConnection();
+
+            //Código de criar...
+            String sql = "SELECT COD_ATIVIDADE, NOME, DURACAO_PREV, HORAS_TRABALHADAS, PERCENTUAL_CONCLUSAO FROM ATIVIDADE A "
+                    + "INNER JOIN PROJETO P ON (P.FK_ATIVIDADE = COD_ATIVIDADE) "
+                    + "INNER JOIN DEPARTAMENTO D ON (D.FK_PROJETO = P.COD_PROJETO) "
+                    + "WHERE D.FK_GERENTE_CPF ='"+codGer+"'";
+            
+            comando = conexao.prepareStatement(sql);
+
+            resultado = comando.executeQuery();
+
+            while (resultado.next()) {
+            //Instancia um novo objeto e atribui os valores vindo do BD
+                //(Note que no BD o index inicia por 1)
+                                
+                Atividade atividadeTemp = new Atividade();
+                atividadeTemp.setCodigo(resultado.getInt(1));
+                atividadeTemp.setNome(resultado.getString(2));
+                atividadeTemp.setDuracao(resultado.getInt(3));
+                atividadeTemp.setHorasTrabalhadas(resultado.getInt(4));
+                atividadeTemp.setPercentualConclusao(resultado.getInt(5));
+                //Adiciona um item à lista que será retornada
+                listaAtividadeTemp.add(atividadeTemp);
+            }
+            for (Atividade atividade : listaAtividade) {
+            if (atividade.getHorasTrabalhadas() > atividade.getDuracao() && atividade.getPercentualConclusao() < 100) {
+               listaAtividade.add(atividade);
+            }
+        }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (resultado != null && !resultado.isClosed()) {
+                resultado.close();
+            }
+            if (conexao != null && !conexao.isClosed()) {
+                conexao.close();
+            }
+        }
+        return listaAtividade;
+    }
 
 }

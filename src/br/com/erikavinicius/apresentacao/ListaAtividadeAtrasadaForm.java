@@ -28,7 +28,7 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author Erika
  */
-public class ListaAtividadeForm extends javax.swing.JFrame {
+public class ListaAtividadeAtrasadaForm extends javax.swing.JFrame {
 
     private TrabalhoSeguranca trabalhoSeguranca;
     private BancoDadosProjeto bancoDadosProjeto;
@@ -39,7 +39,7 @@ public class ListaAtividadeForm extends javax.swing.JFrame {
     private String codDepAtivo;
     
     
-    public ListaAtividadeForm(TrabalhoSeguranca trabalhoSeguranca, Usuario usuario) throws SQLException {
+    public ListaAtividadeAtrasadaForm(TrabalhoSeguranca trabalhoSeguranca, Usuario usuario) throws SQLException {
         initComponents();
         this.trabalhoSeguranca = trabalhoSeguranca;
         this.bancoDadosProjeto = bancoDadosProjeto;
@@ -60,8 +60,7 @@ public class ListaAtividadeForm extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblAtividade = new javax.swing.JTable();
-        btnEditar = new javax.swing.JButton();
-        btnExcluir = new javax.swing.JButton();
+        btnFechar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -80,19 +79,11 @@ public class ListaAtividadeForm extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblAtividade);
 
-        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/application_edit.png"))); // NOI18N
-        btnEditar.setText("Editar");
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+        btnFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/cancel.png"))); // NOI18N
+        btnFechar.setText("Fechar");
+        btnFechar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
-            }
-        });
-
-        btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/application_delete.png"))); // NOI18N
-        btnExcluir.setText("Excluir");
-        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExcluirActionPerformed(evt);
+                btnFecharActionPerformed(evt);
             }
         });
 
@@ -102,11 +93,11 @@ public class ListaAtividadeForm extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE))
+                        .addGap(213, 213, 213)
+                        .addComponent(btnFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -115,9 +106,7 @@ public class ListaAtividadeForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEditar)
-                    .addComponent(btnExcluir))
+                .addComponent(btnFechar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -140,79 +129,13 @@ public class ListaAtividadeForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        if (tblAtividade.getSelectedRow() != - 1) {
-           int result = JOptionPane.showConfirmDialog(null, "Deseja Editar ? ", "Editar", JOptionPane.YES_NO_CANCEL_OPTION);
-            if (result == JOptionPane.YES_OPTION) {
-                TabelaAtividadeModel model = null;
-                try {
-                    model = new TabelaAtividadeModel(this.bancoDadosAtividade.ConsultaAtividadePorProj(codDepAtivo));
-                } catch (SQLException ex) {
-                    Logger.getLogger(ListaAtividadeForm.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                int colunaCodigo = 0;
-                int codigo =  (int) model.getValueAt(tblAtividade.getSelectedRow(), colunaCodigo);
-                
-               try {
-                   EditaAtividadeForm editaAtividadeForm = new EditaAtividadeForm(this.trabalhoSeguranca, usuarioAtivo, codigo);
-                   editaAtividadeForm.setVisible(true);
-               } catch (SQLException ex) {
-                   Logger.getLogger(ListaAtividadeForm.class.getName()).log(Level.SEVERE, null, ex);
-               }
-                
-                
-               try {
-                   this.configurarTblAtividade();
-               } catch (SQLException ex) {
-                   Logger.getLogger(ListaAtividadeForm.class.getName()).log(Level.SEVERE, null, ex);
-               }
-                
-                //JOptionPane.showMessageDialog(null,"Editado com sucesso!");
-               this.dispose();
-            }
-        }else{
-            JOptionPane.showMessageDialog(null, "Por favor, selecione um item!");
-        }
-    }//GEN-LAST:event_btnEditarActionPerformed
-
-    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        if (tblAtividade.getSelectedRow() != - 1) {
-            int result = JOptionPane.showConfirmDialog(null, "Deseja Excluir ? ", "Excluir", JOptionPane.YES_NO_CANCEL_OPTION);
-            if (result == JOptionPane.YES_OPTION) {
-                TabelaAtividadeModel model = null;
-                try {
-                    model = new TabelaAtividadeModel(this.bancoDadosAtividade.ConsultaAtividadePorProj(codDepAtivo));
-                } catch (SQLException ex) {
-                    Logger.getLogger(ListaFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                int colunaCodigo = 0;
-                int Codigo =  (int) model.getValueAt(tblAtividade.getSelectedRow(), colunaCodigo);
-                
-                    
-                    Projeto projeto = new Projeto();
-                try {
-                    projeto = (Projeto) BancoDadosProjeto.ConsultaProjetoAtv(Codigo);
-                    this.bancoDadosProjeto.SetaProjeto(projeto.getCodigo(), 0);
-                    this.bancoDadosProjeto.removeProjeto(Codigo);
-                    } catch (SQLException ex) {
-                    Logger.getLogger(ListaAtividadeForm.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-                try {
-                    this.configurarTblAtividade();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ListaFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                JOptionPane.showMessageDialog(null,"Excluído com sucesso!");
-                
-            }
-        }else{
-            JOptionPane.showMessageDialog(null, "Por favor, selecione um item!");
-        }
-    }//GEN-LAST:event_btnExcluirActionPerformed
+    private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnFecharActionPerformed
     
     void configurarTblAtividade() throws SQLException {
-        TabelaAtividadeModel model = new TabelaAtividadeModel(this.bancoDadosAtividade.ConsultaAtividadePorProj(codDepAtivo));
+        
+        TabelaAtividadeModel model = new TabelaAtividadeModel(this.bancoDadosAtividade.ConsultaAtividadesAtrasadas(usuarioAtivo.getCpf()));
 
         tblAtividade.setModel(model);
     }
@@ -295,8 +218,7 @@ public class ListaAtividadeForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEditar;
-    private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnFechar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblAtividade;

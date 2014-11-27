@@ -52,6 +52,7 @@ public class MenuGerenteForm extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         itmCadastarAtividades = new javax.swing.JMenuItem();
         itmListarAtividades = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         MenuSair = new javax.swing.JMenu();
 
         jMenuItem1.setText("jMenuItem1");
@@ -146,6 +147,16 @@ public class MenuGerenteForm extends javax.swing.JFrame {
             }
         });
         jMenu1.add(itmListarAtividades);
+
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F8, 0));
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/To_do_list.png"))); // NOI18N
+        jMenuItem2.setText("Listar Atividades em Atraso");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem2);
 
         jMenuBar1.add(jMenu1);
 
@@ -253,6 +264,10 @@ public class MenuGerenteForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_itmListarAtividadesActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -298,5 +313,6 @@ public class MenuGerenteForm extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     // End of variables declaration//GEN-END:variables
 }

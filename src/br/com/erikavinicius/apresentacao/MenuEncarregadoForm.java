@@ -29,10 +29,22 @@ public class MenuEncarregadoForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuBar2 = new javax.swing.JMenuBar();
+        jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         itmAlterarDados = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        itmLancaHoras = new javax.swing.JMenuItem();
+        itmListaAtividades = new javax.swing.JMenuItem();
         MenuSair = new javax.swing.JMenu();
+
+        jMenu2.setText("File");
+        jMenuBar2.add(jMenu2);
+
+        jMenu3.setText("Edit");
+        jMenuBar2.add(jMenu3);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setExtendedState(6);
@@ -51,6 +63,31 @@ public class MenuEncarregadoForm extends javax.swing.JFrame {
         jMenu1.add(itmAlterarDados);
 
         jMenuBar1.add(jMenu1);
+
+        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/Pencil.png"))); // NOI18N
+        jMenu4.setText("Lançamento");
+
+        itmLancaHoras.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
+        itmLancaHoras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/To_do_list.png"))); // NOI18N
+        itmLancaHoras.setText("Lançar Horas Trabalhadas");
+        itmLancaHoras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmLancaHorasActionPerformed(evt);
+            }
+        });
+        jMenu4.add(itmLancaHoras);
+
+        itmListaAtividades.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, 0));
+        itmListaAtividades.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/liste-texte-vue-icone-4177-32.png"))); // NOI18N
+        itmListaAtividades.setText("Lista Atividades");
+        itmListaAtividades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmListaAtividadesActionPerformed(evt);
+            }
+        });
+        jMenu4.add(itmListaAtividades);
+
+        jMenuBar1.add(jMenu4);
 
         MenuSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/halte-session-icone-4911-32.png"))); // NOI18N
         MenuSair.setText("Sair");
@@ -97,6 +134,19 @@ public class MenuEncarregadoForm extends javax.swing.JFrame {
         alteraDadosEncarregado.setVisible(true);
     }//GEN-LAST:event_itmAlterarDadosActionPerformed
 
+    private void itmLancaHorasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmLancaHorasActionPerformed
+        LancamentoAtividadeForm lancamentoAtividadeForm = new LancamentoAtividadeForm(trabalhoSeguranca, usuarioAtivo);
+        lancamentoAtividadeForm.setVisible(true);
+    }//GEN-LAST:event_itmLancaHorasActionPerformed
+
+    private void itmListaAtividadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmListaAtividadesActionPerformed
+        try{
+            ListaAtividadeEmpregadoForm listaAtividadeEmpregadoForm = new ListaAtividadeEmpregadoForm(trabalhoSeguranca, usuarioAtivo);
+            listaAtividadeEmpregadoForm.setVisible(true);
+        }catch(Exception e){
+        }
+    }//GEN-LAST:event_itmListaAtividadesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -131,7 +181,13 @@ public class MenuEncarregadoForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu MenuSair;
     private javax.swing.JMenuItem itmAlterarDados;
+    private javax.swing.JMenuItem itmLancaHoras;
+    private javax.swing.JMenuItem itmListaAtividades;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBar2;
     // End of variables declaration//GEN-END:variables
 }

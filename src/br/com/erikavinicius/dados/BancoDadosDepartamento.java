@@ -205,6 +205,7 @@ public class BancoDadosDepartamento {
             }
         }
     }
+    
     public static boolean ConsultaDepartamentoExiste() throws SQLException {
         Connection conexao = null;
         PreparedStatement comando = null;

@@ -179,7 +179,7 @@ public class EditaAtividadeForm extends javax.swing.JFrame {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         try {
-            int codigo = (this.bancoDadosAtividade.ConsultaUltimoCodigo());
+            int codigo = this.codAtv;
             String nome = this.txtNome.getText().trim();
             int duracao = parseInt(this.txtNome.getText().trim());
             Usuario encTemp = new Usuario();
@@ -205,13 +205,13 @@ public class EditaAtividadeForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbEncarregadoActionPerformed
 
-    private void cmbProjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbProjetoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbProjetoActionPerformed
-
     private void txtDuracaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDuracaoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDuracaoActionPerformed
+
+    private void cmbProjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbProjetoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbProjetoActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -254,10 +254,9 @@ public class EditaAtividadeForm extends javax.swing.JFrame {
         for (Usuario gerente : listaTodos) {
                model.addElement(gerente);
         }
-        //model.setSelectedItem(this.bancoDadosFuncionario
     }
     
-    private void configurarCmbProjeto() throws SQLException {
+    private void configurarCmbProjeto() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) this.cmbProjeto.getModel();
         model.removeAllElements();
         
@@ -271,8 +270,8 @@ public class EditaAtividadeForm extends javax.swing.JFrame {
         for (Projeto p : listaTodos) {
                model.addElement(p);
         }
-        model.setSelectedItem(this.bancoDadosProjeto.ConsultaProjetoAtv(codAtv));
     }
+    
     private void preencher() {
 
         Atividade atvTemp = new Atividade();
