@@ -180,7 +180,6 @@ public class ListaProjetoForm extends javax.swing.JFrame {
                 try {
                     Usuario usuario = new Usuario();
                     usuario = BancoDadosFuncionario.ConsultaFuncionarioPorEmail(usuarioAtivo.getEmail());
-                    this.bancoDadosDepartamento.SetaDepartamento(usuario.getSenha(), 0);
                     this.bancoDadosProjeto.removeProjeto(Codigo);
                 } catch (SQLException ex) {
                     Logger.getLogger(ListaFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);

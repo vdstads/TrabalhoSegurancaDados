@@ -16,6 +16,15 @@ public class Atividade {
     private int horasTrabalhadas;
     private float percentualConclusao;
     private Encarregado encarregado;
+    private Projeto projeto;
+
+    public Projeto getProjeto() {
+        return projeto;
+    }
+
+    public void setProjeto(Projeto projeto) {
+        this.projeto = projeto;
+    }
 
     public int getHorasTrabalhadas() {
         return horasTrabalhadas;

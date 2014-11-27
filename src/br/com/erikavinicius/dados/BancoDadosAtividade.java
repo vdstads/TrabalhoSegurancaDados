@@ -20,20 +20,21 @@ import java.util.List;
  * @author vinicius
  */
 public class BancoDadosAtividade {
-    public static void CriarAtividade(int codigo, String nome, int duracao, String cpfEnc) throws SQLException {
+    public static void CriarAtividade(int codigo, String nome, int duracao, String cpfEnc, int codProj) throws SQLException {
         Connection conexao = null;
         PreparedStatement comando = null;
         try {
             conexao = BancoDadosUtil.getConnection();
 
             //Código de criar...
-            String sql = "INSERT INTO ATIVIDADE(COD_ATIVIDADE, NOME, DURACAO_PREV, FK_ENCARREGADO_CPF) VALUES (?,?,?,?)";
+            String sql = "INSERT INTO ATIVIDADE(COD_ATIVIDADE, NOME, DURACAO_PREV, FK_ENCARREGADO_CPF, FK_PROJETO) VALUES (?,?,?,?,?)";
             comando = conexao.prepareStatement(sql);
 
             comando.setInt(1, codigo);
             comando.setString(2, nome);
             comando.setInt(3, duracao);
             comando.setString(4, cpfEnc);
+            comando.setInt(5, codProj);
 
             comando.execute();
 
@@ -90,7 +91,7 @@ public class BancoDadosAtividade {
             conexao = BancoDadosUtil.getConnection();
 
             //Código de criar...
-            String sql = "DELETE FROM PROJETO WHERE COD_PROJETO ='"+Codigo+"'";
+            String sql = "DELETE FROM ATIVIDADE WHERE COD_ATIVIDADE ='"+Codigo+"'";
             comando = conexao.prepareStatement(sql);
             
             comando.execute();
@@ -107,21 +108,20 @@ public class BancoDadosAtividade {
             }
         }
     }
-    public static void EditaAtividade(int codigo, String nome, String descricao, String dataInicio, String dataTermino) throws SQLException {
+    public static void EditaAtividade(int codigo, String nome, int duaracao, String encarregado, int codProj) throws SQLException {
         Connection conexao = null;
         PreparedStatement comando = null;
         try {
             conexao = BancoDadosUtil.getConnection();
 
-            //Código de criar...
-            String sql = "UPDATE PROJETO SET COD_PROJETO = ?, NOME = ?, DESCRICAO = ?, DATA_INICIO = ?, DATA_TERMINO = ? WHERE COD_PROJETO ='"+codigo+"'";
+            //Código de criar...              
+            String sql = "UPDATE ATIVIDADE SET NOME = ?, DURACAO_PREV = ?, FK_ENCARREGADO_CPF = ?, FK_PROJETO = ? WHERE COD_ATIVIDADE ='"+codigo+"'";
             comando = conexao.prepareStatement(sql);
 
-            comando.setInt(1, codigo);
-            comando.setString(2, nome);
-            comando.setString(3, descricao);
-            comando.setString(4, dataInicio);
-            comando.setString(5, dataTermino);
+            comando.setString(1, nome);
+            comando.setInt(2, duaracao);
+            comando.setString(3, encarregado);
+            comando.setInt(4, codProj);
             
             comando.execute();
 
@@ -148,7 +148,7 @@ public class BancoDadosAtividade {
             conexao = BancoDadosUtil.getConnection();
 
             //Código de criar...
-            String sql = "SELECT * FROM PROJETO INNER JOIN DEPARTAMENTO D ON (D.FK_PROJETO = COD_PROJETO) WHERE D.CODIGO = '"+codDep+"'";
+            String sql = "SELECT * FROM ATIVIDADE A INNER JOIN PROJETO P ON (P.COD_PROJETO = A.FK_PROJETO) WHERE P.FK_DEPARTAMENTO = '"+codDep+"'";
             comando = conexao.prepareStatement(sql);
 
             resultado = comando.executeQuery();
@@ -180,10 +180,7 @@ public class BancoDadosAtividade {
             conexao = BancoDadosUtil.getConnection();
 
             //Código de criar...
-            String sql = "SELECT COD_ATIVIDADE, NOME, DURACAO_PREV, HORAS_TRABALHADAS, PERCENTUAL_CONCLUSAO FROM ATIVIDADE "
-                    + "INNER JOIN PROJETO P ON (P.FK_ATIVIDADE = COD_ATIVIDADE) "
-                    + "INNER JOIN DEPARTAMENTO D ON (D.FK_PROJETO = P.COD_PROJETO) "
-                    + "WHERE D.CODIGO ='"+codDep+"'";
+            String sql = "SELECT * FROM ATIVIDADE A INNER JOIN PROJETO P ON (P.COD_PROJETO = A.FK_PROJETO) WHERE P.FK_DEPARTAMENTO = '"+codDep+"'";
             
             comando = conexao.prepareStatement(sql);
 
@@ -223,7 +220,7 @@ public class BancoDadosAtividade {
             conexao = BancoDadosUtil.getConnection();
 
             //Código de criar...
-            String sql = "DELETE FROM PROJETO WHERE COD_PROJETO ='"+codigo+"'";
+            String sql = "DELETE FROM ATIVIDADE WHERE COD_ATIVIDADE ='"+codigo+"'";
             comando = conexao.prepareStatement(sql);
             
             comando.execute();
@@ -251,9 +248,7 @@ public class BancoDadosAtividade {
             conexao = BancoDadosUtil.getConnection();
 
             //Código de criar...
-            String sql = "SELECT COD_ATIVIDADE, NOME, DURACAO_PREV, HORAS_TRABALHADAS, PERCENTUAL_CONCLUSAO FROM ATIVIDADE A "
-                    + "INNER JOIN FUNCIONARIO F ON (F.CPF = A.FK_ENCARREGADO_CPF) "
-                    + "WHERE A.FK_ENCARREGADO_CPF ='"+codEnc+"'";
+            String sql = "SELECT COD_ATIVIDADE, NOME, DURACAO_PREV, HORAS_TRABALHADAS, PERCENTUAL_CONCLUSAO FROM ATIVIDADE WHERE FK_ENCARREGADO_CPF ='"+codEnc+"'";
             
             comando = conexao.prepareStatement(sql);
 
@@ -327,8 +322,8 @@ public class BancoDadosAtividade {
 
             //Código de criar...
             String sql = "SELECT COD_ATIVIDADE, NOME, DURACAO_PREV, HORAS_TRABALHADAS, PERCENTUAL_CONCLUSAO FROM ATIVIDADE A "
-                    + "INNER JOIN PROJETO P ON (P.FK_ATIVIDADE = COD_ATIVIDADE) "
-                    + "INNER JOIN DEPARTAMENTO D ON (D.FK_PROJETO = P.COD_PROJETO) "
+                    + "INNER JOIN PROJETO P ON (P.COD_PROJETO = A.FK_PROJETO) "
+                    + "INNER JOIN DEPARTAMENTO D ON (D.CODIGO = P.FK_DEPARTAMENTO) "
                     + "WHERE D.FK_GERENTE_CPF ='"+codGer+"'";
             
             comando = conexao.prepareStatement(sql);

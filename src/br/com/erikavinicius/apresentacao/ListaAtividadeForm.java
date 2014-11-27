@@ -187,12 +187,8 @@ public class ListaAtividadeForm extends javax.swing.JFrame {
                 }
                 int colunaCodigo = 0;
                 int Codigo =  (int) model.getValueAt(tblAtividade.getSelectedRow(), colunaCodigo);
-                
-                    
-                    Projeto projeto = new Projeto();
+
                 try {
-                    projeto = (Projeto) BancoDadosProjeto.ConsultaProjetoAtv(Codigo);
-                    this.bancoDadosProjeto.SetaProjeto(projeto.getCodigo(), 0);
                     this.bancoDadosProjeto.removeProjeto(Codigo);
                     } catch (SQLException ex) {
                     Logger.getLogger(ListaAtividadeForm.class.getName()).log(Level.SEVERE, null, ex);

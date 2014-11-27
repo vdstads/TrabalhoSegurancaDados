@@ -188,10 +188,9 @@ public class CadastroProjetoForm extends javax.swing.JFrame {
             if (nome.isEmpty() || descricao.isEmpty() || dataInicio.isEmpty() || dataTermino.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Preencha todos os campos!", "Erro", JOptionPane.WARNING_MESSAGE);
             } else {
-                this.bancoDadosProjeto.CriarProjeto(codigo, nome, descricao, dataInicio, dataTermino, atividade);
+                this.bancoDadosProjeto.CriarProjeto(codigo, nome, descricao, dataInicio, dataTermino, usuarioAtivo.getSenha());
                 Usuario usuario = new Usuario();
                 usuario = BancoDadosFuncionario.ConsultaFuncionarioPorEmail(usuarioAtivo.getEmail());
-                this.bancoDadosDepartamento.SetaDepartamento(usuario.getSenha(), codigo);
                 JOptionPane.showMessageDialog(this, "Projeto adicionado com sucesso!", "Cadastro de Projeto", JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
             }

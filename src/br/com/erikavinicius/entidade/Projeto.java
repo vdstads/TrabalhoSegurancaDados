@@ -15,7 +15,7 @@ public class Projeto {
     private String descricao;
     private String dataInicio;
     private String dataTermino;
-    private Atividade atividade;
+    private Departamento departamento;
 
     public int getCodigo() {
         return codigo;
@@ -57,12 +57,12 @@ public class Projeto {
         this.dataTermino = dataTermino;
     }
 
-    public Atividade getAtividade() {
-        return atividade;
+    public Departamento getDepartamento() {
+        return departamento;
     }
 
-    public void setAtividade(Atividade atividade) {
-        this.atividade = atividade;
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
     }
     @Override
     public String toString(){

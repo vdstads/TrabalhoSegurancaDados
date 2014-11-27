@@ -19,14 +19,14 @@ import java.util.List;
  * @author vinicius
  */
 public class BancoDadosProjeto {
-    public static void CriarProjeto(int codigo, String nome, String descricao, String dataInicio, String dataTermino, String atividade) throws SQLException {
+    public static void CriarProjeto(int codigo, String nome, String descricao, String dataInicio, String dataTermino, String departamento) throws SQLException {
         Connection conexao = null;
         PreparedStatement comando = null;
         try {
             conexao = BancoDadosUtil.getConnection();
 
             //Código de criar...
-            String sql = "INSERT INTO PROJETO(COD_PROJETO, NOME, DESCRICAO, DATA_INICIO, DATA_TERMINO, FK_ATIVIDADE) VALUES (?,?,?,?,?,?)";
+            String sql = "INSERT INTO PROJETO(COD_PROJETO, NOME, DESCRICAO, DATA_INICIO, DATA_TERMINO, FK_DEPARTAMENTO) VALUES (?,?,?,?,?,?)";
             comando = conexao.prepareStatement(sql);
 
             comando.setInt(1, codigo);
@@ -34,7 +34,7 @@ public class BancoDadosProjeto {
             comando.setString(3, descricao);
             comando.setString(4, dataInicio);
             comando.setString(5, dataTermino);
-            comando.setString(6, atividade);
+            comando.setString(6, departamento);
 
             comando.execute();
 
@@ -93,7 +93,7 @@ public class BancoDadosProjeto {
             conexao = BancoDadosUtil.getConnection();
 
             //Código de criar...
-            String sql = "SELECT COD_PROJETO, NOME, DESCRICAO, DATA_INICIO, DATA_TERMINO, FK_ATIVIDADE FROM PROJETO";
+            String sql = "SELECT COD_PROJETO, NOME, DESCRICAO, DATA_INICIO, DATA_TERMINO FROM PROJETO";
             comando = conexao.prepareStatement(sql);
 
             resultado = comando.executeQuery();
@@ -181,76 +181,6 @@ public class BancoDadosProjeto {
 
     }
     
-    public static void SetaProjeto(int codigoProj, int codigoAtv) throws SQLException {
-        Connection conexao = null;
-        PreparedStatement comando = null;
-        try {
-            conexao = BancoDadosUtil.getConnection();
-
-            //Código de criar...
-            String sql = "UPDATE PROJETO SET FK_ATIVIDADE = ? WHERE COD_PROJETO ='"+codigoProj+"'";
-            comando = conexao.prepareStatement(sql);
-
-            comando.setInt(1, codigoAtv);
-            
-            comando.execute();
-
-            conexao.commit();
-        } catch (Exception e) {
-            if (conexao != null && !conexao.isClosed()) {
-                conexao.rollback();
-            }
-            throw new RuntimeException(e);
-        } finally {
-            if (conexao != null && !conexao.isClosed()) {
-                conexao.close();
-            }
-        }
-
-    }
-    
-    public static List<Projeto> ConsultaProjetoDep(int codDep) throws SQLException {
-        Connection conexao = null;
-        PreparedStatement comando = null;
-        ResultSet resultado = null;
-        List<Projeto> listaProjetos = new ArrayList<Projeto>();
-                
-        try {
-            conexao = BancoDadosUtil.getConnection();
-
-            //Código de criar...
-            String sql = "SELECT COD_PROJETO, NOME, DESCRICAO, DATA_INICIO, DATA_TERMINO FROM PROJETO WHERE COD_PROJETO'"+codDep+"'";
-            comando = conexao.prepareStatement(sql);
-
-            resultado = comando.executeQuery();
-
-            while (resultado.next()) {
-            //Instancia um novo objeto e atribui os valores vindo do BD
-                //(Note que no BD o index inicia por 1)
-                                
-                Projeto projeto = new Projeto();
-                projeto.setCodigo(resultado.getInt(1));
-                projeto.setNome(resultado.getString(2));
-                projeto.setDescricao(resultado.getString(3));
-                projeto.setDataInicio(resultado.getString(4));
-                projeto.setDataTermino(resultado.getString(5));
-                //Adiciona um item à lista que será retornada
-                listaProjetos.add(projeto);
-            }
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        } finally {
-            if (resultado != null && !resultado.isClosed()) {
-                resultado.close();
-            }
-            if (conexao != null && !conexao.isClosed()) {
-                conexao.close();
-            }
-        }
-        return listaProjetos;
-    }
-    
     public static List<Projeto> ConsultaProjetoPorDep(String codDep) throws SQLException {
         Connection conexao = null;
         PreparedStatement comando = null;
@@ -261,8 +191,7 @@ public class BancoDadosProjeto {
             conexao = BancoDadosUtil.getConnection();
 
             //Código de criar...
-            String sql = "SELECT COD_PROJETO, NOME, DESCRICAO, DATA_INICIO, DATA_TERMINO FROM PROJETO INNER JOIN DEPARTAMENTO D ON (D.FK_PROJETO = COD_PROJETO) WHERE D.CODIGO = '"+codDep+"'";
-            
+            String sql = "SELECT COD_PROJETO, NOME, DESCRICAO, DATA_INICIO, DATA_TERMINO FROM PROJETO WHERE FK_DEPARTAMENTO'"+codDep+"'";
             comando = conexao.prepareStatement(sql);
 
             resultado = comando.executeQuery();
@@ -293,47 +222,5 @@ public class BancoDadosProjeto {
         }
         return listaProjetos;
     }
-    
-    public static List<Projeto> ConsultaProjetoAtv(int codAtv) throws SQLException {
-        Connection conexao = null;
-        PreparedStatement comando = null;
-        ResultSet resultado = null;
-        List<Projeto> listaProjetos = new ArrayList<Projeto>();
-                
-        try {
-            conexao = BancoDadosUtil.getConnection();
-
-            //Código de criar...
-            String sql = "SELECT COD_PROJETO, NOME, DESCRICAO, DATA_INICIO, DATA_TERMINO FROM PROJETO WHERE FK_ATIVIDADE'"+codAtv+"'";
-            comando = conexao.prepareStatement(sql);
-
-            resultado = comando.executeQuery();
-
-            while (resultado.next()) {
-            //Instancia um novo objeto e atribui os valores vindo do BD
-                //(Note que no BD o index inicia por 1)
-                                
-                Projeto projeto = new Projeto();
-                projeto.setCodigo(resultado.getInt(1));
-                projeto.setNome(resultado.getString(2));
-                projeto.setDescricao(resultado.getString(3));
-                projeto.setDataInicio(resultado.getString(4));
-                projeto.setDataTermino(resultado.getString(5));
-                //Adiciona um item à lista que será retornada
-                listaProjetos.add(projeto);
-            }
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        } finally {
-            if (resultado != null && !resultado.isClosed()) {
-                resultado.close();
-            }
-            if (conexao != null && !conexao.isClosed()) {
-                conexao.close();
-            }
-        }
-        return listaProjetos;
-    }
-
+        
 }

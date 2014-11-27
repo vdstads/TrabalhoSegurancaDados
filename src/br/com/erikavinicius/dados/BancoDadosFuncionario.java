@@ -452,7 +452,7 @@ public class BancoDadosFuncionario {
         return listaFuncionarios;
     }
     
-    public static void SetaaFuncionarioDepartamento(String cpf, String codDep) throws SQLException {
+    public static void SetaFuncionarioDepartamento(String cpf, String codDep) throws SQLException {
         Connection conexao = null;
         PreparedStatement comando = null;
         try {

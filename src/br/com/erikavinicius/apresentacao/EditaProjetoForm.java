@@ -178,7 +178,6 @@ public class EditaProjetoForm extends javax.swing.JFrame {
                 this.bancoDadosProjeto.EditaProjeto(codigo, nome, descricao, dataInicio, dataTermino);
                 Usuario usuario = new Usuario();
                 usuario = BancoDadosFuncionario.ConsultaFuncionarioPorEmail(usuarioAtivo.getEmail());
-                this.bancoDadosDepartamento.SetaDepartamento(usuario.getSenha(), codigo);
                 JOptionPane.showMessageDialog(this, "Projeto Editado com sucesso!", "Edição de Projeto", JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
             }
