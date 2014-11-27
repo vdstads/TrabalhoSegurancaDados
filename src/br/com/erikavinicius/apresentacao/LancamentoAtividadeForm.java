@@ -78,7 +78,7 @@ public class LancamentoAtividadeForm extends javax.swing.JFrame {
             }
         });
 
-        lblPercentual.setText("Percentual de Conclusao:");
+        lblPercentual.setText("Percentual de Conclusão:");
 
         try {
             txtPercentual.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###")));
