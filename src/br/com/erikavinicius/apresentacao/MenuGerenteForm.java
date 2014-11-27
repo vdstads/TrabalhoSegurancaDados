@@ -52,7 +52,7 @@ public class MenuGerenteForm extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         itmCadastarAtividades = new javax.swing.JMenuItem();
         itmListarAtividades = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        itmListarAtividadesAtrasadas = new javax.swing.JMenuItem();
         MenuSair = new javax.swing.JMenu();
 
         jMenuItem1.setText("jMenuItem1");
@@ -148,15 +148,15 @@ public class MenuGerenteForm extends javax.swing.JFrame {
         });
         jMenu1.add(itmListarAtividades);
 
-        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F8, 0));
-        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/To_do_list.png"))); // NOI18N
-        jMenuItem2.setText("Listar Atividades em Atraso");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        itmListarAtividadesAtrasadas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F8, 0));
+        itmListarAtividadesAtrasadas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/To_do_list.png"))); // NOI18N
+        itmListarAtividadesAtrasadas.setText("Listar Atividades em Atraso");
+        itmListarAtividadesAtrasadas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                itmListarAtividadesAtrasadasActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        jMenu1.add(itmListarAtividadesAtrasadas);
 
         jMenuBar1.add(jMenu1);
 
@@ -264,9 +264,15 @@ public class MenuGerenteForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_itmListarAtividadesActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    private void itmListarAtividadesAtrasadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmListarAtividadesAtrasadasActionPerformed
+        ListaAtividadeAtrasadaForm listaAtividadeAtrasadaForm = null;
+        try {
+            listaAtividadeAtrasadaForm = new ListaAtividadeAtrasadaForm(this.trabalhoSeguranca, usuarioAtivo);
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuGerenteForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        listaAtividadeAtrasadaForm.setVisible(true);
+    }//GEN-LAST:event_itmListarAtividadesAtrasadasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -307,12 +313,12 @@ public class MenuGerenteForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem itmListaDepartamentos;
     private javax.swing.JMenuItem itmListaFuncionarios;
     private javax.swing.JMenuItem itmListarAtividades;
+    private javax.swing.JMenuItem itmListarAtividadesAtrasadas;
     private javax.swing.JMenuItem itmListarProjetos;
     private javax.swing.JMenu itmMenuCadastrarFuncionario;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     // End of variables declaration//GEN-END:variables
 }

@@ -59,7 +59,7 @@ public class EditaDepartamentoForm extends javax.swing.JFrame {
         txtCodigo = new javax.swing.JTextField();
         lblNome = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
-        btnEditar = new javax.swing.JButton();
+        btnSalvar = new javax.swing.JButton();
         cmbFuncionario = new javax.swing.JComboBox();
         lblGerente = new javax.swing.JLabel();
 
@@ -71,11 +71,11 @@ public class EditaDepartamentoForm extends javax.swing.JFrame {
 
         lblNome.setText("Nome:");
 
-        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/application_edit.png"))); // NOI18N
-        btnEditar.setText("Editar");
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+        btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/tick.png"))); // NOI18N
+        btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
+                btnSalvarActionPerformed(evt);
             }
         });
 
@@ -95,7 +95,7 @@ public class EditaDepartamentoForm extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtCodigo)
                     .addComponent(txtNome)
                     .addComponent(cmbFuncionario, 0, 364, Short.MAX_VALUE)
@@ -123,7 +123,7 @@ public class EditaDepartamentoForm extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addComponent(cmbFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
-                .addComponent(btnEditar)
+                .addComponent(btnSalvar)
                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
@@ -151,7 +151,7 @@ public class EditaDepartamentoForm extends javax.swing.JFrame {
         
     }//GEN-LAST:event_cmbFuncionarioActionPerformed
 
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         Departamento depTemp = new Departamento();
         depTemp = (Departamento) this.cmbFuncionario.getSelectedItem();
                 
@@ -171,7 +171,7 @@ public class EditaDepartamentoForm extends javax.swing.JFrame {
            limpar();
            this.dispose();
         }
-    }//GEN-LAST:event_btnEditarActionPerformed
+    }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void configurarCmbGerente() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) this.cmbFuncionario.getModel();
@@ -256,7 +256,7 @@ public class EditaDepartamentoForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnSalvar;
     private javax.swing.JComboBox cmbFuncionario;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblCodigo;
