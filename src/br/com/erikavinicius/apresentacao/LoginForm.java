@@ -171,8 +171,12 @@ public class LoginForm extends javax.swing.JFrame {
                     MenuGerenteForm menuGerenteForm = new MenuGerenteForm(this.trabalhoSeguranca, usuario);
                     menuGerenteForm.setVisible(true);       
                 }else if(usuario.getCargo().equals("ENCARREGADO")){
+                    JOptionPane.showMessageDialog(this, "Passou no 1", "Erro", JOptionPane.WARNING_MESSAGE);
                     MenuEncarregadoForm menuEncarregadoForm = new MenuEncarregadoForm(this.trabalhoSeguranca, usuario);
-                    menuEncarregadoForm.setVisible(true);       
+                    JOptionPane.showMessageDialog(this, "Passou no 2", "Erro", JOptionPane.WARNING_MESSAGE);
+                    menuEncarregadoForm.setVisible(true);
+                    JOptionPane.showMessageDialog(this, "Passou no 3", "Erro", JOptionPane.WARNING_MESSAGE);
+                    
                 }
                
                 this.dispose(); 
