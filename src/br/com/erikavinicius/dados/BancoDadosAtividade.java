@@ -214,32 +214,7 @@ public class BancoDadosAtividade {
         }
         return listaAtividade;
     }
-    
-    public static void removeAtvidade(int codigo) throws SQLException {
-        Connection conexao = null;
-        PreparedStatement comando = null;
-        try {
-            conexao = BancoDadosUtil.getConnection();
-
-            //Código de criar...
-            String sql = "DELETE FROM ATIVIDADE WHERE COD_ATIVIDADE ='"+codigo+"'";
-            comando = conexao.prepareStatement(sql);
-            
-            comando.execute();
-
-            conexao.commit();
-        } catch (Exception e) {
-            if (conexao != null && !conexao.isClosed()) {
-                conexao.rollback();
-            }
-            throw new RuntimeException(e);
-        } finally {
-            if (conexao != null && !conexao.isClosed()) {
-                conexao.close();
-            }
-        }
-    }
-    
+   
     public static List<Atividade> ConsultaAtividadePorEncarregado(String codEnc) throws SQLException {
         Connection conexao = null;
         PreparedStatement comando = null;

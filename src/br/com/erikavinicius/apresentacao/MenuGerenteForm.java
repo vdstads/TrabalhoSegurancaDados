@@ -13,6 +13,7 @@ import br.com.erikavinicius.dados.BancoDadosProjeto;
 import br.com.erikavinicius.entidade.Departamento;
 import br.com.erikavinicius.entidade.Usuario;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,6 +29,7 @@ public class MenuGerenteForm extends javax.swing.JFrame {
     private BancoDadosDepartamento bancoDadosDepartamento;
     private BancoDadosAtividade bancoDadosAtividade;
     private BancoDadosProjeto bancoDadosProjeto;
+    private BancoDadosFuncionario bancoDadosFuncionario;
     
     public MenuGerenteForm(TrabalhoSeguranca trabalhoSeguranca, Usuario usuario) {
         initComponents();
@@ -35,6 +37,7 @@ public class MenuGerenteForm extends javax.swing.JFrame {
         this.bancoDadosDepartamento = bancoDadosDepartamento;
         this.bancoDadosAtividade = bancoDadosAtividade;
         this.bancoDadosProjeto = bancoDadosProjeto;
+        this.bancoDadosFuncionario = bancoDadosFuncionario;
     }
 
    
@@ -214,13 +217,26 @@ public class MenuGerenteForm extends javax.swing.JFrame {
     }//GEN-LAST:event_itmCadastroFuncionariosActionPerformed
 
     private void itmListaFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmListaFuncionariosActionPerformed
-        ListaFuncionarioGerenteForm listaFuncionarioGerenteForm = null;
+        
+        List<Usuario> listaUser= new ArrayList<Usuario>();
+        
         try {
-            listaFuncionarioGerenteForm = new ListaFuncionarioGerenteForm(this.trabalhoSeguranca, usuarioAtivo);
+            listaUser = (List<Usuario>) this.bancoDadosFuncionario.ConsultaFuncionariosDepartamento(usuarioAtivo.getSenha());
         } catch (SQLException ex) {
             Logger.getLogger(MenuGerenteForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        listaFuncionarioGerenteForm.setVisible(true);
+        try {
+        if(!listaUser.isEmpty()){
+        
+            ListaFuncionarioGerenteForm listaFuncionarioGerenteForm =  new ListaFuncionarioGerenteForm(this.trabalhoSeguranca, usuarioAtivo);
+            listaFuncionarioGerenteForm.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(this, "Não possui Funcionários Cadastrados! Cadastre um Novo!", "Erro", JOptionPane.WARNING_MESSAGE);
+        }
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuGerenteForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_itmListaFuncionariosActionPerformed
 
     private void MenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuSairActionPerformed
@@ -264,7 +280,7 @@ public class MenuGerenteForm extends javax.swing.JFrame {
                 ListaAtividadeForm listaAtividadeForm = new ListaAtividadeForm(this.trabalhoSeguranca, usuarioAtivo);
                 listaAtividadeForm.setVisible(true);
             }else{
-                JOptionPane.showMessageDialog(this, "Não possui Departamentos Cadastrados! Cadastre um Novo!", "Erro", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Não possui Atividades Cadastradas! Cadastre uma Nova!", "Erro", JOptionPane.WARNING_MESSAGE);
             }
         } catch (SQLException ex) {
             Logger.getLogger(MenuGerenteForm.class.getName()).log(Level.SEVERE, null, ex);

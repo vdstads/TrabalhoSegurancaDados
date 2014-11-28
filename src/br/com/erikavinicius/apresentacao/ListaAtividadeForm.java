@@ -106,7 +106,7 @@ public class ListaAtividadeForm extends javax.swing.JFrame {
                         .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 734, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -188,11 +188,11 @@ public class ListaAtividadeForm extends javax.swing.JFrame {
                 int colunaCodigo = 0;
                 int Codigo =  (int) model.getValueAt(tblAtividade.getSelectedRow(), colunaCodigo);
 
-                /*try {
-                    this.bancoDadosProjeto.remove(Codigo);
+                try {
+                    this.bancoDadosAtividade.removeAtividade(Codigo);
                     } catch (SQLException ex) {
                     Logger.getLogger(ListaAtividadeForm.class.getName()).log(Level.SEVERE, null, ex);
-                }*/
+                }
                 
                 try {
                     this.configurarTblAtividade();
