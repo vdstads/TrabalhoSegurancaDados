@@ -47,18 +47,19 @@ public class MenuGerenteForm extends javax.swing.JFrame {
 
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuBar1 = new javax.swing.JMenuBar();
-        itmListaDepartamento = new javax.swing.JMenu();
+        MenuDepartamento = new javax.swing.JMenu();
         itmListaDepartamentos = new javax.swing.JMenuItem();
-        itmMenuCadastrarFuncionario = new javax.swing.JMenu();
+        MenuFuncionario = new javax.swing.JMenu();
         itmCadastroFuncionarios = new javax.swing.JMenuItem();
         itmListaFuncionarios = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        MenuProjeto = new javax.swing.JMenu();
         itmCadastrarProjeto = new javax.swing.JMenuItem();
         itmListarProjetos = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
+        MenuAtividade = new javax.swing.JMenu();
         itmCadastarAtividades = new javax.swing.JMenuItem();
         itmListarAtividades = new javax.swing.JMenuItem();
         itmListarAtividadesAtrasadas = new javax.swing.JMenuItem();
+        MenuRelatorio = new javax.swing.JMenu();
         MenuSair = new javax.swing.JMenu();
 
         jMenuItem1.setText("jMenuItem1");
@@ -66,8 +67,8 @@ public class MenuGerenteForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setExtendedState(6);
 
-        itmListaDepartamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/dossier-orange-icone-9020-32.png"))); // NOI18N
-        itmListaDepartamento.setText("Departamentos");
+        MenuDepartamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/dossier-orange-icone-9020-32.png"))); // NOI18N
+        MenuDepartamento.setText("Departamentos");
 
         itmListaDepartamentos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
         itmListaDepartamentos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/liste-texte-vue-icone-4177-32.png"))); // NOI18N
@@ -77,12 +78,12 @@ public class MenuGerenteForm extends javax.swing.JFrame {
                 itmListaDepartamentosActionPerformed(evt);
             }
         });
-        itmListaDepartamento.add(itmListaDepartamentos);
+        MenuDepartamento.add(itmListaDepartamentos);
 
-        jMenuBar1.add(itmListaDepartamento);
+        jMenuBar1.add(MenuDepartamento);
 
-        itmMenuCadastrarFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/homme-costume-cravate-utilisateur-icone-7362-32.png"))); // NOI18N
-        itmMenuCadastrarFuncionario.setText("Funcionários");
+        MenuFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/homme-costume-cravate-utilisateur-icone-7362-32.png"))); // NOI18N
+        MenuFuncionario.setText("Funcionários");
 
         itmCadastroFuncionarios.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
         itmCadastroFuncionarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/1416951045_user_add.png"))); // NOI18N
@@ -92,7 +93,7 @@ public class MenuGerenteForm extends javax.swing.JFrame {
                 itmCadastroFuncionariosActionPerformed(evt);
             }
         });
-        itmMenuCadastrarFuncionario.add(itmCadastroFuncionarios);
+        MenuFuncionario.add(itmCadastroFuncionarios);
 
         itmListaFuncionarios.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, 0));
         itmListaFuncionarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/liste-texte-vue-icone-4177-32.png"))); // NOI18N
@@ -102,12 +103,12 @@ public class MenuGerenteForm extends javax.swing.JFrame {
                 itmListaFuncionariosActionPerformed(evt);
             }
         });
-        itmMenuCadastrarFuncionario.add(itmListaFuncionarios);
+        MenuFuncionario.add(itmListaFuncionarios);
 
-        jMenuBar1.add(itmMenuCadastrarFuncionario);
+        jMenuBar1.add(MenuFuncionario);
 
-        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/Edit_page.png"))); // NOI18N
-        jMenu2.setText("Projetos");
+        MenuProjeto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/Edit_page.png"))); // NOI18N
+        MenuProjeto.setText("Projetos");
 
         itmCadastrarProjeto.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, 0));
         itmCadastrarProjeto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/Create.png"))); // NOI18N
@@ -117,7 +118,7 @@ public class MenuGerenteForm extends javax.swing.JFrame {
                 itmCadastrarProjetoActionPerformed(evt);
             }
         });
-        jMenu2.add(itmCadastrarProjeto);
+        MenuProjeto.add(itmCadastrarProjeto);
 
         itmListarProjetos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
         itmListarProjetos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/liste-texte-vue-icone-4177-32.png"))); // NOI18N
@@ -127,12 +128,12 @@ public class MenuGerenteForm extends javax.swing.JFrame {
                 itmListarProjetosActionPerformed(evt);
             }
         });
-        jMenu2.add(itmListarProjetos);
+        MenuProjeto.add(itmListarProjetos);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(MenuProjeto);
 
-        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/List.png"))); // NOI18N
-        jMenu1.setText("Atividades");
+        MenuAtividade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/List.png"))); // NOI18N
+        MenuAtividade.setText("Atividades");
 
         itmCadastarAtividades.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F6, 0));
         itmCadastarAtividades.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/List_add.jpg"))); // NOI18N
@@ -142,7 +143,7 @@ public class MenuGerenteForm extends javax.swing.JFrame {
                 itmCadastarAtividadesActionPerformed(evt);
             }
         });
-        jMenu1.add(itmCadastarAtividades);
+        MenuAtividade.add(itmCadastarAtividades);
 
         itmListarAtividades.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F7, 0));
         itmListarAtividades.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/liste-texte-vue-icone-4177-32.png"))); // NOI18N
@@ -152,7 +153,7 @@ public class MenuGerenteForm extends javax.swing.JFrame {
                 itmListarAtividadesActionPerformed(evt);
             }
         });
-        jMenu1.add(itmListarAtividades);
+        MenuAtividade.add(itmListarAtividades);
 
         itmListarAtividadesAtrasadas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F8, 0));
         itmListarAtividadesAtrasadas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/To_do_list.png"))); // NOI18N
@@ -162,9 +163,13 @@ public class MenuGerenteForm extends javax.swing.JFrame {
                 itmListarAtividadesAtrasadasActionPerformed(evt);
             }
         });
-        jMenu1.add(itmListarAtividadesAtrasadas);
+        MenuAtividade.add(itmListarAtividadesAtrasadas);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(MenuAtividade);
+
+        MenuRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/Form.png"))); // NOI18N
+        MenuRelatorio.setText("Relatórios");
+        jMenuBar1.add(MenuRelatorio);
 
         MenuSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/halte-session-icone-4911-32.png"))); // NOI18N
         MenuSair.setText("Sair");
@@ -186,7 +191,7 @@ public class MenuGerenteForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 649, Short.MAX_VALUE)
+            .addGap(0, 760, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -329,19 +334,20 @@ public class MenuGerenteForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu MenuAtividade;
+    private javax.swing.JMenu MenuDepartamento;
+    private javax.swing.JMenu MenuFuncionario;
+    private javax.swing.JMenu MenuProjeto;
+    private javax.swing.JMenu MenuRelatorio;
     private javax.swing.JMenu MenuSair;
     private javax.swing.JMenuItem itmCadastarAtividades;
     private javax.swing.JMenuItem itmCadastrarProjeto;
     private javax.swing.JMenuItem itmCadastroFuncionarios;
-    private javax.swing.JMenu itmListaDepartamento;
     private javax.swing.JMenuItem itmListaDepartamentos;
     private javax.swing.JMenuItem itmListaFuncionarios;
     private javax.swing.JMenuItem itmListarAtividades;
     private javax.swing.JMenuItem itmListarAtividadesAtrasadas;
     private javax.swing.JMenuItem itmListarProjetos;
-    private javax.swing.JMenu itmMenuCadastrarFuncionario;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     // End of variables declaration//GEN-END:variables
