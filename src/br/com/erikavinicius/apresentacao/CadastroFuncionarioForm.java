@@ -54,7 +54,7 @@ public class CadastroFuncionarioForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        plDiretor.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastro de Funcionarios", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 0, 18))); // NOI18N
+        plDiretor.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastro de Funcionários", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 0, 18))); // NOI18N
         plDiretor.setPreferredSize(new java.awt.Dimension(405, 245));
 
         lblNome.setText("Nome:");
