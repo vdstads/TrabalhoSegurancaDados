@@ -170,7 +170,7 @@ public class ListaAtividadeAtrasadaForm extends javax.swing.JFrame {
             } else if(columnIndex==2) {
                 return atividade.getDuracao();
             } else {
-                return atividade.getEncarregado();
+                return atividade.getEncarregado().getNome();
             }   
         }
 

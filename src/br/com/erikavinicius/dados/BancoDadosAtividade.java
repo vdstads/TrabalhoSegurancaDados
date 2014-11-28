@@ -7,7 +7,9 @@ package br.com.erikavinicius.dados;
 
 import br.com.erikavinicius.entidade.Atividade;
 import br.com.erikavinicius.entidade.Departamento;
+import br.com.erikavinicius.entidade.Encarregado;
 import br.com.erikavinicius.entidade.Projeto;
+import br.com.erikavinicius.entidade.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -314,17 +316,19 @@ public class BancoDadosAtividade {
         Connection conexao = null;
         PreparedStatement comando = null;
         ResultSet resultado = null;
-        List<Atividade> listaAtividade = new ArrayList<Atividade>();
         List<Atividade> listaAtividadeTemp = new ArrayList<Atividade>();
+        Encarregado encarregado = new Encarregado();
                 
         try {
             conexao = BancoDadosUtil.getConnection();
 
             //Código de criar...
-            String sql = "SELECT COD_ATIVIDADE, NOME, DURACAO_PREV, HORAS_TRABALHADAS, PERCENTUAL_CONCLUSAO FROM ATIVIDADE A "
-                    + "INNER JOIN PROJETO P ON (P.COD_PROJETO = A.FK_PROJETO) "
-                    + "INNER JOIN DEPARTAMENTO D ON (D.CODIGO = P.FK_DEPARTAMENTO) "
-                    + "WHERE D.FK_GERENTE_CPF ='"+codGer+"'";
+            String sql = "SELECT COD_ATIVIDADE, NOME, DURACAO_PREV, HORAS_TRABALHADAS, PERCENTUAL_CONCLUSAO, FK_ENCARREGADO_CPF, F.NOME FROM ATIVIDADE A "
+                       + "INNER JOIN PROJETO P ON (P.COD_PROJETO = A.FK_PROJETO) "
+                       + "INNER JOIN FUNCIONARIO F ON (F.CPF = A.FK_ENCARREGADO_CPF) "
+                       + "INNER JOIN DEPARTAMENTO D ON (D.CODIGO = P.FK_DEPARTAMENTO) "
+                       + "WHERE D.FK_GERENTE_CPF = '"+codGer+"'";
+            
             
             comando = conexao.prepareStatement(sql);
 
@@ -340,14 +344,16 @@ public class BancoDadosAtividade {
                 atividadeTemp.setDuracao(resultado.getInt(3));
                 atividadeTemp.setHorasTrabalhadas(resultado.getInt(4));
                 atividadeTemp.setPercentualConclusao(resultado.getInt(5));
+                encarregado.setCpf(resultado.getString(6));
+                encarregado.setNome(resultado.getString(7));
+                atividadeTemp.setEncarregado(encarregado);
                 //Adiciona um item à lista que será retornada
-                listaAtividadeTemp.add(atividadeTemp);
+               // listaAtividadeTemp.add(atividadeTemp);
+                if (atividadeTemp.getHorasTrabalhadas() > atividadeTemp.getDuracao() && atividadeTemp.getPercentualConclusao() < 100) {
+                    listaAtividadeTemp.add(atividadeTemp);
+                }
             }
-            for (Atividade atividade : listaAtividade) {
-            if (atividade.getHorasTrabalhadas() > atividade.getDuracao() && atividade.getPercentualConclusao() < 100) {
-               listaAtividade.add(atividade);
-            }
-        }
+            
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -359,7 +365,7 @@ public class BancoDadosAtividade {
                 conexao.close();
             }
         }
-        return listaAtividade;
+        return listaAtividadeTemp;
     }
 
 }
