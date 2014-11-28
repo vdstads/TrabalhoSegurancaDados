@@ -411,6 +411,44 @@ public class BancoDadosFuncionario {
         return usuario;
     }
     
+    public static boolean ConsultaFuncionarioPorEmailCpf(String email, String cpf) throws SQLException {
+        Connection conexao = null;
+        PreparedStatement comando = null;
+        ResultSet resultado = null;
+        boolean existeUsuario = false;
+        try {
+            conexao = BancoDadosUtil.getConnection();
+
+            //Código de criar...
+            String sqlEmail = "SELECT CPF, EMAIL FROM FUNCIONARIO WHERE EMAIL ='"+email+"'";
+            String sqlCpf = "SELECT CPF, EMAIL FROM FUNCIONARIO WHERE EMAIL ='"+cpf+"'";
+            
+            comando = conexao.prepareStatement(sqlEmail);
+            resultado = comando.executeQuery();
+            while (resultado.next()) {
+                existeUsuario = true;         
+            }
+            if(!existeUsuario){
+               comando = conexao.prepareStatement(sqlCpf);
+                resultado = comando.executeQuery();
+                while (resultado.next()) {
+                    existeUsuario = true;         
+                } 
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (resultado != null && !resultado.isClosed()) {
+                resultado.close();
+            }
+            if (conexao != null && !conexao.isClosed()) {
+                conexao.close();
+            }
+        }
+        return existeUsuario;
+    }
+    
     public static List<Usuario> ConsultaFuncionariosDepartamento(String codDep) throws SQLException {
         Connection conexao = null;
         PreparedStatement comando = null;

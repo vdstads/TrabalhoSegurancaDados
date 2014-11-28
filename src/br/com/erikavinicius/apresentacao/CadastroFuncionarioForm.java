@@ -189,7 +189,11 @@ public class CadastroFuncionarioForm extends javax.swing.JFrame {
                 } catch (Exception e) {
                }
                 //---------------------------------------------------
-                this.bancoDadosFuncionario.CriarFuncionario(cpf, nome, email, senha, cargo, departamento);
+                if(!this.bancoDadosFuncionario.ConsultaFuncionarioPorEmailCpf(email, cpf)){
+                    this.bancoDadosFuncionario.CriarFuncionario(cpf, nome, email, senha, cargo, departamento);
+                }else{
+                    JOptionPane.showMessageDialog(this, "E-mail ou CPF Ja cadastrados!", "Erro", JOptionPane.WARNING_MESSAGE);
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(CadastroDiretorForm.class.getName()).log(Level.SEVERE, null, ex);
             }
