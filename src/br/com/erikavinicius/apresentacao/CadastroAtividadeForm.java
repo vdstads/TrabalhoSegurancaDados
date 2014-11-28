@@ -184,7 +184,6 @@ public class CadastroAtividadeForm extends javax.swing.JFrame {
             if (nome.isEmpty() || duracao == 0) {
                 JOptionPane.showMessageDialog(this, "Preencha todos os campos!", "Erro", JOptionPane.WARNING_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(this, "Cod ATV: "+codigo, "Erro", JOptionPane.WARNING_MESSAGE);
                 this.bancoDadosAtividade.CriarAtividade(codigo, nome, duracao, encTemp.getCpf(), codProjeto);
                 JOptionPane.showMessageDialog(this, "Atividade adicionada com sucesso!", "Cadastro de Atividade", JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
