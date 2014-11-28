@@ -197,9 +197,15 @@ public class CadastroFuncionarioForm extends javax.swing.JFrame {
             } catch (SQLException ex) {
                 Logger.getLogger(CadastroDiretorForm.class.getName()).log(Level.SEVERE, null, ex);
             }
-            this.limpar();
-            JOptionPane.showMessageDialog(this, cargo+" cadastrado com sucesso!", "Cadastro de Funcionario", JOptionPane.INFORMATION_MESSAGE);
-            this.dispose();
+            try {
+                if(!this.bancoDadosFuncionario.ConsultaFuncionarioPorEmailCpf(email, cpf)){
+                    this.limpar();
+                    JOptionPane.showMessageDialog(this, cargo+" cadastrado com sucesso!", "Cadastro de Funcionario", JOptionPane.INFORMATION_MESSAGE);
+                    this.dispose();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(CadastroFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
