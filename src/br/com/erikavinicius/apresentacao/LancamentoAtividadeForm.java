@@ -52,8 +52,8 @@ public class LancamentoAtividadeForm extends javax.swing.JFrame {
         lblTarefa = new javax.swing.JLabel();
         cmbTarefa = new javax.swing.JComboBox();
         lblPercentual = new javax.swing.JLabel();
+        txtHoras = new javax.swing.JFormattedTextField();
         txtPercentual = new javax.swing.JFormattedTextField();
-        txtHrs = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -80,22 +80,19 @@ public class LancamentoAtividadeForm extends javax.swing.JFrame {
 
         lblPercentual.setText("Percentual de Conclusão:");
 
-        try {
-            txtPercentual.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
+        txtHoras.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
+        txtHoras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtHorasActionPerformed(evt);
+            }
+        });
+
+        txtPercentual.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0%"))));
         txtPercentual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPercentualActionPerformed(evt);
             }
         });
-
-        try {
-            txtHrs.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#######")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -107,7 +104,7 @@ public class LancamentoAtividadeForm extends javax.swing.JFrame {
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cmbTarefa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtPercentual)
+                            .addComponent(txtHoras)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblTarefa)
@@ -120,7 +117,7 @@ public class LancamentoAtividadeForm extends javax.swing.JFrame {
                         .addGap(0, 109, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(txtHrs)))
+                        .addComponent(txtPercentual)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -129,7 +126,7 @@ public class LancamentoAtividadeForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lblHoras)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtHrs, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtHoras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lblPercentual)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -165,8 +162,8 @@ public class LancamentoAtividadeForm extends javax.swing.JFrame {
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
        try {
-            int percentual = parseInt(this.txtPercentual.getText().trim());
-            int horasTrab = parseInt(this.txtHrs.getText().trim());
+            int percentual = parseInt(this.txtHoras.getText().trim());
+            int horasTrab = parseInt(this.txtHoras.getText().trim());
             
             Atividade atvTemp = new Atividade();
             atvTemp = (Atividade) this.cmbTarefa.getSelectedItem();
@@ -186,6 +183,10 @@ public class LancamentoAtividadeForm extends javax.swing.JFrame {
     private void cmbTarefaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTarefaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbTarefaActionPerformed
+
+    private void txtHorasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHorasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtHorasActionPerformed
 
     private void txtPercentualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPercentualActionPerformed
         // TODO add your handling code here:
@@ -239,7 +240,7 @@ public class LancamentoAtividadeForm extends javax.swing.JFrame {
     private javax.swing.JLabel lblHoras;
     private javax.swing.JLabel lblPercentual;
     private javax.swing.JLabel lblTarefa;
-    private javax.swing.JFormattedTextField txtHrs;
+    private javax.swing.JFormattedTextField txtHoras;
     private javax.swing.JFormattedTextField txtPercentual;
     // End of variables declaration//GEN-END:variables
 }
