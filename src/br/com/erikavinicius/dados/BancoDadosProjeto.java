@@ -191,7 +191,7 @@ public class BancoDadosProjeto {
             conexao = BancoDadosUtil.getConnection();
 
             //Código de criar...
-            String sql = "SELECT COD_PROJETO, NOME, DESCRICAO, DATA_INICIO, DATA_TERMINO FROM PROJETO WHERE FK_DEPARTAMENTO'"+codDep+"'";
+            String sql = "SELECT COD_PROJETO, NOME, DESCRICAO, DATA_INICIO, DATA_TERMINO FROM PROJETO WHERE FK_DEPARTAMENTO = '"+codDep+"'";
             comando = conexao.prepareStatement(sql);
 
             resultado = comando.executeQuery();
