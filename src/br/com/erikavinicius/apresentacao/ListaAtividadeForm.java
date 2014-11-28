@@ -183,21 +183,21 @@ public class ListaAtividadeForm extends javax.swing.JFrame {
                 try {
                     model = new TabelaAtividadeModel(this.bancoDadosAtividade.ConsultaAtividadePorProj(codDepAtivo));
                 } catch (SQLException ex) {
-                    Logger.getLogger(ListaFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ListaAtividadeForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 int colunaCodigo = 0;
                 int Codigo =  (int) model.getValueAt(tblAtividade.getSelectedRow(), colunaCodigo);
 
-                try {
-                    this.bancoDadosProjeto.removeProjeto(Codigo);
+                /*try {
+                    this.bancoDadosProjeto.remove(Codigo);
                     } catch (SQLException ex) {
                     Logger.getLogger(ListaAtividadeForm.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                }*/
                 
                 try {
                     this.configurarTblAtividade();
                 } catch (SQLException ex) {
-                    Logger.getLogger(ListaFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ListaAtividadeForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 JOptionPane.showMessageDialog(null,"Excluído com sucesso!");
                 
@@ -248,7 +248,7 @@ public class ListaAtividadeForm extends javax.swing.JFrame {
 
         public String getColumnName(int columnIndex) {
             if (columnIndex == 0) {
-                return "Codigo";
+                return "Código";
             } else if (columnIndex == 1){
                 return "Nome";
             } else if (columnIndex == 2){

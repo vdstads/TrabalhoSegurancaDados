@@ -74,11 +74,11 @@ public class CadastroProjetoForm extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(txtDescricao);
 
-        lblDataInicio.setText("Data de Inicio:");
+        lblDataInicio.setText("Data de Início:");
 
         txtDataInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.MEDIUM))));
 
-        lblDataTermino.setText("Data de Termino:");
+        lblDataTermino.setText("Data de Término:");
 
         txtDataTermino.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.MEDIUM))));
 
@@ -112,6 +112,7 @@ public class CadastroProjetoForm extends javax.swing.JFrame {
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtNome)
+                            .addComponent(jScrollPane1)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblNome)
@@ -119,11 +120,8 @@ public class CadastroProjetoForm extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(txtDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jLabel1)))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jScrollPane1)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lblDescricao)
+                                        .addComponent(jLabel1))
+                                    .addComponent(lblDescricao))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );

@@ -76,11 +76,11 @@ public class EditaProjetoForm extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(txtDescricao);
 
-        lblDataInicio.setText("Data de Inicio:");
+        lblDataInicio.setText("Data de Início:");
 
         txtDataInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.MEDIUM))));
 
-        lblDataTermino.setText("Data de Termino:");
+        lblDataTermino.setText("Data de Término:");
 
         txtDataTermino.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.MEDIUM))));
 

@@ -215,7 +215,7 @@ public class BancoDadosAtividade {
         return listaAtividade;
     }
     
-    public static void removeAtv(int codigo) throws SQLException {
+    public static void removeAtvidade(int codigo) throws SQLException {
         Connection conexao = null;
         PreparedStatement comando = null;
         try {
@@ -366,6 +366,37 @@ public class BancoDadosAtividade {
             }
         }
         return listaAtividadeTemp;
+    }
+    
+    public static boolean ConsultaAtividadeExiste() throws SQLException {
+        Connection conexao = null;
+        PreparedStatement comando = null;
+        ResultSet resultado = null;
+        boolean existeAtividade = false;
+        try {
+            conexao = BancoDadosUtil.getConnection();
+
+            //Código de criar...
+            String sql = "SELECT * FROM ATIVIDADE";
+            comando = conexao.prepareStatement(sql);
+
+            resultado = comando.executeQuery();
+
+            if (resultado.next()) {
+                existeAtividade = true;
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (resultado != null && !resultado.isClosed()) {
+                resultado.close();
+            }
+            if (conexao != null && !conexao.isClosed()) {
+                conexao.close();
+            }
+        }
+        return existeAtividade;
     }
 
 }

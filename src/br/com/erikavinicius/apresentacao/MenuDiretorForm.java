@@ -156,7 +156,7 @@ public class MenuDiretorForm extends javax.swing.JFrame {
         try {
             if(this.bancoDadosDepartamento.ConsultaDepartamentoExiste()){
                 ListaDepartamentoForm listaDepartamentoForm = new ListaDepartamentoForm(this.trabalhoSeguranca);
-             listaDepartamentoForm.setVisible(true);
+                listaDepartamentoForm.setVisible(true);
             }else{
                 JOptionPane.showMessageDialog(this, "Não possui Departamentos Cadastrados! Cadastre um Novo!", "Erro", JOptionPane.WARNING_MESSAGE);
             }

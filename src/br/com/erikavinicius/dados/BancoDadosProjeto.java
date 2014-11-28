@@ -222,5 +222,36 @@ public class BancoDadosProjeto {
         }
         return listaProjetos;
     }
+    
+    public static boolean ConsultaProjetoExiste() throws SQLException {
+        Connection conexao = null;
+        PreparedStatement comando = null;
+        ResultSet resultado = null;
+        boolean existeProjeto = false;
+        try {
+            conexao = BancoDadosUtil.getConnection();
+
+            //Código de criar...
+            String sql = "SELECT * FROM PROJETO";
+            comando = conexao.prepareStatement(sql);
+
+            resultado = comando.executeQuery();
+
+            if (resultado.next()) {
+                existeProjeto = true;
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (resultado != null && !resultado.isClosed()) {
+                resultado.close();
+            }
+            if (conexao != null && !conexao.isClosed()) {
+                conexao.close();
+            }
+        }
+        return existeProjeto;
+    }
         
 }

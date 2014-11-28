@@ -9,6 +9,7 @@ import br.com.erikavinicius.TrabalhoSeguranca;
 import br.com.erikavinicius.dados.BancoDadosAtividade;
 import br.com.erikavinicius.dados.BancoDadosDepartamento;
 import br.com.erikavinicius.dados.BancoDadosFuncionario;
+import br.com.erikavinicius.dados.BancoDadosProjeto;
 import br.com.erikavinicius.entidade.Departamento;
 import br.com.erikavinicius.entidade.Usuario;
 import java.sql.SQLException;
@@ -26,12 +27,14 @@ public class MenuGerenteForm extends javax.swing.JFrame {
     private Usuario usuarioAtivo;
     private BancoDadosDepartamento bancoDadosDepartamento;
     private BancoDadosAtividade bancoDadosAtividade;
+    private BancoDadosProjeto bancoDadosProjeto;
     
     public MenuGerenteForm(TrabalhoSeguranca trabalhoSeguranca, Usuario usuario) {
         initComponents();
         this.usuarioAtivo = usuario;
         this.bancoDadosDepartamento = bancoDadosDepartamento;
         this.bancoDadosAtividade = bancoDadosAtividade;
+        this.bancoDadosProjeto = bancoDadosProjeto;
     }
 
    
@@ -237,8 +240,12 @@ public class MenuGerenteForm extends javax.swing.JFrame {
 
     private void itmListarProjetosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmListarProjetosActionPerformed
         try {
-            ListaProjetoForm listaProjetoForm = new ListaProjetoForm(this.trabalhoSeguranca, usuarioAtivo);  
-            listaProjetoForm.setVisible(true);
+            if(this.bancoDadosProjeto.ConsultaProjetoExiste()){
+                ListaProjetoForm listaProjetoForm = new ListaProjetoForm(this.trabalhoSeguranca, usuarioAtivo);  
+                listaProjetoForm.setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(this, "Não possui Projetos Cadastrados! Cadastre um Novo!", "Erro", JOptionPane.WARNING_MESSAGE);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(MenuGerenteForm.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -268,6 +275,7 @@ public class MenuGerenteForm extends javax.swing.JFrame {
         ListaAtividadeAtrasadaForm listaAtividadeAtrasadaForm = null;
         try {
             listaAtividadeAtrasadaForm = new ListaAtividadeAtrasadaForm(this.trabalhoSeguranca, usuarioAtivo);
+            
         } catch (SQLException ex) {
             Logger.getLogger(MenuGerenteForm.class.getName()).log(Level.SEVERE, null, ex);
         }

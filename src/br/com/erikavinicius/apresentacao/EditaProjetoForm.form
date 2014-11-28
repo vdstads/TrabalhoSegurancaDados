@@ -164,7 +164,7 @@
         </Container>
         <Component class="javax.swing.JLabel" name="lblDataInicio">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Data de Inicio:"/>
+            <Property name="text" type="java.lang.String" value="Data de In&#xed;cio:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="txtDataInicio">
@@ -176,7 +176,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblDataTermino">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Data de Termino:"/>
+            <Property name="text" type="java.lang.String" value="Data de T&#xe9;rmino:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="txtDataTermino">

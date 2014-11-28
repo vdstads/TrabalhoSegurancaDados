@@ -166,29 +166,36 @@ public class ListaProjetoForm extends javax.swing.JFrame {
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         if (tblProjeto.getSelectedRow() != - 1) {
-            int result = JOptionPane.showConfirmDialog(null, "Deseja Excluir ? ", "Excluir", JOptionPane.YES_NO_CANCEL_OPTION);
+            int result = JOptionPane.showConfirmDialog(null,"Deseja Excluir ? ", "Excluir", JOptionPane.YES_NO_CANCEL_OPTION);
             if (result == JOptionPane.YES_OPTION) {
                 TabelaProjetoModel model = null;
                 try {
                     model = new TabelaProjetoModel(this.bancoDadosProjeto.ConsultaTodosProjetos());
                 } catch (SQLException ex) {
-                    Logger.getLogger(ListaFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ListaProjetoForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 int colunaCodigo = 0;
                 int Codigo =  (int) model.getValueAt(tblProjeto.getSelectedRow(), colunaCodigo);
-                
+                JOptionPane.showMessageDialog(null,+Codigo+"Excluído com sucesso!");
+                try {
+                    
+                    this.bancoDadosProjeto.removeProjeto(Codigo);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ListaProjetoForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                /*
                 try {
                     Usuario usuario = new Usuario();
                     usuario = BancoDadosFuncionario.ConsultaFuncionarioPorEmail(usuarioAtivo.getEmail());
                     this.bancoDadosProjeto.removeProjeto(Codigo);
                 } catch (SQLException ex) {
-                    Logger.getLogger(ListaFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                    Logger.getLogger(ListaProjetoForm.class.getName()).log(Level.SEVERE, null, ex);
+                }*/
 
                 try {
                     this.configurarTblProjeto();
                 } catch (SQLException ex) {
-                    Logger.getLogger(ListaFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ListaProjetoForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 JOptionPane.showMessageDialog(null,"Excluído com sucesso!");
                 
@@ -240,13 +247,13 @@ public class ListaProjetoForm extends javax.swing.JFrame {
 
         public String getColumnName(int columnIndex) {
             if (columnIndex == 0) {
-                return "Codigo";
+                return "Código";
             } else if (columnIndex == 1){
                 return "Nome";
             } else if (columnIndex == 2){
-                return "Data de Inicio";
+                return "Data de Início";
             } else {
-                return "Data de Termino";
+                return "Data de Término";
             }
         }
     }
