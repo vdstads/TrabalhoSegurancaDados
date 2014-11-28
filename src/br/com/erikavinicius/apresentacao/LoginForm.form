@@ -96,7 +96,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="btnLogin" min="-2" pref="213" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="btnLogin1" pref="160" max="32767" attributes="0"/>
+                          <Component id="btnCancelar" pref="160" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -117,9 +117,9 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnLogin" alignment="3" min="-2" pref="56" max="-2" attributes="0"/>
-                      <Component id="btnLogin1" alignment="3" min="-2" pref="56" max="-2" attributes="0"/>
+                      <Component id="btnCancelar" alignment="3" min="-2" pref="56" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="36" max="32767" attributes="0"/>
+                  <EmptySpace pref="39" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -163,7 +163,7 @@
         </Component>
         <Component class="javax.swing.JPasswordField" name="txtSenha">
         </Component>
-        <Component class="javax.swing.JButton" name="btnLogin1">
+        <Component class="javax.swing.JButton" name="btnCancelar">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Ubuntu" size="18" style="1"/>
@@ -174,7 +174,7 @@
             <Property name="text" type="java.lang.String" value="Cancelar"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLogin1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
