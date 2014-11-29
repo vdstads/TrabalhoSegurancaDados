@@ -38,7 +38,7 @@ public class EmitirRelatorioProjeto extends javax.swing.JFrame {
     private BancoDadosAtividade bancoDadosAtividade;
     public Atividade atividade = new Atividade();
     public Usuario usuarioAtivo = new Usuario();
-    private String codDepAtivo;
+    //private String codDepAtivo;
 
     public EmitirRelatorioProjeto(TrabalhoSeguranca trabalhoSeguranca, Usuario usuario) throws SQLException {
         initComponents();
@@ -158,7 +158,7 @@ public class EmitirRelatorioProjeto extends javax.swing.JFrame {
         
         model.removeAllElements();
         
-        List<Projeto> listaProjetos = this.bancoDadosProjeto.ConsultaTodosProjetos();
+        List<Projeto> listaProjetos = this.bancoDadosProjeto.ConsultaProjetoPorDep(usuarioAtivo.getSenha());
         
         for (Projeto projeto : listaProjetos) {
             model.addElement(projeto);
@@ -172,21 +172,6 @@ public class EmitirRelatorioProjeto extends javax.swing.JFrame {
        
         }
 
-       
-        
-        
-        /*or(int i=1; i<=100; i++){
-            Contato contato = new Contato();
-            contato.setNome("Jão da Silva "+i);
-            contato.setEmail("joaosilva"+i+"@gmail.com");
-            if(i%3==0){
-                contato.setSexo('M');
-            }else{
-                contato.setSexo('F');    
-            }
-            contato.setDataNascimento(new Date());
-            this.listaContatos.add(contato);
-        }*/
     
     /**
      * @param args the command line arguments

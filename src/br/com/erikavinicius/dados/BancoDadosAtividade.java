@@ -284,6 +284,8 @@ public class BancoDadosAtividade {
                 conexao.close();
             }
         }
+        
+        
 
     }
     
@@ -372,6 +374,55 @@ public class BancoDadosAtividade {
             }
         }
         return existeAtividade;
+    }
+    
+    public static List<Atividade> RelatorioAtividadePorProjeto(String codDep) throws SQLException {
+        Connection conexao = null;
+        PreparedStatement comando = null;
+        ResultSet resultado = null;
+        List<Atividade> listaAtividade = new ArrayList<Atividade>();
+                
+        try {
+            conexao = BancoDadosUtil.getConnection();
+
+            //Código de criar...
+            String sql = "SELECT A.COD_ATIVIDADE, A.NOME, A.DURACAO_PREV, A.HORAS_TRABALHADAS, A.PERCENTUAL, F.NOME FROM ATIVIDADE A "
+                       + "INNER JOIN PROJETO P ON (P.COD_PROJETO = A.FK_PROJETO) "
+                       + "INNER JOIN FUNCIONARIO F ON (F.CPF = A.FK_GERENTE_CPF) "
+                       + "WHERE P.FK_DEPARTAMENTO = '"+codDep+"'";
+            
+            comando = conexao.prepareStatement(sql);
+
+            resultado = comando.executeQuery();
+
+            while (resultado.next()) {
+            //Instancia um novo objeto e atribui os valores vindo do BD
+                //(Note que no BD o index inicia por 1)
+                                
+                Atividade atividade = new Atividade();
+                Encarregado encarregado = new Encarregado();
+                atividade.setCodigo(resultado.getInt(1));
+                atividade.setNome(resultado.getString(2));
+                atividade.setDuracao(resultado.getInt(3));
+                atividade.setHorasTrabalhadas(resultado.getInt(4));
+                atividade.setPercentualConclusao(resultado.getInt(5));
+                encarregado.setNome(resultado.getString(6));
+                atividade.setEncarregado(encarregado);
+                //Adiciona um item à lista que será retornada
+                listaAtividade.add(atividade);
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (resultado != null && !resultado.isClosed()) {
+                resultado.close();
+            }
+            if (conexao != null && !conexao.isClosed()) {
+                conexao.close();
+            }
+        }
+        return listaAtividade;
     }
 
 }
