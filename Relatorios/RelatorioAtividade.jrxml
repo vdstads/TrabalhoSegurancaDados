@@ -1,17 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8535b666-5d2b-401e-82b0-e30864b5e661">
-	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.zoom" value="1.610510000000001"/>
+	<property name="ireport.x" value="24"/>
 	<property name="ireport.y" value="0"/>
-	<field name="codigo" class="java.lang.String"/>
+	<parameter name="nomeencarregado" class="java.lang.String"/>
+	<field name="codigo" class="java.lang.Integer"/>
 	<field name="nome" class="java.lang.String"/>
 	<field name="encarregado" class="java.lang.String"/>
-	<field name="percentualConclusao" class="java.lang.String"/>
-	<variable name="totalAtividades" class="java.lang.String"/>
-	<variable name="totalAtividadesIniciadas" class="java.lang.String"/>
-	<variable name="totalAtividadesNaoIniciadas" class="java.lang.String"/>
-	<variable name="totalAtividadeConcluidas" class="java.lang.String"/>
-	<variable name="PercentualConclusão" class="java.lang.String"/>
+	<field name="percentualConclusao" class="java.lang.Integer"/>
+	<field name="horasTrabalhadas" class="java.lang.Integer"/>
+	<variable name="totalAtividades" class="java.lang.Integer"/>
+	<variable name="totalAtividadesIniciadas" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{horasTrabalhadas}!= 0 ? 1 : 0]]></variableExpression>
+	</variable>
+	<variable name="totalAtividadesNaoIniciadas" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{horasTrabalhadas}== 0 ? 1 : 0]]></variableExpression>
+	</variable>
+	<variable name="totalAtividadeConcluidas" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{percentualConclusao}== 100 ? 1 : 0]]></variableExpression>
+	</variable>
+	<variable name="PercentualConclusão" class="java.lang.Double">
+		<variableExpression><![CDATA[$V{totalAtividadeConcluidas}*100/$V{PAGE_COUNT}]]></variableExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -49,39 +59,47 @@
 	<columnHeader>
 		<band height="21" splitType="Stretch">
 			<staticText>
-				<reportElement x="381" y="0" width="174" height="20" uuid="c6725250-1994-4b8d-9f49-495f78834b2a"/>
+				<reportElement x="424" y="1" width="131" height="20" uuid="c6725250-1994-4b8d-9f49-495f78834b2a"/>
 				<text><![CDATA[Percentual de Conclusão]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="0" width="120" height="20" uuid="d4ac60fd-8b53-4a41-8397-5cf9349f42bf"/>
+				<reportElement x="0" y="0" width="37" height="20" uuid="d4ac60fd-8b53-4a41-8397-5cf9349f42bf"/>
 				<text><![CDATA[Código]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="249" y="0" width="132" height="20" uuid="8924698c-6546-4b9c-a230-51b5da6c9028"/>
+				<reportElement x="166" y="1" width="119" height="20" uuid="8924698c-6546-4b9c-a230-51b5da6c9028"/>
 				<text><![CDATA[Encarregado]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="120" y="0" width="129" height="20" uuid="94ec4cfb-d350-4a3d-bf20-51b980503e70"/>
+				<reportElement x="37" y="0" width="129" height="20" uuid="94ec4cfb-d350-4a3d-bf20-51b980503e70"/>
 				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="285" y="0" width="139" height="20" uuid="1ee8ab5a-3d75-4eff-b14a-a3b91465ae4d"/>
+				<text><![CDATA[Horas Trabalhadas]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="20" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="120" height="20" uuid="74f325a9-64d3-4014-8480-a3abd2828f46"/>
+				<reportElement x="0" y="0" width="37" height="20" uuid="74f325a9-64d3-4014-8480-a3abd2828f46"/>
 				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="120" y="0" width="129" height="20" uuid="a27524b3-5e15-4951-9dec-c9b5585cb2cb"/>
+				<reportElement x="37" y="0" width="129" height="20" uuid="a27524b3-5e15-4951-9dec-c9b5585cb2cb"/>
 				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="249" y="0" width="132" height="20" uuid="e1010eab-b7d8-4f70-90bd-cb9524242852"/>
+				<reportElement x="285" y="0" width="139" height="20" uuid="d733bbe9-549a-48fc-b266-e3bec3d5f999"/>
+				<textFieldExpression><![CDATA[$F{horasTrabalhadas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="166" y="0" width="119" height="20" uuid="e1010eab-b7d8-4f70-90bd-cb9524242852"/>
 				<textFieldExpression><![CDATA[$F{encarregado}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00 %">
-				<reportElement x="381" y="0" width="174" height="20" uuid="e67918f7-5fca-415a-b7bd-31658513ccae"/>
+			<textField>
+				<reportElement x="424" y="0" width="131" height="20" uuid="71d9fa6d-43a5-4eec-b2c7-d0e0b1d5c37b"/>
 				<textFieldExpression><![CDATA[$F{percentualConclusao}]]></textFieldExpression>
 			</textField>
 		</band>
@@ -105,7 +123,7 @@
 				<textFieldExpression><![CDATA["Total de Atividades Iniciadas: "+$V{totalAtividadesIniciadas}]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement x="0" y="65" width="330" height="20" uuid="4408a963-b4f6-4778-aab8-c0d92fb79005"/>
+				<reportElement x="0" y="65" width="368" height="20" uuid="4408a963-b4f6-4778-aab8-c0d92fb79005"/>
 				<textFieldExpression><![CDATA["Total de Atividade não Iniciadas: "+$V{totalAtividadesNaoIniciadas}]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
@@ -118,7 +136,7 @@
 			</textField>
 			<textField evaluationTime="Report">
 				<reportElement x="0" y="0" width="330" height="20" uuid="88525f3a-a80d-42ad-aa17-6036c8e0370a"/>
-				<textFieldExpression><![CDATA["Total de Atividades: "+$V{totalAtividades}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Total de Atividades: "+$V{PAGE_COUNT}]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

@@ -386,9 +386,9 @@ public class BancoDadosAtividade {
             conexao = BancoDadosUtil.getConnection();
 
             //Código de criar...
-            String sql = "SELECT A.COD_ATIVIDADE, A.NOME, A.DURACAO_PREV, A.HORAS_TRABALHADAS, A.PERCENTUAL, F.NOME FROM ATIVIDADE A "
+            String sql = "SELECT A.COD_ATIVIDADE, A.NOME, A.DURACAO_PREV, A.HORAS_TRABALHADAS, A.PERCENTUAL_CONCLUSAO, F.NOME FROM ATIVIDADE A "
                        + "INNER JOIN PROJETO P ON (P.COD_PROJETO = A.FK_PROJETO) "
-                       + "INNER JOIN FUNCIONARIO F ON (F.CPF = A.FK_GERENTE_CPF) "
+                       + "INNER JOIN FUNCIONARIO F ON (F.CPF = A.FK_ENCARREGADO_CPF) "
                        + "WHERE P.FK_DEPARTAMENTO = '"+codDep+"'";
             
             comando = conexao.prepareStatement(sql);

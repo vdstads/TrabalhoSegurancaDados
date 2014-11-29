@@ -208,7 +208,7 @@ public class ListaAtividadeForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirActionPerformed
     
     void configurarTblAtividade() throws SQLException {
-        TabelaAtividadeModel model = new TabelaAtividadeModel(this.bancoDadosAtividade.ConsultaAtividadePorProj(codDepAtivo));
+        TabelaAtividadeModel model = new TabelaAtividadeModel(this.bancoDadosAtividade.RelatorioAtividadePorProjeto(codDepAtivo));
 
         tblAtividade.setModel(model);
     }
@@ -242,7 +242,7 @@ public class ListaAtividadeForm extends javax.swing.JFrame {
             } else if(columnIndex==2) {
                 return atividade.getDuracao();
             } else {
-                return atividade.getEncarregado();
+                return atividade.getEncarregado().getNome();
             }   
         }
 
