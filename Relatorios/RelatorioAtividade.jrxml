@@ -6,7 +6,7 @@
 	<field name="codigo" class="java.lang.String"/>
 	<field name="nome" class="java.lang.String"/>
 	<field name="encarregado" class="java.lang.String"/>
-	<field name="percentual" class="java.lang.String"/>
+	<field name="percentualConclusao" class="java.lang.String"/>
 	<variable name="totalAtividades" class="java.lang.String"/>
 	<variable name="totalAtividadesIniciadas" class="java.lang.String"/>
 	<variable name="totalAtividadesNaoIniciadas" class="java.lang.String"/>
@@ -82,7 +82,7 @@
 			</textField>
 			<textField pattern="#,##0.00 %">
 				<reportElement x="381" y="0" width="174" height="20" uuid="e67918f7-5fca-415a-b7bd-31658513ccae"/>
-				<textFieldExpression><![CDATA[$F{percentual}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{percentualConclusao}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
