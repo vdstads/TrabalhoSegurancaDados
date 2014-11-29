@@ -60,6 +60,7 @@ public class MenuGerenteForm extends javax.swing.JFrame {
         itmListarAtividades = new javax.swing.JMenuItem();
         itmListarAtividadesAtrasadas = new javax.swing.JMenuItem();
         MenuRelatorio = new javax.swing.JMenu();
+        itmEmitirRelatorioProjeto = new javax.swing.JMenuItem();
         MenuSair = new javax.swing.JMenu();
 
         jMenuItem1.setText("jMenuItem1");
@@ -167,8 +168,19 @@ public class MenuGerenteForm extends javax.swing.JFrame {
 
         jMenuBar1.add(MenuAtividade);
 
-        MenuRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/Form.png"))); // NOI18N
+        MenuRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/10693_32x32.png"))); // NOI18N
         MenuRelatorio.setText("Relatórios");
+
+        itmEmitirRelatorioProjeto.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F9, 0));
+        itmEmitirRelatorioProjeto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/Form.png"))); // NOI18N
+        itmEmitirRelatorioProjeto.setText("Emitir Relatório por Projeto");
+        itmEmitirRelatorioProjeto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmEmitirRelatorioProjetoActionPerformed(evt);
+            }
+        });
+        MenuRelatorio.add(itmEmitirRelatorioProjeto);
+
         jMenuBar1.add(MenuRelatorio);
 
         MenuSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/halte-session-icone-4911-32.png"))); // NOI18N
@@ -303,6 +315,11 @@ public class MenuGerenteForm extends javax.swing.JFrame {
         listaAtividadeAtrasadaForm.setVisible(true);
     }//GEN-LAST:event_itmListarAtividadesAtrasadasActionPerformed
 
+    private void itmEmitirRelatorioProjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmEmitirRelatorioProjetoActionPerformed
+        EmitirRelatorioProjeto emitirRelatorioProjeto = new EmitirRelatorioProjeto(this.trabalhoSeguranca);
+        emitirRelatorioProjeto.setVisible(true);
+    }//GEN-LAST:event_itmEmitirRelatorioProjetoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -343,6 +360,7 @@ public class MenuGerenteForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem itmCadastarAtividades;
     private javax.swing.JMenuItem itmCadastrarProjeto;
     private javax.swing.JMenuItem itmCadastroFuncionarios;
+    private javax.swing.JMenuItem itmEmitirRelatorioProjeto;
     private javax.swing.JMenuItem itmListaDepartamentos;
     private javax.swing.JMenuItem itmListaFuncionarios;
     private javax.swing.JMenuItem itmListarAtividades;

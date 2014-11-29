@@ -18,19 +18,74 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch"/>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="184" height="35" uuid="cce98421-9df4-425d-b371-d8e0ecb43387"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatório de Projetos]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="424" y="0" width="80" height="20" uuid="e3ed73ec-d1bd-48ec-a51c-8c414a9c61fb"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="504" y="0" width="40" height="20" uuid="b77a3736-1379-44e1-bd7e-dc448aae3a79"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="61" splitType="Stretch"/>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="381" y="0" width="174" height="20" uuid="c6725250-1994-4b8d-9f49-495f78834b2a"/>
+				<text><![CDATA[Percentual de Conclusão]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="120" height="20" uuid="d4ac60fd-8b53-4a41-8397-5cf9349f42bf"/>
+				<text><![CDATA[Código]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="249" y="0" width="132" height="20" uuid="8924698c-6546-4b9c-a230-51b5da6c9028"/>
+				<text><![CDATA[Encarregado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="120" y="0" width="129" height="20" uuid="94ec4cfb-d350-4a3d-bf20-51b980503e70"/>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch"/>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="120" height="20" uuid="caacd751-4d24-4f55-a6f9-c30fd844ba8a"/>
+				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="382" y="0" width="173" height="20" uuid="814b51f2-7b58-4f46-b79f-e8b11d7be4c8"/>
+			</textField>
+			<textField>
+				<reportElement x="249" y="0" width="132" height="20" uuid="d7cd1f8d-75c8-4590-a7f4-53c58a2cc478"/>
+			</textField>
+			<textField>
+				<reportElement x="120" y="0" width="129" height="20" uuid="437f4292-470f-451c-8156-17755a21740d"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+		</band>
 	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch"/>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="113" height="20" uuid="fe74e624-9f27-4883-b06a-45b4fb6da2dd"/>
+				<text><![CDATA[Relatorio Gerado em: ]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy - HH:mm">
+				<reportElement x="113" y="0" width="137" height="20" uuid="7c9f41f3-8ec9-4f4e-a721-152e275b026a"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
 	</pageFooter>
 	<summary>
 		<band height="42" splitType="Stretch"/>
