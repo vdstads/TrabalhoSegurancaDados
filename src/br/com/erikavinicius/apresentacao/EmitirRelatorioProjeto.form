@@ -64,7 +64,7 @@
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace pref="108" max="32767" attributes="0"/>
-                  <Component id="btnGerarRelatório" min="-2" pref="151" max="-2" attributes="0"/>
+                  <Component id="btnGerarRelatorio" min="-2" pref="151" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -77,7 +77,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="cmbListaProjetos" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="53" max="32767" attributes="0"/>
-                  <Component id="btnGerarRelatório" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnGerarRelatorio" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -104,7 +104,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbListaProjetosActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnGerarRelat&#xf3;rio">
+        <Component class="javax.swing.JButton" name="btnGerarRelatorio">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/br/com/erikavinicius/entidade/icones/arrow_refresh.png"/>
@@ -112,7 +112,7 @@
             <Property name="text" type="java.lang.String" value="Gerar Relat&#xf3;rio"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGerarRelat&#xf3;rioActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGerarRelatorioActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

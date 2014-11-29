@@ -7,10 +7,13 @@
 package br.com.erikavinicius.apresentacao;
 
 import br.com.erikavinicius.TrabalhoSeguranca;
+import br.com.erikavinicius.dados.BancoDadosAtividade;
 import br.com.erikavinicius.dados.BancoDadosProjeto;
+import br.com.erikavinicius.entidade.Atividade;
+import br.com.erikavinicius.entidade.Encarregado;
 import br.com.erikavinicius.entidade.Projeto;
+import br.com.erikavinicius.entidade.Usuario;
 import java.sql.SQLException;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,12 +33,26 @@ public class EmitirRelatorioProjeto extends javax.swing.JFrame {
 
     private TrabalhoSeguranca trabalhoSeguranca;
     private BancoDadosProjeto bancoDadosProjeto;
-    List<Projeto> listaProjetos = new ArrayList<>();
+    public List<Projeto> listaProjetos;
+    public List<Atividade> listaAtividade;
+    private BancoDadosAtividade bancoDadosAtividade;
+    public Atividade atividade = new Atividade();
+    public Usuario usuario = new Usuario();
+    private String codDepAtivo;
 
-    public EmitirRelatorioProjeto(TrabalhoSeguranca trabalhoSeguranca) {
+    public EmitirRelatorioProjeto(TrabalhoSeguranca trabalhoSeguranca, Usuario usuario) throws SQLException {
         initComponents();
+
         this.trabalhoSeguranca = trabalhoSeguranca;
-        this.bancoDadosProjeto = bancoDadosProjeto; 
+        this.bancoDadosProjeto = bancoDadosProjeto;
+        this.listaAtividade = listaAtividade;
+        this.listaProjetos = listaProjetos;
+        this.bancoDadosAtividade = bancoDadosAtividade;
+        
+        
+        this.configurarCmbListaProjetos();
+        this.gerarProjetos();
+        
     }
 
     /**
@@ -50,7 +67,7 @@ public class EmitirRelatorioProjeto extends javax.swing.JFrame {
         plRelatorio = new javax.swing.JPanel();
         lblMensagem = new javax.swing.JLabel();
         cmbListaProjetos = new javax.swing.JComboBox();
-        btnGerarRelatório = new javax.swing.JButton();
+        btnGerarRelatorio = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -65,11 +82,11 @@ public class EmitirRelatorioProjeto extends javax.swing.JFrame {
             }
         });
 
-        btnGerarRelatório.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/arrow_refresh.png"))); // NOI18N
-        btnGerarRelatório.setText("Gerar Relatório");
-        btnGerarRelatório.addActionListener(new java.awt.event.ActionListener() {
+        btnGerarRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/arrow_refresh.png"))); // NOI18N
+        btnGerarRelatorio.setText("Gerar Relatório");
+        btnGerarRelatorio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGerarRelatórioActionPerformed(evt);
+                btnGerarRelatorioActionPerformed(evt);
             }
         });
 
@@ -84,7 +101,7 @@ public class EmitirRelatorioProjeto extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, plRelatorioLayout.createSequentialGroup()
                 .addContainerGap(108, Short.MAX_VALUE)
-                .addComponent(btnGerarRelatório, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnGerarRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(109, 109, 109))
         );
         plRelatorioLayout.setVerticalGroup(
@@ -95,7 +112,7 @@ public class EmitirRelatorioProjeto extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(cmbListaProjetos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
-                .addComponent(btnGerarRelatório)
+                .addComponent(btnGerarRelatorio)
                 .addGap(46, 46, 46))
         );
 
@@ -119,22 +136,22 @@ public class EmitirRelatorioProjeto extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnGerarRelatórioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarRelatórioActionPerformed
+    private void btnGerarRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarRelatorioActionPerformed
         try {
             String relatorio = System.getProperty("user.dir")+
                     "/Relatorios/RelatorioAtividade.jasper";
             
             JRBeanCollectionDataSource fonteDados = 
-                    new JRBeanCollectionDataSource(listaProjetos);
+                    new JRBeanCollectionDataSource(listaAtividade);
             
             JasperPrint relatorioGerado = JasperFillManager.fillReport(relatorio, null, fonteDados);
             
             JasperViewer jasperViewer = new JasperViewer (relatorioGerado, false);
             jasperViewer.setVisible(true);
         } catch (JRException e){
-            System.err.println("Falha ao gerar relatorio!");
+            System.err.println("Falha ao gerar relatório!");
         }
-    }//GEN-LAST:event_btnGerarRelatórioActionPerformed
+    }//GEN-LAST:event_btnGerarRelatorioActionPerformed
 
     private void cmbListaProjetosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbListaProjetosActionPerformed
         // TODO add your handling code here:
@@ -151,6 +168,40 @@ public class EmitirRelatorioProjeto extends javax.swing.JFrame {
         for (Projeto projeto : listaProjetos) {
             model.addElement(projeto);
         }
+    }
+    
+     private void gerarProjetos() throws SQLException {
+        //this.listaProjetos = new ArrayList<Projeto>();
+        this.listaAtividade = new ArrayList<>();
+   
+         
+        for(Atividade atividade: listaAtividade){  
+            if (this.bancoDadosAtividade.ConsultaAtividadePorProj(codDepAtivo));
+                atividade.getCodigo();
+                atividade.getNome();
+                atividade.getEncarregado();
+                atividade.getPercentualConclusao();
+
+                this.listaAtividade.add(atividade);
+            }
+        
+        }
+
+       
+        
+        
+        /*or(int i=1; i<=100; i++){
+            Contato contato = new Contato();
+            contato.setNome("Jão da Silva "+i);
+            contato.setEmail("joaosilva"+i+"@gmail.com");
+            if(i%3==0){
+                contato.setSexo('M');
+            }else{
+                contato.setSexo('F');    
+            }
+            contato.setDataNascimento(new Date());
+            this.listaContatos.add(contato);
+        }*/
     }
     /**
      * @param args the command line arguments
@@ -184,9 +235,11 @@ public class EmitirRelatorioProjeto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnGerarRelatório;
+    private javax.swing.JButton btnGerarRelatorio;
     private javax.swing.JComboBox cmbListaProjetos;
     private javax.swing.JLabel lblMensagem;
     private javax.swing.JPanel plRelatorio;
     // End of variables declaration//GEN-END:variables
+
+        
 }

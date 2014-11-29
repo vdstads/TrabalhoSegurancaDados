@@ -171,7 +171,7 @@ public class BancoDadosAtividade {
         }
         return existeDepartamento;
     }
-    
+       
     public static List<Atividade> ConsultaAtividadePorProj(String codDep) throws SQLException {
         Connection conexao = null;
         PreparedStatement comando = null;

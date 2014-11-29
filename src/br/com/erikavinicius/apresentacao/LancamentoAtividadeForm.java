@@ -90,7 +90,7 @@ public class LancamentoAtividadeForm extends javax.swing.JFrame {
         });
 
         try {
-            txtPercentual.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###")));
+            txtPercentual.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }

@@ -148,7 +148,7 @@ public class ListaAtividadeForm extends javax.swing.JFrame {
                 try {
                     model = new TabelaAtividadeModel(this.bancoDadosAtividade.ConsultaAtividadePorProj(codDepAtivo));
                 } catch (SQLException ex) {
-                    Logger.getLogger(ListaAtividadeForm.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(TabelaAtividadeModel.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 int colunaCodigo = 0;
                 int codigo =  (int) model.getValueAt(tblAtividade.getSelectedRow(), colunaCodigo);
@@ -157,14 +157,14 @@ public class ListaAtividadeForm extends javax.swing.JFrame {
                    EditaAtividadeForm editaAtividadeForm = new EditaAtividadeForm(this.trabalhoSeguranca, usuarioAtivo, codigo);
                    editaAtividadeForm.setVisible(true);
                } catch (SQLException ex) {
-                   Logger.getLogger(ListaAtividadeForm.class.getName()).log(Level.SEVERE, null, ex);
+                   Logger.getLogger(TabelaAtividadeModel.class.getName()).log(Level.SEVERE, null, ex);
                }
                 
                 
                try {
                    this.configurarTblAtividade();
                } catch (SQLException ex) {
-                   Logger.getLogger(ListaAtividadeForm.class.getName()).log(Level.SEVERE, null, ex);
+                   Logger.getLogger(TabelaAtividadeModel.class.getName()).log(Level.SEVERE, null, ex);
                }
                 
                 //JOptionPane.showMessageDialog(null,"Editado com sucesso!");
@@ -183,7 +183,7 @@ public class ListaAtividadeForm extends javax.swing.JFrame {
                 try {
                     model = new TabelaAtividadeModel(this.bancoDadosAtividade.ConsultaAtividadePorProj(codDepAtivo));
                 } catch (SQLException ex) {
-                    Logger.getLogger(ListaAtividadeForm.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(TabelaAtividadeModel.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 int colunaCodigo = 0;
                 int Codigo =  (int) model.getValueAt(tblAtividade.getSelectedRow(), colunaCodigo);
@@ -191,13 +191,13 @@ public class ListaAtividadeForm extends javax.swing.JFrame {
                 try {
                     this.bancoDadosAtividade.removeAtividade(Codigo);
                     } catch (SQLException ex) {
-                    Logger.getLogger(ListaAtividadeForm.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(TabelaAtividadeModel.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 
                 try {
                     this.configurarTblAtividade();
                 } catch (SQLException ex) {
-                    Logger.getLogger(ListaAtividadeForm.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(TabelaAtividadeModel.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 JOptionPane.showMessageDialog(null,"Excluído com sucesso!");
                 
