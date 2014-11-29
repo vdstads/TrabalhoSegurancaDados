@@ -7,6 +7,20 @@
 package br.com.erikavinicius.apresentacao;
 
 import br.com.erikavinicius.TrabalhoSeguranca;
+import br.com.erikavinicius.dados.BancoDadosProjeto;
+import br.com.erikavinicius.entidade.Projeto;
+import java.sql.SQLException;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -15,10 +29,13 @@ import br.com.erikavinicius.TrabalhoSeguranca;
 public class EmitirRelatorioProjeto extends javax.swing.JFrame {
 
     private TrabalhoSeguranca trabalhoSeguranca;
+    private BancoDadosProjeto bancoDadosProjeto;
+    List<Projeto> listaProjetos = new ArrayList<>();
 
     public EmitirRelatorioProjeto(TrabalhoSeguranca trabalhoSeguranca) {
         initComponents();
         this.trabalhoSeguranca = trabalhoSeguranca;
+        this.bancoDadosProjeto = bancoDadosProjeto; 
     }
 
     /**
@@ -30,39 +47,49 @@ public class EmitirRelatorioProjeto extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        plRelatorio = new javax.swing.JPanel();
         lblMensagem = new javax.swing.JLabel();
         cmbListaProjetos = new javax.swing.JComboBox();
         btnGerarRelatório = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Emissão de Relatório", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
+        plRelatorio.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Emissão de Relatório", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
 
         lblMensagem.setText("Escolha um projeto para gerar Relatório:");
 
         cmbListaProjetos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbListaProjetos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbListaProjetosActionPerformed(evt);
+            }
+        });
 
         btnGerarRelatório.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/arrow_refresh.png"))); // NOI18N
-        btnGerarRelatório.setText("Gerar Relatário");
+        btnGerarRelatório.setText("Gerar Relatório");
+        btnGerarRelatório.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGerarRelatórioActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+        javax.swing.GroupLayout plRelatorioLayout = new javax.swing.GroupLayout(plRelatorio);
+        plRelatorio.setLayout(plRelatorioLayout);
+        plRelatorioLayout.setHorizontalGroup(
+            plRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(plRelatorioLayout.createSequentialGroup()
+                .addGroup(plRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblMensagem, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
                     .addComponent(cmbListaProjetos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, plRelatorioLayout.createSequentialGroup()
                 .addContainerGap(108, Short.MAX_VALUE)
                 .addComponent(btnGerarRelatório, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(109, 109, 109))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        plRelatorioLayout.setVerticalGroup(
+            plRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(plRelatorioLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(lblMensagem)
                 .addGap(18, 18, 18)
@@ -78,20 +105,53 @@ public class EmitirRelatorioProjeto extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(plRelatorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(plRelatorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnGerarRelatórioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarRelatórioActionPerformed
+        try {
+            String relatorio = System.getProperty("user.dir")+
+                    "/Relatorios/RelatorioAtividade.jasper";
+            
+            JRBeanCollectionDataSource fonteDados = 
+                    new JRBeanCollectionDataSource(listaProjetos);
+            
+            JasperPrint relatorioGerado = JasperFillManager.fillReport(relatorio, null, fonteDados);
+            
+            JasperViewer jasperViewer = new JasperViewer (relatorioGerado, false);
+            jasperViewer.setVisible(true);
+        } catch (JRException e){
+            System.err.println("Falha ao gerar relatorio!");
+        }
+    }//GEN-LAST:event_btnGerarRelatórioActionPerformed
+
+    private void cmbListaProjetosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbListaProjetosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbListaProjetosActionPerformed
+
+    
+    private void configurarCmbListaProjetos() throws SQLException {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) this.cmbListaProjetos.getModel();
+        
+        model.removeAllElements();
+        
+        List<Projeto> listaProjetos = this.bancoDadosProjeto.ConsultaTodosProjetos();
+        
+        for (Projeto projeto : listaProjetos) {
+            model.addElement(projeto);
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -126,7 +186,7 @@ public class EmitirRelatorioProjeto extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGerarRelatório;
     private javax.swing.JComboBox cmbListaProjetos;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblMensagem;
+    private javax.swing.JPanel plRelatorio;
     // End of variables declaration//GEN-END:variables
 }

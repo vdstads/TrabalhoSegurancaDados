@@ -60,23 +60,21 @@
 	<detail>
 		<band height="20" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="120" height="20" uuid="caacd751-4d24-4f55-a6f9-c30fd844ba8a"/>
-				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
-			</textField>
-			<textField>
 				<reportElement x="382" y="0" width="173" height="20" uuid="814b51f2-7b58-4f46-b79f-e8b11d7be4c8"/>
 			</textField>
 			<textField>
 				<reportElement x="249" y="0" width="132" height="20" uuid="d7cd1f8d-75c8-4590-a7f4-53c58a2cc478"/>
 			</textField>
 			<textField>
-				<reportElement x="120" y="0" width="129" height="20" uuid="437f4292-470f-451c-8156-17755a21740d"/>
-				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+				<reportElement x="120" y="0" width="132" height="20" uuid="e81766b0-9071-4ac4-a400-e584443deef8"/>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="120" height="20" uuid="54b78d1e-9550-4e03-9949-68240ead59ce"/>
 			</textField>
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="54" splitType="Stretch">
+		<band height="20" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="0" width="113" height="20" uuid="fe74e624-9f27-4883-b06a-45b4fb6da2dd"/>
 				<text><![CDATA[Relatorio Gerado em: ]]></text>
@@ -88,6 +86,27 @@
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="42" splitType="Stretch"/>
+		<band height="168" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="65" width="175" height="20" uuid="3a773738-2167-4222-8c9e-157f57dffa03"/>
+				<text><![CDATA[Total de Atividades não Iniciadas:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="33" width="150" height="20" uuid="846af8b5-e27c-4570-9e46-5b497a26b2f0"/>
+				<text><![CDATA[Total de Atividades Iniciadas:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="11f45bee-4791-47cc-a830-8e6a83b9628f"/>
+				<text><![CDATA[Total de Atividades:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="97" width="175" height="20" uuid="29863795-ab3f-4832-bd1e-973a964b87d4"/>
+				<text><![CDATA[Total de Atividades Concluídas:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="131" width="175" height="20" uuid="979a7be8-0ac2-4259-9e3b-1929be6c5813"/>
+				<text><![CDATA[Percentual de Conclusão do Projeto:]]></text>
+			</staticText>
+		</band>
 	</summary>
 </jasperReport>
