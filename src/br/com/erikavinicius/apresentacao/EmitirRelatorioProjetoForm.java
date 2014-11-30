@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -136,6 +137,8 @@ public class EmitirRelatorioProjetoForm extends javax.swing.JFrame {
                     "/Relatorios/RelatorioAtividade.jasper";
             
             JRBeanCollectionDataSource fonteDados = new JRBeanCollectionDataSource(listaAtividade);
+            
+           
             
             JasperPrint relatorioGerado = JasperFillManager.fillReport(relatorio, null, fonteDados);
             

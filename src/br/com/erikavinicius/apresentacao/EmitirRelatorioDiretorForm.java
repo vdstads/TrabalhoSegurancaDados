@@ -27,15 +27,13 @@ import net.sf.jasperreports.view.JasperViewer;
 public class EmitirRelatorioDiretorForm extends javax.swing.JFrame {
 
     private TrabalhoSeguranca trabalhoSeguranca;
-    public Usuario usuarioAtivo = new Usuario();
     private BancoDadosProjeto bancoDadosProjeto;
     public List<Projeto> listaProjetos;
     
-    public EmitirRelatorioDiretorForm(TrabalhoSeguranca trabalhoSeguranca, Usuario usuario) throws SQLException {
+    public EmitirRelatorioDiretorForm(TrabalhoSeguranca trabalhoSeguranca) throws SQLException {
         initComponents();
         this.trabalhoSeguranca = trabalhoSeguranca;
         this.bancoDadosProjeto = bancoDadosProjeto;
-        this.usuarioAtivo = usuario;
         
         this.configurarCmbListaProjetos();
         this.gerarProjetos();

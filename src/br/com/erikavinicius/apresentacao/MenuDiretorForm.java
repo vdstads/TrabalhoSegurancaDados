@@ -238,8 +238,13 @@ public class MenuDiretorForm extends javax.swing.JFrame {
     }//GEN-LAST:event_MenuSairMouseClicked
 
     private void itmEmitirRelatorioProjetoDiretorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmEmitirRelatorioProjetoDiretorActionPerformed
-        EmitirRelatorioDiretorForm emitirRelatorioDiretorForm = new EmitirRelatorioDiretorForm(this.trabalhoSeguranca );
-        emitirRelatorioDiretorForm.setVisible(true);
+        try {
+           EmitirRelatorioDiretorForm emitirRelatorioDiretorForm = new EmitirRelatorioDiretorForm(this.trabalhoSeguranca);
+           emitirRelatorioDiretorForm.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuDiretorForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_itmEmitirRelatorioProjetoDiretorActionPerformed
 
     /**
