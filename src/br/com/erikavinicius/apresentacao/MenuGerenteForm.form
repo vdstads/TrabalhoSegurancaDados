@@ -164,18 +164,32 @@
         <Menu class="javax.swing.JMenu" name="MenuRelatorio">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/br/com/erikavinicius/entidade/icones/10693_32x32.png"/>
+              <Image iconType="3" name="/br/com/erikavinicius/entidade/icones/9754_32x32.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Relat&#xf3;rios"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="itmEmitirRelatorioProjeto">
+            <MenuItem class="javax.swing.JMenuItem" name="itmEmitirRelatorioAtividadeProjeto">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="F9"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/br/com/erikavinicius/entidade/icones/Form.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Emitir Relat&#xf3;rio de Atividade por Projeto"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itmEmitirRelatorioAtividadeProjetoActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="itmEmitirRelatorioProjeto">
+              <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="F10"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/br/com/erikavinicius/entidade/icones/List.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Emitir Relat&#xf3;rio por Projeto"/>
               </Properties>

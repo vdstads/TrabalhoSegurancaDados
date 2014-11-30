@@ -60,6 +60,7 @@ public class MenuGerenteForm extends javax.swing.JFrame {
         itmListarAtividades = new javax.swing.JMenuItem();
         itmListarAtividadesAtrasadas = new javax.swing.JMenuItem();
         MenuRelatorio = new javax.swing.JMenu();
+        itmEmitirRelatorioAtividadeProjeto = new javax.swing.JMenuItem();
         itmEmitirRelatorioProjeto = new javax.swing.JMenuItem();
         MenuSair = new javax.swing.JMenu();
 
@@ -168,11 +169,21 @@ public class MenuGerenteForm extends javax.swing.JFrame {
 
         jMenuBar1.add(MenuAtividade);
 
-        MenuRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/10693_32x32.png"))); // NOI18N
+        MenuRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/9754_32x32.png"))); // NOI18N
         MenuRelatorio.setText("Relatórios");
 
-        itmEmitirRelatorioProjeto.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F9, 0));
-        itmEmitirRelatorioProjeto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/Form.png"))); // NOI18N
+        itmEmitirRelatorioAtividadeProjeto.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F9, 0));
+        itmEmitirRelatorioAtividadeProjeto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/Form.png"))); // NOI18N
+        itmEmitirRelatorioAtividadeProjeto.setText("Emitir Relatório de Atividade por Projeto");
+        itmEmitirRelatorioAtividadeProjeto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmEmitirRelatorioAtividadeProjetoActionPerformed(evt);
+            }
+        });
+        MenuRelatorio.add(itmEmitirRelatorioAtividadeProjeto);
+
+        itmEmitirRelatorioProjeto.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F10, 0));
+        itmEmitirRelatorioProjeto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/List.png"))); // NOI18N
         itmEmitirRelatorioProjeto.setText("Emitir Relatório por Projeto");
         itmEmitirRelatorioProjeto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -315,15 +326,25 @@ public class MenuGerenteForm extends javax.swing.JFrame {
         listaAtividadeAtrasadaForm.setVisible(true);
     }//GEN-LAST:event_itmListarAtividadesAtrasadasActionPerformed
 
-    private void itmEmitirRelatorioProjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmEmitirRelatorioProjetoActionPerformed
+    private void itmEmitirRelatorioAtividadeProjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmEmitirRelatorioAtividadeProjetoActionPerformed
 
         try {
-         EmitirRelatorioProjeto emitirRelatorioProjeto  = new EmitirRelatorioProjeto(this.trabalhoSeguranca, usuarioAtivo);
+         EmitirRelatorioProjetoForm emitirRelatorioProjeto  = new EmitirRelatorioProjetoForm(this.trabalhoSeguranca, usuarioAtivo);
          emitirRelatorioProjeto.setVisible(true);
         } catch (SQLException ex) {
             Logger.getLogger(MenuGerenteForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+    }//GEN-LAST:event_itmEmitirRelatorioAtividadeProjetoActionPerformed
+
+    private void itmEmitirRelatorioProjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmEmitirRelatorioProjetoActionPerformed
+        EmitirRelatorioForm emitirRelatorioForm = null;
+        try {
+            emitirRelatorioForm = new EmitirRelatorioForm(this.trabalhoSeguranca, usuarioAtivo);
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuGerenteForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        emitirRelatorioForm.setVisible(true);
     }//GEN-LAST:event_itmEmitirRelatorioProjetoActionPerformed
 
     /**
@@ -366,6 +387,7 @@ public class MenuGerenteForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem itmCadastarAtividades;
     private javax.swing.JMenuItem itmCadastrarProjeto;
     private javax.swing.JMenuItem itmCadastroFuncionarios;
+    private javax.swing.JMenuItem itmEmitirRelatorioAtividadeProjeto;
     private javax.swing.JMenuItem itmEmitirRelatorioProjeto;
     private javax.swing.JMenuItem itmListaDepartamentos;
     private javax.swing.JMenuItem itmListaFuncionarios;

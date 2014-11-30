@@ -52,6 +52,8 @@ public class MenuDiretorForm extends javax.swing.JFrame {
         itmCadastroFuncionarios = new javax.swing.JMenuItem();
         itmListaFuncionarios = new javax.swing.JMenuItem();
         itmCadastroCargo = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        itmEmitirRelatorioProjetoDiretor = new javax.swing.JMenuItem();
         MenuSair = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -117,6 +119,21 @@ public class MenuDiretorForm extends javax.swing.JFrame {
 
         jMenuBar1.add(itmMenuCadastrarFuncionario);
 
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/9754_32x32.png"))); // NOI18N
+        jMenu2.setText("Relatórios");
+
+        itmEmitirRelatorioProjetoDiretor.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F6, 0));
+        itmEmitirRelatorioProjetoDiretor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/List.png"))); // NOI18N
+        itmEmitirRelatorioProjetoDiretor.setText("Emitir Relatório por Projeto");
+        itmEmitirRelatorioProjetoDiretor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmEmitirRelatorioProjetoDiretorActionPerformed(evt);
+            }
+        });
+        jMenu2.add(itmEmitirRelatorioProjetoDiretor);
+
+        jMenuBar1.add(jMenu2);
+
         MenuSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/halte-session-icone-4911-32.png"))); // NOI18N
         MenuSair.setText("Sair");
         MenuSair.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -137,7 +154,7 @@ public class MenuDiretorForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 559, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,6 +237,11 @@ public class MenuDiretorForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_MenuSairMouseClicked
 
+    private void itmEmitirRelatorioProjetoDiretorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmEmitirRelatorioProjetoDiretorActionPerformed
+        EmitirRelatorioDiretorForm emitirRelatorioDiretorForm = new EmitirRelatorioDiretorForm(this.trabalhoSeguranca );
+        emitirRelatorioDiretorForm.setVisible(true);
+    }//GEN-LAST:event_itmEmitirRelatorioProjetoDiretorActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -256,10 +278,12 @@ public class MenuDiretorForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem itmCadastroCargo;
     private javax.swing.JMenuItem itmCadastroDepartamentos;
     private javax.swing.JMenuItem itmCadastroFuncionarios;
+    private javax.swing.JMenuItem itmEmitirRelatorioProjetoDiretor;
     private javax.swing.JMenuItem itmListaDepartamentos;
     private javax.swing.JMenuItem itmListaFuncionarios;
     private javax.swing.JMenu itmMenuCadastrarFuncionario;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
 }

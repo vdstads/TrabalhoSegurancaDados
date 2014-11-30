@@ -31,7 +31,7 @@
 			<staticText>
 				<reportElement x="272" y="73" width="283" height="22" uuid="3492a1c8-dc77-42ed-af8f-ffaab0bc5576"/>
 				<textElement>
-					<font size="16" isBold="true"/>
+					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Sistema Segurança de Dados]]></text>
 			</staticText>
@@ -42,7 +42,7 @@
 			<staticText>
 				<reportElement x="0" y="0" width="217" height="35" uuid="cce98421-9df4-425d-b371-d8e0ecb43387"/>
 				<textElement>
-					<font size="14" isBold="true"/>
+					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Relatório de Atividades]]></text>
 			</staticText>
