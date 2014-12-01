@@ -10,12 +10,10 @@
 	<field name="projeto.dataTermino" class="java.lang.String"/>
 	<field name="horasTrabalhadas" class="java.lang.Integer"/>
 	<field name="duracao" class="java.lang.Integer"/>
-	<variable name="PERCENTUAL" class="java.lang.Doube">
-                <variableExpression><![CDATA[$F{horasTrabalhadas}*100/$F{duracao}]]></variableExpression>
+	<variable name="PERCENTUAL" class="java.lang.Double">
+            <variableExpression><![CDATA[$F{horasTrabalhadas}*100/$F{duracao}]]></variableExpression>
         </variable>
-	<background>
-		<band splitType="Stretch"/>
-	</background>
+        
 	<title>
 		<band height="95" splitType="Stretch">
 			<image>
@@ -123,13 +121,13 @@
 				<reportElement x="380" y="0" width="56" height="20" uuid="b9a88aaa-b766-4e17-8931-a5d25301a498"/>
 				<textFieldExpression><![CDATA[$F{duracao}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="491" y="0" width="64" height="20" uuid="08613f2d-4a59-4b7f-a52f-31d2dfc057df"/>
-				<textFieldExpression><![CDATA[$V{PERCENTUAL}]]></textFieldExpression>
-			</textField>
 			<line>
 				<reportElement x="0" y="19" width="555" height="1" uuid="b57ec57d-d3ab-49be-9d9e-bffdd905464e"/>
 			</line>
+			<textField>
+				<reportElement x="491" y="0" width="64" height="20" uuid="9ba9ce93-ac94-4ca0-895e-b0b1da20f3b7"/>
+				<textFieldExpression><![CDATA[$V{PERCENTUAL}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<columnFooter>

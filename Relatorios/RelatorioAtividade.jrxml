@@ -6,7 +6,7 @@
 	<parameter name="nomeencarregado" class="java.lang.String"/>
 	<field name="codigo" class="java.lang.Integer"/>
 	<field name="nome" class="java.lang.String"/>
-	<field name="encarregado" class="java.lang.String"/>
+	<field name="encarregado.nome" class="java.lang.String"/>
 	<field name="percentualConclusao" class="java.lang.Integer"/>
 	<field name="horasTrabalhadas" class="java.lang.Integer"/>
 	<variable name="totalAtividades" class="java.lang.Integer"/>
@@ -47,12 +47,12 @@
 				<text><![CDATA[Relatório de Atividades]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="435" y="0" width="80" height="20" uuid="e3ed73ec-d1bd-48ec-a51c-8c414a9c61fb"/>
+				<reportElement x="424" y="0" width="80" height="20" uuid="e3ed73ec-d1bd-48ec-a51c-8c414a9c61fb"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement x="515" y="0" width="40" height="20" uuid="b77a3736-1379-44e1-bd7e-dc448aae3a79"/>
+				<reportElement x="504" y="0" width="40" height="20" uuid="b77a3736-1379-44e1-bd7e-dc448aae3a79"/>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<line>
@@ -94,16 +94,8 @@
 				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="37" y="0" width="129" height="20" uuid="a27524b3-5e15-4951-9dec-c9b5585cb2cb"/>
-				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
-			</textField>
-			<textField>
 				<reportElement x="285" y="0" width="139" height="20" uuid="d733bbe9-549a-48fc-b266-e3bec3d5f999"/>
 				<textFieldExpression><![CDATA[$F{horasTrabalhadas}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="166" y="0" width="119" height="20" uuid="e1010eab-b7d8-4f70-90bd-cb9524242852"/>
-				<textFieldExpression><![CDATA[$F{encarregado}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="424" y="0" width="131" height="20" uuid="71d9fa6d-43a5-4eec-b2c7-d0e0b1d5c37b"/>
@@ -112,6 +104,14 @@
 			<line>
 				<reportElement x="0" y="19" width="555" height="1" uuid="e1a2c0b3-53eb-40a4-a6cc-80abe7cf875f"/>
 			</line>
+			<textField>
+				<reportElement x="166" y="0" width="119" height="20" uuid="1daa8979-3f72-4831-87f6-c8ac51b003ba"/>
+				<textFieldExpression><![CDATA[$F{encarregado.nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="37" y="0" width="129" height="20" uuid="94afbcb6-6f53-490a-88ec-bbc1ec83633f"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<pageFooter>
@@ -142,7 +142,7 @@
 			</textField>
 			<textField pattern="#,##0.00 %">
 				<reportElement x="0" y="96" width="368" height="20" uuid="3fc78fc1-a54d-4e00-9e90-fc3669f99102"/>
-				<textFieldExpression><![CDATA["Percentual de Conclusão do Projeto: "+$V{PercentualConclusão}+" %"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Percentual de Conclusão do Projeto: "+$V{PercentualConclusão}+"%"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
 				<reportElement x="0" y="16" width="330" height="20" uuid="88525f3a-a80d-42ad-aa17-6036c8e0370a"/>
