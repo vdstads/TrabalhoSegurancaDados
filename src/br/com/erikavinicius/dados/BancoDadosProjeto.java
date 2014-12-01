@@ -9,6 +9,7 @@ import br.com.erikavinicius.entidade.Atividade;
 import br.com.erikavinicius.entidade.Departamento;
 import br.com.erikavinicius.entidade.Diretor;
 import br.com.erikavinicius.entidade.Encarregado;
+import br.com.erikavinicius.entidade.Gerente;
 import br.com.erikavinicius.entidade.Projeto;
 import br.com.erikavinicius.entidade.Usuario;
 import java.sql.Connection;
@@ -294,10 +295,12 @@ public class BancoDadosProjeto {
                 Projeto projeto = new Projeto();
                 Departamento departamento = new Departamento();
                 Encarregado encarregado = new Encarregado();
+                Gerente gerente = new Gerente();
                 
                 projeto.setNome(resultado.getString(1));
                 departamento.setNome(resultado.getString(2));
-                encarregado.setNome(resultado.getString(3));
+                gerente.setNome(resultado.getString(3));
+                departamento.setGerente(gerente);
                 projeto.setDepartamento(departamento);
                 projeto.setDataInicio(resultado.getString(4));
                 projeto.setDataTermino(resultado.getString(5));

@@ -47,12 +47,12 @@
 				<text><![CDATA[Relatório de Atividades]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="424" y="0" width="80" height="20" uuid="e3ed73ec-d1bd-48ec-a51c-8c414a9c61fb"/>
+				<reportElement x="435" y="0" width="80" height="20" uuid="e3ed73ec-d1bd-48ec-a51c-8c414a9c61fb"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement x="504" y="0" width="40" height="20" uuid="b77a3736-1379-44e1-bd7e-dc448aae3a79"/>
+				<reportElement x="515" y="0" width="40" height="20" uuid="b77a3736-1379-44e1-bd7e-dc448aae3a79"/>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<line>
