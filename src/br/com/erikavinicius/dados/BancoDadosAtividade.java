@@ -172,7 +172,7 @@ public class BancoDadosAtividade {
         return existeDepartamento;
     }
        
-    public static List<Atividade> ConsultaAtividadePorProj(String codDep) throws SQLException {
+    public static List<Atividade> ConsultaAtividadePorDep(String codDep) throws SQLException {
         Connection conexao = null;
         PreparedStatement comando = null;
         ResultSet resultado = null;
@@ -376,7 +376,7 @@ public class BancoDadosAtividade {
         return existeAtividade;
     }
     
-    public static List<Atividade> RelatorioAtividadePorProjeto(String codDep) throws SQLException {
+    public static List<Atividade> RelatorioAtividadePorProjeto(int codProj) throws SQLException {
         Connection conexao = null;
         PreparedStatement comando = null;
         ResultSet resultado = null;
@@ -389,7 +389,7 @@ public class BancoDadosAtividade {
             String sql = "SELECT A.COD_ATIVIDADE, A.NOME, A.DURACAO_PREV, A.HORAS_TRABALHADAS, A.PERCENTUAL_CONCLUSAO, F.NOME FROM ATIVIDADE A "
                        + "INNER JOIN PROJETO P ON (P.COD_PROJETO = A.FK_PROJETO) "
                        + "INNER JOIN FUNCIONARIO F ON (F.CPF = A.FK_ENCARREGADO_CPF) "
-                       + "WHERE P.FK_DEPARTAMENTO = '"+codDep+"'"
+                       + "WHERE P.COD_PROJETO = '"+codProj+"'"
                        + "ORDER BY NOME";
             
             comando = conexao.prepareStatement(sql);
@@ -401,13 +401,15 @@ public class BancoDadosAtividade {
                 //(Note que no BD o index inicia por 1)
                                 
                 Atividade atividade = new Atividade();
-                Encarregado encarregado = new Encarregado();
+                
                 atividade.setCodigo(resultado.getInt(1));
                 atividade.setNome(resultado.getString(2));
                 atividade.setDuracao(resultado.getInt(3));
                 atividade.setHorasTrabalhadas(resultado.getInt(4));
                 atividade.setPercentualConclusao(resultado.getInt(5));
+                Encarregado encarregado = new Encarregado();
                 encarregado.setNome(resultado.getString(6));
+                
                 atividade.setEncarregado(encarregado);
                 //Adiciona um item à lista que será retornada
                 listaAtividade.add(atividade);

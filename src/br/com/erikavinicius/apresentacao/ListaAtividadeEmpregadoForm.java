@@ -134,7 +134,7 @@ public class ListaAtividadeEmpregadoForm extends javax.swing.JFrame {
             if (result == JOptionPane.YES_OPTION) {
                 TabelaAtividadeModel model = null;
                 try {
-                    model = new TabelaAtividadeModel(this.bancoDadosAtividade.ConsultaAtividadePorProj(codDepAtivo));
+                    model = new TabelaAtividadeModel(this.bancoDadosAtividade.ConsultaAtividadePorDep(codDepAtivo));
                 } catch (SQLException ex) {
                     Logger.getLogger(ListaAtividadeEmpregadoForm.class.getName()).log(Level.SEVERE, null, ex);
                 }

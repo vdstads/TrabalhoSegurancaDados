@@ -18,6 +18,7 @@ import br.com.erikavinicius.entidade.Gerente;
 import br.com.erikavinicius.entidade.Projeto;
 import br.com.erikavinicius.entidade.Usuario;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -146,7 +147,7 @@ public class ListaAtividadeForm extends javax.swing.JFrame {
             if (result == JOptionPane.YES_OPTION) {
                 TabelaAtividadeModel model = null;
                 try {
-                    model = new TabelaAtividadeModel(this.bancoDadosAtividade.ConsultaAtividadePorProj(codDepAtivo));
+                    model = new TabelaAtividadeModel(this.bancoDadosAtividade.ConsultaAtividadePorDep(codDepAtivo));
                 } catch (SQLException ex) {
                     Logger.getLogger(TabelaAtividadeModel.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -181,7 +182,7 @@ public class ListaAtividadeForm extends javax.swing.JFrame {
             if (result == JOptionPane.YES_OPTION) {
                 TabelaAtividadeModel model = null;
                 try {
-                    model = new TabelaAtividadeModel(this.bancoDadosAtividade.ConsultaAtividadePorProj(codDepAtivo));
+                    model = new TabelaAtividadeModel(this.bancoDadosAtividade.ConsultaAtividadePorDep(codDepAtivo));
                 } catch (SQLException ex) {
                     Logger.getLogger(TabelaAtividadeModel.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -208,7 +209,7 @@ public class ListaAtividadeForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirActionPerformed
     
     void configurarTblAtividade() throws SQLException {
-        TabelaAtividadeModel model = new TabelaAtividadeModel(this.bancoDadosAtividade.RelatorioAtividadePorProjeto(codDepAtivo));
+        TabelaAtividadeModel model = new TabelaAtividadeModel(this.bancoDadosAtividade.ConsultaAtividadePorDep(codDepAtivo));
 
         tblAtividade.setModel(model);
     }
@@ -243,7 +244,8 @@ public class ListaAtividadeForm extends javax.swing.JFrame {
                 return atividade.getDuracao();
             } else {
                 return atividade.getEncarregado().getNome();
-            }   
+            }
+            
         }
 
         public String getColumnName(int columnIndex) {

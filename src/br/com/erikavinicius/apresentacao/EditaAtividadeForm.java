@@ -276,7 +276,7 @@ public class EditaAtividadeForm extends javax.swing.JFrame {
         Atividade atvTemp = new Atividade();
         List<Atividade> listaAtividade = null;
         try {
-            listaAtividade  = this.bancoDadosAtividade.ConsultaAtividadePorProj(codDepAtivo);
+            listaAtividade  = this.bancoDadosAtividade.ConsultaAtividadePorDep(codDepAtivo);
         } catch (SQLException ex) {
             Logger.getLogger(EditaDepartamentoForm.class.getName()).log(Level.SEVERE, null, ex);
         }

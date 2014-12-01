@@ -18,6 +18,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JRException;
@@ -35,7 +37,6 @@ public class EmitirRelatorioProjetoForm extends javax.swing.JFrame {
     private TrabalhoSeguranca trabalhoSeguranca;
     private BancoDadosProjeto bancoDadosProjeto;
     public List<Projeto> listaProjetos;
-    public List<Atividade> listaAtividade;
     private BancoDadosAtividade bancoDadosAtividade;
     public Atividade atividade = new Atividade();
     public Usuario usuarioAtivo = new Usuario();
@@ -48,11 +49,8 @@ public class EmitirRelatorioProjetoForm extends javax.swing.JFrame {
         this.bancoDadosProjeto = bancoDadosProjeto;
         this.listaProjetos = listaProjetos;
         this.bancoDadosAtividade = bancoDadosAtividade;
-        this.usuarioAtivo = usuario;
-        
-        
+        this.usuarioAtivo = usuario;  
         this.configurarCmbListaProjetos();
-        this.gerarProjetos();
         
     }
 
@@ -133,10 +131,16 @@ public class EmitirRelatorioProjetoForm extends javax.swing.JFrame {
     private void btnGerarRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarRelatorioActionPerformed
         //chama o relatorio
         try {
+            Projeto projTemp = new Projeto();
+            projTemp = (Projeto) this.cmbListaProjetos.getSelectedItem();
+            
+            List<Atividade> listaAtvividade = new ArrayList<>();
+            listaAtvividade = this.bancoDadosAtividade.RelatorioAtividadePorProjeto(projTemp.getCodigo());
+            
             String relatorio = System.getProperty("user.dir")+
                     "/Relatorios/RelatorioAtividade.jasper";
             
-            JRBeanCollectionDataSource fonteDados = new JRBeanCollectionDataSource(listaAtividade);
+            JRBeanCollectionDataSource fonteDados = new JRBeanCollectionDataSource(listaAtvividade);
             
            
             
@@ -146,6 +150,8 @@ public class EmitirRelatorioProjetoForm extends javax.swing.JFrame {
             jasperViewer.setVisible(true);
         } catch (JRException ex){
             System.out.println("Falha ao gerar Relatorio: "+ex.getMessage());
+        } catch (SQLException ex) {
+            Logger.getLogger(EmitirRelatorioProjetoForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnGerarRelatorioActionPerformed
 
@@ -165,12 +171,7 @@ public class EmitirRelatorioProjetoForm extends javax.swing.JFrame {
             model.addElement(projeto);
         }
     }
-    
-    private void gerarProjetos() throws SQLException {
-        this.listaAtividade = new ArrayList<>(this.bancoDadosAtividade.ConsultaAtividadePorProj(usuarioAtivo.getSenha()));
-    }
-
-    
+       
     /**
      * @param args the command line arguments
      */
