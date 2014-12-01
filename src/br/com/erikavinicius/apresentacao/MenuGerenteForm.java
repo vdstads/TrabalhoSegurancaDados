@@ -10,6 +10,7 @@ import br.com.erikavinicius.dados.BancoDadosAtividade;
 import br.com.erikavinicius.dados.BancoDadosDepartamento;
 import br.com.erikavinicius.dados.BancoDadosFuncionario;
 import br.com.erikavinicius.dados.BancoDadosProjeto;
+import br.com.erikavinicius.entidade.Atividade;
 import br.com.erikavinicius.entidade.Departamento;
 import br.com.erikavinicius.entidade.Usuario;
 import java.sql.SQLException;
@@ -18,6 +19,11 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -338,13 +344,33 @@ public class MenuGerenteForm extends javax.swing.JFrame {
     }//GEN-LAST:event_itmEmitirRelatorioAtividadeProjetoActionPerformed
 
     private void itmEmitirRelatorioProjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmEmitirRelatorioProjetoActionPerformed
-        EmitirRelatorioForm emitirRelatorioForm = null;
+        /*EmitirRelatorioForm emitirRelatorioForm = null;
         try {
             emitirRelatorioForm = new EmitirRelatorioForm(this.trabalhoSeguranca, usuarioAtivo);
         } catch (SQLException ex) {
             Logger.getLogger(MenuGerenteForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        emitirRelatorioForm.setVisible(true);
+        emitirRelatorioForm.setVisible(true);*/
+        try {
+        List<Atividade> listaAtvividade = new ArrayList<>();
+        listaAtvividade = this.bancoDadosProjeto.RelatorioProjetosPorDep(usuarioAtivo.getSenha());
+        String relatorio = System.getProperty("user.dir")+
+            "/Relatorios/RelatorioProjetoGerente.jasper";
+
+            JRBeanCollectionDataSource fonteDados = new JRBeanCollectionDataSource(listaAtvividade);
+
+            JasperPrint relatorioGerado;
+        
+            relatorioGerado = JasperFillManager.fillReport(relatorio, null, fonteDados);
+        
+
+            JasperViewer jasperViewer = new JasperViewer (relatorioGerado, false);
+            jasperViewer.setVisible(true);
+        } catch (JRException ex){
+            System.out.println("Falha ao gerar Relatorio: "+ex.getMessage());
+            } catch (SQLException ex) {
+            Logger.getLogger(MenuGerenteForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_itmEmitirRelatorioProjetoActionPerformed
 
     /**

@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="aa49d3c4-ffde-4aee-83e6-066a37f9d9b6">
+	<property name="ireport.zoom" value="1.6105100000000072"/>
+	<property name="ireport.x" value="12"/>
+	<property name="ireport.y" value="21"/>
+	<field name="projeto.nome" class="java.lang.String"/>
+	<field name="projeto.departamento.nome" class="java.lang.String"/>
+	<field name="projeto.departamento.gerente.nome" class="java.lang.String"/>
+	<field name="projeto.dataInicio" class="java.lang.String"/>
+	<field name="projeto.dataTermino" class="java.lang.String"/>
+	<field name="horasTrabalhadas" class="java.lang.String"/>
+	<field name="duracao" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -10,10 +20,68 @@
 		<band height="35" splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="61" splitType="Stretch"/>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="2" width="100" height="20" uuid="17552384-2aa6-40c2-b687-09e00a73a7db"/>
+				<text><![CDATA[Projeto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="2" width="100" height="20" uuid="4af4de6a-a599-4ffa-9ac1-6b616a94067e"/>
+				<text><![CDATA[Departamento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="2" width="100" height="20" uuid="0b382ca3-784e-44ee-b13c-8d28ae2b9ac3"/>
+				<text><![CDATA[Gerente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="2" width="77" height="20" uuid="f9a53361-a580-4ca4-bb9f-e88f035375fd"/>
+				<text><![CDATA[Inicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="377" y="2" width="62" height="20" uuid="be6b536f-4535-431e-8abb-fc985c0cc809"/>
+				<text><![CDATA[Termino]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="513" y="2" width="42" height="20" uuid="d2efd0c1-fd25-4ec6-be60-60e3a16c2eb9"/>
+				<text><![CDATA[T Atv Conc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="439" y="2" width="74" height="20" uuid="029d4427-e464-44d4-9404-be0552333ff9"/>
+				<text><![CDATA[Total de Atv]]></text>
+			</staticText>
+		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch"/>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="e2b6d612-a73b-4183-905c-5d30fd6db7a2"/>
+				<textFieldExpression><![CDATA[$F{projeto.nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="100" height="20" uuid="d5a7009c-6e12-4094-a4fe-12ff69646503"/>
+				<textFieldExpression><![CDATA[$F{projeto.departamento.nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="77" height="20" uuid="4e8b44e9-a151-4546-a2b5-cdade0918bd4"/>
+				<textFieldExpression><![CDATA[$F{projeto.dataInicio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="377" y="0" width="62" height="20" uuid="101675df-a038-430b-a9c3-533763e4e12f"/>
+				<textFieldExpression><![CDATA[$F{projeto.dataTermino}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="513" y="0" width="42" height="20" uuid="fda32fa3-56e0-492d-b9cc-f95feebdf4d7"/>
+				<textFieldExpression><![CDATA[$F{horasTrabalhadas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="457" y="0" width="56" height="20" uuid="b9a88aaa-b766-4e17-8931-a5d25301a498"/>
+				<textFieldExpression><![CDATA[$F{duracao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="0" width="100" height="20" uuid="8323d3f9-f08f-4d92-af4c-0ebc3f31ec7e"/>
+				<textFieldExpression><![CDATA[$F{projeto.departamento.gerente.nome}]]></textFieldExpression>
+			</textField>
+		</band>
 	</detail>
 	<columnFooter>
 		<band height="45" splitType="Stretch"/>
