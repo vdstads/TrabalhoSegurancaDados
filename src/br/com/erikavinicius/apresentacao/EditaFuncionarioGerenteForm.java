@@ -5,10 +5,13 @@ import br.com.erikavinicius.TrabalhoSeguranca;
 import br.com.erikavinicius.dados.BancoDados;
 import br.com.erikavinicius.dados.BancoDadosFuncionario;
 import br.com.erikavinicius.entidade.Usuario;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
@@ -25,6 +28,7 @@ public class EditaFuncionarioGerenteForm extends javax.swing.JFrame {
     private CryptographyTripleDES criptografia;
     private Usuario usuarioAtivo;
     private String CPF;
+    Logger logger = Logger.getLogger(TrabalhoSeguranca.class.getName()); 
     
     public EditaFuncionarioGerenteForm(TrabalhoSeguranca trabalhoSeguranca, String cpf) {
         initComponents();
@@ -35,6 +39,18 @@ public class EditaFuncionarioGerenteForm extends javax.swing.JFrame {
         this.CPF = cpf;
         
         this.preencher();
+        
+        try {
+            
+            FileHandler simpleHandler = new FileHandler("log.txt", true);
+            simpleHandler.setFormatter(new SimpleFormatter());
+            logger.addHandler(simpleHandler);
+            logger.setUseParentHandlers(false);
+            
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Falha ao criar log", e);
+        }
+ 
     }
 
     
@@ -184,21 +200,25 @@ public class EditaFuncionarioGerenteForm extends javax.swing.JFrame {
                 CryptographyTripleDES cryptography = CryptographyTripleDES.newInstance();
                 senha = cryptography.encrypt(senha);
             } catch (Exception e) {
+                logger.log(Level.SEVERE, e.getMessage(), e);
             }
             try {
                 this.bancoDadosFuncionario.EditaFuncionario(cpf, nome, email, senha, cargo, CPF);
             } catch (SQLException ex) {
                 Logger.getLogger(EditaFuncionarioGerenteForm.class.getName()).log(Level.SEVERE, null, ex);
+                logger.log(Level.SEVERE, ex.getMessage(), ex);
             }
             this.limpar();
             JOptionPane.showMessageDialog(this, cargo+" editado com sucesso!", "Edição de Funcionario", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
+            logger.info("Funcionario"+nome+" Editado com sucesso");
             ListaFuncionarioGerenteForm listaFuncionarioGerenteForm;
             
             try {
                 listaFuncionarioGerenteForm = new ListaFuncionarioGerenteForm(this.trabalhoSeguranca, usuarioAtivo);
                 listaFuncionarioGerenteForm.setVisible(true);
             } catch (Exception e) {
+                logger.log(Level.SEVERE, e.getMessage(), e);
             } 
         }   
     }//GEN-LAST:event_btnSalvarActionPerformed
@@ -232,8 +252,6 @@ public class EditaFuncionarioGerenteForm extends javax.swing.JFrame {
             this.rdoGerente.setSelected(true);
         }
         
-                
-
         txtNome.setText(usrTemp.getNome());
         txtCpf.setText(usrTemp.getCpf());
         txtEmail.setText(usrTemp.getEmail());

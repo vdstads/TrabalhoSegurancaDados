@@ -12,10 +12,13 @@ import br.com.erikavinicius.dados.BancoDadosFuncionario;
 import br.com.erikavinicius.dados.BancoDadosProjeto;
 import br.com.erikavinicius.entidade.Projeto;
 import br.com.erikavinicius.entidade.Usuario;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import javax.swing.JOptionPane;
 
 /**
@@ -29,6 +32,7 @@ public class EditaProjetoForm extends javax.swing.JFrame {
     private BancoDadosDepartamento bancoDadosDepartamento;
     private int codigoProj;
     private Usuario usuarioAtivo;
+    Logger logger = Logger.getLogger(TrabalhoSeguranca.class.getName()); 
     
     public EditaProjetoForm(TrabalhoSeguranca trabalhoSeguranca, int codigo, Usuario usuario) {
         initComponents();
@@ -38,6 +42,17 @@ public class EditaProjetoForm extends javax.swing.JFrame {
         this.usuarioAtivo = usuario;
         this.bancoDadosDepartamento = bancoDadosDepartamento;
         this.preencher();
+        
+        try {
+            
+            FileHandler simpleHandler = new FileHandler("log.txt", true);
+            simpleHandler.setFormatter(new SimpleFormatter());
+            logger.addHandler(simpleHandler);
+            logger.setUseParentHandlers(false);
+            
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Falha ao criar log", e);
+        }
     }
 
 
@@ -180,9 +195,11 @@ public class EditaProjetoForm extends javax.swing.JFrame {
                 usuario = BancoDadosFuncionario.ConsultaFuncionarioPorEmail(usuarioAtivo.getEmail());
                 JOptionPane.showMessageDialog(this, "Projeto Editado com sucesso!", "Edição de Projeto", JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
+                logger.info("Projeto "+nome+" Editado com sucesso");
             }
         } catch (SQLException ex) {
             Logger.getLogger(EditaProjetoForm.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 

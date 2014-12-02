@@ -11,9 +11,12 @@ import br.com.erikavinicius.dados.BancoDadosFuncionario;
 import br.com.erikavinicius.dados.BancoDadosProjeto;
 import br.com.erikavinicius.entidade.Projeto;
 import br.com.erikavinicius.entidade.Usuario;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import javax.swing.JOptionPane;
 
 /**
@@ -27,6 +30,7 @@ public class CadastroProjetoForm extends javax.swing.JFrame {
     private BancoDadosDepartamento bancoDadosDepartamento;
     private BancoDadosFuncionario bancoDadosFuncionario;
     private Usuario usuarioAtivo;
+    Logger logger = Logger.getLogger(TrabalhoSeguranca.class.getName());
 
     public CadastroProjetoForm(TrabalhoSeguranca trabalhoSeguranca, Usuario usuario) {
         initComponents();
@@ -35,6 +39,18 @@ public class CadastroProjetoForm extends javax.swing.JFrame {
         this.bancoDadosDepartamento = bancoDadosDepartamento;
         this.bancoDadosFuncionario = bancoDadosFuncionario;
         this.usuarioAtivo = usuario;
+        
+        try {
+            
+            FileHandler simpleHandler = new FileHandler("log.txt", true);
+            simpleHandler.setFormatter(new SimpleFormatter());
+            logger.addHandler(simpleHandler);
+            logger.setUseParentHandlers(false);
+            
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Falha ao criar log", e);
+        }
+ 
     }
 
 
@@ -191,6 +207,7 @@ public class CadastroProjetoForm extends javax.swing.JFrame {
                 usuario = BancoDadosFuncionario.ConsultaFuncionarioPorEmail(usuarioAtivo.getEmail());
                 JOptionPane.showMessageDialog(this, "Projeto adicionado com sucesso!", "Cadastro de Projeto", JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
+                logger.info("Projeto "+nome+" Cadastrado com sucesso");
             }
         } catch (SQLException ex) {
             Logger.getLogger(CadastroProjetoForm.class.getName()).log(Level.SEVERE, null, ex);

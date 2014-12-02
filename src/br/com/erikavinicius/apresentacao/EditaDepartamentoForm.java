@@ -14,10 +14,13 @@ import br.com.erikavinicius.dados.BancoDadosFuncionario;
 import br.com.erikavinicius.entidade.Departamento;
 import br.com.erikavinicius.entidade.Gerente;
 import br.com.erikavinicius.entidade.Usuario;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
@@ -32,18 +35,30 @@ public class EditaDepartamentoForm extends javax.swing.JFrame {
     private BancoDadosDepartamento bancoDadosDepartamento;
     private String codigoDep;
     private Gerente CPF_Atual;
+    Logger logger = Logger.getLogger(TrabalhoSeguranca.class.getName()); 
     
     public EditaDepartamentoForm(TrabalhoSeguranca trabalhoSeguranca, String codigoDep, Gerente CPFAtual) {
         initComponents();
-    this.trabalhoSeguranca = trabalhoSeguranca;
-    this.bancoDadosFuncionario = bancoDadosFuncionario;
-    this.bancoDadosDepartamento = bancoDadosDepartamento;
-    this.codigoDep = codigoDep;
-    this.CPF_Atual = CPFAtual;
-    this.configurarCmbGerente();
-    this.preencher();
+        this.trabalhoSeguranca = trabalhoSeguranca;
+        this.bancoDadosFuncionario = bancoDadosFuncionario;
+        this.bancoDadosDepartamento = bancoDadosDepartamento;
+        this.codigoDep = codigoDep;
+        this.CPF_Atual = CPFAtual;
+        this.configurarCmbGerente();
+        this.preencher();
     
-    }
+        try {
+
+                FileHandler simpleHandler = new FileHandler("log.txt", true);
+                simpleHandler.setFormatter(new SimpleFormatter());
+                logger.addHandler(simpleHandler);
+                logger.setUseParentHandlers(false);
+
+            } catch (IOException e) {
+                logger.log(Level.SEVERE, "Falha ao criar log", e);
+            }
+
+        }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -166,10 +181,12 @@ public class EditaDepartamentoForm extends javax.swing.JFrame {
                 this.bancoDadosDepartamento.EditaDepartamento(codigo, nome, cpfGerente, codigoDep);
             } catch (SQLException ex) {
                 Logger.getLogger(EditaDepartamentoForm.class.getName()).log(Level.SEVERE, null, ex);
+                logger.log(Level.SEVERE, ex.getMessage(), ex); 
             }
            JOptionPane.showMessageDialog(this, "Departamento Editado com sucesso!", "Edição de Departamento", JOptionPane.INFORMATION_MESSAGE);
            limpar();
            this.dispose();
+           logger.info("Departamento "+nome+" Editado com sucesso");
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 

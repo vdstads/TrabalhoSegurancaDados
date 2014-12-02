@@ -13,8 +13,10 @@ import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.swing.JOptionPane;
@@ -27,7 +29,7 @@ public class LoginForm extends javax.swing.JFrame {
     
     private TrabalhoSeguranca trabalhoSeguranca;
     private BancoDadosFuncionario bancoDadosFuncionario;
-    
+    Logger logger = Logger.getLogger(TrabalhoSeguranca.class.getName()); 
     Usuario usuario = new Usuario();
     
     public LoginForm(TrabalhoSeguranca trabalhoSeguranca) {
@@ -35,6 +37,17 @@ public class LoginForm extends javax.swing.JFrame {
         this.trabalhoSeguranca = trabalhoSeguranca;
         this.bancoDadosFuncionario = bancoDadosFuncionario;
         this.setLocationRelativeTo(null);
+        
+        try {
+            
+            FileHandler simpleHandler = new FileHandler("log.txt", true);
+            simpleHandler.setFormatter(new SimpleFormatter());
+            logger.addHandler(simpleHandler);
+            logger.setUseParentHandlers(false);
+            
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Falha ao criar log", e);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -165,17 +178,20 @@ public class LoginForm extends javax.swing.JFrame {
             if (this.trabalhoSeguranca.login(email, senha) == true){
                 usuario = this.bancoDadosFuncionario.ConsultaFuncionarioPorEmail(email);
                 if(usuario.getCargo().equals("DIRETOR")){
+                    this.logger.info("Logado com Diretor, email: "+email);
                     MenuDiretorForm menuDiretorForm = new MenuDiretorForm(this.trabalhoSeguranca);
-                    menuDiretorForm.setVisible(true);       
+                    menuDiretorForm.setVisible(true);
                 }else if(usuario.getCargo().equals("GERENTE")){
                     if (!bancoDadosFuncionario.ConsultaNaoExisteDep(usuario.getEmail())){
+                        this.logger.info("Logado com Gerente, email: "+email);
                         MenuGerenteForm menuGerenteForm = new MenuGerenteForm(this.trabalhoSeguranca, usuario);
-                        menuGerenteForm.setVisible(true);     
+                        menuGerenteForm.setVisible(true);  
                     } else {
                         JOptionPane.showMessageDialog(this, "Gerente não cadastrado em nenhum departamento!!", "Erro", JOptionPane.WARNING_MESSAGE);   
                         }
                 }else if(usuario.getCargo().equals("ENCARREGADO")){
                     if (!bancoDadosFuncionario.ConsultaNaoExisteDep(usuario.getEmail())){
+                        this.logger.info("Logado com Encarregado, email: "+email);
                         MenuEncarregadoForm menuEncarregadoForm = new MenuEncarregadoForm(this.trabalhoSeguranca, usuario);
                         menuEncarregadoForm.setVisible(true);
                     } else {

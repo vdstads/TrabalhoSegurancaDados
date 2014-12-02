@@ -14,11 +14,14 @@ import br.com.erikavinicius.entidade.Departamento;
 import br.com.erikavinicius.entidade.Encarregado;
 import br.com.erikavinicius.entidade.Projeto;
 import br.com.erikavinicius.entidade.Usuario;
+import java.io.IOException;
 import static java.lang.Integer.parseInt;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
@@ -36,6 +39,7 @@ public class EditaAtividadeForm extends javax.swing.JFrame {
     Usuario usuario = new Usuario();
     private String codDepAtivo;
     private int codAtv;
+    Logger logger = Logger.getLogger(TrabalhoSeguranca.class.getName());
 
     public EditaAtividadeForm(TrabalhoSeguranca trabalhoSeguranca, Usuario usuario, int cod) throws SQLException {
         initComponents();
@@ -49,6 +53,17 @@ public class EditaAtividadeForm extends javax.swing.JFrame {
         this.codDepAtivo = usuario.getSenha();
         this.configurarCmbEncarregado();
         this.configurarCmbProjeto();
+        
+        try {
+            
+            FileHandler simpleHandler = new FileHandler("log.txt", true);
+            simpleHandler.setFormatter(new SimpleFormatter());
+            logger.addHandler(simpleHandler);
+            logger.setUseParentHandlers(false);
+            
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Falha ao criar log", e);
+        }
     }
 
 
@@ -194,9 +209,11 @@ public class EditaAtividadeForm extends javax.swing.JFrame {
                 this.bancoDadosAtividade.EditaAtividade(codigo, nome, duracao, encTemp.getCpf(), codProjeto);
                 JOptionPane.showMessageDialog(this, "Atividade adicionada com sucesso!", "Cadastro de Atividade", JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
+                logger.info("Atividade "+nome+" Cadastrada com sucesso");
             }
         } catch (SQLException ex) {
             Logger.getLogger(EditaAtividadeForm.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, ex.getMessage(), ex); 
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 

@@ -9,9 +9,12 @@ import br.com.erikavinicius.CryptographyTripleDES;
 import br.com.erikavinicius.TrabalhoSeguranca;
 import br.com.erikavinicius.dados.BancoDados;
 import br.com.erikavinicius.dados.BancoDadosFuncionario;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
@@ -25,11 +28,23 @@ public class CadastroFuncionarioForm extends javax.swing.JFrame {
     private TrabalhoSeguranca trabalhoSeguranca;
     private BancoDadosFuncionario bancoDadosFuncionario;
     private CryptographyTripleDES criptografia;
+    Logger logger = Logger.getLogger(TrabalhoSeguranca.class.getName()); 
     
     public CadastroFuncionarioForm(TrabalhoSeguranca trabalhoSeguranca) {
         initComponents();
         this.trabalhoSeguranca = trabalhoSeguranca;
         this.bancoDadosFuncionario = bancoDadosFuncionario;
+        
+        try {
+            
+            FileHandler simpleHandler = new FileHandler("log.txt", true);
+            simpleHandler.setFormatter(new SimpleFormatter());
+            logger.addHandler(simpleHandler);
+            logger.setUseParentHandlers(false);
+            
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Falha ao criar log", e);
+        }
     }
 
  
@@ -194,6 +209,7 @@ public class CadastroFuncionarioForm extends javax.swing.JFrame {
                     this.limpar();
                     JOptionPane.showMessageDialog(this, cargo+" cadastrado com sucesso!", "Cadastro de Funcionario", JOptionPane.INFORMATION_MESSAGE);
                     this.dispose();
+                    logger.info("Funcionario "+nome+" Cadastrado");
                 }else{
                     JOptionPane.showMessageDialog(this, "E-mail ou CPF Ja cadastrados!", "Erro", JOptionPane.WARNING_MESSAGE);
                 }

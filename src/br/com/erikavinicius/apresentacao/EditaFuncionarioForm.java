@@ -5,10 +5,13 @@ import br.com.erikavinicius.TrabalhoSeguranca;
 import br.com.erikavinicius.dados.BancoDados;
 import br.com.erikavinicius.dados.BancoDadosFuncionario;
 import br.com.erikavinicius.entidade.Usuario;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
@@ -25,6 +28,7 @@ public class EditaFuncionarioForm extends javax.swing.JFrame {
     private CryptographyTripleDES criptografia;
     String CPF;
     private ListaFuncionarioForm listaFuncionario;
+    Logger logger = Logger.getLogger(TrabalhoSeguranca.class.getName()); 
     
     public EditaFuncionarioForm(TrabalhoSeguranca trabalhoSeguranca, String cpf) {
         initComponents();
@@ -34,6 +38,17 @@ public class EditaFuncionarioForm extends javax.swing.JFrame {
         CPF = cpf;
         preencher();
         
+        try {
+            
+            FileHandler simpleHandler = new FileHandler("log.txt", true);
+            simpleHandler.setFormatter(new SimpleFormatter());
+            logger.addHandler(simpleHandler);
+            logger.setUseParentHandlers(false);
+            
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Falha ao criar log", e);
+        }
+ 
     }
  
     @SuppressWarnings("unchecked")
@@ -199,21 +214,25 @@ public class EditaFuncionarioForm extends javax.swing.JFrame {
                     CryptographyTripleDES cryptography = CryptographyTripleDES.newInstance();
                     senha = cryptography.encrypt(senha);
                 } catch (Exception e) {
+                    logger.log(Level.SEVERE, e.getMessage(), e);
                }
                 //--------------------------------------------------------------
                 this.bancoDadosFuncionario.EditaFuncionario(cpf, nome, email, senha, cargo, CPF);
             } catch (SQLException ex) {
                 Logger.getLogger(CadastroDiretorForm.class.getName()).log(Level.SEVERE, null, ex);
+                logger.log(Level.SEVERE, ex.getMessage(), ex);
             }
             this.limpar();
             JOptionPane.showMessageDialog(this, cargo+" editado com sucesso!", "Edição de Funcionario", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
+            logger.info("Funcionario "+nome+" Editado com sucesso");
             ListaFuncionarioForm listaFuncionarioForm;
             
             try {
                 listaFuncionarioForm = new ListaFuncionarioForm(this.trabalhoSeguranca);
                 listaFuncionarioForm.setVisible(true);
             } catch (Exception e) {
+                logger.log(Level.SEVERE, e.getMessage(), e);
             }   
         }  
     }//GEN-LAST:event_btnSalvarActionPerformed

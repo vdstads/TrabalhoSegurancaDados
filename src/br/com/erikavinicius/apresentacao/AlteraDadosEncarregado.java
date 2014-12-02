@@ -11,10 +11,13 @@ import br.com.erikavinicius.TrabalhoSeguranca;
 import br.com.erikavinicius.dados.BancoDados;
 import br.com.erikavinicius.dados.BancoDadosFuncionario;
 import br.com.erikavinicius.entidade.Usuario;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
@@ -29,6 +32,7 @@ public class AlteraDadosEncarregado extends javax.swing.JFrame {
     private BancoDadosFuncionario bancoDadosFuncionario;
     private BancoDados bancoDados;
     private Usuario usuarioAtivo;
+    Logger logger = Logger.getLogger(TrabalhoSeguranca.class.getName());
     
     public AlteraDadosEncarregado(TrabalhoSeguranca trabalhoSeguranca, Usuario usuario) {
         initComponents();
@@ -37,6 +41,17 @@ public class AlteraDadosEncarregado extends javax.swing.JFrame {
         this.bancoDados = bancoDados;
         this.usuarioAtivo = usuario;
         this.preencher();
+        
+        try {
+            
+            FileHandler simpleHandler = new FileHandler("log.txt", true);
+            simpleHandler.setFormatter(new SimpleFormatter());
+            logger.addHandler(simpleHandler);
+            logger.setUseParentHandlers(false);
+            
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Falha ao criar log", e);
+        }
     }
 
     /**
@@ -175,14 +190,11 @@ public class AlteraDadosEncarregado extends javax.swing.JFrame {
             }
             this.limpar();
             JOptionPane.showMessageDialog(this, cargo+" alterado com sucesso!", "Alteração de Encarregado", JOptionPane.INFORMATION_MESSAGE);
+            logger.info("Encarregado Alterado com Sucesso");
             this.dispose();
             ListaFuncionarioGerenteForm listaFuncionarioGerenteForm;
             
-            /*try {
-                listaFuncionarioGerenteForm = new ListaFuncionarioGerenteForm(this.trabalhoSeguranca, usuarioAtivo);
-                listaFuncionarioGerenteForm.setVisible(true);
-            } catch (Exception e) {
-            } */
+           
         }  
     }//GEN-LAST:event_btnAlterarActionPerformed
 

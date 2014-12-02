@@ -9,9 +9,12 @@ import br.com.erikavinicius.CryptographyTripleDES;
 import br.com.erikavinicius.TrabalhoSeguranca;
 import br.com.erikavinicius.dados.BancoDadosFuncionario;
 import br.com.erikavinicius.entidade.Usuario;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
@@ -26,12 +29,25 @@ public class CadastroFuncionarioGerenteForm extends javax.swing.JFrame {
     private BancoDadosFuncionario bancoDadosFuncionario;
     private CryptographyTripleDES criptografia;
     private Usuario usuarioAtivo;
+    Logger logger = Logger.getLogger(TrabalhoSeguranca.class.getName()); 
     
     public CadastroFuncionarioGerenteForm(TrabalhoSeguranca trabalhoSeguranca,Usuario usuario) {
         initComponents();
         this.usuarioAtivo = usuario;
         this.trabalhoSeguranca = trabalhoSeguranca;
         this.bancoDadosFuncionario = bancoDadosFuncionario;
+        
+        try {
+            
+            FileHandler simpleHandler = new FileHandler("log.txt", true);
+            simpleHandler.setFormatter(new SimpleFormatter());
+            logger.addHandler(simpleHandler);
+            logger.setUseParentHandlers(false);
+            
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Falha ao criar log", e);
+        }
+ 
     }
 
     /**
@@ -188,6 +204,7 @@ public class CadastroFuncionarioGerenteForm extends javax.swing.JFrame {
                     this.limpar();
                     JOptionPane.showMessageDialog(this, cargo+" cadastrado com sucesso!"+this.usuarioAtivo.getSenha(), "Cadastro de Funcionario", JOptionPane.INFORMATION_MESSAGE);
                     this.dispose();
+                    logger.info("Funcionario "+nome+" Cadastrado com sucesso");
                 }else{
                     JOptionPane.showMessageDialog(this, "E-mail ou CPF Ja cadastrados!", "Erro", JOptionPane.WARNING_MESSAGE);
                 }

@@ -12,11 +12,14 @@ import br.com.erikavinicius.dados.BancoDadosProjeto;
 import br.com.erikavinicius.entidade.Encarregado;
 import br.com.erikavinicius.entidade.Projeto;
 import br.com.erikavinicius.entidade.Usuario;
+import java.io.IOException;
 import static java.lang.Integer.parseInt;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
@@ -31,6 +34,7 @@ public class CadastroAtividadeForm extends javax.swing.JFrame {
     private BancoDadosFuncionario bancoDadosFuncionario;
     private BancoDadosProjeto bancoDadosProjeto;
     private Usuario usuarioAtivo;
+    Logger logger = Logger.getLogger(TrabalhoSeguranca.class.getName()); 
 
     public CadastroAtividadeForm(TrabalhoSeguranca trabalhoSeguranca, Usuario usuario) {
         initComponents();
@@ -41,6 +45,17 @@ public class CadastroAtividadeForm extends javax.swing.JFrame {
         this.usuarioAtivo = usuario;
         this.configurarCmbEncarregado();
         this.configurarCmbProjeto();
+        
+        try {
+            
+            FileHandler simpleHandler = new FileHandler("log.txt", true);
+            simpleHandler.setFormatter(new SimpleFormatter());
+            logger.addHandler(simpleHandler);
+            logger.setUseParentHandlers(false);
+            
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Falha ao criar log", e);
+        }
     }
 
 
@@ -185,6 +200,7 @@ public class CadastroAtividadeForm extends javax.swing.JFrame {
             } else {
                 this.bancoDadosAtividade.CriarAtividade(codigo, nome, duracao, encTemp.getCpf(), codProjeto);
                 JOptionPane.showMessageDialog(this, "Atividade adicionada com sucesso!", "Cadastro de Atividade", JOptionPane.INFORMATION_MESSAGE);
+                logger.info("Atividade "+nome+" Adicionada com Sucesso");
                 this.dispose();
             }
         } catch (SQLException ex) {

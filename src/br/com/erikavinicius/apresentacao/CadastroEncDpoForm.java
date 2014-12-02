@@ -12,10 +12,13 @@ import br.com.erikavinicius.entidade.Departamento;
 import br.com.erikavinicius.entidade.Encarregado;
 import br.com.erikavinicius.entidade.Gerente;
 import br.com.erikavinicius.entidade.Usuario;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
@@ -29,6 +32,7 @@ public class CadastroEncDpoForm extends javax.swing.JFrame {
     private BancoDadosFuncionario bancoDadosFuncionario;
     private BancoDadosDepartamento bancoDadosDepartamento;
     private String codigoDep;
+    Logger logger = Logger.getLogger(TrabalhoSeguranca.class.getName()); 
 
     
     public CadastroEncDpoForm(TrabalhoSeguranca trabalhoSeguranca) {
@@ -39,6 +43,17 @@ public class CadastroEncDpoForm extends javax.swing.JFrame {
     this.codigoDep = codigoDep;
     this.configurarCmbDepartamento();
     this.configurarCmbEncarregado();
+    
+    try {
+            
+            FileHandler simpleHandler = new FileHandler("log.txt", true);
+            simpleHandler.setFormatter(new SimpleFormatter());
+            logger.addHandler(simpleHandler);
+            logger.setUseParentHandlers(false);
+            
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Falha ao criar log", e);
+        }
     
     
     }
@@ -156,8 +171,9 @@ public class CadastroEncDpoForm extends javax.swing.JFrame {
              Logger.getLogger(CadastroEncDpoForm.class.getName()).log(Level.SEVERE, null, ex);
          }
            
-        JOptionPane.showMessageDialog(this, "Encarregado: "+encTemp.getNome()+" Cadastrado no Departamento "+depTemp.getNome()+" com sucesso!", "Edição de Departamento", JOptionPane.INFORMATION_MESSAGE);
-        this.dispose();    
+        JOptionPane.showMessageDialog(this, encTemp.getNome()+" Cadastrado no Departamento "+depTemp.getNome()+" com sucesso!", "Cadastro de Departamento", JOptionPane.INFORMATION_MESSAGE);
+        this.dispose();   
+        logger.info("Encarregado "+encTemp.getNome()+" Cadastrado com sucesso no Deparamento"+depTemp.getNome());
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void cmbEncarregadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEncarregadoActionPerformed

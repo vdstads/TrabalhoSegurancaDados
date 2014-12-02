@@ -11,13 +11,16 @@ import br.com.erikavinicius.CryptographyTripleDES;
 import br.com.erikavinicius.TrabalhoSeguranca;
 import br.com.erikavinicius.dados.BancoDados;
 import br.com.erikavinicius.entidade.Diretor;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.crypto.BadPaddingException;
@@ -34,11 +37,22 @@ public class CadastroDiretorForm extends javax.swing.JFrame {
     private TrabalhoSeguranca trabalhoSeguranca;
     private BancoDados bancoDados;
     private CryptographyTripleDES criptografia;
+    Logger logger = Logger.getLogger(TrabalhoSeguranca.class.getName());
     
     public CadastroDiretorForm(TrabalhoSeguranca trabalhoSeguranca) {
         initComponents();
         this.trabalhoSeguranca = trabalhoSeguranca;
         this.bancoDados = bancoDados;
+        try {
+            
+            FileHandler simpleHandler = new FileHandler("log.txt", true);
+            simpleHandler.setFormatter(new SimpleFormatter());
+            logger.addHandler(simpleHandler);
+            logger.setUseParentHandlers(false);
+            
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Falha ao criar log", e);
+        }
     }
         
     @SuppressWarnings("unchecked")
@@ -176,8 +190,10 @@ public class CadastroDiretorForm extends javax.swing.JFrame {
             this.limpar();
             JOptionPane.showMessageDialog(this, "Diretor cadastrado com sucesso!", "Cadastro de Diretor", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
+            this.logger.info("Diretor Cadastrado Com Sucesso");
             LoginForm loginForm = new LoginForm(this.trabalhoSeguranca);
             loginForm.setVisible(true);
+            
         }       
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
