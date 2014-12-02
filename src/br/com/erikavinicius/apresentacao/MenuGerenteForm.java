@@ -14,11 +14,14 @@ import br.com.erikavinicius.entidade.Atividade;
 import br.com.erikavinicius.entidade.Departamento;
 import br.com.erikavinicius.entidade.Projeto;
 import br.com.erikavinicius.entidade.Usuario;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -38,6 +41,7 @@ public class MenuGerenteForm extends javax.swing.JFrame {
     private BancoDadosProjeto bancoDadosProjeto;
     private BancoDadosFuncionario bancoDadosFuncionario;
     public Usuario usuarioAtivo = new Usuario();
+    Logger logger = Logger.getLogger(TrabalhoSeguranca.class.getName()); 
     
     public MenuGerenteForm(TrabalhoSeguranca trabalhoSeguranca, Usuario usuario) {
         initComponents();
@@ -46,6 +50,17 @@ public class MenuGerenteForm extends javax.swing.JFrame {
         this.bancoDadosAtividade = bancoDadosAtividade;
         this.bancoDadosProjeto = bancoDadosProjeto;
         this.bancoDadosFuncionario = bancoDadosFuncionario;
+        
+        try {
+            
+            FileHandler simpleHandler = new FileHandler("log.txt", true);
+            simpleHandler.setFormatter(new SimpleFormatter());
+            logger.addHandler(simpleHandler);
+            logger.setUseParentHandlers(false);
+            
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Falha ao criar log", e);
+        }
     }
 
    
@@ -243,6 +258,7 @@ public class MenuGerenteForm extends javax.swing.JFrame {
             }
         } catch (SQLException ex) {
             Logger.getLogger(MenuGerenteForm.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
         
     }//GEN-LAST:event_itmListaDepartamentosActionPerformed
@@ -260,6 +276,7 @@ public class MenuGerenteForm extends javax.swing.JFrame {
             listaUser = (List<Usuario>) this.bancoDadosFuncionario.ConsultaFuncionariosDepartamento(usuarioAtivo.getSenha());
         } catch (SQLException ex) {
             Logger.getLogger(MenuGerenteForm.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
         try {
         if(!listaUser.isEmpty()){
@@ -271,6 +288,7 @@ public class MenuGerenteForm extends javax.swing.JFrame {
         }
         } catch (SQLException ex) {
             Logger.getLogger(MenuGerenteForm.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
         
     }//GEN-LAST:event_itmListaFuncionariosActionPerformed
@@ -301,6 +319,7 @@ public class MenuGerenteForm extends javax.swing.JFrame {
             }
         } catch (SQLException ex) {
             Logger.getLogger(MenuGerenteForm.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
     }//GEN-LAST:event_itmListarProjetosActionPerformed
 
@@ -321,7 +340,8 @@ public class MenuGerenteForm extends javax.swing.JFrame {
             
          } catch (SQLException ex) {
             Logger.getLogger(MenuGerenteForm.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
+         }
     }//GEN-LAST:event_itmCadastarAtividadesActionPerformed
 
     private void itmListarAtividadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmListarAtividadesActionPerformed
@@ -336,6 +356,7 @@ public class MenuGerenteForm extends javax.swing.JFrame {
             }
         } catch (SQLException ex) {
             Logger.getLogger(MenuGerenteForm.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
     }//GEN-LAST:event_itmListarAtividadesActionPerformed
 
@@ -350,6 +371,7 @@ public class MenuGerenteForm extends javax.swing.JFrame {
             }
         } catch (SQLException ex) {
             Logger.getLogger(MenuGerenteForm.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
     }//GEN-LAST:event_itmListarAtividadesAtrasadasActionPerformed
 
@@ -365,6 +387,7 @@ public class MenuGerenteForm extends javax.swing.JFrame {
          }
         } catch (SQLException ex) {
             Logger.getLogger(MenuGerenteForm.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
         
     }//GEN-LAST:event_itmEmitirRelatorioAtividadeProjetoActionPerformed
@@ -391,8 +414,10 @@ public class MenuGerenteForm extends javax.swing.JFrame {
         }
         } catch (JRException ex){
             System.out.println("Falha ao gerar Relatorio: "+ex.getMessage());
-            } catch (SQLException ex) {
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
+        } catch (SQLException ex) {
             Logger.getLogger(MenuGerenteForm.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
     }//GEN-LAST:event_itmEmitirRelatorioProjetoActionPerformed
 

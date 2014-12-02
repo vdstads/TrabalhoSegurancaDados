@@ -17,10 +17,13 @@ import br.com.erikavinicius.entidade.Departamento;
 import br.com.erikavinicius.entidade.Gerente;
 import br.com.erikavinicius.entidade.Projeto;
 import br.com.erikavinicius.entidade.Usuario;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
@@ -37,6 +40,7 @@ public class ListaAtividadeEmpregadoForm extends javax.swing.JFrame {
     private Usuario usuarioAtivo;
     Usuario usuario = new Usuario();
     private String codDepAtivo;
+    Logger logger = Logger.getLogger(TrabalhoSeguranca.class.getName());
     
     
     public ListaAtividadeEmpregadoForm(TrabalhoSeguranca trabalhoSeguranca, Usuario usuario) throws SQLException {
@@ -49,6 +53,17 @@ public class ListaAtividadeEmpregadoForm extends javax.swing.JFrame {
         usuario = BancoDadosFuncionario.ConsultaFuncionarioPorEmail(usuarioAtivo.getEmail());
         this.codDepAtivo = usuario.getSenha();
         this.configurarTblAtividade();
+        
+        try {
+            
+            FileHandler simpleHandler = new FileHandler("log.txt", true);
+            simpleHandler.setFormatter(new SimpleFormatter());
+            logger.addHandler(simpleHandler);
+            logger.setUseParentHandlers(false);
+            
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Falha ao criar log", e);
+        }
         
     }
 
@@ -137,26 +152,30 @@ public class ListaAtividadeEmpregadoForm extends javax.swing.JFrame {
                     model = new TabelaAtividadeModel(this.bancoDadosAtividade.ConsultaAtividadePorDep(codDepAtivo));
                 } catch (SQLException ex) {
                     Logger.getLogger(ListaAtividadeEmpregadoForm.class.getName()).log(Level.SEVERE, null, ex);
+                    logger.log(Level.SEVERE, ex.getMessage(), ex);
                 }
                 int colunaCodigo = 0;
                 int codigo =  (int) model.getValueAt(tblAtividade.getSelectedRow(), colunaCodigo);
                 
-               try {
+                try {
                    EditaAtividadeForm editaAtividadeForm = new EditaAtividadeForm(this.trabalhoSeguranca, usuarioAtivo, codigo);
                    editaAtividadeForm.setVisible(true);
-               } catch (SQLException ex) {
+                } catch (SQLException ex) {
                    Logger.getLogger(ListaAtividadeEmpregadoForm.class.getName()).log(Level.SEVERE, null, ex);
-               }
+                   logger.log(Level.SEVERE, ex.getMessage(), ex);
+                }
                 
                 
-               try {
+                try {
                    this.configurarTblAtividade();
-               } catch (SQLException ex) {
+                } catch (SQLException ex) {
                    Logger.getLogger(ListaAtividadeEmpregadoForm.class.getName()).log(Level.SEVERE, null, ex);
-               }
+                   logger.log(Level.SEVERE, ex.getMessage(), ex);
+                }
                 
                 //JOptionPane.showMessageDialog(null,"Editado com sucesso!");
-               this.dispose();
+                this.dispose();
+                logger.info("Editado com sucesso");
             }
         }else{
             JOptionPane.showMessageDialog(null, "Por favor, selecione um item!");

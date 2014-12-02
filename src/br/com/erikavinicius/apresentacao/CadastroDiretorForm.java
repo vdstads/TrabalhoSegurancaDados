@@ -181,11 +181,13 @@ public class CadastroDiretorForm extends javax.swing.JFrame {
                      CryptographyTripleDES cryptography = CryptographyTripleDES.newInstance();
                      senha = cryptography.encrypt(senha);
                 } catch (Exception e) {
+                    logger.log(Level.SEVERE, e.getMessage(), e);
                 }
                 //---------------------------------------------------
                 this.bancoDados.CriarFuncionario(cpf, nome, email, senha, "DIRETOR");
             } catch (SQLException ex) {
                 Logger.getLogger(CadastroDiretorForm.class.getName()).log(Level.SEVERE, null, ex);
+                logger.log(Level.SEVERE, ex.getMessage(), ex);
             }
             this.limpar();
             JOptionPane.showMessageDialog(this, "Diretor cadastrado com sucesso!", "Cadastro de Diretor", JOptionPane.INFORMATION_MESSAGE);

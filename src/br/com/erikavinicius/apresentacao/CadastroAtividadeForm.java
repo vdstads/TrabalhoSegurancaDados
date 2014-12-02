@@ -205,6 +205,7 @@ public class CadastroAtividadeForm extends javax.swing.JFrame {
             }
         } catch (SQLException ex) {
             Logger.getLogger(CadastroAtividadeForm.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 

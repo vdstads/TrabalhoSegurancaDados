@@ -13,11 +13,14 @@ import br.com.erikavinicius.entidade.Atividade;
 import br.com.erikavinicius.entidade.Encarregado;
 import br.com.erikavinicius.entidade.Projeto;
 import br.com.erikavinicius.entidade.Usuario;
+import java.io.IOException;
 import static java.lang.Integer.parseInt;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
@@ -31,6 +34,7 @@ public class LancamentoAtividadeForm extends javax.swing.JFrame {
     private BancoDadosAtividade bancoDadosAtividade;
     private BancoDadosFuncionario bancoDadosFuncionario;
     private Usuario usuarioAtivo;
+    Logger logger = Logger.getLogger(TrabalhoSeguranca.class.getName());
 
     public LancamentoAtividadeForm(TrabalhoSeguranca trabalhoSeguranca, Usuario usuario) {
         initComponents();
@@ -39,6 +43,17 @@ public class LancamentoAtividadeForm extends javax.swing.JFrame {
         this.bancoDadosFuncionario = bancoDadosFuncionario;
         this.usuarioAtivo = usuario;
         this.configurarCmbAtividade();
+        
+        try {
+            
+            FileHandler simpleHandler = new FileHandler("log.txt", true);
+            simpleHandler.setFormatter(new SimpleFormatter());
+            logger.addHandler(simpleHandler);
+            logger.setUseParentHandlers(false);
+            
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Falha ao criar log", e);
+        }
     }
 
 
@@ -194,9 +209,11 @@ public class LancamentoAtividadeForm extends javax.swing.JFrame {
                 this.bancoDadosAtividade.SetaHorasAtividade(horasTrab, percentual, atvTemp.getCodigo());
                 JOptionPane.showMessageDialog(this, "Horas adicionada com sucesso!", "Lançamento de horas", JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
+                logger.info("Horas adicionada na atividade"+atvTemp.getNome()+" com sucesso");
             }
         } catch (SQLException ex) {
             Logger.getLogger(LancamentoAtividadeForm.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 

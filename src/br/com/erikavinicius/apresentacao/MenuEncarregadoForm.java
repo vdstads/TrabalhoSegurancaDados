@@ -11,10 +11,13 @@ import br.com.erikavinicius.dados.BancoDadosAtividade;
 import br.com.erikavinicius.entidade.Atividade;
 import br.com.erikavinicius.entidade.Projeto;
 import br.com.erikavinicius.entidade.Usuario;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import javax.swing.JOptionPane;
 
 /**
@@ -26,12 +29,25 @@ public class MenuEncarregadoForm extends javax.swing.JFrame {
     private TrabalhoSeguranca trabalhoSeguranca;
     private Usuario usuarioAtivo;
     private BancoDadosAtividade bancoDadosAtividade;
+    Logger logger = Logger.getLogger(TrabalhoSeguranca.class.getName());
     
     MenuEncarregadoForm(TrabalhoSeguranca trabalhoSeguranca, Usuario usuario) {
         initComponents();
         this.trabalhoSeguranca = trabalhoSeguranca;
         this.usuarioAtivo = usuario;
         this.bancoDadosAtividade = bancoDadosAtividade;
+        
+        try {
+            
+            FileHandler simpleHandler = new FileHandler("log.txt", true);
+            simpleHandler.setFormatter(new SimpleFormatter());
+            logger.addHandler(simpleHandler);
+            logger.setUseParentHandlers(false);
+            
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Falha ao criar log", e);
+        }
+ 
     }
 
      
@@ -156,6 +172,7 @@ public class MenuEncarregadoForm extends javax.swing.JFrame {
             }
         } catch (SQLException ex) {
             Logger.getLogger(MenuEncarregadoForm.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
 
         
@@ -171,6 +188,7 @@ public class MenuEncarregadoForm extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Não possui Atividades Cadastradas para Você!", "Erro", JOptionPane.WARNING_MESSAGE);
             }
         }catch(Exception e){
+            logger.log(Level.SEVERE, e.getMessage(), e);
         }
     }//GEN-LAST:event_itmListaAtividadesActionPerformed
 

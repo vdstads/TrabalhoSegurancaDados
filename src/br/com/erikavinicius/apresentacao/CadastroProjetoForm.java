@@ -211,6 +211,7 @@ public class CadastroProjetoForm extends javax.swing.JFrame {
             }
         } catch (SQLException ex) {
             Logger.getLogger(CadastroProjetoForm.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 

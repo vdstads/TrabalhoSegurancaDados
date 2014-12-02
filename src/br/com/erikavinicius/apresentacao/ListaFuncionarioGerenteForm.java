@@ -8,10 +8,13 @@ package br.com.erikavinicius.apresentacao;
 import br.com.erikavinicius.TrabalhoSeguranca;
 import br.com.erikavinicius.dados.BancoDadosFuncionario;
 import br.com.erikavinicius.entidade.Usuario;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
@@ -24,6 +27,8 @@ public class ListaFuncionarioGerenteForm extends javax.swing.JFrame {
     private TrabalhoSeguranca trabalhoSeguranca;
     private BancoDadosFuncionario bancoDadosFuncionario;
     private Usuario usuarioAtivo;
+    Logger logger = Logger.getLogger(TrabalhoSeguranca.class.getName()); 
+    
             
     public ListaFuncionarioGerenteForm(TrabalhoSeguranca trabalhoSeguranca, Usuario usuarioAtivo) throws SQLException {
         initComponents();
@@ -32,6 +37,17 @@ public class ListaFuncionarioGerenteForm extends javax.swing.JFrame {
         this.usuarioAtivo = usuarioAtivo;
         
         this.configurarTblFuncionarios();
+        
+        try {
+            
+            FileHandler simpleHandler = new FileHandler("log.txt", true);
+            simpleHandler.setFormatter(new SimpleFormatter());
+            logger.addHandler(simpleHandler);
+            logger.setUseParentHandlers(false);
+            
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Falha ao criar log", e);
+        }
     }
 
     /**
@@ -126,6 +142,7 @@ public class ListaFuncionarioGerenteForm extends javax.swing.JFrame {
                     model = new TabelaFuncionariosModel(this.bancoDadosFuncionario.ConsultaTodosFuncionariosDepartamento(usuarioAtivo.getSenha()));
                 } catch (SQLException ex) {
                     Logger.getLogger(ListaFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);
+                    logger.log(Level.SEVERE, ex.getMessage(), ex);
                 }
                 int colunaCPF = 1;
                 String CPF = (String) model.getValueAt(tblFuncionarios.getSelectedRow(), colunaCPF);
@@ -133,13 +150,15 @@ public class ListaFuncionarioGerenteForm extends javax.swing.JFrame {
                 EditaFuncionarioGerenteForm editaFuncionarioGerenteForm = new EditaFuncionarioGerenteForm(this.trabalhoSeguranca, CPF);
                 editaFuncionarioGerenteForm.setVisible(true);
    
-               try {
+                try {
                    this.configurarTblFuncionarios();
-               } catch (SQLException ex) {
+                } catch (SQLException ex) {
                    Logger.getLogger(ListaFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);
-               }
+                   logger.log(Level.SEVERE, ex.getMessage(), ex);
+                }
                 
                this.dispose();
+               logger.info("Funcionario Editado com sucesso");
             }
         }else{
             JOptionPane.showMessageDialog(null, "Por favor, selecione um item!");

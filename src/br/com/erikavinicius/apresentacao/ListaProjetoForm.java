@@ -15,10 +15,13 @@ import br.com.erikavinicius.entidade.Departamento;
 import br.com.erikavinicius.entidade.Gerente;
 import br.com.erikavinicius.entidade.Projeto;
 import br.com.erikavinicius.entidade.Usuario;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
@@ -32,6 +35,7 @@ public class ListaProjetoForm extends javax.swing.JFrame {
     private BancoDadosProjeto bancoDadosProjeto;
     private BancoDadosDepartamento bancoDadosDepartamento;
     private Usuario usuarioAtivo;
+    Logger logger = Logger.getLogger(TrabalhoSeguranca.class.getName()); 
  
     
     
@@ -43,6 +47,16 @@ public class ListaProjetoForm extends javax.swing.JFrame {
         this.usuarioAtivo = usuario;
         this.configurarTblProjeto();
         
+        try {
+            
+            FileHandler simpleHandler = new FileHandler("log.txt", true);
+            simpleHandler.setFormatter(new SimpleFormatter());
+            logger.addHandler(simpleHandler);
+            logger.setUseParentHandlers(false);
+            
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Falha ao criar log", e);
+        }
         
     }
 
@@ -143,6 +157,7 @@ public class ListaProjetoForm extends javax.swing.JFrame {
                     model = new TabelaProjetoModel(this.bancoDadosProjeto.ConsultaTodosProjetos());
                 } catch (SQLException ex) {
                     Logger.getLogger(ListaProjetoForm.class.getName()).log(Level.SEVERE, null, ex);
+                    logger.log(Level.SEVERE, ex.getMessage(), ex);
                 }
                 int colunaCodigo = 0;
                 int codigo =  (int) model.getValueAt(tblProjeto.getSelectedRow(), colunaCodigo);
@@ -150,14 +165,16 @@ public class ListaProjetoForm extends javax.swing.JFrame {
                 EditaProjetoForm editaProjetoForm = new EditaProjetoForm(this.trabalhoSeguranca, codigo, usuarioAtivo);
                 editaProjetoForm.setVisible(true);
                 
-               try {
+                try {
                    this.configurarTblProjeto();
-               } catch (SQLException ex) {
+                } catch (SQLException ex) {
                    Logger.getLogger(ListaProjetoForm.class.getName()).log(Level.SEVERE, null, ex);
-               }
+                   logger.log(Level.SEVERE, ex.getMessage(), ex);
+                }
                 
                 //JOptionPane.showMessageDialog(null,"Editado com sucesso!");
                this.dispose();
+               logger.info("Projeto editado com sucesso");
             }
         }else{
             JOptionPane.showMessageDialog(null, "Por favor, selecione um item!");
@@ -173,6 +190,7 @@ public class ListaProjetoForm extends javax.swing.JFrame {
                     model = new TabelaProjetoModel(this.bancoDadosProjeto.ConsultaTodosProjetos());
                 } catch (SQLException ex) {
                     Logger.getLogger(ListaProjetoForm.class.getName()).log(Level.SEVERE, null, ex);
+                    logger.log(Level.SEVERE, ex.getMessage(), ex);
                 }
                 int colunaCodigo = 0;
                 int Codigo =  (int) model.getValueAt(tblProjeto.getSelectedRow(), colunaCodigo);
@@ -181,6 +199,7 @@ public class ListaProjetoForm extends javax.swing.JFrame {
                     this.bancoDadosProjeto.removeProjeto(Codigo);
                 } catch (SQLException ex) {
                     Logger.getLogger(ListaProjetoForm.class.getName()).log(Level.SEVERE, null, ex);
+                    logger.log(Level.SEVERE, ex.getMessage(), ex);
                 }
                 
 
@@ -188,9 +207,10 @@ public class ListaProjetoForm extends javax.swing.JFrame {
                     this.configurarTblProjeto();
                 } catch (SQLException ex) {
                     Logger.getLogger(ListaProjetoForm.class.getName()).log(Level.SEVERE, null, ex);
+                    logger.log(Level.SEVERE, ex.getMessage(), ex);
                 }
                 JOptionPane.showMessageDialog(null,"Excluído com sucesso!");
-                
+                logger.info("Projeto Excluido com sucesso");
             }
         }else{
             JOptionPane.showMessageDialog(null, "Por favor, selecione um item!");

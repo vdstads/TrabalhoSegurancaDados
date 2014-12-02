@@ -10,10 +10,13 @@ import br.com.erikavinicius.CryptographyTripleDES;
 import br.com.erikavinicius.TrabalhoSeguranca;
 import br.com.erikavinicius.dados.BancoDadosFuncionario;
 import br.com.erikavinicius.entidade.Usuario;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
@@ -25,6 +28,7 @@ public class ListaFuncionarioForm extends javax.swing.JFrame {
 
     private TrabalhoSeguranca trabalhoSeguranca;
     private BancoDadosFuncionario bancoDadosFuncionario;
+    Logger logger = Logger.getLogger(TrabalhoSeguranca.class.getName()); 
 
     
     public ListaFuncionarioForm(TrabalhoSeguranca trabalhoSeguranca) throws SQLException {
@@ -33,6 +37,17 @@ public class ListaFuncionarioForm extends javax.swing.JFrame {
         this.bancoDadosFuncionario = bancoDadosFuncionario;
         
         this.configurarTblFuncionarios();
+        
+        try {
+            
+            FileHandler simpleHandler = new FileHandler("log.txt", true);
+            simpleHandler.setFormatter(new SimpleFormatter());
+            logger.addHandler(simpleHandler);
+            logger.setUseParentHandlers(false);
+            
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Falha ao criar log", e);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -136,6 +151,7 @@ public class ListaFuncionarioForm extends javax.swing.JFrame {
                     model = new TabelaFuncionariosModel(this.bancoDadosFuncionario.ConsultaTodos());
                 } catch (SQLException ex) {
                     Logger.getLogger(ListaFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);
+                    logger.log(Level.SEVERE, ex.getMessage(), ex);
                 }
                 int colunaCPF = 1;
                 String CPF = (String) model.getValueAt(tblFuncionarios.getSelectedRow(), colunaCPF);
@@ -143,14 +159,16 @@ public class ListaFuncionarioForm extends javax.swing.JFrame {
                 EditaFuncionarioForm editaFuncionarioForm = new EditaFuncionarioForm(this.trabalhoSeguranca, CPF);
                 editaFuncionarioForm.setVisible(true);
    
-               try {
+                try {
                    this.configurarTblFuncionarios();
-               } catch (SQLException ex) {
+                } catch (SQLException ex) {
                    Logger.getLogger(ListaFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);
-               }
+                   logger.log(Level.SEVERE, ex.getMessage(), ex);
+                }
                 
                 //JOptionPane.showMessageDialog(null,"Editado com sucesso!");
                this.dispose();
+               logger.info("Funcionario Editado com sucesso");
             }
         }else{
             JOptionPane.showMessageDialog(null, "Por favor, selecione um item!");
@@ -166,6 +184,7 @@ public class ListaFuncionarioForm extends javax.swing.JFrame {
                     model = new TabelaFuncionariosModel(this.bancoDadosFuncionario.ConsultaTodos());
                 } catch (SQLException ex) {
                     Logger.getLogger(ListaFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);
+                    logger.log(Level.SEVERE, ex.getMessage(), ex);
                 }
                 int colunaCPF = 1;
                 int colunaCargo = 2;
@@ -179,14 +198,17 @@ public class ListaFuncionarioForm extends javax.swing.JFrame {
                         this.bancoDadosFuncionario.removeFuncionario(CPF);
                     } catch (SQLException ex) {
                         Logger.getLogger(ListaFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);
+                        logger.log(Level.SEVERE, ex.getMessage(), ex);
                     }
 
                     try {
                         this.configurarTblFuncionarios();
                     } catch (SQLException ex) {
                         Logger.getLogger(ListaFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);
+                        logger.log(Level.SEVERE, ex.getMessage(), ex);
                     }
                     JOptionPane.showMessageDialog(null,"Demitido com sucesso!");
+                    logger.info("Funcionario Demitido com sucesso");
                 }
             }
         }else{

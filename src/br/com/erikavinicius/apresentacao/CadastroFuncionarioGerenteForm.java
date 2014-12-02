@@ -197,6 +197,7 @@ public class CadastroFuncionarioGerenteForm extends javax.swing.JFrame {
                     CryptographyTripleDES cryptography = CryptographyTripleDES.newInstance();
                     senha = cryptography.encrypt(senha);
                 } catch (Exception e) {
+                    logger.log(Level.SEVERE, e.getMessage(), e);
                 }
                 //---------------------------------------------------
                 if(!this.bancoDadosFuncionario.ConsultaFuncionarioPorEmailCpf(email, cpf)){
@@ -211,6 +212,7 @@ public class CadastroFuncionarioGerenteForm extends javax.swing.JFrame {
                 
             } catch (SQLException ex) {
                 Logger.getLogger(CadastroDiretorForm.class.getName()).log(Level.SEVERE, null, ex);
+                logger.log(Level.SEVERE, ex.getMessage(), ex);
             }
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed

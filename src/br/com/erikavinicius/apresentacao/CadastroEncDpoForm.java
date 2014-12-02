@@ -169,6 +169,7 @@ public class CadastroEncDpoForm extends javax.swing.JFrame {
              this.bancoDadosDepartamento.CadastraEncDep(encTemp.getCpf(), depTemp.getCodigo());
          } catch (SQLException ex) {
              Logger.getLogger(CadastroEncDpoForm.class.getName()).log(Level.SEVERE, null, ex);
+             logger.log(Level.SEVERE, ex.getMessage(), ex);
          }
            
         JOptionPane.showMessageDialog(this, encTemp.getNome()+" Cadastrado no Departamento "+depTemp.getNome()+" com sucesso!", "Cadastro de Departamento", JOptionPane.INFORMATION_MESSAGE);

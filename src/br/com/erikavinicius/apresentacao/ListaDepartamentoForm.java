@@ -13,10 +13,13 @@ import br.com.erikavinicius.dados.BancoDadosFuncionario;
 import br.com.erikavinicius.entidade.Departamento;
 import br.com.erikavinicius.entidade.Gerente;
 import br.com.erikavinicius.entidade.Usuario;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
@@ -30,6 +33,7 @@ public class ListaDepartamentoForm extends javax.swing.JFrame {
     private BancoDadosFuncionario bancoDadosFuncionario;
     private BancoDadosDepartamento bancoDadosDepartamento;
     Gerente CPFAtual = null;
+    Logger logger = Logger.getLogger(TrabalhoSeguranca.class.getName()); 
  
     
     
@@ -40,6 +44,16 @@ public class ListaDepartamentoForm extends javax.swing.JFrame {
         this.bancoDadosDepartamento = bancoDadosDepartamento;
         this.configurarTblDepartamentos();
         
+        try {
+            
+            FileHandler simpleHandler = new FileHandler("log.txt", true);
+            simpleHandler.setFormatter(new SimpleFormatter());
+            logger.addHandler(simpleHandler);
+            logger.setUseParentHandlers(false);
+            
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Falha ao criar log", e);
+        }
         
     }
 
@@ -142,6 +156,7 @@ public class ListaDepartamentoForm extends javax.swing.JFrame {
                     model = new TabelaDepartamentoModel(this.bancoDadosDepartamento.ConsultaTodosDepartamentos());
                 } catch (SQLException ex) {
                     Logger.getLogger(ListaDepartamentoForm.class.getName()).log(Level.SEVERE, null, ex);
+                    logger.log(Level.SEVERE, ex.getMessage(), ex);
                 }
                 int colunaCodigo = 0;
                 String codigoDep = (String) model.getValueAt(tblDepartamentos.getSelectedRow(), colunaCodigo);
@@ -150,14 +165,16 @@ public class ListaDepartamentoForm extends javax.swing.JFrame {
                 EditaDepartamentoForm editaDepartamentoForm = new EditaDepartamentoForm(this.trabalhoSeguranca, codigoDep, CPFAtual);
                 editaDepartamentoForm.setVisible(true);
                 
-               try {
+                try {
                    this.configurarTblDepartamentos();
-               } catch (SQLException ex) {
+                } catch (SQLException ex) {
                    Logger.getLogger(ListaDepartamentoForm.class.getName()).log(Level.SEVERE, null, ex);
-               }
+                   logger.log(Level.SEVERE, ex.getMessage(), ex);
+                }
                 
                 //JOptionPane.showMessageDialog(null,"Editado com sucesso!");
                this.dispose();
+               logger.info("Departamento Editado com sucesso");
             }
         }else{
             JOptionPane.showMessageDialog(null, "Por favor, selecione um item!");
@@ -173,6 +190,7 @@ public class ListaDepartamentoForm extends javax.swing.JFrame {
                     model = new TabelaDepartamentoModel(this.bancoDadosDepartamento.ConsultaTodosDepartamentos());
                 } catch (SQLException ex) {
                     Logger.getLogger(ListaFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);
+                    logger.log(Level.SEVERE, ex.getMessage(), ex);
                 }
                 int colunaCodigo = 0;
                 String Codigo = (String) model.getValueAt(tblDepartamentos.getSelectedRow(), colunaCodigo);
@@ -181,14 +199,17 @@ public class ListaDepartamentoForm extends javax.swing.JFrame {
                     this.bancoDadosDepartamento.removeDepartamento(Codigo);
                 } catch (SQLException ex) {
                     Logger.getLogger(ListaFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);
+                    logger.log(Level.SEVERE, ex.getMessage(), ex);
                 }
 
                 try {
                     this.configurarTblDepartamentos();
                 } catch (SQLException ex) {
                     Logger.getLogger(ListaFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);
+                    logger.log(Level.SEVERE, ex.getMessage(), ex);
                 }
                 JOptionPane.showMessageDialog(null,"Excluído com sucesso!");
+                logger.info("Departamento Excluido com sucesso");
                 
             }
         }else{

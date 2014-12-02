@@ -34,22 +34,22 @@ public class CadastroDepartamentoForm extends javax.swing.JFrame {
     
     public CadastroDepartamentoForm(TrabalhoSeguranca trabalhoSeguranca) {
         initComponents();
-    this.trabalhoSeguranca = trabalhoSeguranca;
-    this.bancoDadosFuncionario = bancoDadosFuncionario;
-    this.bancoDadosDepartamento = bancoDadosDepartamento;
-    this.configurarCmbGerente();
-    
-    try {
-            
-            FileHandler simpleHandler = new FileHandler("log.txt", true);
-            simpleHandler.setFormatter(new SimpleFormatter());
-            logger.addHandler(simpleHandler);
-            logger.setUseParentHandlers(false);
-            
-        } catch (IOException e) {
-            logger.log(Level.SEVERE, "Falha ao criar log", e);
-        }
-    
+        this.trabalhoSeguranca = trabalhoSeguranca;
+        this.bancoDadosFuncionario = bancoDadosFuncionario;
+        this.bancoDadosDepartamento = bancoDadosDepartamento;
+        this.configurarCmbGerente();
+
+        try {
+
+                FileHandler simpleHandler = new FileHandler("log.txt", true);
+                simpleHandler.setFormatter(new SimpleFormatter());
+                logger.addHandler(simpleHandler);
+                logger.setUseParentHandlers(false);
+
+            } catch (IOException e) {
+                logger.log(Level.SEVERE, "Falha ao criar log", e);
+            }
+
     }
 
     @SuppressWarnings("unchecked")
@@ -179,6 +179,7 @@ public class CadastroDepartamentoForm extends javax.swing.JFrame {
                 logger.info("Departamento "+nome+" Cadastrado com sucesso");
             } catch (SQLException ex) {
                 Logger.getLogger(CadastroDepartamentoForm.class.getName()).log(Level.SEVERE, null, ex);
+                logger.log(Level.SEVERE, ex.getMessage(), ex);
             }
            JOptionPane.showMessageDialog(this, "Departamento adicionado com sucesso!", "Cadastro de Departamento", JOptionPane.INFORMATION_MESSAGE);
            limpar();

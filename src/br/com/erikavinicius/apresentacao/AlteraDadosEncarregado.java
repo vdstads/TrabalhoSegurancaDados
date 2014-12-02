@@ -182,11 +182,13 @@ public class AlteraDadosEncarregado extends javax.swing.JFrame {
                 CryptographyTripleDES cryptography = CryptographyTripleDES.newInstance();
                 senha = cryptography.encrypt(senha);
             } catch (Exception e) {
+                logger.log(Level.SEVERE, e.getMessage(), e);
             }
             try {
                 this.bancoDadosFuncionario.EditaFuncionario(cpf, nome, email, senha, cargo, usuarioAtivo.getCpf());
             } catch (SQLException ex) {
                 Logger.getLogger(EditaFuncionarioGerenteForm.class.getName()).log(Level.SEVERE, null, ex);
+                logger.log(Level.SEVERE, ex.getMessage(), ex);
             }
             this.limpar();
             JOptionPane.showMessageDialog(this, cargo+" alterado com sucesso!", "Alteração de Encarregado", JOptionPane.INFORMATION_MESSAGE);

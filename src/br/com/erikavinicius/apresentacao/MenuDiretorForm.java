@@ -13,11 +13,14 @@ import br.com.erikavinicius.dados.BancoDadosProjeto;
 import br.com.erikavinicius.entidade.Atividade;
 import br.com.erikavinicius.entidade.Departamento;
 import br.com.erikavinicius.entidade.Usuario;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -35,6 +38,7 @@ public class MenuDiretorForm extends javax.swing.JFrame {
     private BancoDadosFuncionario bancoDadosFuncionario;
     private BancoDadosDepartamento bancoDadosDepartamento;
     private BancoDadosProjeto bancoDadosProjeto;
+    Logger logger = Logger.getLogger(TrabalhoSeguranca.class.getName()); 
     
     
     public MenuDiretorForm(TrabalhoSeguranca trabalhoSeguranca) {
@@ -43,6 +47,18 @@ public class MenuDiretorForm extends javax.swing.JFrame {
         this.bancoDadosFuncionario = bancoDadosFuncionario;
         this.bancoDadosDepartamento = bancoDadosDepartamento;
         this.bancoDadosProjeto = bancoDadosProjeto;
+        
+        try {
+            
+            FileHandler simpleHandler = new FileHandler("log.txt", true);
+            simpleHandler.setFormatter(new SimpleFormatter());
+            logger.addHandler(simpleHandler);
+            logger.setUseParentHandlers(false);
+            
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Falha ao criar log", e);
+        }
+ 
     }
 
     /**
@@ -189,6 +205,7 @@ public class MenuDiretorForm extends javax.swing.JFrame {
             }
         } catch (SQLException ex) {
             Logger.getLogger(MenuGerenteForm.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
         }        
     }//GEN-LAST:event_itmListaDepartamentosActionPerformed
 
@@ -198,6 +215,7 @@ public class MenuDiretorForm extends javax.swing.JFrame {
             listaUsuario = this.bancoDadosFuncionario.ConsultaGerenteDisponivel();
         } catch (SQLException ex) {
             Logger.getLogger(MenuDiretorForm.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
         if(!listaUsuario.isEmpty()){
             CadastroDepartamentoForm cadastroDepartamentoForm = new CadastroDepartamentoForm(this.trabalhoSeguranca);
@@ -213,6 +231,7 @@ public class MenuDiretorForm extends javax.swing.JFrame {
             listaFuncionarioForm = new ListaFuncionarioForm(this.trabalhoSeguranca);
         } catch (SQLException ex) {
             Logger.getLogger(MenuDiretorForm.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
         listaFuncionarioForm.setVisible(true);
     }//GEN-LAST:event_itmListaFuncionariosActionPerformed
@@ -226,6 +245,7 @@ public class MenuDiretorForm extends javax.swing.JFrame {
             
         } catch (SQLException ex) {
             Logger.getLogger(MenuDiretorForm.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
         if(listaUsuario.isEmpty()){
             JOptionPane.showMessageDialog(this, "Não possui Encarregados Disponiveis! Cadastre um Novo!", "Erro", JOptionPane.WARNING_MESSAGE);
@@ -267,14 +287,17 @@ public class MenuDiretorForm extends javax.swing.JFrame {
                     jasperViewer.setVisible(true);
                 } catch (JRException ex){
                     System.out.println("Falha ao gerar Relatorio: "+ex.getMessage());
+                    logger.log(Level.SEVERE, ex.getMessage(), ex);
                 } catch (SQLException ex) {
                     Logger.getLogger(MenuGerenteForm.class.getName()).log(Level.SEVERE, null, ex);
+                    logger.log(Level.SEVERE, ex.getMessage(), ex);
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "Não possui Projetos Cadastrados ! Cadastre um Novo!", "Erro", JOptionPane.WARNING_MESSAGE);
             }
         } catch (SQLException ex) {
             Logger.getLogger(MenuDiretorForm.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
     }//GEN-LAST:event_itmEmitirRelatorioProjetoDiretorActionPerformed
 
