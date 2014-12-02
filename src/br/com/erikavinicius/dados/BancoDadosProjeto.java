@@ -325,5 +325,63 @@ public class BancoDadosProjeto {
         }
         return listaAtividade;
     }
+    
+    public static List<Atividade> RelatorioDiretorProjeto() throws SQLException {
+        Connection conexao = null;
+        PreparedStatement comando = null;
+        ResultSet resultado = null;
+        List<Atividade> listaAtividade = new ArrayList<Atividade>();
+                
+        try {
+            conexao = BancoDadosUtil.getConnection();
+            //Código de criar...
+            String sql = "SELECT P.NOME, D.NOME, F.NOME, P.DATA_INICIO, P.DATA_TERMINO, COUNT(A.COD_ATIVIDADE), (SELECT COUNT(COD_ATIVIDADE) FROM ATIVIDADE WHERE PERCENTUAL_CONCLUSAO= 100) FROM PROJETO P "
+                        +"INNER JOIN DEPARTAMENTO D ON (D.CODIGO = P.FK_DEPARTAMENTO) "
+                        +"INNER JOIN FUNCIONARIO F ON (F.CPF = D.FK_GERENTE_CPF) "
+                        +"INNER JOIN ATIVIDADE A ON (A.FK_PROJETO = P.COD_PROJETO) "
+                        +"GROUP BY P.NOME, D.NOME, F.NOME, P.DATA_INICIO, P.DATA_TERMINO";
+            
+            comando = conexao.prepareStatement(sql);
+
+            resultado = comando.executeQuery();
+
+            while (resultado.next()) {
+            //Instancia um novo objeto e atribui os valores vindo do BD
+                //(Note que no BD o index inicia por 1)
+                                
+                Atividade atividade = new Atividade();
+                Projeto projeto = new Projeto();
+                Departamento departamento = new Departamento();
+                Encarregado encarregado = new Encarregado();
+                Gerente gerente = new Gerente();
+                
+                projeto.setNome(resultado.getString(1));
+                departamento.setNome(resultado.getString(2));
+                gerente.setNome(resultado.getString(3));
+                departamento.setGerente(gerente);
+                projeto.setDepartamento(departamento);
+                projeto.setDataInicio(resultado.getString(4));
+                projeto.setDataTermino(resultado.getString(5));
+                atividade.setDuracao(resultado.getInt(6));
+                atividade.setHorasTrabalhadas(resultado.getInt(7));
+                atividade.setProjeto(projeto);
+                atividade.setEncarregado(encarregado);
+  
+                //Adiciona um item à lista que será retornada
+                listaAtividade.add(atividade);
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (resultado != null && !resultado.isClosed()) {
+                resultado.close();
+            }
+            if (conexao != null && !conexao.isClosed()) {
+                conexao.close();
+            }
+        }
+        return listaAtividade;
+    }
         
 }

@@ -516,5 +516,35 @@ public class BancoDadosFuncionario {
             }
         }
     }
+    public static boolean ConsultaNaoExisteDep(String email) throws SQLException {
+        Connection conexao = null;
+        PreparedStatement comando = null;
+        ResultSet resultado = null;
+        boolean existeDiretor = false;
+        try {
+            conexao = BancoDadosUtil.getConnection();
+
+            //Código de criar...
+            String sql = "SELECT * FROM FUNCIONARIO WHERE EMAIL = '"+email+"' AND DEPARTAMENTO = NULL";
+            comando = conexao.prepareStatement(sql);
+
+            resultado = comando.executeQuery();
+
+            if (resultado.next()) {
+                existeDiretor = true;
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (resultado != null && !resultado.isClosed()) {
+                resultado.close();
+            }
+            if (conexao != null && !conexao.isClosed()) {
+                conexao.close();
+            }
+        }
+        return existeDiretor;
+    }
 
 }

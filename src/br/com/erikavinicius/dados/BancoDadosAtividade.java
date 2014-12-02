@@ -29,7 +29,7 @@ public class BancoDadosAtividade {
             conexao = BancoDadosUtil.getConnection();
 
             //Código de criar...
-            String sql = "INSERT INTO ATIVIDADE(COD_ATIVIDADE, NOME, DURACAO_PREV, FK_ENCARREGADO_CPF, FK_PROJETO) VALUES (?,?,?,?,?)";
+            String sql = "INSERT INTO ATIVIDADE(COD_ATIVIDADE, NOME, DURACAO_PREV, FK_ENCARREGADO_CPF, FK_PROJETO, PERCENTUAL_CONCLUSAO) VALUES (?,?,?,?,?,?)";
             comando = conexao.prepareStatement(sql);
 
             comando.setInt(1, codigo);
@@ -37,6 +37,7 @@ public class BancoDadosAtividade {
             comando.setInt(3, duracao);
             comando.setString(4, cpfEnc);
             comando.setInt(5, codProj);
+            comando.setInt(6, 0);
 
             comando.execute();
 
@@ -182,7 +183,10 @@ public class BancoDadosAtividade {
             conexao = BancoDadosUtil.getConnection();
 
             //Código de criar...
-            String sql = "SELECT * FROM ATIVIDADE A INNER JOIN PROJETO P ON (P.COD_PROJETO = A.FK_PROJETO) WHERE P.FK_DEPARTAMENTO = '"+codDep+"'";
+            String sql = "SELECT A.COD_ATIVIDADE, A.NOME, A.DURACAO_PREV, A.HORAS_TRABALHADAS, A.PERCENTUAL_CONCLUSAO, F.NOME FROM ATIVIDADE A "
+                       + "INNER JOIN PROJETO P ON (P.COD_PROJETO = A.FK_PROJETO) "
+                       + "INNER JOIN FUNCIONARIO F ON (F.CPF = A.FK_ENCARREGADO_CPF) "
+                       + "WHERE P.FK_DEPARTAMENTO = '"+codDep+"'";
             
             comando = conexao.prepareStatement(sql);
 
@@ -198,6 +202,9 @@ public class BancoDadosAtividade {
                 atividade.setDuracao(resultado.getInt(3));
                 atividade.setHorasTrabalhadas(resultado.getInt(4));
                 atividade.setPercentualConclusao(resultado.getInt(5));
+                Encarregado encarregado = new Encarregado();
+                encarregado.setNome(resultado.getString(6));
+                atividade.setEncarregado(encarregado);
                 //Adiciona um item à lista que será retornada
                 listaAtividade.add(atividade);
             }

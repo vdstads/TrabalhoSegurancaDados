@@ -344,13 +344,6 @@ public class MenuGerenteForm extends javax.swing.JFrame {
     }//GEN-LAST:event_itmEmitirRelatorioAtividadeProjetoActionPerformed
 
     private void itmEmitirRelatorioProjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmEmitirRelatorioProjetoActionPerformed
-        /*EmitirRelatorioForm emitirRelatorioForm = null;
-        try {
-            emitirRelatorioForm = new EmitirRelatorioForm(this.trabalhoSeguranca, usuarioAtivo);
-        } catch (SQLException ex) {
-            Logger.getLogger(MenuGerenteForm.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        emitirRelatorioForm.setVisible(true);*/
         try {
         List<Atividade> listaAtvividade = new ArrayList<>();
         listaAtvividade = this.bancoDadosProjeto.RelatorioProjetosPorDep(usuarioAtivo.getSenha());

@@ -168,11 +168,23 @@ public class LoginForm extends javax.swing.JFrame {
                     MenuDiretorForm menuDiretorForm = new MenuDiretorForm(this.trabalhoSeguranca);
                     menuDiretorForm.setVisible(true);       
                 }else if(usuario.getCargo().equals("GERENTE")){
-                    MenuGerenteForm menuGerenteForm = new MenuGerenteForm(this.trabalhoSeguranca, usuario);
-                    menuGerenteForm.setVisible(true);       
+                    if (!bancoDadosFuncionario.ConsultaNaoExisteDep(usuario.getEmail())){
+                        MenuGerenteForm menuGerenteForm = new MenuGerenteForm(this.trabalhoSeguranca, usuario);
+                        menuGerenteForm.setVisible(true);     
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Gerente não cadastrado em nenhum departamento!!", "Erro", JOptionPane.WARNING_MESSAGE);   
+                        LoginForm loginForm = new LoginForm(this.trabalhoSeguranca);
+                        loginForm.setVisible(true);
+                    }
                 }else if(usuario.getCargo().equals("ENCARREGADO")){
+                    if (!bancoDadosFuncionario.ConsultaNaoExisteDep(usuario.getEmail())){
                     MenuEncarregadoForm menuEncarregadoForm = new MenuEncarregadoForm(this.trabalhoSeguranca, usuario);
                     menuEncarregadoForm.setVisible(true);
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Encarregado não cadastrado em nenhum departamento!!", "Erro", JOptionPane.WARNING_MESSAGE);   
+                        LoginForm loginForm = new LoginForm(this.trabalhoSeguranca);
+                        loginForm.setVisible(true);
+                    }
                     
                 }
                

@@ -10,10 +10,7 @@
 	<field name="projeto.dataTermino" class="java.lang.String"/>
 	<field name="horasTrabalhadas" class="java.lang.Integer"/>
 	<field name="duracao" class="java.lang.Integer"/>
-	<variable name="PERCENTUAL" class="java.lang.Double">
-            <variableExpression><![CDATA[$F{horasTrabalhadas}*100/$F{duracao}]]></variableExpression>
-        </variable>
-        
+	<variable name="percentual" class="java.lang.String"/>
 	<title>
 		<band height="95" splitType="Stretch">
 			<image>
@@ -118,7 +115,7 @@
 				<textFieldExpression><![CDATA[$F{projeto.dataTermino}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="380" y="0" width="56" height="20" uuid="b9a88aaa-b766-4e17-8931-a5d25301a498"/>
+				<reportElement x="406" y="0" width="43" height="20" uuid="b9a88aaa-b766-4e17-8931-a5d25301a498"/>
 				<textFieldExpression><![CDATA[$F{duracao}]]></textFieldExpression>
 			</textField>
 			<line>
@@ -126,7 +123,7 @@
 			</line>
 			<textField>
 				<reportElement x="491" y="0" width="64" height="20" uuid="9ba9ce93-ac94-4ca0-895e-b0b1da20f3b7"/>
-				<textFieldExpression><![CDATA[$V{PERCENTUAL}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{horasTrabalhadas}*100/$F{duracao}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -134,18 +131,18 @@
 		<band height="1" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="20" splitType="Stretch">
+		<band height="20" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="0" width="114" height="20" uuid="046bf5a8-61db-4134-8cb6-f36111178402"/>
 				<text><![CDATA[Relatorio Gerado em: ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="117" y="0" width="124" height="20" uuid="eb0fcd52-4ac3-4cfd-94e8-a35b8ea4d19f"/>
+				<reportElement x="114" y="0" width="124" height="20" uuid="eb0fcd52-4ac3-4cfd-94e8-a35b8ea4d19f"/>
 				<text><![CDATA[new java.util.Date()]]></text>
 			</staticText>
 		</band>
-	</pageFooter>
-	<summary>
-		<band height="42" splitType="Stretch"/>
 	</summary>
 </jasperReport>
