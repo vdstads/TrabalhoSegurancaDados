@@ -176,21 +176,13 @@ public class ListaProjetoForm extends javax.swing.JFrame {
                 }
                 int colunaCodigo = 0;
                 int Codigo =  (int) model.getValueAt(tblProjeto.getSelectedRow(), colunaCodigo);
-                JOptionPane.showMessageDialog(null,+Codigo+"Excluído com sucesso!");
                 try {
                     
                     this.bancoDadosProjeto.removeProjeto(Codigo);
                 } catch (SQLException ex) {
                     Logger.getLogger(ListaProjetoForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                /*
-                try {
-                    Usuario usuario = new Usuario();
-                    usuario = BancoDadosFuncionario.ConsultaFuncionarioPorEmail(usuarioAtivo.getEmail());
-                    this.bancoDadosProjeto.removeProjeto(Codigo);
-                } catch (SQLException ex) {
-                    Logger.getLogger(ListaProjetoForm.class.getName()).log(Level.SEVERE, null, ex);
-                }*/
+                
 
                 try {
                     this.configurarTblProjeto();

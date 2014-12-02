@@ -7,7 +7,15 @@
 package br.com.erikavinicius.apresentacao;
 
 import br.com.erikavinicius.TrabalhoSeguranca;
+import br.com.erikavinicius.dados.BancoDadosAtividade;
+import br.com.erikavinicius.entidade.Atividade;
+import br.com.erikavinicius.entidade.Projeto;
 import br.com.erikavinicius.entidade.Usuario;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,11 +25,13 @@ public class MenuEncarregadoForm extends javax.swing.JFrame {
 
     private TrabalhoSeguranca trabalhoSeguranca;
     private Usuario usuarioAtivo;
+    private BancoDadosAtividade bancoDadosAtividade;
     
     MenuEncarregadoForm(TrabalhoSeguranca trabalhoSeguranca, Usuario usuario) {
         initComponents();
         this.trabalhoSeguranca = trabalhoSeguranca;
         this.usuarioAtivo = usuario;
+        this.bancoDadosAtividade = bancoDadosAtividade;
     }
 
      
@@ -135,14 +145,31 @@ public class MenuEncarregadoForm extends javax.swing.JFrame {
     }//GEN-LAST:event_itmAlterarDadosActionPerformed
 
     private void itmLancaHorasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmLancaHorasActionPerformed
-        LancamentoAtividadeForm lancamentoAtividadeForm = new LancamentoAtividadeForm(trabalhoSeguranca, usuarioAtivo);
-        lancamentoAtividadeForm.setVisible(true);
+
+        try {
+            List<Atividade> listaTodos = this.bancoDadosAtividade.ConsultaAtividadePorEncarregado(usuarioAtivo.getCpf());
+            if(!listaTodos.isEmpty()){
+                LancamentoAtividadeForm lancamentoAtividadeForm = new LancamentoAtividadeForm(trabalhoSeguranca, usuarioAtivo);
+                lancamentoAtividadeForm.setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(this, "Não possui Atividades Cadastradas para Você!", "Erro", JOptionPane.WARNING_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuEncarregadoForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        
     }//GEN-LAST:event_itmLancaHorasActionPerformed
 
     private void itmListaAtividadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmListaAtividadesActionPerformed
         try{
-            ListaAtividadeEmpregadoForm listaAtividadeEmpregadoForm = new ListaAtividadeEmpregadoForm(trabalhoSeguranca, usuarioAtivo);
-            listaAtividadeEmpregadoForm.setVisible(true);
+            List<Atividade> listaTodos = this.bancoDadosAtividade.ConsultaAtividadePorEncarregado(usuarioAtivo.getCpf());
+            if(!listaTodos.isEmpty()){
+                ListaAtividadeEmpregadoForm listaAtividadeEmpregadoForm = new ListaAtividadeEmpregadoForm(trabalhoSeguranca, usuarioAtivo);
+                listaAtividadeEmpregadoForm.setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(this, "Não possui Atividades Cadastradas para Você!", "Erro", JOptionPane.WARNING_MESSAGE);
+            }
         }catch(Exception e){
         }
     }//GEN-LAST:event_itmListaAtividadesActionPerformed

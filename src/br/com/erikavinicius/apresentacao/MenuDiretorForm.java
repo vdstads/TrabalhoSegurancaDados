@@ -249,26 +249,33 @@ public class MenuDiretorForm extends javax.swing.JFrame {
 
     private void itmEmitirRelatorioProjetoDiretorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmEmitirRelatorioProjetoDiretorActionPerformed
         try {
-        List<Atividade> listaAtvividade = new ArrayList<>();
-        listaAtvividade = this.bancoDadosProjeto.RelatorioDiretorProjeto();
-        String relatorio = System.getProperty("user.dir")+
-            "/Relatorios/RelatorioProjetoGerente.jasper";
-
-            JRBeanCollectionDataSource fonteDados = new JRBeanCollectionDataSource(listaAtvividade);
-
-            JasperPrint relatorioGerado;
-        
-            relatorioGerado = JasperFillManager.fillReport(relatorio, null, fonteDados);
-        
-
-            JasperViewer jasperViewer = new JasperViewer (relatorioGerado, false);
-            jasperViewer.setVisible(true);
-        } catch (JRException ex){
-            System.out.println("Falha ao gerar Relatorio: "+ex.getMessage());
-            } catch (SQLException ex) {
-            Logger.getLogger(MenuGerenteForm.class.getName()).log(Level.SEVERE, null, ex);
+            if(this.bancoDadosProjeto.ConsultaProjetoExiste()){
+                try {
+                    List<Atividade> listaAtvividade = new ArrayList<>();
+                    listaAtvividade = this.bancoDadosProjeto.RelatorioDiretorProjeto();
+                    String relatorio = System.getProperty("user.dir")+
+                            "/Relatorios/RelatorioProjetoGerente.jasper";
+                    
+                    JRBeanCollectionDataSource fonteDados = new JRBeanCollectionDataSource(listaAtvividade);
+                    
+                    JasperPrint relatorioGerado;
+                    
+                    relatorioGerado = JasperFillManager.fillReport(relatorio, null, fonteDados);
+                    
+                    
+                    JasperViewer jasperViewer = new JasperViewer (relatorioGerado, false);
+                    jasperViewer.setVisible(true);
+                } catch (JRException ex){
+                    System.out.println("Falha ao gerar Relatorio: "+ex.getMessage());
+                } catch (SQLException ex) {
+                    Logger.getLogger(MenuGerenteForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Não possui Projetos Cadastrados ! Cadastre um Novo!", "Erro", JOptionPane.WARNING_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuDiretorForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }//GEN-LAST:event_itmEmitirRelatorioProjetoDiretorActionPerformed
 
     /**

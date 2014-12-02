@@ -12,6 +12,7 @@ import br.com.erikavinicius.dados.BancoDadosFuncionario;
 import br.com.erikavinicius.dados.BancoDadosProjeto;
 import br.com.erikavinicius.entidade.Atividade;
 import br.com.erikavinicius.entidade.Departamento;
+import br.com.erikavinicius.entidade.Projeto;
 import br.com.erikavinicius.entidade.Usuario;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -31,11 +32,12 @@ import net.sf.jasperreports.view.JasperViewer;
  */
 public class MenuGerenteForm extends javax.swing.JFrame {
     private TrabalhoSeguranca trabalhoSeguranca;
-    private Usuario usuarioAtivo;
+    //private Usuario usuarioAtivo;
     private BancoDadosDepartamento bancoDadosDepartamento;
     private BancoDadosAtividade bancoDadosAtividade;
     private BancoDadosProjeto bancoDadosProjeto;
     private BancoDadosFuncionario bancoDadosFuncionario;
+    public Usuario usuarioAtivo = new Usuario();
     
     public MenuGerenteForm(TrabalhoSeguranca trabalhoSeguranca, Usuario usuario) {
         initComponents();
@@ -290,6 +292,7 @@ public class MenuGerenteForm extends javax.swing.JFrame {
 
     private void itmListarProjetosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmListarProjetosActionPerformed
         try {
+            
             if(this.bancoDadosProjeto.ConsultaProjetoExiste()){
                 ListaProjetoForm listaProjetoForm = new ListaProjetoForm(this.trabalhoSeguranca, usuarioAtivo);  
                 listaProjetoForm.setVisible(true);
@@ -302,8 +305,23 @@ public class MenuGerenteForm extends javax.swing.JFrame {
     }//GEN-LAST:event_itmListarProjetosActionPerformed
 
     private void itmCadastarAtividadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmCadastarAtividadesActionPerformed
-      CadastroAtividadeForm cadastroAtividadesForm = new CadastroAtividadeForm(this.trabalhoSeguranca, usuarioAtivo);
-      cadastroAtividadesForm.setVisible(true);
+        try {
+            List<Usuario> listaFuncionarios = this.bancoDadosFuncionario.ConsultaFuncionariosDepartamento(usuarioAtivo.getSenha());
+            List<Projeto> listaProjeto = this.bancoDadosProjeto.ConsultaProjetoPorDep(usuarioAtivo.getSenha());
+            if(!listaFuncionarios.isEmpty()){
+                if(!listaProjeto.isEmpty()){
+                    CadastroAtividadeForm cadastroAtividadesForm = new CadastroAtividadeForm(this.trabalhoSeguranca, usuarioAtivo);
+                    cadastroAtividadesForm.setVisible(true);
+                }else{
+                    JOptionPane.showMessageDialog(this, "Não possui Projetos Cadastrados nesse Departamento! Cadastre um Novo!", "Erro", JOptionPane.WARNING_MESSAGE);
+                }
+            }else{
+                JOptionPane.showMessageDialog(this, "Não possui Encarregados Cadastrados nesse Departamento! Cadastre um Novo!", "Erro", JOptionPane.WARNING_MESSAGE);
+            }
+            
+         } catch (SQLException ex) {
+            Logger.getLogger(MenuGerenteForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_itmCadastarAtividadesActionPerformed
 
     private void itmListarAtividadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmListarAtividadesActionPerformed
@@ -322,21 +340,29 @@ public class MenuGerenteForm extends javax.swing.JFrame {
     }//GEN-LAST:event_itmListarAtividadesActionPerformed
 
     private void itmListarAtividadesAtrasadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmListarAtividadesAtrasadasActionPerformed
-        ListaAtividadeAtrasadaForm listaAtividadeAtrasadaForm = null;
         try {
-            listaAtividadeAtrasadaForm = new ListaAtividadeAtrasadaForm(this.trabalhoSeguranca, usuarioAtivo);
-            
+            List<Atividade> listaAtrasadas = bancoDadosAtividade.ConsultaAtividadesAtrasadas(usuarioAtivo.getSenha());
+            if(!listaAtrasadas.isEmpty()){
+                ListaAtividadeAtrasadaForm listaAtividadeAtrasadaForm = new ListaAtividadeAtrasadaForm(this.trabalhoSeguranca, usuarioAtivo);
+                listaAtividadeAtrasadaForm.setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(this, "Não possui Atividades Atrasadas!", "Erro", JOptionPane.WARNING_MESSAGE);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(MenuGerenteForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        listaAtividadeAtrasadaForm.setVisible(true);
     }//GEN-LAST:event_itmListarAtividadesAtrasadasActionPerformed
 
     private void itmEmitirRelatorioAtividadeProjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmEmitirRelatorioAtividadeProjetoActionPerformed
 
         try {
-         EmitirRelatorioProjetoForm emitirRelatorioProjeto  = new EmitirRelatorioProjetoForm(this.trabalhoSeguranca, usuarioAtivo);
-         emitirRelatorioProjeto.setVisible(true);
+         List<Projeto> listaProjetos = this.bancoDadosProjeto.ConsultaProjetoPorDep(usuarioAtivo.getSenha());
+         if(!listaProjetos.isEmpty()){
+            EmitirRelatorioProjetoForm emitirRelatorioProjeto  = new EmitirRelatorioProjetoForm(this.trabalhoSeguranca, usuarioAtivo);
+            emitirRelatorioProjeto.setVisible(true);
+         }else{
+             JOptionPane.showMessageDialog(this, "Não possui Projetos Cadastrados!", "Erro", JOptionPane.WARNING_MESSAGE);
+         }
         } catch (SQLException ex) {
             Logger.getLogger(MenuGerenteForm.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -347,6 +373,7 @@ public class MenuGerenteForm extends javax.swing.JFrame {
         try {
         List<Atividade> listaAtvividade = new ArrayList<>();
         listaAtvividade = this.bancoDadosProjeto.RelatorioProjetosPorDep(usuarioAtivo.getSenha());
+        if(!listaAtvividade.isEmpty()){
         String relatorio = System.getProperty("user.dir")+
             "/Relatorios/RelatorioProjetoGerente.jasper";
 
@@ -359,6 +386,9 @@ public class MenuGerenteForm extends javax.swing.JFrame {
 
             JasperViewer jasperViewer = new JasperViewer (relatorioGerado, false);
             jasperViewer.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(this, "Não possui Atividades Cadastradas!", "Erro", JOptionPane.WARNING_MESSAGE);
+        }
         } catch (JRException ex){
             System.out.println("Falha ao gerar Relatorio: "+ex.getMessage());
             } catch (SQLException ex) {

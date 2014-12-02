@@ -459,6 +459,46 @@ public class BancoDadosFuncionario {
             conexao = BancoDadosUtil.getConnection();
 
             //Código de criar...
+            String sql = "SELECT CPF, NOME, CARGO FROM FUNCIONARIO WHERE (DEPARTAMENTO ='"+codDep+"') AND (CARGO = 'ENCARREGADO')";
+            comando = conexao.prepareStatement(sql);
+
+            resultado = comando.executeQuery();
+
+            while (resultado.next()) {
+            //Instancia um novo objeto e atribui os valores vindo do BD
+                //(Note que no BD o index inicia por 1)
+                Usuario usuario = new Usuario();
+                usuario.setCpf(resultado.getString(1));
+                usuario.setNome(resultado.getString(2));
+                usuario.setCargo(resultado.getString(3));
+                //Adiciona um item à lista que será retornada
+                listaFuncionarios.add(usuario);
+                //----------------------------------
+                
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (resultado != null && !resultado.isClosed()) {
+                resultado.close();
+            }
+            if (conexao != null && !conexao.isClosed()) {
+                conexao.close();
+            }
+        }
+        return listaFuncionarios;
+    }
+    public static List<Usuario> ConsultaTodosFuncionariosDepartamento(String codDep) throws SQLException {
+        Connection conexao = null;
+        PreparedStatement comando = null;
+        ResultSet resultado = null;
+        List<Usuario> listaFuncionarios = new ArrayList<Usuario>();
+     
+        try {
+            conexao = BancoDadosUtil.getConnection();
+
+            //Código de criar...
             String sql = "SELECT CPF, NOME, CARGO FROM FUNCIONARIO WHERE DEPARTAMENTO ='"+codDep+"'";
             comando = conexao.prepareStatement(sql);
 
@@ -525,7 +565,7 @@ public class BancoDadosFuncionario {
             conexao = BancoDadosUtil.getConnection();
 
             //Código de criar...
-            String sql = "SELECT * FROM FUNCIONARIO WHERE EMAIL = '"+email+"' AND DEPARTAMENTO = NULL";
+            String sql = "SELECT * FROM FUNCIONARIO WHERE (EMAIL = '"+email+"') AND (DEPARTAMENTO IS NULL)";
             comando = conexao.prepareStatement(sql);
 
             resultado = comando.executeQuery();

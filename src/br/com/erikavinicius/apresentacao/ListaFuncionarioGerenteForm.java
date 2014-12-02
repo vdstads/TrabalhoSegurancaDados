@@ -123,7 +123,7 @@ public class ListaFuncionarioGerenteForm extends javax.swing.JFrame {
             if (result == JOptionPane.YES_OPTION) {
                 TabelaFuncionariosModel model = null;
                 try {
-                    model = new TabelaFuncionariosModel(this.bancoDadosFuncionario.ConsultaFuncionariosDepartamento(usuarioAtivo.getSenha()));
+                    model = new TabelaFuncionariosModel(this.bancoDadosFuncionario.ConsultaTodosFuncionariosDepartamento(usuarioAtivo.getSenha()));
                 } catch (SQLException ex) {
                     Logger.getLogger(ListaFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -148,7 +148,7 @@ public class ListaFuncionarioGerenteForm extends javax.swing.JFrame {
     
     void configurarTblFuncionarios() throws SQLException {
         /* NESSA LINHA QUE ACUSA UM ERRO NA HR DE CHAMAR A TELA DE FUNCIONARIOS*/
-        TabelaFuncionariosModel model = new TabelaFuncionariosModel(this.bancoDadosFuncionario.ConsultaFuncionariosDepartamento(usuarioAtivo.getSenha()));
+        TabelaFuncionariosModel model = new TabelaFuncionariosModel(this.bancoDadosFuncionario.ConsultaTodosFuncionariosDepartamento(usuarioAtivo.getSenha()));
 
         tblFuncionarios.setModel(model);
     }

@@ -276,12 +276,12 @@ public class BancoDadosProjeto {
             GROUP BY P.NOME, D.NOME, F.NOME, P.DATA_INICIO, P.DATA_TERMINO
             */
             //Código de criar...
-            String sql = "SELECT P.NOME, D.NOME, F.NOME, P.DATA_INICIO, P.DATA_TERMINO, COUNT(A.COD_ATIVIDADE), (SELECT COUNT(COD_ATIVIDADE) FROM ATIVIDADE WHERE PERCENTUAL_CONCLUSAO= 100) FROM PROJETO P "
+            String sql = "SELECT A.COD_ATIVIDADE, P.NOME, D.NOME, F.NOME, P.DATA_INICIO, P.DATA_TERMINO, COUNT(A.COD_ATIVIDADE), (SELECT COUNT(COD_ATIVIDADE) FROM ATIVIDADE WHERE (PERCENTUAL_CONCLUSAO= 100) AND (COD_ATIVIDADE = A.COD_ATIVIDADE)) FROM PROJETO P "
                         +"INNER JOIN DEPARTAMENTO D ON (D.CODIGO = P.FK_DEPARTAMENTO) "
                         +"INNER JOIN FUNCIONARIO F ON (F.CPF = D.FK_GERENTE_CPF) "
                         +"INNER JOIN ATIVIDADE A ON (A.FK_PROJETO = P.COD_PROJETO) "
                         +"WHERE D.CODIGO = '"+codDep+"' "
-                        +"GROUP BY P.NOME, D.NOME, F.NOME, P.DATA_INICIO, P.DATA_TERMINO";
+                        +"GROUP BY A.COD_ATIVIDADE, P.NOME, D.NOME, F.NOME, P.DATA_INICIO, P.DATA_TERMINO";
             
             comando = conexao.prepareStatement(sql);
 
@@ -297,15 +297,15 @@ public class BancoDadosProjeto {
                 Encarregado encarregado = new Encarregado();
                 Gerente gerente = new Gerente();
                 
-                projeto.setNome(resultado.getString(1));
-                departamento.setNome(resultado.getString(2));
-                gerente.setNome(resultado.getString(3));
+                projeto.setNome(resultado.getString(2));
+                departamento.setNome(resultado.getString(3));
+                gerente.setNome(resultado.getString(4));
                 departamento.setGerente(gerente);
                 projeto.setDepartamento(departamento);
-                projeto.setDataInicio(resultado.getString(4));
-                projeto.setDataTermino(resultado.getString(5));
-                atividade.setDuracao(resultado.getInt(6));
-                atividade.setHorasTrabalhadas(resultado.getInt(7));
+                projeto.setDataInicio(resultado.getString(5));
+                projeto.setDataTermino(resultado.getString(6));
+                atividade.setDuracao(resultado.getInt(7));
+                atividade.setHorasTrabalhadas(resultado.getInt(8));
                 atividade.setProjeto(projeto);
                 atividade.setEncarregado(encarregado);
   
@@ -335,11 +335,11 @@ public class BancoDadosProjeto {
         try {
             conexao = BancoDadosUtil.getConnection();
             //Código de criar...
-            String sql = "SELECT P.NOME, D.NOME, F.NOME, P.DATA_INICIO, P.DATA_TERMINO, COUNT(A.COD_ATIVIDADE), (SELECT COUNT(COD_ATIVIDADE) FROM ATIVIDADE WHERE PERCENTUAL_CONCLUSAO= 100) FROM PROJETO P "
+            String sql = "SELECT A.COD_ATIVIDADE, P.NOME, D.NOME, F.NOME, P.DATA_INICIO, P.DATA_TERMINO, COUNT(A.COD_ATIVIDADE), (SELECT COUNT(COD_ATIVIDADE) FROM ATIVIDADE WHERE (PERCENTUAL_CONCLUSAO= 100) AND (COD_ATIVIDADE = A.COD_ATIVIDADE)) FROM PROJETO P "
                         +"INNER JOIN DEPARTAMENTO D ON (D.CODIGO = P.FK_DEPARTAMENTO) "
                         +"INNER JOIN FUNCIONARIO F ON (F.CPF = D.FK_GERENTE_CPF) "
                         +"INNER JOIN ATIVIDADE A ON (A.FK_PROJETO = P.COD_PROJETO) "
-                        +"GROUP BY P.NOME, D.NOME, F.NOME, P.DATA_INICIO, P.DATA_TERMINO";
+                        +"GROUP BY A.COD_ATIVIDADE,P.NOME, D.NOME, F.NOME, P.DATA_INICIO, P.DATA_TERMINO";
             
             comando = conexao.prepareStatement(sql);
 
@@ -355,15 +355,15 @@ public class BancoDadosProjeto {
                 Encarregado encarregado = new Encarregado();
                 Gerente gerente = new Gerente();
                 
-                projeto.setNome(resultado.getString(1));
-                departamento.setNome(resultado.getString(2));
-                gerente.setNome(resultado.getString(3));
+                projeto.setNome(resultado.getString(2));
+                departamento.setNome(resultado.getString(3));
+                gerente.setNome(resultado.getString(4));
                 departamento.setGerente(gerente);
                 projeto.setDepartamento(departamento);
-                projeto.setDataInicio(resultado.getString(4));
-                projeto.setDataTermino(resultado.getString(5));
-                atividade.setDuracao(resultado.getInt(6));
-                atividade.setHorasTrabalhadas(resultado.getInt(7));
+                projeto.setDataInicio(resultado.getString(5));
+                projeto.setDataTermino(resultado.getString(6));
+                atividade.setDuracao(resultado.getInt(7));
+                atividade.setHorasTrabalhadas(resultado.getInt(8));
                 atividade.setProjeto(projeto);
                 atividade.setEncarregado(encarregado);
   

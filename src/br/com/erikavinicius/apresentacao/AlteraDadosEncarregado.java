@@ -8,9 +8,11 @@ package br.com.erikavinicius.apresentacao;
 
 import br.com.erikavinicius.CryptographyTripleDES;
 import br.com.erikavinicius.TrabalhoSeguranca;
+import br.com.erikavinicius.dados.BancoDados;
 import br.com.erikavinicius.dados.BancoDadosFuncionario;
 import br.com.erikavinicius.entidade.Usuario;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -25,13 +27,16 @@ public class AlteraDadosEncarregado extends javax.swing.JFrame {
 
     private TrabalhoSeguranca trabalhoSeguranca;
     private BancoDadosFuncionario bancoDadosFuncionario;
+    private BancoDados bancoDados;
     private Usuario usuarioAtivo;
     
     public AlteraDadosEncarregado(TrabalhoSeguranca trabalhoSeguranca, Usuario usuario) {
         initComponents();
         this.trabalhoSeguranca = trabalhoSeguranca;
         this.bancoDadosFuncionario = bancoDadosFuncionario;
+        this.bancoDados = bancoDados;
         this.usuarioAtivo = usuario;
+        this.preencher();
     }
 
     /**
@@ -209,6 +214,35 @@ public class AlteraDadosEncarregado extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+    }
+    private void preencher() {
+
+        Usuario usrTemp = new Usuario();
+        List<Usuario> listaUsuario = null;
+        String senha = null;
+        try {
+            listaUsuario  = this.bancoDados.ConsultaTodos();
+        } catch (SQLException ex) {
+            Logger.getLogger(EditaFuncionarioForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        for (Usuario usuario : listaUsuario) {
+            if (usuario.getCpf().equals(usuarioAtivo.getCpf())) {
+               usrTemp = usuario;
+               break;
+            }
+        }
+        try {
+                    CryptographyTripleDES cryptography = CryptographyTripleDES.newInstance();
+                    senha = cryptography.decrypt(usrTemp.getSenha());
+                } catch (Exception e) {
+               }
+        
+        txtNome.setText(usrTemp.getNome());
+        txtCpf.setText(usrTemp.getCpf());
+        txtEmail.setText(usrTemp.getEmail());
+        txtSenha.setText(senha);
+
     }
     
      public void limpar(){
