@@ -69,12 +69,12 @@
 				<text><![CDATA[Termino]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="449" y="2" width="42" height="20" uuid="d2efd0c1-fd25-4ec6-be60-60e3a16c2eb9"/>
-				<text><![CDATA[T. Concluida]]></text>
+				<reportElement x="435" y="2" width="56" height="20" uuid="d2efd0c1-fd25-4ec6-be60-60e3a16c2eb9"/>
+				<text><![CDATA[Atv. Conc.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="380" y="2" width="69" height="20" uuid="029d4427-e464-44d4-9404-be0552333ff9"/>
-				<text><![CDATA[T. Atividades]]></text>
+				<reportElement x="380" y="2" width="55" height="20" uuid="029d4427-e464-44d4-9404-be0552333ff9"/>
+				<text><![CDATA[Atividades]]></text>
 			</staticText>
 			<line>
 				<reportElement x="0" y="0" width="555" height="1" uuid="8869cad8-c4e4-497f-93e4-ade9b3ca93ed"/>
@@ -114,16 +114,16 @@
 				<reportElement x="318" y="0" width="62" height="20" uuid="101675df-a038-430b-a9c3-533763e4e12f"/>
 				<textFieldExpression><![CDATA[$F{projeto.dataTermino}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="406" y="0" width="43" height="20" uuid="b9a88aaa-b766-4e17-8931-a5d25301a498"/>
-				<textFieldExpression><![CDATA[$F{duracao}]]></textFieldExpression>
-			</textField>
 			<line>
 				<reportElement x="0" y="19" width="555" height="1" uuid="b57ec57d-d3ab-49be-9d9e-bffdd905464e"/>
 			</line>
 			<textField>
 				<reportElement x="491" y="0" width="64" height="20" uuid="9ba9ce93-ac94-4ca0-895e-b0b1da20f3b7"/>
 				<textFieldExpression><![CDATA[$F{horasTrabalhadas}*100/$F{duracao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="392" y="0" width="43" height="20" uuid="b9a88aaa-b766-4e17-8931-a5d25301a498"/>
+				<textFieldExpression><![CDATA[$F{duracao}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

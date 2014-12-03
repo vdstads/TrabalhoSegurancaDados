@@ -14,3 +14,17 @@ dez 02, 2014 10:52:04 PM br.com.erikavinicius.apresentacao.LoginForm btnLoginAct
 INFORMAÇÕES: Logado com Gerente, email: gerente@gmail.com
 dez 02, 2014 10:54:27 PM br.com.erikavinicius.apresentacao.LoginForm btnLoginActionPerformed
 INFORMAÇÕES: Logado com Gerente, email: gerente@gmail.com
+dez 03, 2014 11:24:27 AM br.com.erikavinicius.apresentacao.LoginForm btnLoginActionPerformed
+INFORMAÇÕES: Logado com Diretor, email: adm@gmail.com
+dez 03, 2014 11:25:37 AM br.com.erikavinicius.apresentacao.LoginForm btnLoginActionPerformed
+INFORMAÇÕES: Logado com Diretor, email: adm@gmail.com
+dez 03, 2014 11:30:49 AM br.com.erikavinicius.apresentacao.LoginForm btnLoginActionPerformed
+INFORMAÇÕES: Logado com Gerente, email: gerente@gmail.com
+dez 03, 2014 11:34:03 AM br.com.erikavinicius.apresentacao.LoginForm btnLoginActionPerformed
+INFORMAÇÕES: Logado com Gerente, email: gerente@gmail.com
+dez 03, 2014 11:46:41 AM br.com.erikavinicius.apresentacao.LoginForm btnLoginActionPerformed
+INFORMAÇÕES: Logado com Gerente, email: gerente@gmail.com
+dez 03, 2014 11:47:43 AM br.com.erikavinicius.apresentacao.LoginForm btnLoginActionPerformed
+INFORMAÇÕES: Logado com Diretor, email: adm@gmail.com
+dez 03, 2014 11:48:07 AM br.com.erikavinicius.apresentacao.ListaFuncionarioForm btnDemitirActionPerformed
+INFORMAÇÕES: Funcionario Demitido com sucesso

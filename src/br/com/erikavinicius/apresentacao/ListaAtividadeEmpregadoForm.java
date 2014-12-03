@@ -75,7 +75,6 @@ public class ListaAtividadeEmpregadoForm extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblAtividade = new javax.swing.JTable();
-        btnEditar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -94,14 +93,6 @@ public class ListaAtividadeEmpregadoForm extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblAtividade);
 
-        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/erikavinicius/entidade/icones/application_edit.png"))); // NOI18N
-        btnEditar.setText("Editar");
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -109,19 +100,13 @@ public class ListaAtividadeEmpregadoForm extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(210, 210, 210)
-                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                .addComponent(btnEditar)
-                .addContainerGap())
+                .addContainerGap(81, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -142,45 +127,6 @@ public class ListaAtividadeEmpregadoForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        if (tblAtividade.getSelectedRow() != - 1) {
-           int result = JOptionPane.showConfirmDialog(null, "Deseja Editar ? ", "Editar", JOptionPane.YES_NO_CANCEL_OPTION);
-            if (result == JOptionPane.YES_OPTION) {
-                TabelaAtividadeModel model = null;
-                try {
-                    model = new TabelaAtividadeModel(this.bancoDadosAtividade.ConsultaAtividadePorDep(codDepAtivo));
-                } catch (SQLException ex) {
-                    Logger.getLogger(ListaAtividadeEmpregadoForm.class.getName()).log(Level.SEVERE, null, ex);
-                    logger.log(Level.SEVERE, ex.getMessage(), ex);
-                }
-                int colunaCodigo = 0;
-                int codigo =  (int) model.getValueAt(tblAtividade.getSelectedRow(), colunaCodigo);
-                
-                try {
-                   EditaAtividadeForm editaAtividadeForm = new EditaAtividadeForm(this.trabalhoSeguranca, usuarioAtivo, codigo);
-                   editaAtividadeForm.setVisible(true);
-                } catch (SQLException ex) {
-                   Logger.getLogger(ListaAtividadeEmpregadoForm.class.getName()).log(Level.SEVERE, null, ex);
-                   logger.log(Level.SEVERE, ex.getMessage(), ex);
-                }
-                
-                
-                try {
-                   this.configurarTblAtividade();
-                } catch (SQLException ex) {
-                   Logger.getLogger(ListaAtividadeEmpregadoForm.class.getName()).log(Level.SEVERE, null, ex);
-                   logger.log(Level.SEVERE, ex.getMessage(), ex);
-                }
-                
-                //JOptionPane.showMessageDialog(null,"Editado com sucesso!");
-                this.dispose();
-                logger.info("Editado com sucesso");
-            }
-        }else{
-            JOptionPane.showMessageDialog(null, "Por favor, selecione um item!");
-        }
-    }//GEN-LAST:event_btnEditarActionPerformed
     
     void configurarTblAtividade() throws SQLException {
         TabelaAtividadeModel model = new TabelaAtividadeModel(this.bancoDadosAtividade.ConsultaAtividadePorEncarregado(usuarioAtivo.getCpf()));
@@ -266,7 +212,6 @@ public class ListaAtividadeEmpregadoForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEditar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblAtividade;

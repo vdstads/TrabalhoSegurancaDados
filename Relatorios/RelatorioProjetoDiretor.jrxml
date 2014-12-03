@@ -72,14 +72,14 @@
 			</staticText>
 			<staticText>
 				<reportElement x="364" y="0" width="56" height="20" uuid="9747d49c-7295-421e-90c7-fd613abd6dfa"/>
-				<text><![CDATA[T.Atividades]]></text>
+				<text><![CDATA[Atividades]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="420" y="0" width="41" height="20" uuid="3e440b7a-78e4-41ad-9c05-8a05118e718d"/>
-				<text><![CDATA[T.Atv.Concluidas]]></text>
+				<reportElement x="420" y="0" width="78" height="20" uuid="3e440b7a-78e4-41ad-9c05-8a05118e718d"/>
+				<text><![CDATA[Atv.Concluidas]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="461" y="0" width="94" height="20" uuid="02cb77ff-5f3a-4d64-a3d9-6b9f9bfe5352"/>
+				<reportElement x="498" y="0" width="57" height="20" uuid="02cb77ff-5f3a-4d64-a3d9-6b9f9bfe5352"/>
 				<text><![CDATA[Percentual]]></text>
 			</staticText>
 		</band>
@@ -111,11 +111,11 @@
 				<textFieldExpression><![CDATA[$F{horasTrabalhadas}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="420" y="0" width="41" height="20" uuid="10883ab8-d116-4b36-9eb2-7f8e6bd2f379"/>
+				<reportElement x="441" y="0" width="57" height="20" uuid="10883ab8-d116-4b36-9eb2-7f8e6bd2f379"/>
 				<textFieldExpression><![CDATA[$F{duracao}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="461" y="0" width="94" height="20" uuid="f128f807-9ee4-4a9d-b9a6-dca3f8e1e2bc"/>
+				<reportElement x="498" y="0" width="57" height="20" uuid="f128f807-9ee4-4a9d-b9a6-dca3f8e1e2bc"/>
 				<textFieldExpression><![CDATA[$F{horasTrabalhadas}*100/$F{duracao}]]></textFieldExpression>
 			</textField>
 		</band>
