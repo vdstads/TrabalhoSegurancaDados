@@ -362,7 +362,7 @@ public class MenuGerenteForm extends javax.swing.JFrame {
 
     private void itmListarAtividadesAtrasadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmListarAtividadesAtrasadasActionPerformed
         try {
-            List<Atividade> listaAtrasadas = bancoDadosAtividade.ConsultaAtividadesAtrasadas(usuarioAtivo.getSenha());
+            List<Atividade> listaAtrasadas = bancoDadosAtividade.ConsultaAtividadesAtrasadas(usuarioAtivo.getCpf());
             if(!listaAtrasadas.isEmpty()){
                 ListaAtividadeAtrasadaForm listaAtividadeAtrasadaForm = new ListaAtividadeAtrasadaForm(this.trabalhoSeguranca, usuarioAtivo);
                 listaAtividadeAtrasadaForm.setVisible(true);
